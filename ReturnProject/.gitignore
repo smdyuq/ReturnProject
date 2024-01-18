@@ -11,10 +11,13 @@ tmp/
 *~.nib
 local.properties
 .settings/
+.target/
 .classpath
+.project
+.springBeans
 .loadpath
 .recommenders
-.target/
+
 
 # ignore properties file
 config.properties
