@@ -15,15 +15,75 @@
 		<result column="SALES_IMAGE_NAME" property="salesImageName"></result>
 		<result column="SALES_IMAGE_PATH" property="salesImagePath"></result>
 		<result column="SALES_DATE" property="salesDate"></result>
+		<result column="SALES_UPDATE_DATE" property="salesUpdateDate"></result>
+		<result column="SALES_DELETE_DATE" property="salesDeleteDate"></result>
 		<result column="SALES_COMPLETE" property="salesComplete"></result>
 	</resultMap>
+
+	<!-- 상품관리 전체 리스트 수 -->
+	<select id="salesSelectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM SALES
+		WHERE SALES_NAME LIKE '%' || #{searchText} || '%' AND
+		MEMBER_NO = #{memberNo}
+	</select>
+
+	<!-- 상품관리 목록 불러오기 -->
+	<select id="salesSelectListAll" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE SALES_NAME LIKE '%' || #{searchText} || '%' AND
+		MEMBER_NO = #{memberNo}
+		ORDER BY
+		SALES_NO DESC
+	</select>
+
+	<!-- 상품 수정 폼 이동 -->
+	<select id="updateSalesForm" resultMap="salesResultSet">
+		SELECT *
+		FROM SALES
+		WHERE
+		SALES_NO = #{salesNo}
+	</select>
+
+	<!-- 상품 수정 -->
+	<update id="updateSales" parameterType="sales">
+		UPDATE SALES 
+		SET SALES_NAME = #{salesName},
+			SALES_CATEGORY = #{salesCategory},
+			SALES_ADDRESS = #{salesAddress},
+			SALES_CONDITION = #{salesCondition},
+			SALES_PRICE = #{salesPrice},
+			SALES_DELIVERY = #{salesDelivery},
+			SALES_COMMENT = #{salesComment},
+			SALES_COUNT = #{salesCount}
+		WHERE SALES_NO = #{salesNo}
+	</update>
+
+	<!-- 상품 삭제 -->
+	<delete id="deleteSales" parameterType="sales">
+		DELETE FROM SALES
+		WHERE
+		SALES_NO = #{salesNo}
+	</delete>
 
 	<!-- 판매 등록 -->
 	<insert id="enrollSales" parameterType="sales">
 		INSERT INTO SALES
-		VALUES(SALES_SEQ.NEXTVAL, #{salesName}, #{salesCategory}, #{salesAddress},
-		#{salesCondition}, #{salesPrice}, DEFAULT, #{salesComment}, #{salesCount}, #{salesImageName},
-		#{salesImagePath}, DEFAULT, DEFAULT, #{memberNo})
+		VALUES(SALES_SEQ.NEXTVAL,
+		#{salesName},
+		#{salesCategory},
+		#{salesAddress},
+		#{salesCondition},
+		#{salesPrice},
+		#{salesDelivery},
+		#{salesComment},
+		#{salesCount},
+		#{salesImageName},
+		#{salesImagePath},
+		DEFAULT,
+		NULL,
+		NULL,
+		DEFAULT,
+		#{memberNo})
 	</insert>
-
 </mapper>

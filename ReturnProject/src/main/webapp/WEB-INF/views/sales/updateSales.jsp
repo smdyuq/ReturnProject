@@ -19,20 +19,24 @@
 			<img class="d-block mx-auto mb-4"
 				src="https://getbootstrap.kr/docs/5.2/assets/brand/bootstrap-logo.svg"
 				alt="" width="72" height="57">
-			<h2><a href="/sales/enrollSalesForm.do">판매 등록</a></h2>
-			<h2><a href="/sales/detailSalesForm.do">상품 관리</a></h2>
+			<h2>
+				<a href="/sales/enrollSalesForm.do">판매 등록</a>
+			</h2>
+			<h2>
+				<a href="/sales/detailSalesForm.do">상품 관리</a>
+			</h2>
 		</div>
 
 		<div class="row g-3">
-		<h3>판매 등록</h3>
+			<h3>수정</h3>
 			<div class="">
-				<form action="/sales/enrollSales.do" method="POST"
+				<form action="/sales/updateSales.do" method="POST"
 					class="needs-validation" novalidate="">
 					<div class="row g-3">
 						<div class="col-12">
 							<label for="salesName" class="form-label">상품명</label> <input
 								type="text" class="form-control" id="salesName" name="salesName"
-								>
+								value="${sales.salesName }">
 
 						</div>
 
@@ -52,45 +56,48 @@
 
 						<div class="col-12">
 							<label for="salesAddress" class="form-label">거래지역</label> <input
-								type="text" class="form-control" id="salesAddress" name="salesAddress"
-								placeholder="ex)경기도 안양시 동안구">
+								type="text" class="form-control" id="salesAddress"
+								name="salesAddress" value="${sales.salesAddress }">
 
 						</div>
 
 						<div class="col-12">
 							<label for="salesCondition" class="form-label">상품 상태</label> <input
-								type="text" class="form-control" id="salesCondition" name="salesCondition"
-								placeholder="ex)최상">
+								type="text" class="form-control" id="salesCondition"
+								name="salesCondition" value="${sales.salesCondition }">
 
 						</div>
-						
+
 						<div class="col-12">
 							<label for="salesPrice" class="form-label">상품 가격</label> <input
-								type="text" class="form-control" id="salesPrice" name="salesPrice">
+								type="text" class="form-control" id="salesPrice"
+								name="salesPrice" value="${sales.salesPrice }">
 
 						</div>
-						
+
 						<div class="col-12">
 							<label for="salesDelivery" class="form-label">배송비</label> <input
-								type="text" class="form-control" id="salesDelivery" name="salesDelivery"
-								value="0">
+								type="text" class="form-control" id="salesDelivery"
+								name="salesDelivery" value="${sales.salesDelivery }">
 
 						</div>
-						
+
 						<div class="col-12">
 							<label for="salesComment" class="form-label">상품 설명</label> <input
-								type="text" class="form-control" id="salesComment" name="salesComment">
+								type="text" class="form-control" id="salesComment"
+								name="salesComment" value="${sales.salesComment }">
 
 						</div>
-						
+
 						<div class="col-12">
 							<label for="salesCount" class="form-label">상품 수량</label> <input
-								type="text" class="form-control" id="salesCount" name="salesCount" value="1">
+								type="text" class="form-control" id="salesCount"
+								name="salesCount" value="${sales.salesCount }">
 
 						</div>
-						
+
 						<button class="w-100 btn btn-primary btn-lg" type="submit"
-							id="submit-btn">등록</button>
+							id="submit-btn">수정</button>
 				</form>
 			</div>
 		</div>

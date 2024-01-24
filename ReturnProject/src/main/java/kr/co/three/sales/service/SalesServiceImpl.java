@@ -1,14 +1,12 @@
 package kr.co.three.sales.service;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.three.common.PageInfo;
 import kr.co.three.sales.dao.SalesDAO;
 import kr.co.three.sales.dto.SalesDTO;
 
@@ -20,6 +18,36 @@ public class SalesServiceImpl implements SalesService {
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
+
+//	상품관리 전체 리스트 수
+	@Override
+	public int salesSelectListCount(SalesDTO sales) {
+		return salesDAO.salesSelectListCount(sales, sqlSession);
+	}
+
+//	상품관리 목록 불러오기
+	@Override
+	public List<SalesDTO> salesSelectListAll(PageInfo pi, SalesDTO sales) {
+		return salesDAO.salesSelectListAll(pi, sales, sqlSession);
+	}
+
+//	상품 수정 폼 이동
+	@Override
+	public SalesDTO updateSalesForm(int salesNo) {
+		return salesDAO.updateSalesForm(salesNo, sqlSession);
+	}
+
+//	상품 수정
+	@Override
+	public int updateSales(SalesDTO sales) {
+		return salesDAO.updateSales(sales, sqlSession);
+	}
+
+//	상품 삭제
+	@Override
+	public int deleteSales(int salesNo) {
+		return salesDAO.deleteSales(salesNo, sqlSession);
+	}
 
 //	판매 등록
 	@Override

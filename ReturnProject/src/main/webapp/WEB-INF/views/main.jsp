@@ -9,9 +9,35 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>${member.memberId }</p>
-	<a href="/member/loginForm.do">로그인</a>
-	<a href="/member/registerForm.do">회원가입</a>
-	<a href="/sales/enrollSalesForm.do">판매하기</a>
+	<a href="/">로고</a>
+	<hr>
+	<p>${sessionScope.memberId }님안녕하세요!</p>
+	<hr>
+	<c:choose>
+		<c:when test="${sessionScope.memberNo == null }">
+			<a href="/member/loginForm.do">로그인</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/member/logout.do">로그아웃</a>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when test="${sessionScope.memberNo == null }">
+			<a href="/member/registerForm.do">회원가입</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/member/alarm.do">알림</a>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when test="${sessionScope.memberNo == null }">
+			<a href="/member/loginForm.do">판매하기</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/sales/enrollSalesForm.do">판매하기</a>
+		</c:otherwise>
+	</c:choose>
 </body>
 </html>

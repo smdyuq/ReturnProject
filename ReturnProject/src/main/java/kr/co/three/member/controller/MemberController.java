@@ -75,7 +75,7 @@ public class MemberController {
 
 //	로그인
 	@PostMapping("/login.do")
-	public String loginIndex(MemberDTO member, HttpSession session, Model model) {
+	public String login(MemberDTO member, HttpSession session) {
 
 		MemberDTO loginUser = memberService.loginMember(member);
 
@@ -85,11 +85,20 @@ public class MemberController {
 			session.setAttribute("memberNo", loginUser.getMemberNo());
 			session.setAttribute("memberId", loginUser.getMemberId());
 
-			model.addAttribute("member", member);
 			return "main";
 		} else {
 			return "common/error";
 		}
+	}
+
+//	로그아웃
+	@GetMapping("/logout.do")
+	public String logout(HttpSession session) {
+
+		session.removeAttribute("memberNo");
+		session.invalidate();
+		
+		return "main";
 	}
 
 }
