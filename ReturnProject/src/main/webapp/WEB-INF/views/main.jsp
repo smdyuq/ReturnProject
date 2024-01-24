@@ -11,7 +11,7 @@
 <body>
 	<a href="/">로고</a>
 	<hr>
-	<p>${sessionScope.memberId }님안녕하세요!</p>
+	<p>${sessionScope.memberId }님 안녕하세요!</p>
 	<hr>
 	<c:choose>
 		<c:when test="${sessionScope.memberNo == null }">

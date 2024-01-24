@@ -13,7 +13,7 @@
 </head>
 
 <body class="text-center">
-<a href="/">로고</a>
+	<a href="/">로고</a>
 	<main>
 		<div class="py-5 text-center">
 			<img class="d-block mx-auto mb-4"
@@ -32,6 +32,7 @@
 			<div class="">
 				<form action="/sales/updateSales.do" method="POST"
 					class="needs-validation" novalidate="">
+					<input type="hidden" name="salesNo" value="${sales.salesNo }">
 					<div class="row g-3">
 						<div class="col-12">
 							<label for="salesName" class="form-label">상품명</label> <input

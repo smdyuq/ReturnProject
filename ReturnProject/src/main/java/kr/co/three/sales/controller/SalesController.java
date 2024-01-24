@@ -74,7 +74,7 @@ public class SalesController {
 		int result = salesService.updateSales(sales);
 
 		if (result == 1) {
-			return "sales/detailSales";
+			return "redirect:/sales/detailSalesForm.do";
 		} else {
 			return "common/error";
 		}
@@ -86,7 +86,7 @@ public class SalesController {
 
 		int result = salesService.deleteSales(salesNo);
 
-		return "sales/detailSales";
+		return "redirect:/sales/detailSalesForm.do";
 
 	}
 
@@ -102,7 +102,7 @@ public class SalesController {
 		int result = salesService.enrollSales(sales);
 
 		if (result == 1) {
-			return "main";
+			return "redirect:/sales/detailSalesForm.do";
 		} else {
 			return "common/error";
 		}
