@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="salesMapper">
+	<resultMap type="sales" id="salesResultSet">
+		<result column="SALES_NO" property="salesNo"></result>
+		<result column="SALES_NAME" property="salesName"></result>
+		<result column="SALES_CATEGORY" property="salesCategory"></result>
+		<result column="SALES_ADDRESS" property="salesAddress"></result>
+		<result column="SALES_CONDITION" property="salesCondition"></result>
+		<result column="SALES_PRICE" property="salesPrice"></result>
+		<result column="SALES_DELIVERY" property="salesDelivery"></result>
+		<result column="SALES_COMMENT" property="salesComment"></result>
+		<result column="SALES_COUNT" property="salesCount"></result>
+		<result column="SALES_IMAGE_NAME" property="salesImageName"></result>
+		<result column="SALES_IMAGE_PATH" property="salesImagePath"></result>
+		<result column="SALES_DATE" property="salesDate"></result>
+		<result column="SALES_COMPLETE" property="salesComplete"></result>
+	</resultMap>
+
+	<!-- 판매 등록 -->
+	<insert id="enrollSales" parameterType="sales">
+		INSERT INTO SALES
+		VALUES(SALES_SEQ.NEXTVAL, #{salesName}, #{salesCategory}, #{salesAddress},
+		#{salesCondition}, #{salesPrice}, DEFAULT, #{salesComment}, #{salesCount}, #{salesImageName},
+		#{salesImagePath}, DEFAULT, DEFAULT, #{memberNo})
+	</insert>
+
+</mapper>
