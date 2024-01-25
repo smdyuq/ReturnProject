@@ -65,13 +65,18 @@
 							</c:when>
 							<c:otherwise>
 								<c:forEach var="item" items="${list }">
-									<tr
-										onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
-										<td>${row}</td>
-										<td><img src="${item.salesImageName}"></td>
-										<td>${item.salesName}</td>
-										<td>${item.salesPrice}</td>
-										<td>${item.salesUpdateDate}</td>
+									<tr>
+										<td
+											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${row}</td>
+										<td
+											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'"><img
+											src="${item.salesImageName}"></td>
+										<td
+											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesName}</td>
+										<td
+											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesPrice}</td>
+										<td
+											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesUpdateDate}</td>
 										<td><button
 												onclick="location.href='/sales/updateSalesForm.do?salesNo=${item.salesNo}'">수정</button>
 											<button
