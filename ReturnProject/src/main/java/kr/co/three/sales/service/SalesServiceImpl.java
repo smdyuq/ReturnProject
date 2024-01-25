@@ -49,6 +49,12 @@ public class SalesServiceImpl implements SalesService {
 		return salesDAO.deleteSales(salesNo, sqlSession);
 	}
 
+//	상품 상세
+	@Override
+	public SalesDTO detailSales(int salesNo) {
+		return salesDAO.detailSales(salesNo, sqlSession);
+	}
+
 //	판매 등록
 	@Override
 	public int enrollSales(SalesDTO sales) {

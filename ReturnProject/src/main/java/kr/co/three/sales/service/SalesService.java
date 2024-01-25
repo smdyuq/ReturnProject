@@ -18,9 +18,12 @@ public interface SalesService {
 
 //	상품 수정
 	int updateSales(SalesDTO sales);
-	
+
 //	상품 삭제
 	int deleteSales(int salesNo);
+
+//	상품 상세
+	SalesDTO detailSales(int salesNo);
 
 //	판매 등록
 	int enrollSales(SalesDTO sales);

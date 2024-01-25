@@ -11,7 +11,7 @@
 <body>
 	<a href="/">로고</a>
 	<hr>
-	<p>${sessionScope.memberId }님 안녕하세요!</p>
+	<p>${sessionScope.memberId }님안녕하세요!</p>
 	<hr>
 	<c:choose>
 		<c:when test="${sessionScope.memberNo == null }">
@@ -31,6 +31,8 @@
 		</c:otherwise>
 	</c:choose>
 
+	<hr>
+
 	<c:choose>
 		<c:when test="${sessionScope.memberNo == null }">
 			<a href="/member/loginForm.do">판매하기</a>
@@ -39,5 +41,15 @@
 			<a href="/sales/enrollSalesForm.do">판매하기</a>
 		</c:otherwise>
 	</c:choose>
+
+	<c:choose>
+		<c:when test="${sessionScope.memberNo == null }">
+			<a href="/member/loginForm.do">내상점</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/member/storeForm.do">내상점</a>
+		</c:otherwise>
+	</c:choose>
+
 </body>
 </html>

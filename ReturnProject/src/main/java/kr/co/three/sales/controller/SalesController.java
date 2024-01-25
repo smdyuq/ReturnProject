@@ -31,8 +31,8 @@ public class SalesController {
 	}
 
 //	상품관리 페이지로 이동
-	@GetMapping("detailSalesForm.do")
-	public String detailSalesForm(SalesDTO sales, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
+	@GetMapping("manageSalesForm.do")
+	public String manageSalesForm(SalesDTO sales, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
 			Model model, HttpSession session) {
 
 		int memberNo = (int) session.getAttribute("memberNo");
@@ -55,7 +55,7 @@ public class SalesController {
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		model.addAttribute("row", row);
-		return "sales/detailSales";
+		return "sales/manageSales";
 	}
 
 //	상품수정 페이지로 이동
@@ -74,7 +74,7 @@ public class SalesController {
 		int result = salesService.updateSales(sales);
 
 		if (result == 1) {
-			return "redirect:/sales/detailSalesForm.do";
+			return "redirect:/sales/manageSalesForm.do";
 		} else {
 			return "common/error";
 		}
@@ -86,8 +86,19 @@ public class SalesController {
 
 		int result = salesService.deleteSales(salesNo);
 
-		return "redirect:/sales/detailSalesForm.do";
+		return "redirect:/sales/manageSalesForm.do";
 
+	}
+
+//	상품 상세
+	@GetMapping("detailSales.do")
+	public String detailSales(@RequestParam(value = "salesNo") int salesNo, Model model) {
+
+		SalesDTO result = salesService.detailSales(salesNo);
+
+		model.addAttribute("sales", result);
+
+		return "sales/detailSales";
 	}
 
 //	판매등록
@@ -102,7 +113,7 @@ public class SalesController {
 		int result = salesService.enrollSales(sales);
 
 		if (result == 1) {
-			return "redirect:/sales/detailSalesForm.do";
+			return "redirect:/sales/manageSalesForm.do";
 		} else {
 			return "common/error";
 		}

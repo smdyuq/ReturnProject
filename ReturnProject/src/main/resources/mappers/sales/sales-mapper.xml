@@ -32,7 +32,8 @@
 	<select id="salesSelectListAll" resultMap="salesResultSet">
 		SELECT * FROM SALES
 		WHERE SALES_NAME LIKE '%' || #{searchText} || '%' AND
-		MEMBER_NO = #{memberNo}
+		MEMBER_NO =
+		#{memberNo}
 		ORDER BY
 		SALES_NO DESC
 	</select>
@@ -47,16 +48,18 @@
 
 	<!-- 상품 수정 -->
 	<update id="updateSales" parameterType="sales">
-		UPDATE SALES 
-		SET SALES_NAME = #{salesName},
-			SALES_CATEGORY = #{salesCategory},
-			SALES_ADDRESS = #{salesAddress},
-			SALES_CONDITION = #{salesCondition},
-			SALES_PRICE = #{salesPrice},
-			SALES_DELIVERY = #{salesDelivery},
-			SALES_COMMENT = #{salesComment},
-			SALES_COUNT = #{salesCount}
-		WHERE SALES_NO = #{salesNo}
+		UPDATE SALES
+		SET
+		SALES_NAME = #{salesName},
+		SALES_CATEGORY = #{salesCategory},
+		SALES_ADDRESS = #{salesAddress},
+		SALES_CONDITION = #{salesCondition},
+		SALES_PRICE = #{salesPrice},
+		SALES_DELIVERY = #{salesDelivery},
+		SALES_COMMENT = #{salesComment},
+		SALES_COUNT = #{salesCount}
+		WHERE
+		SALES_NO = #{salesNo}
 	</update>
 
 	<!-- 상품 삭제 -->
@@ -65,6 +68,13 @@
 		WHERE
 		SALES_NO = #{salesNo}
 	</delete>
+
+	<!-- 상품 상세 -->
+	<select id="detailSales" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_NO = #{salesNo}
+	</select>
 
 	<!-- 판매 등록 -->
 	<insert id="enrollSales" parameterType="sales">
@@ -86,4 +96,13 @@
 		DEFAULT,
 		#{memberNo})
 	</insert>
+
+	<!-- 상품 테이블 데이터 조회 -->
+	<select id="selectSalesData" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		MEMBER_NO = #{memberNo}
+		ORDER BY
+		SALES_NO DESC
+	</select>
 </mapper>

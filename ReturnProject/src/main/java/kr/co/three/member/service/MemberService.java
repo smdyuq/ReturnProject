@@ -1,6 +1,9 @@
 package kr.co.three.member.service;
 
+import java.util.List;
+
 import kr.co.three.member.dto.MemberDTO;
+import kr.co.three.sales.dto.SalesDTO;
 
 public interface MemberService {
 
@@ -12,4 +15,12 @@ public interface MemberService {
 
 //	로그인
 	MemberDTO loginMember(MemberDTO member);
+
+//	내 상점
+
+//	멤버 테이블 데이터 조회
+	MemberDTO selectMemberData(int memberNo);
+
+//	상품 테이블 데이터 조회
+	List<SalesDTO> selectSalesData(int memberNo);
 }

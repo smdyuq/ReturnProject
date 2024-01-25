@@ -8,14 +8,17 @@
 		<result column="MEMBER_PWD" property="memberPwd"></result>
 		<result column="MEMBER_NAME" property="memberName"></result>
 		<result column="MEMBER_PHONE" property="memberPhone"></result>
-		<result column="MEMBER_TYPE" property="memberType"></result>
+		<result column="MEMBER_IMAGE_NAME" property="memberImageName"></result>
+		<result column="MEMBER_IMAGE_PATH" property="memberImagePath"></result>
+		<result column="MEMBER_VISIT" property="memberVisit"></result>
+		<result column="MEMBER_CONTENT" property="memberContent"></result>
 	</resultMap>
 
 	<!-- 회원가입 -->
 	<insert id="registerMember" parameterType="member">
 		INSERT INTO MEMBER
 		VALUES(MEMBER_SEQ.NEXTVAL, #{memberId}, #{memberPwd}, #{memberName},
-		#{memberPhone}, DEFAULT)
+		#{memberPhone}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, NULL)
 	</insert>
 
 	<!-- 아이디 중복검사 -->
@@ -31,5 +34,12 @@
 		SELECT * FROM MEMBER
 		WHERE
 		MEMBER_ID = #{memberId}
+	</select>
+
+	<!-- 멤버 테이블 데이터 조회 -->
+	<select id="selectMemberData" resultMap="memberResultSet">
+		SELECT * FROM MEMBER
+		WHERE
+		MEMBER_NO = #{memberNo}
 	</select>
 </mapper>

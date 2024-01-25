@@ -20,7 +20,7 @@
 				src="https://getbootstrap.kr/docs/5.2/assets/brand/bootstrap-logo.svg"
 				alt="" width="72" height="57">
 			<h2><a href="/sales/enrollSalesForm.do">판매 등록</a></h2>
-			<h2><a href="/sales/detailSalesForm.do">상품 관리</a></h2>
+			<h2><a href="/sales/manageSalesForm.do">상품 관리</a></h2>
 		</div>
 
 		<div class="row g-3">

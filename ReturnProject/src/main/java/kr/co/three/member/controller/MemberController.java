@@ -1,5 +1,6 @@
 package kr.co.three.member.controller;
 
+import java.util.List;
 import java.util.Objects;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.three.member.dto.MemberDTO;
 import kr.co.three.member.service.MemberServiceImpl;
+import kr.co.three.sales.dto.SalesDTO;
 
 @Controller
 @RequestMapping("/member")
@@ -97,8 +99,24 @@ public class MemberController {
 
 		session.removeAttribute("memberNo");
 		session.invalidate();
-		
+
 		return "main";
+	}
+
+//	내 상점
+	@GetMapping("storeForm.do")
+	public String storeForm(HttpSession session, Model model) {
+		int memberNo = (int) session.getAttribute("memberNo");
+
+		// 멤버 테이블 데이터 조회
+		MemberDTO memberResult = memberService.selectMemberData(memberNo);
+		// 상품 테이블 데이터 조회
+		List<SalesDTO> salesResult = memberService.selectSalesData(memberNo);
+
+			model.addAttribute("member", memberResult);
+			model.addAttribute("sales", salesResult);
+
+		return "member/store";
 	}
 
 }

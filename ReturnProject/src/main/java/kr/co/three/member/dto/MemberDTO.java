@@ -12,4 +12,9 @@ public class MemberDTO {
 	private String memberName;
 	private String memberPhone;
 	private String memberType;
+
+	private String memberImageName;
+	private String memberImagePath;
+	private int memberVisit;
+	private String memberContent;
 }

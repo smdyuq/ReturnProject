@@ -23,7 +23,7 @@
 				<a href="/sales/enrollSalesForm.do">판매 등록</a>
 			</h2>
 			<h2>
-				<a href="/sales/detailSalesForm.do">상품 관리</a>
+				<a href="/sales/manageSalesForm.do">상품 관리</a>
 			</h2>
 		</div>
 

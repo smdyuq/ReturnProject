@@ -43,6 +43,11 @@ public class SalesDAO {
 		return sqlSession.delete("salesMapper.deleteSales", salesNo);
 	}
 
+//	상품 상세
+	public SalesDTO detailSales(int salesNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.detailSales", salesNo);
+	}
+
 //	판매 등록
 	public int enrollSales(SalesDTO sales, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("salesMapper.enrollSales", sales);
