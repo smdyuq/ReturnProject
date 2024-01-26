@@ -28,4 +28,5 @@ public class SalesDTO {
 	private int memberNo;
 
 	private String searchText = "";
+	private String searchWord = "";
 }

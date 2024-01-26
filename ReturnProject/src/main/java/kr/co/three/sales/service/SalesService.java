@@ -3,6 +3,7 @@ package kr.co.three.sales.service;
 import java.util.List;
 
 import kr.co.three.common.PageInfo;
+import kr.co.three.main.dto.MainDTO;
 import kr.co.three.sales.dto.SalesDTO;
 
 public interface SalesService {
@@ -27,4 +28,5 @@ public interface SalesService {
 
 //	판매 등록
 	int enrollSales(SalesDTO sales);
+	
 }

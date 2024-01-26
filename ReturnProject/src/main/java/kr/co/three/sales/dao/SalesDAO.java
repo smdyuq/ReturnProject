@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.three.common.PageInfo;
+import kr.co.three.main.dto.MainDTO;
 import kr.co.three.sales.dto.SalesDTO;
 
 @Repository

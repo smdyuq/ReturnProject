@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<header>
 	<a href="/">로고</a>
 	<hr>
 	<p>${sessionScope.memberId }님안녕하세요!</p>
@@ -33,6 +33,17 @@
 
 	<hr>
 
+	<form action="/main/search.do" method="POST">
+		<input type="hidden" value="${searchNo }"> <input
+			class="form-control me-2" type="search" name="searchWord"
+			placeholder="Search" aria-label="Search">
+		<div class="btn-group">
+			<button class="btn btn-outline-success" type="submit">Search</button>
+		</div>
+	</form>
+
+	<hr>
+
 	<c:choose>
 		<c:when test="${sessionScope.memberNo == null }">
 			<a href="/member/loginForm.do">판매하기</a>
@@ -51,5 +62,40 @@
 		</c:otherwise>
 	</c:choose>
 
+	<c:choose>
+		<c:when test="${sessionScope.memberNo == null }">
+			<a href="/member/loginForm.do">채팅</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/">채팅</a>
+		</c:otherwise>
+	</c:choose>
+</header>
+<body>
+<hr>
+<h2>상품 리스트</h2>
+<hr>
+	<div class=populaPage_List>
+		<div class="Popula-card-wrapper">
+			<c:forEach var="item" items="${sales }">
+				<div class="popula-img"
+					onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
+					<p>상품이미지</p>
+					<a href="#"><img class="popular_img"
+						src="/resources/uploads/outerimage/300x300/${item.salesImageName }"></a>
+
+					<div class="projectCardDetail">
+
+						<input type="hidden" value=${item.salesNo }>
+						<p>상품명</p>
+						<a href="#">${item.salesName }</a>
+						<p>상품가격</p>
+						<a href="#">${item.salesPrice }</a>
+						<hr>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
 </body>
 </html>

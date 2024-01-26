@@ -105,4 +105,14 @@
 		ORDER BY
 		SALES_NO DESC
 	</select>
+
+	<!-- 상품 리스트 -->
+	<select id="mainSalesList" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_NAME LIKE '%' || #{searchWord} || '%'
+		ORDER BY
+		SALES_DATE DESC
+	</select>
+
 </mapper>

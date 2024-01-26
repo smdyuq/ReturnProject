@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mainMapper">
+	<resultMap type="main" id="mainResultSet">
+		<result column="SEARCH_NO" property="searchNo"></result>
+		<result column="SEARCH_WORD" property="searchWord"></result>
+		<result column="SEARCH_DATE" property="searchDate"></result>
+		<result column="SEARCH_STATUS" property="searchStatus"></result>
+	</resultMap>
+
+	<!-- 검색 페이지 검색 데이터 -->
+	<insert id="insertSearch" parameterType="main">
+		INSERT INTO SEARCH
+		VALUES(SEARCH_SEQ.NEXTVAL, #{searchWord}, DEFAULT,
+		DEFAULT,
+		#{memberNo})
+	</insert>
+
+	<!-- 검색 데이터 리스트 -->
+	<select id="searchList" resultMap="mainResultSet">
+		SELECT * FROM SEARCH
+		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY
+		SEARCH_DATE DESC
+	</select>
+</mapper>
+	

@@ -54,7 +54,7 @@ public class MemberController {
 		int result = memberService.registerMember(member);
 
 		if (result == 1) {
-			return "main";
+			return "redirect:/";
 		} else {
 			return "common/error";
 		}
@@ -80,14 +80,14 @@ public class MemberController {
 	public String login(MemberDTO member, HttpSession session) {
 
 		MemberDTO loginUser = memberService.loginMember(member);
-
+		
 		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
 		if (!Objects.isNull(loginUser)
 				&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("memberNo", loginUser.getMemberNo());
 			session.setAttribute("memberId", loginUser.getMemberId());
 
-			return "main";
+			return "redirect:/";
 		} else {
 			return "common/error";
 		}
@@ -97,10 +97,9 @@ public class MemberController {
 	@GetMapping("/logout.do")
 	public String logout(HttpSession session) {
 
-		session.removeAttribute("memberNo");
 		session.invalidate();
 
-		return "main";
+		return "redirect:/";
 	}
 
 //	내 상점
