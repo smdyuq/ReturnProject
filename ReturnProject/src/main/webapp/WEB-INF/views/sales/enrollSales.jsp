@@ -43,10 +43,9 @@
 								<option selected hidden disabled>카테고리를 선택해주세요.</option>
 								<option value="가전">가전</option>
 								<option value="의류">의류</option>
-								<option value="뷰티">향수·뷰티</option>
+								<option value="향수">향수</option>
 								<option value="푸드">푸드</option>
 								<option value="주얼리">주얼리</option>
-								<option value="크리스마스">크리스마스</option>
 							</select>
 						</div>
 
