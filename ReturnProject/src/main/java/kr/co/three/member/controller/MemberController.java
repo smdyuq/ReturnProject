@@ -45,7 +45,7 @@ public class MemberController {
 	public String register(MemberDTO member) {
 
 //		임시로 핸드폰 번호 넣어두기
-		member.setMemberPhone("01012345678");
+//		member.setMemberPhone("01012345678");
 
 //		패스워드 암호화
 		String pwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
@@ -80,7 +80,7 @@ public class MemberController {
 	public String login(MemberDTO member, HttpSession session) {
 
 		MemberDTO loginUser = memberService.loginMember(member);
-		
+
 		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
 		if (!Objects.isNull(loginUser)
 				&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
@@ -112,8 +112,8 @@ public class MemberController {
 		// 상품 테이블 데이터 조회
 		List<SalesDTO> salesResult = memberService.selectSalesData(memberNo);
 
-			model.addAttribute("member", memberResult);
-			model.addAttribute("sales", salesResult);
+		model.addAttribute("member", memberResult);
+		model.addAttribute("sales", salesResult);
 
 		return "member/store";
 	}
