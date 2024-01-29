@@ -74,15 +74,15 @@
 	<p>카테고리</p>
 	<ul>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=가전'">가전</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=homeAppliances'">가전</p></li>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=의류'">의류</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=clothes'">의류</p></li>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=향수'">향수</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=perfume'">향수</p></li>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=푸드'">푸드</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=food'">푸드</p></li>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=주얼리'">주얼리</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=jewelry'">주얼리</p></li>
 	</ul>
 </header>
 <body>

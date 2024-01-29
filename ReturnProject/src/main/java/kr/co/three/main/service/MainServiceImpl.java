@@ -37,4 +37,36 @@ public class MainServiceImpl implements MainService {
 		return mainDAO.mainSalesList(sales, sqlSession);
 	}
 
+//	카테고리 페이지
+
+//	가전 카테고리
+	@Override
+	public List<SalesDTO> homeAppliances() {
+		return mainDAO.homeAppliances(sqlSession);
+	}
+
+//	의류 카테고리
+	@Override
+	public List<SalesDTO> clothes() {
+		return mainDAO.clothes(sqlSession);
+	}
+
+//	향수 카테고리
+	@Override
+	public List<SalesDTO> perfume() {
+		return mainDAO.perfume(sqlSession);
+	}
+
+//	푸드 카테고리
+	@Override
+	public List<SalesDTO> food() {
+		return mainDAO.food(sqlSession);
+	}
+
+//	주얼리 카테고리
+	@Override
+	public List<SalesDTO> jewelry() {
+		return mainDAO.jewelry(sqlSession);
+	}
+
 }

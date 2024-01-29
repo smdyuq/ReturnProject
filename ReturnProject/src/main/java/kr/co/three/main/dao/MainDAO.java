@@ -26,4 +26,31 @@ public class MainDAO {
 		return sqlSession.selectList("salesMapper.mainSalesList", sales);
 	}
 
+//	카테고리 페이지
+
+//	가전 카테고리
+	public List<SalesDTO> homeAppliances(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("salesMapper.homeAppliances");
+	}
+
+//	의류 카테고리
+	public List<SalesDTO> clothes(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("salesMapper.clothes");
+	}
+
+//	향수 카테고리
+	public List<SalesDTO> perfume(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("salesMapper.perfume");
+	}
+
+//	푸드 카테고리
+	public List<SalesDTO> food(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("salesMapper.food");
+	}
+
+//	주얼리 카테고리
+	public List<SalesDTO> jewelry(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("salesMapper.jewelry");
+	}
+
 }

@@ -41,11 +41,11 @@
 								class="form-select" aria-label="Default select example"
 								name="salesCategory">
 								<option selected hidden disabled>카테고리를 선택해주세요.</option>
-								<option value="가전">가전</option>
-								<option value="의류">의류</option>
-								<option value="향수">향수</option>
-								<option value="푸드">푸드</option>
-								<option value="주얼리">주얼리</option>
+								<option value="homeAppliances">가전</option>
+								<option value="clothes">의류</option>
+								<option value="perfume">향수</option>
+								<option value="food">푸드</option>
+								<option value="jewelry">주얼리</option>
 							</select>
 						</div>
 

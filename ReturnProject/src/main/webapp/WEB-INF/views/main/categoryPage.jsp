@@ -14,22 +14,21 @@
 	<h1>카테고리 페이지</h1>
 	<hr>
 
-			<h2>상품 리스트</h2>
-			<c:forEach var="item" items="${sales }">
-				<div class="popula-img"
-					onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
-					<a href="#"><img class="popular_img"
-						src="/resources/uploads/outerimage/300x300/${item.salesImageName }"></a>
+	<c:forEach var="item" items="${sales }">
+		<div class="popula-img"
+			onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
+			<a href="#"><img class="popular_img"
+				src="/resources/uploads/outerimage/300x300/${item.salesImageName }"></a>
 
-					<div class="projectCardDetail">
+			<div class="projectCardDetail">
 
-						<input type="hidden" value=${item.salesNo }> <a href="#">${item.salesName }</a>
-						<a href="#">${item.salesPrice }</a>
-					</div>
-					<hr>
-				</div>
-			</c:forEach>
+				<input type="hidden" value=${item.salesNo }> <a href="#">${item.salesName }</a>
+				<a href="#">${item.salesPrice }</a>
+			</div>
+			<hr>
 		</div>
+	</c:forEach>
+	</div>
 	</div>
 </body>
 </html>

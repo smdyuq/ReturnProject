@@ -115,4 +115,51 @@
 		SALES_DATE DESC
 	</select>
 
+	<!-- 카테고리 페이지 -->
+
+	<!-- 가전 카테고리 -->
+	<select id="homeAppliances" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_CATEGORY = 'homeAppliances'
+		ORDER BY
+		SALES_DATE DESC
+	</select>
+	
+	<!-- 의류 카테고리 -->
+	<select id="clothes" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_CATEGORY = 'clothes'
+		ORDER BY
+		SALES_DATE DESC
+	</select>
+	
+	<!-- 향수 카테고리 -->
+	<select id="perfume" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_CATEGORY = 'perfume'
+		ORDER BY
+		SALES_DATE DESC
+	</select>
+	
+	<!-- 푸드 카테고리 -->
+	<select id="food" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_CATEGORY = 'food'
+		ORDER BY
+		SALES_DATE DESC
+	</select>
+	
+	<!-- 주얼리 카테고리 -->
+	<select id="jewelry" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_CATEGORY = 'jewelry'
+		ORDER BY
+		SALES_DATE DESC
+	</select>
+
 </mapper>

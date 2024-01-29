@@ -1,15 +1,17 @@
 package kr.co.three.main.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.three.main.dto.MainDTO;
 import kr.co.three.main.service.MainServiceImpl;
@@ -49,7 +51,7 @@ public class MainController {
 
 			// 상품 리스트
 			List<SalesDTO> salesList = mainService.mainSalesList(sales);
-			
+
 			model.addAttribute("sales", salesList);
 
 			model.addAttribute("search", searchList);
@@ -69,6 +71,34 @@ public class MainController {
 
 			return "main/searchPage";
 		}
+	}
+
+// 	카테고리 페이지
+	@GetMapping("/main/categorySales.do")
+	public String category(@RequestParam("salesCategory") String salesCategory, Model model) {
+
+		List<SalesDTO> salesList = new ArrayList<>();
+
+		if (salesCategory.equals("homeAppliances")) {
+			// 가전 카테고리
+			salesList = mainService.homeAppliances();
+		} else if (salesCategory.equals("clothes")) {
+			// 의류 카테고리
+			salesList = mainService.clothes();
+		} else if (salesCategory.equals("perfume")) {
+			// 향수 카테고리
+			salesList = mainService.perfume();
+		} else if (salesCategory.equals("food")) {
+			// 푸드 카테고리
+			salesList = mainService.food();
+		} else if (salesCategory.equals("jewelry")) {
+			// 주얼리 카테고리
+			salesList = mainService.jewelry();
+		}
+
+		model.addAttribute("sales", salesList);
+
+		return "main/categoryPage";
 	}
 
 }
