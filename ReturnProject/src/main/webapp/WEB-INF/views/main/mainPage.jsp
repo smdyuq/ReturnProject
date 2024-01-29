@@ -87,6 +87,9 @@
 </header>
 <body>
 	<hr>
+	<h2>배너 이미지</h2>
+	<a href="/main/bannerPage.do"><img src="배너 이미지"></a>
+	<hr>
 	<h2>상품 리스트</h2>
 	<hr>
 	<div class=populaPage_List>

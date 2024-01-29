@@ -73,7 +73,7 @@ public class MainController {
 		}
 	}
 
-// 	카테고리 페이지
+// 	카테고리 페이지로 이동
 	@GetMapping("/main/categorySales.do")
 	public String category(@RequestParam("salesCategory") String salesCategory, Model model) {
 
@@ -99,6 +99,13 @@ public class MainController {
 		model.addAttribute("sales", salesList);
 
 		return "main/categoryPage";
+	}
+
+//	배너 페이지로 이동
+	@GetMapping("/main/bannerPage.do")
+	public String banner() {
+
+		return "main/bannerPage";
 	}
 
 }
