@@ -25,17 +25,17 @@ public class adminController {
 	@Autowired
 	private adminServiceImpl adminService;
 	
-//	회원가입 폼으로 이동
+//	가입 폼으로 이동
 	@GetMapping("/registerForm.do")
 	public String registerForm() {
 		return "admin/adminRegister";
 	}
 
 ////	로그인 폼으로 이동
-//	@GetMapping("/loginForm.do")
-//	public String loginForm() {
-//		return "admin/main/adminMain";
-//	}
+	@GetMapping("/loginForm.do")
+	public String loginForm() {
+		return "admin/main/adminMain";
+	}
 
 //	회원가입
 	@PostMapping("/register.do")
@@ -90,5 +90,14 @@ public class adminController {
 			return "common/error";
 		}
 	}
+	//로그아웃
+	@GetMapping("/logout.do")
+	   public String logout(HttpSession session) {
+
+	      session.removeAttribute("memberNo");
+	      session.invalidate();
+	      
+	      return "admin/adminLogin";
+	   }
 	
 }

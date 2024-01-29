@@ -13,12 +13,15 @@
 			alias="admin" />
 		<typeAlias type="kr.co.three.sales.dto.SalesDTO"
 			alias="sales" />
+		<typeAlias type="kr.co.three.board.dto.boardDTO"
+			alias="board" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="/mappers/member/member-mapper.xml" />
 		<mapper resource="/mappers/sales/sales-mapper.xml" />
 		<mapper resource="/mappers/admin/admin-mapper.xml" />
+		<mapper resource="/mappers/board/board-mapper.xml" />
 	</mappers>
 </configuration>
 

@@ -4,7 +4,7 @@
 <!doctype html>
 <html lang="ko" class="h-100">
 <head>
-	<%@ include file="/WEB-INF/views/common/head.jsp" %>
+	<%@ include file="/WEB-INF/views/admin/common/head.jsp" %>
  </head>
  
 	
@@ -46,7 +46,6 @@
 			  				<td>${item.title}</td>
 			  				<td>${item.writer}</td>
 			  				<td>${item.indate}</td>
-			  				<td>${item.views}</td>
 			  			</tr>
 			  			<c:set var="row" value="${row-1}" />
 			  		</c:forEach>
@@ -56,9 +55,9 @@
 			  
 			  
 			  </tbody>
-<!-- 	      <div class="d-grid gap-2d-md-flex justify-content-end float-right ">
-				  <button class="btn btn-dark me-md-2" onclick="window.location.href='/admin/enrollForm.do'" type="button" >글쓰기</button>
-				</div>  -->
+	      <div class="d-grid gap-2d-md-flex justify-content-end float-right ">
+				  <button class="btn btn-dark me-md-2" onclick="window.location.href='/inquiry/enrollForm.do'" type="button" >글쓰기</button>
+				</div> 
 				</table>
 				<nav aria-label="Page navigation example ">
 				  <ul class="pagination justify-content-center">
@@ -69,11 +68,11 @@
 						      <a class="page-link" href="#" aria-label="Previous">
 						        <span aria-hidden="true">&laquo;</span>
 						      </a>
-						    </li>
+						    </li>	
 					    </c:when>
 					    <c:otherwise>
 						    <li class="page-item">
-						      <a class="page-link" href="list.do?cpage=${pi.cpage-1}" aria-label="Previous">
+						      <a class="page-link" href="boardlist.do?cpage=${pi.cpage-1}" aria-label="Previous">
 						        <span aria-hidden="true">&laquo;</span>
 						      </a>
 						    </li>
@@ -82,7 +81,7 @@
 				    
 				    <c:forEach var="page" begin="${pi.startPage}" end="${pi.endPage}">
 				    	<li class="page-item">
-				    		<a class="page-link" href="list.do?cpage=${page}">${page}</a>
+				    		<a class="page-link" href="boardlist.do?cpage=${page}">${page}</a>
 			    		</li>
 				    </c:forEach>
 				    
@@ -96,7 +95,7 @@
 					    </c:when>
 					    <c:otherwise>
   						    <li class="page-item">
-						      <a class="page-link" href="list.do?cpage=${pi.cpage+1}" aria-label="Next">
+						      <a class="page-link" href="boardlist.do?cpage=${pi.cpage+1}" aria-label="Next">
 						        <span aria-hidden="true">&raquo;</span>
 						      </a>
 						    </li>

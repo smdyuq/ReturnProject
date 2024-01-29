@@ -29,8 +29,9 @@
 			</div>
 
 			<button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
-			 
-			 <a href="/admin/registerForm.do">Register</a>
+			
+			<a href="/admin/registerForm.do">관리자
+					등록</a>
 
 		</form>
 	</main>

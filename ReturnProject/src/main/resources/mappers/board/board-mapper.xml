@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	<resultMap type="board" id="boardResultSet">
+		<result column="ASK_NO" property="no"></result>
+		<result column="ASK_TITLE" property="title"></result>
+		<result column="ASK_CONTENT" property="content"></result>
+		<result column="ASK_DATE" property="indate"></result>
+	</resultMap>
+
+	<!-- 리스트 카운트 -->
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM ASK
+		<choose>
+			<when test='searchCategory.equals("content")'>
+				WHERE ASK_CONTENT LIKE '%' || #{searchText} || '%'
+			</when>
+			<when test='searchCategory.equals("title")'>
+				WHERE ASK_TITLE LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectListAll" resultMap="boardResultSet">
+		SELECT * FROM ASK
+		<choose>
+			<when test='searchCategory.equals("title")'>
+				WHERE ASK_TITLE LIKE '%' || #{searchText} || '%'
+			</when>
+			<when test='searchCategory.equals("content")'>
+				WHERE ASK_CONTENT LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+		ORDER BY ASK_NO DESC
+	</select>
+
+	<!-- 보드 등록 -->
+	<insert id="enrollBoard" parameterType="board">
+		INSERT INTO ASK
+SELECT seq_ASK_NO.NEXTVAL,
+       #{title},
+       #{content},
+       SYSDATE,
+       0,
+       #{uploadName},
+       #{uploadPath}
+FROM MEMBER
+WHERE MEMBER.MEMBER_NO = ASK.MEMBER_NO
+	</insert>
+</mapper>
+	
