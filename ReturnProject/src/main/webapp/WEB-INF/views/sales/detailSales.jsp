@@ -33,13 +33,20 @@
 		<p>${sales.salesAddress }</p>
 		<hr>
 		<c:choose>
-			<c:when test="${sessionScope.memberNo == sales.memberNo }">
+			<c:when
+				test="${not empty sessionScope.memberNo && sessionScope.memberNo == sales.memberNo}">
 				<a href="/member/storeForm.do">내 상점 관리</a>
+			</c:when>
+			<c:when
+				test="${not empty sessionScope.memberNo && sessionScope.memberNo != sales.memberNo}">
+				<p>찜</p>
+				<a href="">채팅</a>
+				<a href="/pay/payPage.do?salesNo=${sales.salesNo}">구매하기</a>
 			</c:when>
 			<c:otherwise>
 				<p>찜</p>
-				<a href="">채팅</a>
-				<a href="">구매하기</a>
+				<a href="/member/loginForm.do">채팅</a>
+				<a href="/member/loginForm.do">구매하기</a>
 			</c:otherwise>
 		</c:choose>
 		<hr>
