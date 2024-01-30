@@ -31,5 +31,8 @@ public class boardServiceImpl implements boardService{
 	public int enrollBoard(boardDTO board) {
 		return boardDao.enrollBoard(sqlSession, board);
 	}
+	public boardDTO detailBoard(int ask_no) {
+		return boardDao.detailBoard(sqlSession,ask_no);
+	}
 
 }

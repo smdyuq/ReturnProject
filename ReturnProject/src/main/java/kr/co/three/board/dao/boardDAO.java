@@ -26,4 +26,8 @@ public class boardDAO {
 		return sqlSession.insert("boardMapper.enrollBoard", board);
 	}
 
+	public boardDTO detailBoard(SqlSessionTemplate sqlSession, int ask_no) {
+		return sqlSession.selectOne("boardMapper.detailBoard", ask_no);
+	}
+
 }

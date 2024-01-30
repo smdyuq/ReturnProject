@@ -26,7 +26,6 @@
 			  	  <td>제목</td>
 			  	  <td>작성자</td>
 			  	  <td>작성일</td>
-			  	  <td>조회수</td>
 			  	</tr>
 			  </thead>
 			  <tbody>
@@ -34,18 +33,18 @@
 			  <c:choose>
 			  	<c:when test="${empty list}"> 
 			  		<tr>
-			  			<td colspan="5">
+			  			<td colspan="4">
 			  				<h3 class="text-center">등록된 글이 없습니다.</h3>
 		  				</td>
 			  		</tr>
 			  	</c:when>
 			  	<c:otherwise>
 			  		<c:forEach var="item" items="${list }">
-			  			<tr onclick="location.href='/admin/detail.do?boardIdx=${item.idx}'">               
+			  			<tr onclick="location.href='/inquiry/detail.do?ask_no=${item.ask_no}'">               
 			  				<td>${row}</td>
-			  				<td>${item.title}</td>
-			  				<td>${item.writer}</td>
-			  				<td>${item.indate}</td>
+			  				<td>${item.ask_title}</td>
+			  				<td>${sessionScope.memberId}</td>
+			  				<td>${item.ask_date}</td>
 			  			</tr>
 			  			<c:set var="row" value="${row-1}" />
 			  		</c:forEach>

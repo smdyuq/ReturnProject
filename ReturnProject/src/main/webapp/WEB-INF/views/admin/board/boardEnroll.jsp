@@ -18,17 +18,16 @@
 			<hr>
 			<br />
 
-			<form action="/inquiry/enroll.do" method="post" enctype="multipart/form-data">
+			<form action="/inquiry/enroll.do" method="post" >
 				<div class="mb-3 justify-content-center">
 					<input type="text" class="form-control"
-						name="title" id="exampleFormControlInput1" placeholder="제목을 입력하세요.">
+						name="ask_title" id="exampleFormControlInput1" placeholder="제목을 입력하세요.">
 				</div>
 				<div id="marteditor mb-3 justify-content-center">
-					<textarea name="content" id="editorTxt" class="form-control"
+					<textarea name="ask_content" id="editorTxt" class="form-control"
 						rows="13" cols="10" placeholder="내용을 입력해주세요"></textarea>
 				</div>
 				
-				<input type="file" name="upload"/>
 				
 				<div class="row">
 					<div class="col text-center">

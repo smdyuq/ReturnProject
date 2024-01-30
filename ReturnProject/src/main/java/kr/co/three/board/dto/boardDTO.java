@@ -11,13 +11,13 @@ import lombok.Setter;
 @AllArgsConstructor
 public class boardDTO {
 	
-	private int ASK_NO;
-	private String ASK_TITLE;
-	private String ASK_CONTENT;
-	private String ASK_DATE;
-	private String ASK_IMAGE_PATH;
-	private String ASK_IMAGE_NAME;
-	private int MEMBER_NO;
+	private int ask_no;
+	private String ask_title;
+	private String ask_content;
+	private String ask_date;
+	private String ask_image_path;
+	private String ask_image_name;
+	private int member_no;
 	
 	
 	private String searchText = "";

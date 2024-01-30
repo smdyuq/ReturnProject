@@ -6,25 +6,18 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.three.board.dto.boardDTO;
 import kr.co.three.board.page.PageInfo;
 import kr.co.three.board.page.Pagination;
 import kr.co.three.board.service.boardServiceImpl;
-import kr.co.three.common.Validation.DataValidation;
-import kr.co.three.common.session.SessionMessage;
-import kr.co.three.common.upload.UploadFile;
 
 @Controller
 @RequestMapping("/inquiry")
@@ -32,8 +25,8 @@ public class boardController {
 	
 	private static final String BOARD_NAME = "C:\\Users\\jaeyun\\git\\ReturnProject\\ReturnProject\\src\\main\\webapp\\resources\\uploads\\";
 
-	@Autowired
-	private SessionMessage sessionMessage;
+//	@Autowired
+//	private SessionMessage sessionMessage;
 	@Autowired
 	private boardServiceImpl boardService;
 
@@ -51,8 +44,8 @@ public class boardController {
 		List<boardDTO> list = boardService.selectListAll(pi, board);
 
 		for (boardDTO item : list) {
-			String indate = item.getASK_DATE().substring(0, 10);
-			item.setASK_DATE(indate);
+			String indate = item.getAsk_date().substring(0, 10);
+			item.setAsk_date(indate);
 		}
 
 		String msg = (String) session.getAttribute("msg");
@@ -85,14 +78,18 @@ public class boardController {
 //	public ResponseEntity<?> infoEnroll(@RequestBody InfoDTO info, MultipartFile upload, HttpSession session)
 //			throws IllegalStateException, IOException {
 //		board.setMEMBER_NO((int) session.getAttribute("memberName"));
+		int memberNo = (int)session.getAttribute("memberNo");
+		board.setMember_no(memberNo);
+		board.setAsk_image_name("임시 이미지 이름");
+		board.setAsk_image_path("임시 이미지 경로");
+System.out.println("asd : " + board.getAsk_title());
+//		boolean titleLengthCheck = DataValidation.CheckLength(board.getAsk_title(), 150);
+//		boolean titleEmptyCheck = DataValidation.emptyCheck(board.getAsk_title());
 
-		boolean titleLengthCheck = DataValidation.CheckLength(board.getASK_TITLE(), 150);
-		boolean titleEmptyCheck = DataValidation.emptyCheck(board.getASK_TITLE());
-
-		if (titleLengthCheck && titleEmptyCheck) {
-			if (!upload.isEmpty()) {
-				UploadFile.uploadMethod(upload, board, session, BOARD_NAME);
-			}
+//		if (titleLengthCheck && titleEmptyCheck) {
+//			if (!upload.isEmpty()) {
+//				UploadFile.uploadMethod(upload, board, session, BOARD_NAME);
+//			}
 
 			int result = boardService.enrollBoard(board);
 
@@ -104,12 +101,25 @@ public class boardController {
 //				return new ResponseEntity<>("failed", HttpStatus.OK);
 			}
 
-			} else if(!titleLengthCheck) {
-			return sessionMessage.setSessionMessage("제목이 너무 깁니다.", "error", "/free/list.do", session);
-		} else if(!titleEmptyCheck) {
-			return sessionMessage.setSessionMessage("제목을 입력해주세요.", "error", "/free/list.do", session);
-		} else {
-			return sessionMessage.setSessionMessage("에러가 발생했습니다.", "error", "/free/list.do", session);
-		}
+//			} else if(!titleLengthCheck) {
+//			return sessionMessage.setSessionMessage("제목이 너무 깁니다.", "error", "/inquiry/boardList.do", session);
+//		} else if(!titleEmptyCheck) {
+//			return sessionMessage.setSessionMessage("제목을 입력해주세요.", "error", "/inquiry/boardList.do", session);
+//		} else {
+//			return sessionMessage.setSessionMessage("에러가 발생했습니다.", "error", "/inquiry/boardList.do", session);
+//		}
+	}
+	@GetMapping("/detail.do")
+	public String detailBoard(@RequestParam("ask_no") int askNo, Model model) {
+	    boardDTO board = boardService.detailBoard(askNo);
+
+	    if (board != null) {
+	        model.addAttribute("board", board);
+	        return "admin/board/boardDetail"; // 상세 정보를 보여줄 뷰의 이름입니다.
+	    } else {
+	        // 게시글을 찾을 수 없는 경우, 에러 메시지를 설정하고 에러 페이지로 이동할 수 있도록 처리합니다.
+	        model.addAttribute("errorMessage", "요청하신 게시글을 찾을 수 없습니다.");
+	        return "error"; // 에러 페이지의 뷰 이름입니다.
+	    }
 	}
 }
