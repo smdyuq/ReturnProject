@@ -6,9 +6,9 @@
 <head>
 <%@ include file="../../common/head.jsp"%>
 <%@ include file="../common/smarteditor.jsp"%>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body class="d-flex flex-column h-100">
+<body class="d-flex flex-column h-100" onload="replyData()">
 	<!-- Fixed navbar -->
 	<%@ include file="/WEB-INF/views/admin/common/header.jsp"%>
 	<!-- Begin page content -->
@@ -48,24 +48,51 @@
 						class="btn btn-primary">삭제</button>
 					<%-- </c:if> --%>
 				</div>
-				<div>
+				<hr />
 
-					<form method="post" action="/reply/enroll">
-
-						<p>
-							<label>댓글 작성자</label> <input type="text" name="writer" value="관리자" readonly>
-						</p>
-						<p>
-							<textarea rows="5" cols="50" name="content"></textarea>
-						</p>
-						<p>
-						<input type="hidden" name="ask_no" value="${ask.ask_no}">
-							<button type="submit">댓글 작성</button>
-						</p>
-					</form>
-
+				<div id="modal_wrap">
+					<!-- 모달 추가 -->
+					<div id="first">
+						<div style="width: 250px; margin: 0 auto; padding-top: 20px;">
+							<form id="frm">
+								<input type="hidden" name="write_num"
+									value="${member.member_type}"> <b>댓글달기</b>
+								<hr>
+								<b>작성자 : 관리자</b>
+								<hr>
+								<b>제목</b><br> <input type="text" id="title" size="30"
+									name="title">
+								<hr>
+								<b>내용</b><br>
+								<textarea name="replyContent" id="content" rows="9" cols="30"></textarea>
+								<hr>
+								<button type="button"
+									style="background: white; border-radius: 4px; border-color: white; height: 30px;"
+									onclick="reply()">댓글달기</button>
+								<button type="button"
+									style="background: white; border-radius: 4px; border-color: white; height: 30px;"
+									onclick="slide_hide()">취소</button>
+							</form>
+						</div>
+					</div>
 				</div>
-			</div>
 	</main>
 </body>
 </html>
+<script>
+$(function(){
+    $("#commentBtn").click(function(){
+        $.ajax({
+            url: '/comment',
+            data: $('#commentForm').serialize(),
+            type: 'POST',
+            success: function(data){
+                $("#commentList").append("<div>"+data.text+"</div>");
+            },
+            error: function(){
+                alert("댓글 작성에 실패하였습니다.");
+            }
+        });
+    });
+});
+</script>

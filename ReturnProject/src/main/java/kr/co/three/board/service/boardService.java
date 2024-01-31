@@ -6,7 +6,6 @@ import kr.co.three.board.dto.boardDTO;
 import kr.co.three.board.page.PageInfo;
 
 public interface boardService {
-
 	// 전체 게시글 수 구하기
 	int selectListCount(boardDTO board);
 
