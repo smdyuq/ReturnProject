@@ -57,7 +57,7 @@
 							<label for="salesCategory" class="form-label">카테고리</label> <select
 								class="form-select" aria-label="Default select example"
 								name="salesCategory">
-								<option selected hidden disabled>카테고리를 선택해주세요.</option>
+								<option value="${sales.salesCategory }" selected hidden disabled>${sales.salesCategory}</option>
 								<option value="가전">가전</option>
 								<option value="의류">의류</option>
 								<option value="뷰티">향수·뷰티</option>
