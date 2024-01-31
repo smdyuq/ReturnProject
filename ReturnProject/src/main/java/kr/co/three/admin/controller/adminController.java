@@ -77,12 +77,12 @@ public class adminController {
 	public String loginIndex(adminDTO admin, HttpSession session, Model model) {
 
 		adminDTO loginAdmin = adminService.loginAdmin(admin);
-
 		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
 		if (!Objects.isNull(loginAdmin)
 				&& bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())) {
 			session.setAttribute("memberNo", loginAdmin.getMemberNo());
 			session.setAttribute("memberId", loginAdmin.getMemberId());
+			session.setAttribute("memberType", loginAdmin.getMemberType());
 
 			model.addAttribute("admin", admin);
 			return "admin/main/adminMain";

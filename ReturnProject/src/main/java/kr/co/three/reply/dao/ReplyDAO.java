@@ -11,11 +11,18 @@ import kr.co.three.reply.dto.ReplyDTO;
 public class ReplyDAO {
 	
 //	댓글 등록
-	public int replyEnroll(SqlSessionTemplate sqlSession, ReplyDTO reply) {
-		return sqlSession.insert("replyMapper.replyEnroll", reply);
+	public int CommentRegist(SqlSessionTemplate sqlSession, ReplyDTO reply) {
+		return sqlSession.insert("replyMapper.CommentRegist", reply);
 	}
 	
-	public List<ReplyDTO> list(SqlSessionTemplate sqlSession, int ask_no) {
+	public List<ReplyDTO> getList(SqlSessionTemplate sqlSession, int ask_no) {
 		return sqlSession.selectList("replyMapper.replyList", ask_no);
 	}
+
+	public int commentDelete(SqlSessionTemplate sqlSession, ReplyDTO reply) {
+		return sqlSession.delete("replyMapper.replyEnroll", reply);
+	}
+
+	
+
 }

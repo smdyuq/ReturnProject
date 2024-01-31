@@ -17,20 +17,23 @@ public class ReplyServiceImpl implements ReplyService{
 	
 	@Autowired 
 	private ReplyDAO replyDao;
+
 	
 	@Override
-	public int replyEnroll(ReplyDTO reply) {
-		return replyDao.replyEnroll(sqlSession, reply);
+	public int CommentRegist(ReplyDTO reply) {
+		return replyDao.CommentRegist(sqlSession, reply);
+		
 	}
-
 
 	@Override
-	public List<ReplyDTO> list(int ask_no) {
-		return replyDao.list(sqlSession,ask_no);
+	public List<ReplyDTO> getList(int ask_no) {
+		return replyDao.getList(sqlSession,ask_no);
 	}
 
-
-
-		
+	@Override
+	public int commentDelete(ReplyDTO reply) {
+		return replyDao.commentDelete(sqlSession, reply);
+	}
+	
 }
 

@@ -13,4 +13,5 @@ public class ReplyDTO {
 
 	private int ask_no;
 	private String ask_comment_content;
+	private int member_no;
 }

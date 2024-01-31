@@ -78,12 +78,12 @@ public class MemberController {
 	public String loginIndex(MemberDTO member, HttpSession session, Model model) {
 
 		MemberDTO loginUser = memberService.loginMember(member);
-
 		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
 		if (!Objects.isNull(loginUser)
 				&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("memberNo", loginUser.getMemberNo());
 			session.setAttribute("memberId", loginUser.getMemberId());
+			session.setAttribute("memberType", loginUser.getMemberType());
 
 			model.addAttribute("member", member);
 			return "main";
