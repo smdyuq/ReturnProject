@@ -54,4 +54,19 @@ public class SalesDAO {
 		return sqlSession.insert("salesMapper.enrollSales", sales);
 	}
 
+//	판매등록 작성자 조회
+	public int selectSalesMember(int memberNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.selectSalesMember", memberNo);
+	}
+
+//	기존 파일이름 조회
+	public String selectFileName(int memberNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.selectFileName", memberNo);
+	}
+
+//	상품 수정(upload가 비어있을 때)
+	public int updateSalesEmptyUpload(SalesDTO sales, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("salesMapper.updateSalesEmptyUpload", sales);
+	}
+
 }

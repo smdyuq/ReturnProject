@@ -62,4 +62,22 @@ public class SalesServiceImpl implements SalesService {
 		return salesDAO.enrollSales(sales, sqlSession);
 	}
 
+//	판매등록 작성자 조회
+	@Override
+	public int selectSalesMember(int memberNo) {
+		return salesDAO.selectSalesMember(memberNo, sqlSession);
+	}
+
+//	기존 파일이름 조회
+	@Override
+	public String selectFileName(int memberNo) {
+		return salesDAO.selectFileName(memberNo, sqlSession);
+	}
+
+//	상품 수정(upload가 비어있을 때)
+	@Override
+	public int updateSalesEmptyUpload(SalesDTO sales) {
+		return salesDAO.updateSalesEmptyUpload(sales, sqlSession);
+	}
+
 }

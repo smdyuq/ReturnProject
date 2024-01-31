@@ -21,6 +21,7 @@ public class SalesDTO {
 	private int salesCount;
 	private String salesImageName;
 	private String salesImagePath;
+	private String salesOriginImageName;
 	private Date salesDate;
 	private Date salesUpdateDate;
 	private Date salesDeleteDate;

@@ -172,13 +172,6 @@
 			<version>1.3.0</version>
 		</dependency>
 
-		<!-- 파일업로드 -->
-		<dependency>
-			<groupId>commons-fileupload</groupId>
-			<artifactId>commons-fileupload</artifactId>
-			<version>1.4</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api -->
 		<dependency>
 			<groupId>jakarta.validation</groupId>
@@ -221,7 +214,13 @@
 			<artifactId>sdk</artifactId>
 			<version>4.3.0</version>
 		</dependency>
-
+		
+		<!-- 파일업로드 -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
 
 	<build>

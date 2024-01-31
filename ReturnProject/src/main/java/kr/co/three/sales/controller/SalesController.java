@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.three.common.PageInfo;
 import kr.co.three.common.Pagination;
+import kr.co.three.common.UploadFile;
 import kr.co.three.sales.dto.SalesDTO;
 import kr.co.three.sales.service.SalesServiceImpl;
 
@@ -69,9 +71,37 @@ public class SalesController {
 
 //	상품 수정
 	@PostMapping("updateSales.do")
-	public String updateSales(SalesDTO sales) {
+	public String updateSales(SalesDTO sales, HttpSession session, MultipartFile upload) {
 
-		int result = salesService.updateSales(sales);
+		// 판매등록 작성자 조회
+		int salesMember = salesService.selectSalesMember(sales.getMemberNo()); // 판매등록 작성자
+
+		int memberNo = (int) session.getAttribute("memberNo"); // 로그인 유저
+
+		int result = 0;
+
+		if (salesMember == memberNo && !upload.isEmpty()) {
+			// 기존 파일이름 조회
+			String fileName = salesService.selectFileName(sales.getMemberNo());
+
+			sales.setSalesImageName(fileName);
+
+			boolean deleteFile = UploadFile.deleteFile(fileName);
+
+			if (deleteFile) {
+				UploadFile.uploadMethod(upload, sales, session);
+
+				// 상품 수정
+				result = salesService.updateSales(sales);
+			}
+		}
+		if (salesMember == memberNo) {
+			// upload가 비어있을 경우 : 기존 업로드 정보 유지
+			// uploadPath, uploadName, uploadOriginName이 비워져있는 상태
+
+			// 상품 수정(upload가 비어있을 때)
+			result = salesService.updateSalesEmptyUpload(sales);
+		}
 
 		if (result == 1) {
 			return "redirect:/sales/manageSalesForm.do";
@@ -103,12 +133,15 @@ public class SalesController {
 
 //	판매등록
 	@PostMapping("/enrollSales.do")
-	public String enrollSales(SalesDTO sales, HttpSession session) {
-		sales.setSalesImageName("임시 이미지 이름");
-		sales.setSalesImagePath("임시 이미지 경로");
+	public String enrollSales(SalesDTO sales, MultipartFile upload, HttpSession session) {
 
 		int memberNo = (int) session.getAttribute("memberNo");
 		sales.setMemberNo(memberNo);
+
+		// 업로드된 파일이 존재하는지 확인
+		if (upload != null && !upload.isEmpty()) {
+			UploadFile.uploadMethod(upload, sales, session);
+		}
 
 		int result = salesService.enrollSales(sales);
 

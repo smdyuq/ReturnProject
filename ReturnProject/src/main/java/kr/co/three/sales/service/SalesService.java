@@ -28,5 +28,14 @@ public interface SalesService {
 
 //	판매 등록
 	int enrollSales(SalesDTO sales);
-	
+
+//	판매등록 작성자 조회
+	int selectSalesMember(int memberNo);
+
+//	기존 파일이름 조회
+	String selectFileName(int memberNo);
+
+//	상품 수정(upload가 비어있을 때)
+	int updateSalesEmptyUpload(SalesDTO sales);
+
 }

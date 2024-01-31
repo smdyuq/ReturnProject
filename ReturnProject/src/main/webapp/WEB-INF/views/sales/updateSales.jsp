@@ -31,8 +31,20 @@
 			<h3>수정</h3>
 			<div class="">
 				<form action="/sales/updateSales.do" method="POST"
-					class="needs-validation" novalidate="">
+					class="needs-validation" novalidate=""
+					enctype="multipart/form-data">
 					<input type="hidden" name="salesNo" value="${sales.salesNo }">
+					<input type="hidden" name="memberNo" value="${sales.memberNo }">
+
+					<div class="row g-3">
+						<div class="col-12">
+							<img src="/resources/uploads/${sales.salesImageName }"> <label
+								for="salesImageName" class="form-label">상품이미지</label> <input
+								type="file" class="form-control" id="salesImageName"
+								name="upload">
+						</div>
+					</div>
+
 					<div class="row g-3">
 						<div class="col-12">
 							<label for="salesName" class="form-label">상품명</label> <input

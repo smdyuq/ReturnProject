@@ -18,6 +18,8 @@
 		<result column="SALES_UPDATE_DATE" property="salesUpdateDate"></result>
 		<result column="SALES_DELETE_DATE" property="salesDeleteDate"></result>
 		<result column="SALES_COMPLETE" property="salesComplete"></result>
+		<result column="SALES_ORIGIN_IMAGE_PATH"
+			property="salesOriginImagePath"></result>
 	</resultMap>
 
 	<!-- 상품관리 전체 리스트 수 -->
@@ -57,7 +59,12 @@
 		SALES_PRICE = #{salesPrice},
 		SALES_DELIVERY = #{salesDelivery},
 		SALES_COMMENT = #{salesComment},
-		SALES_COUNT = #{salesCount}
+		SALES_COUNT = #{salesCount},
+		SALES_IMAGE_NAME = #{salesImageName},
+		SALES_IMAGE_PATH =
+		#{salesImagePath},
+		SALES_ORIGIN_IMAGE_NAME = #{salesOriginImageName},
+		SALES_UPDATE_DATE = SYSDATE
 		WHERE
 		SALES_NO = #{salesNo}
 	</update>
@@ -94,8 +101,41 @@
 		NULL,
 		NULL,
 		DEFAULT,
-		#{memberNo})
+		#{memberNo},
+		#{salesOriginImageName})
 	</insert>
+
+	<!-- 판매등록 작성자 조회 -->
+	<select id="selectSalesMember" resultType="_int">
+		SELECT MEMBER_NO FROM
+		SALES
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+
+	<!-- 기존 파일이름 조회 -->
+	<select id="selectFileName" resultType="string">
+		SELECT SALES_IMAGE_NAME
+		FROM
+		SALES
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+
+	<!-- 상품 수정(upload가 비어있을 때) -->
+	<update id="updateSalesEmptyUpload" parameterType="sales">
+		UPDATE SALES
+		SET
+		SALES_NAME = #{salesName},
+		SALES_CATEGORY = #{salesCategory},
+		SALES_ADDRESS = #{salesAddress},
+		SALES_CONDITION = #{salesCondition},
+		SALES_PRICE = #{salesPrice},
+		SALES_DELIVERY = #{salesDelivery},
+		SALES_COMMENT = #{salesComment},
+		SALES_COUNT = #{salesCount},
+		SALES_UPDATE_DATE = SYSDATE
+		WHERE
+		SALES_NO = #{salesNo}
+	</update>
 
 	<!-- 상품 테이블 데이터 조회 -->
 	<select id="selectSalesData" resultMap="salesResultSet">
@@ -125,7 +165,7 @@
 		ORDER BY
 		SALES_DATE DESC
 	</select>
-	
+
 	<!-- 의류 카테고리 -->
 	<select id="clothes" resultMap="salesResultSet">
 		SELECT * FROM SALES
@@ -134,7 +174,7 @@
 		ORDER BY
 		SALES_DATE DESC
 	</select>
-	
+
 	<!-- 향수 카테고리 -->
 	<select id="perfume" resultMap="salesResultSet">
 		SELECT * FROM SALES
@@ -143,7 +183,7 @@
 		ORDER BY
 		SALES_DATE DESC
 	</select>
-	
+
 	<!-- 푸드 카테고리 -->
 	<select id="food" resultMap="salesResultSet">
 		SELECT * FROM SALES
@@ -152,7 +192,7 @@
 		ORDER BY
 		SALES_DATE DESC
 	</select>
-	
+
 	<!-- 주얼리 카테고리 -->
 	<select id="jewelry" resultMap="salesResultSet">
 		SELECT * FROM SALES

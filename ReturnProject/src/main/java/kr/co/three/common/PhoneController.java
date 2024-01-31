@@ -1,4 +1,4 @@
-package kr.co.three.member.controller;
+package kr.co.three.common;
 
 import java.util.Random;
 
