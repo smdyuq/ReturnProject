@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.three.main.dto.MainDTO;
 import kr.co.three.main.service.MainServiceImpl;
@@ -70,6 +71,18 @@ public class MainController {
 			model.addAttribute("search", searchList);
 
 			return "main/searchPage";
+		}
+	}
+
+//	최근 검색어 삭제
+	@PostMapping("/main/deleteSearch.do")
+	@ResponseBody
+	public String deleteSearch(@RequestParam("searchNo") int searchNo) {
+		int result = mainService.deleteSearch(searchNo);
+		if (result == 1) {
+			return "success";
+		} else {
+			return "failed";
 		}
 	}
 

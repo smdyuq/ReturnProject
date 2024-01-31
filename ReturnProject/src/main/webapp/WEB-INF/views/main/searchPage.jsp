@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <a href="/">로고</a>
 <hr>
@@ -19,11 +20,15 @@
 			<input type="hidden" value="${sessionScope.memberNo}">
 			<h2>최근 검색어</h2>
 			<hr>
-			<c:forEach var="item" items="${search }">
-				<ul>
-				<li>${item.searchWord }</li>
-				</ul>
-				<hr>
+			<c:forEach var="item" items="${search}">
+				<div id="searchWord${item.searchNo}">
+					<ul id="searchWord">
+						<li>${item.searchWord}</li>
+						<button onclick="deleteSearchWord(${item.searchNo})"
+							data-searchno="${item.searchNo}">삭제</button>
+					</ul>
+					<hr>
+				</div>
 			</c:forEach>
 			<h2>상품 리스트</h2>
 			<c:forEach var="item" items="${sales }">
@@ -44,3 +49,24 @@
 	</div>
 </body>
 </html>
+
+<script>
+function deleteSearchWord(searchNo) {
+    $.ajax({
+        url: '/main/deleteSearch.do',
+        type: 'POST',
+        data: { searchNo: searchNo },
+        success: function(response) {
+            // 삭제 요청이 성공한 경우, 화면에서 해당 검색어를 제거합니다.
+            if (response == 'success') {
+            	 // var liElement = document.querySelector(`ul#searchWord li[data-searchno="${searchNo}"]`);
+            	 let divElement = $('#searchWord'+searchNo);
+          	        divElement.remove();
+            }
+        },
+        error: function(xhr) {
+            console.error('검색어 삭제에 실패했습니다.', xhr.status);
+        }
+    });
+}
+</script>

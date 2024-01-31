@@ -31,6 +31,11 @@ public class MainServiceImpl implements MainService {
 		return mainDAO.searchList(main, sqlSession);
 	}
 
+//	최근 검색어 삭제
+	public int deleteSearch(int searchNo) {
+		return mainDAO.deleteSearch(searchNo, sqlSession);
+	}
+
 //	상품 리스트
 	@Override
 	public List<SalesDTO> mainSalesList(SalesDTO sales) {

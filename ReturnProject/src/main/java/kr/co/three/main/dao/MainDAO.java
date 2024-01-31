@@ -21,6 +21,11 @@ public class MainDAO {
 		return sqlSession.selectList("mainMapper.searchList", main);
 	}
 
+//	최근 검색어 삭제
+	public int deleteSearch(int searchNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.delete("mainMapper.deleteSearch", searchNo);
+	}
+
 //	상품 리스트
 	public List<SalesDTO> mainSalesList(SalesDTO sales, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("salesMapper.mainSalesList", sales);
