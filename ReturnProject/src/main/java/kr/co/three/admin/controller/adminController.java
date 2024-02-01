@@ -24,11 +24,11 @@ public class adminController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	@Autowired
 	private adminServiceImpl adminService;
-	
+
 //	가입 폼으로 이동
 	@GetMapping("/registerForm.do")
 	public String registerForm() {
-		return "admin/adminRegister";
+		return "admin/member/adminRegister";
 	}
 
 ////	로그인 폼으로 이동
@@ -90,14 +90,15 @@ public class adminController {
 			return "common/error";
 		}
 	}
-	//로그아웃
-	@GetMapping("/logout.do")
-	   public String logout(HttpSession session) {
 
-	      session.removeAttribute("memberNo");
-	      session.invalidate();
-	      
-	      return "admin/member/adminLogin";
-	   }
-	
+	// 로그아웃
+	@GetMapping("/logout.do")
+	public String logout(HttpSession session) {
+
+		session.removeAttribute("memberNo");
+		session.invalidate();
+
+		return "admin/member/adminLogin";
+	}
+
 }
