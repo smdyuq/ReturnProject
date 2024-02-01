@@ -44,7 +44,7 @@ public class boardController {
 		int boardLimit = 15;
 		int row = listCount - (cpage - 1) * boardLimit;
 
-		PageInfo pi = Pagination.getPage(listCount, cpage, pageLimit, boardLimit);
+		PageInfo pi = Pagination.getPageInfo(listCount, cpage, pageLimit, boardLimit);
 
 		List<boardDTO> list = boardService.selectListAll(pi, board);
 
@@ -120,7 +120,7 @@ public class boardController {
 		boardDTO board = boardService.detailBoard(askNo);
 		List<ReplyDTO> list = replyService.getList(askNo);
 		System.out.println(list);
-		
+
 		if (board != null) {
 			model.addAttribute("board", board);
 			model.addAttribute("list", list);
@@ -130,15 +130,14 @@ public class boardController {
 			model.addAttribute("errorMessage", "요청하신 게시글을 찾을 수 없습니다.");
 			return "error"; // 에러 페이지의 뷰 이름입니다.
 		}
-		
+
 	}
+
 	@DeleteMapping("/delete/{idx}")
-	public String deleteBoard(@RequestParam(value="boardIdx") int idx, HttpSession session) {
+	public String deleteBoard(@RequestParam(value = "boardIdx") int idx, HttpSession session) {
 		return null;
 	}
-	
+
 //	댓글
 
 }
-
-

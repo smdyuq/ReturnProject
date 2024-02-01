@@ -8,6 +8,6 @@ public class adminPage {
 
 	@RequestMapping("/admin")
 	public String adminPage() {
-		return "admin/adminLogin";
+		return "admin/member/adminLogin";
 	}
 }

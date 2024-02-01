@@ -33,8 +33,8 @@
 		VALUES(ASK_SEQ.NEXTVAL,
 		#{ask_title},
 		#{ask_content},
-		SYSDATE,
 		#{member_no},
+		DEFAULT,
 		#{ask_image_name},
 		#{ask_image_path}
 		)
@@ -43,7 +43,8 @@
 	<select id="detailBoard" resultMap="boardResultSet">
 		SELECT *
 		FROM ask
-		WHERE ask_no = #{ask_no}
+		WHERE ask_no
+		= #{ask_no}
 	</select>
 </mapper>
 	
