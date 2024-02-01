@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	<resultMap type="board" id="boardResultSet">
+		<result column="ASK_NO" property="ask_no"></result>
+		<result column="ASK_TITLE" property="ask_title"></result>
+		<result column="ASK_CONTENT" property="ask_content"></result>
+		<result column="ASK_DATE" property="ask_date"></result>
+	</resultMap>
+
+	<!-- 리스트 카운트 -->
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*) FROM ASK
+		<choose>
+			<when test='searchCategory.equals("content")'>
+				WHERE ASK_CONTENT LIKE '%' || #{searchText} || '%'
+			</when>
+			<when test='searchCategory.equals("title")'>
+				WHERE ASK_TITLE LIKE '%' || #{searchText} || '%'
+			</when>
+		</choose>
+	</select>
+
+	<select id="selectListAll" resultMap="boardResultSet">
+		SELECT * FROM ASK
+		ORDER BY
+		ASK_NO DESC
+	</select>
+
+	<!-- 보드 등록 -->
+	<insert id="enrollBoard" parameterType="board">
+		INSERT INTO ASK
+		VALUES(ASK_SEQ.NEXTVAL,
+		#{ask_title},
+		#{ask_content},
+		SYSDATE,
+		#{member_no},
+		#{ask_image_name},
+		#{ask_image_path}
+		)
+	</insert>
+
+	<select id="detailBoard" resultMap="boardResultSet">
+		SELECT *
+		FROM ask
+		WHERE ask_no = #{ask_no}
+	</select>
+</mapper>
+	

@@ -2,7 +2,6 @@ package kr.co.three.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter // 게터
 @AllArgsConstructor // 모든 매개변수가 있는 생성자

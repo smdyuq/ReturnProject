@@ -5,7 +5,7 @@
 <!doctype html>
 <html lang="ko" class="h-100">
 <head>
-<%@ include file="../common/head.jsp"%>
+<%@ include file="../common/adminHead.jsp"%>
 <link rel="canonical"
 	href="https://getbootstrap.kr/docs/5.2/examples/sign-in/">
 <!-- Custom styles for this template -->
@@ -14,7 +14,7 @@
 <body class="text-center">
 	<main class="form-signin w-100 m-auto">
 
-		<form action="/member/login.do" method="post">
+		<form action="/admin/login.do" method="post">
 			<img class="mb-4"
 				src="https://getbootstrap.kr/docs/5.2/assets/brand/bootstrap-logo.svg"
 				alt="" width="72" height="57">
@@ -29,6 +29,9 @@
 			</div>
 
 			<button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
+			
+			<a href="/admin/registerForm.do">관리자
+					등록</a>
 
 		</form>
 	</main>

@@ -10,14 +10,23 @@
 		<typeAlias type="kr.co.three.main.dto.MainDTO" alias="main" />
 		<typeAlias type="kr.co.three.member.dto.MemberDTO"
 			alias="member" />
+		<typeAlias type="kr.co.three.admin.dto.adminDTO"
+			alias="admin" />
 		<typeAlias type="kr.co.three.sales.dto.SalesDTO"
 			alias="sales" />
+		<typeAlias type="kr.co.three.board.dto.boardDTO"
+			alias="board" />
+		<typeAlias type="kr.co.three.reply.dto.ReplyDTO"
+			alias="reply" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="/mappers/main/main-mapper.xml" />
 		<mapper resource="/mappers/member/member-mapper.xml" />
 		<mapper resource="/mappers/sales/sales-mapper.xml" />
+		<mapper resource="/mappers/admin/admin-mapper.xml" />
+		<mapper resource="/mappers/board/board-mapper.xml" />
+		<mapper resource="/mappers/reply/reply-mapper.xml" />
 	</mappers>
 </configuration>
 

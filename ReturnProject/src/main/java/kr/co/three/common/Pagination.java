@@ -1,6 +1,7 @@
 package kr.co.three.common;
 
 public class Pagination {
+
 	public static PageInfo getPageInfo(int listCount, int cpage, int pageLimit, int boardLimit) {
 		int maxPage = (int) (Math.ceil((double) listCount / boardLimit));
 		int startPage = (cpage - 1) / pageLimit * pageLimit + 1;
