@@ -4,13 +4,13 @@
 <!doctype html>
 <html lang="ko" class="h-100">
 <head>
-<%@ include file="../../common/head.jsp"%>
-<%@ include file="../common/smarteditor.jsp"%>
+<%@ include file="../common/adminHead.jsp"%>
+
 
 </head>
 <body class="d-flex flex-column h-100">
 	<!-- Fixed navbar -->
-	<%@ include file="/WEB-INF/views/admin/common/header.jsp" %>
+	<%@ include file="/WEB-INF/views/admin/common/adminHeader.jsp" %>
 	<!-- Begin page content -->
 	<main class="flex-shrink-0">
 		<div class="container">

@@ -16,12 +16,13 @@ public class ReplyDAO {
 	}
 	
 	public List<ReplyDTO> getList(SqlSessionTemplate sqlSession, int ask_no) {
-		return sqlSession.selectList("replyMapper.replyList", ask_no);
+		return sqlSession.selectList("replyMapper.getList", ask_no);
 	}
 
 	public int commentDelete(SqlSessionTemplate sqlSession, ReplyDTO reply) {
 		return sqlSession.delete("replyMapper.replyEnroll", reply);
 	}
+
 
 	
 

@@ -2,8 +2,6 @@ package kr.co.three.reply.service;
 
 import java.util.List;
 
-import kr.co.three.board.dto.boardDTO;
-import kr.co.three.board.page.PageInfo;
 import kr.co.three.reply.dto.ReplyDTO;
 
 public interface ReplyService {

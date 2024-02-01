@@ -18,22 +18,24 @@ public class ReplyServiceImpl implements ReplyService{
 	@Autowired 
 	private ReplyDAO replyDao;
 
-	
+	//댓글 등록
 	@Override
 	public int CommentRegist(ReplyDTO reply) {
 		return replyDao.CommentRegist(sqlSession, reply);
 		
 	}
-
+	//댓글 리스트 불러오기
 	@Override
 	public List<ReplyDTO> getList(int ask_no) {
 		return replyDao.getList(sqlSession,ask_no);
 	}
-
+	//댓글 삭제(미구현)
 	@Override
 	public int commentDelete(ReplyDTO reply) {
 		return replyDao.commentDelete(sqlSession, reply);
 	}
+	
+
 	
 }
 

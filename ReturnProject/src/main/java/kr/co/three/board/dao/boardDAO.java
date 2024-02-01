@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.three.board.dto.boardDTO;
-import kr.co.three.board.page.PageInfo;
+import kr.co.three.common.PageInfo;
 
 @Repository
 public class boardDAO {

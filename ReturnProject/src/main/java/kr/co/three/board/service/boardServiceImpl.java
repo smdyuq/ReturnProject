@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.three.board.dao.boardDAO;
 import kr.co.three.board.dto.boardDTO;
-import kr.co.three.board.page.PageInfo;
+import kr.co.three.common.PageInfo;
 
 @Service
 public class boardServiceImpl implements boardService{

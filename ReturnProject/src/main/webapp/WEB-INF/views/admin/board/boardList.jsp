@@ -4,12 +4,12 @@
 <!doctype html>
 <html lang="ko" class="h-100">
 <head>
-	<%@ include file="/WEB-INF/views/admin/common/head.jsp" %>
+	<%@ include file="/WEB-INF/views/admin/common/adminHead.jsp" %>
  </head>
  
 	
   <body class="d-flex flex-column h-100">
-	<%@ include file="/WEB-INF/views/admin/common/header.jsp" %>
+	<%@ include file="/WEB-INF/views/admin/common/adminHeader.jsp" %>
 		
 		
 		

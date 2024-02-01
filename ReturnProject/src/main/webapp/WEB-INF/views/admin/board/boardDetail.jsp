@@ -4,14 +4,13 @@
 <!doctype html>
 <html lang="ko" class="h-100">
 <head>
-<%@ include file="../../common/head.jsp"%>
-<%@ include file="../common/smarteditor.jsp"%>
+<%@ include file="../common/adminHead.jsp"%>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <!-- Fixed navbar -->
-<%@ include file="/WEB-INF/views/admin/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/admin/common/adminHeader.jsp"%>
 <!-- Begin page content -->
 <main class="flex-shrink-0">
 	<div class="container">
@@ -21,7 +20,7 @@
 		<!-- 타이틀 컴포넌트 : components/board/title.vue -->
 		<div class="mb-3 justify-content-center">
 			<input type="text" class="form-control" name="ask_title"
-				id="exampleFormControlInput1" value="${board.ask_title }"
+				id="exampleFormControlInput" value="${board.ask_title }"
 				placeholder="제목을 입력하세요." readonly>
 		</div>
 		<div class="row mb-3">
@@ -52,7 +51,23 @@
 
 			<div class="comment_Box" style="border: 1px solid gray;">
 				<!-- 댓글이 들어갈 박스 -->
-
+				<c:choose>
+					<c:when test="${empty list}">
+						<tr>
+							<td>
+								<h3 class="text-center">등록된 댓글이 없습니다.</h3>
+							</td>
+						</tr>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="item" items="${list }">
+							<tr>
+								<td>${item.ask_comment_content}</td>
+							</tr>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				<!-- <p>asdsasd</p> -->
 			</div>
 
 			<div class="comment-box">
@@ -62,17 +77,16 @@
 				<!-- <span class="c-icon"><i class="fa-solid fa-user"></i>  -->
 				<div class="comment-name">
 					<span class="anonym">작성자 : <input type="text"
-						class="form-control" id="com_writer" placeholder="이름"
-						name="com_writer" value='관리자' readonly
-						style="width: 100px; border: none;">
+						class="form-control" id="com_writer" placeholder="이름" value='관리자'
+						readonly style="width: 100px; border: none;">
 					</span>
 				</div>
 
 				<!-- </span> -->
 				<!--<img src="/익명.jpg" width ="50px" alt="My Image"><!-->
-				<div class="comment-sbox">
+				<div class="comment-box">
 					<textarea class="comment-input" id="com_content" cols="80" rows="2"
-						name="com_content"></textarea>
+						name="ask_comment_content"></textarea>
 					<!-- <span class="com-function-btn" type="hidden">
                             
                             <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
@@ -87,37 +101,37 @@
 </html>
 
 <script>
+
+var reply={};
+
 	$('#Comment_regist').click(function() {
 
-		// Json으로 전달할 파라미터 변수 선언
-		const com_bno = $
-		{
-			'ask_no'
-		}
-		;
-		//	const com_writer = $('#com_writer').val();
-		const com_content = $('#ask_comment_content').val();
+ 	    reply = {
+	            // 필요한 필드를 추가합니다.
+	            "ask_comment_content": $('#com_content').val(),
+	            "ask_no": ${board.ask_no}
+	        }; 
+		
+		
+		//const com_content = $('#com_content').val();
 
-		console.log(com_bno);
-		console.log(com_content);
-
-		if (com_writer == '') {
+/* 		if (com_writer == '') {
 			alert('로그인 후 이용해주세요');
 			return;
 		} else if (com_content == '') {
 			alert('내용을 입력하세요');
 			return;
-		}
+		} */
 
 		$.ajax({
 			type : 'post',
 			url : '<c:url value="/reply/InsertComment"/>',
-			data : JSON.stringify({
-				"replyDto" : {
-					"ask_no" : com_bno,
+			data : JSON.stringify(reply)
+/* 			({
+					"ask_no" : ${board.ask_no},
 					"ask_comment_content" : com_content
-				}
-			}),
+			}) */
+			,
 			contentType : 'application/json',
 			success : function(data) {
 				console.log('통신 성공' + data);
@@ -140,43 +154,51 @@
 
 	getList();
 
+
 	function getList() {
+	    var ask_comment_content = $('#com_content').val();
+	    var ask_no = ${board.ask_no};  // 이 부분은 JSP 코드로 실행되어 ask_no 값을 가져옵니다.
 
-		const com_bno = $
-		{
-			ask_no
-		}
-		;
-		const com_content = $('#com_content').val();
+	    var reply = {
+	        "ask_comment_content": ask_comment_content,
+	        "ask_no": ask_no
+	    }; 
 
-		$.getJSON("<c:url value='/reply/CommentList/'/>" + com_bno, function(
-				data) {
+	    // reply 객체의 내용을 출력합니다.
+	    console.log(reply);
 
-			if (data.list.length > 0) {
-				var list = data.list;
-				var comment_html = "<div>";
+	    const com_bno = ask_no;  // JavaScript 변수를 사용합니다.
+	    /* const com_content = ask_comment_content; */  // JavaScript 변수를 사용합니다.
 
-				/* $('#count').html(data.total);*/
-				
-				for (i = 0; i < list.length; i++) {
-					var content = list[i].reply_content;
-					var writer = list[i].reply_writer;
-					comment_html += "<div><span id='com_writer'><strong>" + writer + "</strong></span><br/>";
-					comment_html += "<span id='com-content'>" + content + "</span><br>";
-					
-					if (writer === $("#com_writer").val()) {
-						comment_html += "<span id='delete' style='cursor:pointer;' data-id=" + content + ">[삭제]</span><br></div><hr>";
-					} else {
-						comment_html += "</div><hr>";
-					}
-				} 
+		$.getJSON("<c:url value='/reply/CommentList/'/>" + com_bno,
+						function(reply) {
+							if (reply.list.length > 0) {
+								var list = reply.list;
+								var comment_html = "<div>";
 
-				$(".comment_Box").html(comment_html);
+								/* $('#count').html(data.total);*/
 
-			} else {
-				var comment_html = "<div>등록된 댓글이 없습니다.</div>";
-				$(".comment_Box").html(comment_html);
-			}
-		}); // getJson
+								for (i = 0; i < list.length; i++) {
+									var content = list[i].reply_content;
+									var writer = list[i].reply_writer;
+									comment_html += "<div><span id='com_writer'><strong>"
+											+ writer + "</strong></span><br/>";
+									comment_html += "<span id='com-content'>"
+											+ content + "</span><br>";
+
+									if (writer === $("#com_writer").val()) {
+										comment_html += "<span id='delete' style='cursor:pointer;' data-id=" + content + ">[삭제]</span><br></div><hr>";
+									} else {
+										comment_html += "</div><hr>";
+									}
+								}
+
+								$(".comment_Box").html(comment_html);
+
+							} else {
+								var comment_html = "<div>등록된 댓글이 없습니다.</div>";
+								$(".comment_Box").html(comment_html);
+							}
+						}); // getJson
 	}
 </script>

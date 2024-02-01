@@ -3,9 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/WEB-INF/views/admin/common/head.jsp" %>
+	<%@ include file="/WEB-INF/views/admin/common/adminHead.jsp" %>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/admin/common/header.jsp" %>
+	<%@ include file="/WEB-INF/views/admin/common/adminHeader.jsp" %>
 </body>
 </html>
