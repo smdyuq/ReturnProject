@@ -16,7 +16,7 @@ public class boardDTO {
 	private int ask_no;
 	private String ask_title;
 	private String ask_content;
-	private Date ask_date;
+	private String ask_date;
 	private String ask_image_path;
 	private String ask_image_name;
 	private int member_no;
