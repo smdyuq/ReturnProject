@@ -1,5 +1,7 @@
 package kr.co.three.board.dto;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,7 @@ public class boardDTO {
 	private int ask_no;
 	private String ask_title;
 	private String ask_content;
-	private String ask_date;
+	private Date ask_date;
 	private String ask_image_path;
 	private String ask_image_name;
 	private int member_no;

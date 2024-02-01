@@ -97,7 +97,7 @@ public class adminController {
 	      session.removeAttribute("memberNo");
 	      session.invalidate();
 	      
-	      return "admin/adminLogin";
+	      return "admin/member/adminLogin";
 	   }
 	
 }
