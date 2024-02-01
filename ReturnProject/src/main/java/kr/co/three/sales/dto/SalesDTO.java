@@ -30,4 +30,5 @@ public class SalesDTO {
 
 	private String searchText = "";
 	private String searchWord = "";
+
 }

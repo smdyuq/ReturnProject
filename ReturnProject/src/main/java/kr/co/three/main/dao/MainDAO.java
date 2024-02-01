@@ -11,6 +11,11 @@ import kr.co.three.sales.dto.SalesDTO;
 @Repository
 public class MainDAO {
 
+//	중복 등록 체크
+	public int SearchWordDuplicate(MainDTO main, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("mainMapper.SearchWordDuplicate", main);
+	}
+
 //	검색 페이지 검색 데이터 등록
 	public int insertSearch(MainDTO main, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("mainMapper.insertSearch", main);

@@ -49,6 +49,11 @@ public class SalesDAO {
 		return sqlSession.selectOne("salesMapper.detailSales", salesNo);
 	}
 
+//	최근 본 상품
+	public int recentSales(SalesDTO sales, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("salesMapper.recentSales", sales);
+	}
+
 //	판매 등록
 	public int enrollSales(SalesDTO sales, SqlSessionTemplate sqlSession) {
 		return sqlSession.insert("salesMapper.enrollSales", sales);
@@ -67,6 +72,11 @@ public class SalesDAO {
 //	상품 수정(upload가 비어있을 때)
 	public int updateSalesEmptyUpload(SalesDTO sales, SqlSessionTemplate sqlSession) {
 		return sqlSession.update("salesMapper.updateSalesEmptyUpload", sales);
+	}
+
+//	찜 목록 추가
+	public int likeBtn(SalesDTO sales, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("salesMapper.likeBtn", sales);
 	}
 
 }

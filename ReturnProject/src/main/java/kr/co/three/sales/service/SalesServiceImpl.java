@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.three.common.PageInfo;
-import kr.co.three.main.dto.MainDTO;
 import kr.co.three.sales.dao.SalesDAO;
 import kr.co.three.sales.dto.SalesDTO;
 
@@ -56,6 +55,12 @@ public class SalesServiceImpl implements SalesService {
 		return salesDAO.detailSales(salesNo, sqlSession);
 	}
 
+//	최근 본 상품
+	@Override
+	public int recentSales(SalesDTO sales) {
+		return salesDAO.recentSales(sales, sqlSession);
+	}
+
 //	판매 등록
 	@Override
 	public int enrollSales(SalesDTO sales) {
@@ -78,6 +83,12 @@ public class SalesServiceImpl implements SalesService {
 	@Override
 	public int updateSalesEmptyUpload(SalesDTO sales) {
 		return salesDAO.updateSalesEmptyUpload(sales, sqlSession);
+	}
+
+//	찜 목록 추가
+	@Override
+	public int likeBtn(SalesDTO sales) {
+		return salesDAO.likeBtn(sales, sqlSession);
 	}
 
 }

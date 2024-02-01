@@ -7,11 +7,17 @@ import kr.co.three.sales.dto.SalesDTO;
 
 public interface MainService {
 
+//	중복 등록 체크
+	int SearchWordDuplicate(MainDTO main);
+
 //	검색 페이지 검색 데이터 등록
 	int insertSearch(MainDTO main);
 
 //	검색 데이터 리스트
 	List<MainDTO> searchList(MainDTO main);
+
+//	최근 검색어 삭제
+	int deleteSearch(int searchNo);
 
 //	상품 리스트
 	List<SalesDTO> mainSalesList(SalesDTO sales);

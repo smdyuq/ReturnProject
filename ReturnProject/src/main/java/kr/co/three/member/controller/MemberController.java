@@ -44,9 +44,6 @@ public class MemberController {
 	@PostMapping("/register.do")
 	public String register(MemberDTO member) {
 
-//		임시로 핸드폰 번호 넣어두기
-//		member.setMemberPhone("01012345678");
-
 //		패스워드 암호화
 		String pwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(pwd);

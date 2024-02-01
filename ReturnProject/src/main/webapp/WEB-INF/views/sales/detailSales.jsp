@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<a href="/">로고</a>
@@ -15,7 +17,7 @@
 
 	<div>
 		<p>상품 이미지</p>
-		<img src="${sales.salesImageName}">
+		<img src="/resources/uploads/${sales.salesImageName}">
 		<hr>
 		<p>상품 명</p>
 		<p>${sales.salesName }</p>
@@ -39,12 +41,12 @@
 			</c:when>
 			<c:when
 				test="${not empty sessionScope.memberNo && sessionScope.memberNo != sales.memberNo}">
-				<p>찜</p>
+				<button onclick="likeBtn(${sales.salesNo})">찜</button>
 				<a href="">채팅</a>
 				<a href="/pay/payPage.do?salesNo=${sales.salesNo}">구매하기</a>
 			</c:when>
 			<c:otherwise>
-				<p>찜</p>
+				<button onclick="location.href='/member/loginForm.do'">찜</button>
 				<a href="/member/loginForm.do">채팅</a>
 				<a href="/member/loginForm.do">구매하기</a>
 			</c:otherwise>
@@ -63,3 +65,19 @@
 	</div>
 </body>
 </html>
+
+<script>
+	function likeBtn(salesNo) {
+		$.ajax({
+			url : "/sales/likeBtn.do",
+			type : "GET",
+			data: { "salesNo": salesNo },
+			success : function(response) {
+				alert("찜목록에 추가되었습니다.");
+			},
+			failed : function(xhr, status, error) {
+				console.error(error);
+			}
+		});
+	}
+</script>

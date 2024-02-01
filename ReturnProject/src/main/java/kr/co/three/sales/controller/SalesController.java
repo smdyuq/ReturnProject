@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.three.common.PageInfo;
@@ -122,8 +123,17 @@ public class SalesController {
 
 //	상품 상세
 	@GetMapping("detailSales.do")
-	public String detailSales(@RequestParam(value = "salesNo") int salesNo, Model model) {
+	public String detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales, Model model,
+			HttpSession session) {
+		int memberNo = (int) session.getAttribute("memberNo");
 
+		sales.setMemberNo(memberNo);
+		sales.setSalesNo(salesNo);
+
+		// 최근 본 상품
+		int recentSales = salesService.recentSales(sales);
+
+		// 상품 상세
 		SalesDTO result = salesService.detailSales(salesNo);
 
 		model.addAttribute("sales", result);
@@ -149,6 +159,25 @@ public class SalesController {
 			return "redirect:/sales/manageSalesForm.do";
 		} else {
 			return "common/error";
+		}
+	}
+
+//	찜 목록 추가
+	@GetMapping("/likeBtn.do")
+	@ResponseBody
+	public String likeBtn(@RequestParam("salesNo") int salesNo, SalesDTO sales, HttpSession session) {
+		int memberNo = (int) session.getAttribute("memberNo");
+
+		sales.setMemberNo(memberNo);
+		sales.setSalesNo(salesNo);
+
+		// 찜 목록 추가
+		int result = salesService.likeBtn(sales);
+
+		if (result == 1) {
+			return "success";
+		} else {
+			return "failed";
 		}
 	}
 

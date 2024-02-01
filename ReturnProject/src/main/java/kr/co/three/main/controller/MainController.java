@@ -39,13 +39,16 @@ public class MainController {
 //	검색 페이지로 이동
 	@PostMapping("/main/search.do")
 	public String search(SalesDTO sales, MainDTO main, Model model, HttpSession session) {
-
 		try {
 			int memberNo = (int) session.getAttribute("memberNo");
 			main.setMemberNo(memberNo);
 
-			// 검색 페이지 검색 데이터 등록
-			int result = mainService.insertSearch(main);
+			// 중복 등록 체크
+			int isDuplicate = mainService.SearchWordDuplicate(main);
+			if (isDuplicate != 1) {
+				// 검색 페이지 검색 데이터 등록
+				int result = mainService.insertSearch(main);
+			}
 
 			// 검색 데이터 리스트
 			List<MainDTO> searchList = mainService.searchList(main);
@@ -54,7 +57,6 @@ public class MainController {
 			List<SalesDTO> salesList = mainService.mainSalesList(sales);
 
 			model.addAttribute("sales", salesList);
-
 			model.addAttribute("search", searchList);
 
 			return "main/searchPage";
@@ -66,8 +68,8 @@ public class MainController {
 
 			// 상품 리스트
 			List<SalesDTO> salesList = mainService.mainSalesList(sales);
-			model.addAttribute("sales", salesList);
 
+			model.addAttribute("sales", salesList);
 			model.addAttribute("search", searchList);
 
 			return "main/searchPage";
@@ -120,5 +122,5 @@ public class MainController {
 
 		return "main/bannerPage";
 	}
-
+	
 }

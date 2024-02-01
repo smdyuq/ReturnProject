@@ -25,6 +25,9 @@ public interface SalesService {
 
 //	상품 상세
 	SalesDTO detailSales(int salesNo);
+	
+//	최근 본 상품
+	int recentSales(SalesDTO sales);
 
 //	판매 등록
 	int enrollSales(SalesDTO sales);
@@ -37,5 +40,8 @@ public interface SalesService {
 
 //	상품 수정(upload가 비어있을 때)
 	int updateSalesEmptyUpload(SalesDTO sales);
+
+//	찜 목록 추가
+	int likeBtn(SalesDTO sales);
 
 }

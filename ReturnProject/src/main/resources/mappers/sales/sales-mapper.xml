@@ -83,6 +83,12 @@
 		SALES_NO = #{salesNo}
 	</select>
 
+	<!-- 최근 본 상품 -->
+	<insert id="recentSales" parameterType="sales">
+		INSERT INTO RECENT
+		VALUES(RECENT_SEQ.NEXTVAL, DEFAULT, #{memberNo}, #{salesNo})
+	</insert>
+
 	<!-- 판매 등록 -->
 	<insert id="enrollSales" parameterType="sales">
 		INSERT INTO SALES
@@ -201,5 +207,11 @@
 		ORDER BY
 		SALES_DATE DESC
 	</select>
+
+	<!-- 찜 목록 추가 -->
+	<insert id="likeBtn" parameterType="sales">
+		INSERT INTO LIKES
+		VALUES(LIKES_SEQ.NEXTVAL, #{memberNo}, #{salesNo}, DEFAULT)
+	</insert>
 
 </mapper>

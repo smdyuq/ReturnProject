@@ -19,6 +19,12 @@ public class MainServiceImpl implements MainService {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
+//	중복 등록 체크
+	@Override
+	public int SearchWordDuplicate(MainDTO main) {
+		return mainDAO.SearchWordDuplicate(main, sqlSession);
+	}
+
 //	검색 페이지 검색 데이터 등록
 	@Override
 	public int insertSearch(MainDTO main) {
@@ -32,6 +38,7 @@ public class MainServiceImpl implements MainService {
 	}
 
 //	최근 검색어 삭제
+	@Override
 	public int deleteSearch(int searchNo) {
 		return mainDAO.deleteSearch(searchNo, sqlSession);
 	}
