@@ -18,6 +18,7 @@
 	<div>
 		<p>상품 이미지</p>
 		<img src="/resources/uploads/${sales.salesImageName}">
+		<p>${sales.salesImageName}</p>
 		<hr>
 		<p>상품 명</p>
 		<p>${sales.salesName }</p>
