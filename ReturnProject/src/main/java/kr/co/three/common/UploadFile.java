@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.co.three.sales.dto.SalesDTO;
 
 public class UploadFile {
-	private static final String UPLOAD_PATH = "C:\\Users\\tmddu\\git\\ReturnProject\\ReturnProject\\src\\main\\webapp\\resources\\uploads\\";
+	private static final String UPLOAD_PATH = "C:\\Users\\jaeyun\\git\\ReturnProject\\ReturnProject\\src\\main\\webapp\\resources\\uploads\\";
 
 	public static boolean deleteFile(String fileName) {
 		File file = new File(UPLOAD_PATH + fileName);

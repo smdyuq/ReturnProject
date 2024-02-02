@@ -51,6 +51,7 @@
 
 			<div class="comment_Box" style="border: 1px solid gray;">
 				<!-- 댓글이 들어갈 박스 -->
+				<table id="comment_tb">
 				<c:choose>
 					<c:when test="${empty list}">
 						<tr>
@@ -67,6 +68,7 @@
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
+				</table>
 				<!-- <p>asdsasd</p> -->
 			</div>
 
@@ -138,8 +140,16 @@ var reply={};
 				if (data === 'InsertSuccess') {
 					alert('댓글 등록이 완료되었습니다.');
 					console.log('댓글 등록 완료');
+					let tableElement = document.getElementById('comment_tb');
+					let trElement = document.createElement('tr');
+					let tdElement = document.createElement('td');
+					
+					tdElement.innerText = $('#com_content').val();
+					trElement.appendChild(tdElement);
+					tableElement.appendChild(trElement);
 					$('#com_content').val('');
-					getList();
+					
+					/* getList(); */
 				} else {
 					alert('로그인 이후 이용해주시기 바랍니다.');
 					console.log('댓글 등록 실패');
