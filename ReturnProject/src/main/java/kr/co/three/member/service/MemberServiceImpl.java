@@ -50,5 +50,4 @@ public class MemberServiceImpl implements MemberService {
 	public List<SalesDTO> selectSalesData(int memberNo) {
 		return memberDAO.selectSalesData(memberNo, sqlSession);
 	}
-
 }
