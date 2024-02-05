@@ -115,7 +115,7 @@
 	<select id="selectSalesMember" resultType="_int">
 		SELECT MEMBER_NO FROM
 		SALES
-		WHERE MEMBER_NO = #{memberNo}
+		WHERE SALES_NO = #{salesNo}
 	</select>
 
 	<!-- 기존 파일이름 조회 -->
@@ -123,7 +123,7 @@
 		SELECT SALES_IMAGE_NAME
 		FROM
 		SALES
-		WHERE MEMBER_NO = #{memberNo}
+		WHERE SALES_NO = #{salesNo}
 	</select>
 
 	<!-- 상품 수정(upload가 비어있을 때) -->

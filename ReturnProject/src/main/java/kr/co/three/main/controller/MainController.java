@@ -1,11 +1,14 @@
 package kr.co.three.main.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,17 +38,23 @@ import kr.co.three.sales.dto.SalesDTO;
 //
 //		return "main/mainPage";
 //	}
+
 @RestController
 @RequestMapping("/main")
 public class MainController {
 
 	@Autowired
 	private MainServiceImpl mainService;
+	
+	// 메인 페이지
+	@GetMapping("/mainPage")
+	public ResponseEntity<?> mainPage(SalesDTO sales) {
 
-	@GetMapping("/")
-	@ResponseBody
-	public List<SalesDTO> mainPage(SalesDTO sales) {
-		return mainService.mainSalesList(sales);
+		List<SalesDTO> salesList = mainService.mainSalesList(sales);
+		HashMap<String, Object> response = new HashMap<>();
+		response.put("list", salesList);
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 //	검색 페이지로 이동

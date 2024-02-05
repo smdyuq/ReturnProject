@@ -75,7 +75,7 @@ public class SalesController {
 	public String updateSales(SalesDTO sales, HttpSession session, MultipartFile upload) {
 
 		// 판매등록 작성자 조회
-		int salesMember = salesService.selectSalesMember(sales.getMemberNo()); // 판매등록 작성자
+		int salesMember = salesService.selectSalesMember(sales.getSalesNo()); // 판매등록 작성자
 
 		int memberNo = (int) session.getAttribute("memberNo"); // 로그인 유저
 
@@ -83,7 +83,7 @@ public class SalesController {
 
 		if (salesMember == memberNo && !upload.isEmpty()) {
 			// 기존 파일이름 조회
-			String fileName = salesService.selectFileName(sales.getMemberNo());
+			String fileName = salesService.selectFileName(sales.getSalesNo());
 
 			sales.setSalesImageName(fileName);
 

@@ -6,19 +6,22 @@ import java.util.Objects;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.three.member.dto.MemberDTO;
 import kr.co.three.member.service.MemberServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
 
-@Controller
+@RestController
 @RequestMapping("/member")
 public class MemberController {
 
@@ -28,32 +31,36 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
-//	회원가입 폼으로 이동
-	@GetMapping("/registerForm.do")
-	public String registerForm() {
-		return "member/register";
-	}
+////	회원가입
+//	@PostMapping("/register.do")
+//	public String register(MemberDTO member) {
+//
+////		패스워드 암호화
+//		String pwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+//		member.setMemberPwd(pwd);
+//
+//		int result = memberService.registerMember(member);
+//
+//		if (result == 1) {
+//			return "redirect:/";
+//		} else {
+//			return "common/error";
+//		}
+//	}
 
-//	로그인 폼으로 이동
-	@GetMapping("/loginForm.do")
-	public String loginForm() {
-		return "member/login";
-	}
+	// 회원가입
+	@PostMapping("/register")
+	public ResponseEntity<?> register(@RequestBody MemberDTO member) {
 
-//	회원가입
-	@PostMapping("/register.do")
-	public String register(MemberDTO member) {
-
-//		패스워드 암호화
 		String pwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(pwd);
 
 		int result = memberService.registerMember(member);
 
 		if (result == 1) {
-			return "redirect:/";
+			return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
-			return "common/error";
+			return new ResponseEntity<>("error", HttpStatus.OK);
 		}
 	}
 
@@ -114,5 +121,17 @@ public class MemberController {
 
 		return "member/store";
 	}
+
+//	// 회원가입 폼으로 이동
+//	@GetMapping("/registerForm.do")
+//	public String registerForm() {
+//		return "member/register";
+//	}
+//
+//	// 로그인 폼으로 이동
+//	@GetMapping("/loginForm.do")
+//	public String loginForm() {
+//		return "member/login";
+//	}
 
 }

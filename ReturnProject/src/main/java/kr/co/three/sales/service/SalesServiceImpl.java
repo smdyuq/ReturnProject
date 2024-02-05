@@ -69,14 +69,14 @@ public class SalesServiceImpl implements SalesService {
 
 //	판매등록 작성자 조회
 	@Override
-	public int selectSalesMember(int memberNo) {
-		return salesDAO.selectSalesMember(memberNo, sqlSession);
+	public int selectSalesMember(int salesNo) {
+		return salesDAO.selectSalesMember(salesNo, sqlSession);
 	}
 
 //	기존 파일이름 조회
 	@Override
-	public String selectFileName(int memberNo) {
-		return salesDAO.selectFileName(memberNo, sqlSession);
+	public String selectFileName(int salesNo) {
+		return salesDAO.selectFileName(salesNo, sqlSession);
 	}
 
 //	상품 수정(upload가 비어있을 때)

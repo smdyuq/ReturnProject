@@ -33,10 +33,10 @@ public interface SalesService {
 	int enrollSales(SalesDTO sales);
 
 //	판매등록 작성자 조회
-	int selectSalesMember(int memberNo);
+	int selectSalesMember(int salesNo);
 
 //	기존 파일이름 조회
-	String selectFileName(int memberNo);
+	String selectFileName(int salesNo);
 
 //	상품 수정(upload가 비어있을 때)
 	int updateSalesEmptyUpload(SalesDTO sales);
