@@ -10,7 +10,7 @@
       </div>
   
       <div class="store">
-        <div class="aaa">
+        <div class="storeWrap">
           <div class="storeContents" id="content1">
             User ID
             <button>상점명 수정</button>
@@ -22,6 +22,7 @@
           </div>
   
           <div class="storeContents" id="content3">소개글</div>
+          <div style="display:inline;">안녕하세요 소개글입니다.</div>
   
           <div class="storeContents" id="content4">
             <button>소개글 수정</button>
@@ -42,6 +43,7 @@
     border: 1px solid gray;
     width: 1024px;
     margin-top: 30px;
+    margin-bottom:30px;
     height: 310px;
     display: flex;
   }
@@ -60,17 +62,20 @@
     display: flex;
     margin-left: 20px;
     width: 714px;
-    background-color:yellow;
+    /* background-color:yellow; */
+    font-size: large;
   }
   
   .storeContents {
     display: flex;
   }
   
-  .aaa {
+  .storeWrap {
     flex-direction: column;
     display: flex;
     display: inline-grid;
+    margin-top:20px;
+    width: 250px;
   }
   
   #content1 {

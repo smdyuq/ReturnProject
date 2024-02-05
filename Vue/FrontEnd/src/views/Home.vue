@@ -15,9 +15,25 @@ import FooterVue from '../components/layout/Footer.vue';
 import SlideVue from '../components/layout/Slide.vue';
 import CardWrapperVue from '../components/layout/CardWrapper.vue';
 import SidebarVue from '../components/layout/Sidebar.vue';
+import axios from 'axios';
+
 
 export default {
-    components: {   
+    data() {
+        return {
+            users: []
+        };
+    },
+    mounted() {
+        axios.get('https://api.example.com/users')
+        .then(response => {
+            this.users = response.data;
+        })
+        .catch(error => {
+            console.error(error);
+        })
+    },
+        components: {   
         HeaderVue,
         SlideVue,
         FooterVue,

@@ -35,7 +35,7 @@
 
 
             <ul class="menubars" @mouseover="showMenu" @mouseleave="hideMenu">
-            <li class="menuCategory"><router-link to="/Category">전체 카테고리</router-link></li>
+            <li class="menuCategory"><router-link to="/Category" style="color:black;">전체 카테고리</router-link></li>
             <div class="line"></div>
             <li>의류</li>
             <li>주얼리</li>
@@ -119,6 +119,7 @@
 
         .searchWrapper {
             width: 35rem;
+            margin-left:30px;
         }
 
         .headerWrap {
@@ -140,15 +141,20 @@
             height:20px;
             /* background-color:darksalmon; */
         }
-        
-        .search {
-            width:32rem;
+
+        .searchWrap {
             border-radius: 50px;
             border: 2px solid;
             border-image: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec) 1;
             border-image-slice: 1;
-            outline:none;
+            outline: none;
+        }
+        input:focus {outline:none;}
+        .search {
+            width:32rem;
+            border: none;
             margin-left:10px;
+            
         }
 
         li {
@@ -174,21 +180,23 @@
         .headerMenu:hover ~ .menubars
         { display:block; text-align: left; position:fixed;}
         .menubars {
-    display: none;
-    text-align: left;
-    position: absolute;
-    width: 15%;
-    box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.3);
-    padding: 8px;
-    z-index: 999999;
-    color: black;
-    background-color: lightcyan;
-    top: 130px;
-    }
+            display: none;
+            text-align: left;
+            position: absolute;
+            width: 15%;
+            box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.3);
+            padding: 8px;
+            z-index: 999999;
+            color: black;
+            background-color: white;
+            top: 130px;
+        }
         
         .menuCategory {
             font-size:medium;
             display:flex;
+            color:black;
+
 
         }
         .line {

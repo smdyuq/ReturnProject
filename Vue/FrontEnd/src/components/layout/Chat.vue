@@ -144,7 +144,6 @@ ul.chat-messages li {
 /* 대화방 선택 안내 문구 스타일 */
 .chat-messages::before {
   content: "대화방을 선택해주세요";
-  display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;

@@ -7,6 +7,7 @@ import MyStore from '../views/MyStore.vue'
 import Chat from '../views/Chat.vue'
 import ProductManagement from '../views/ProductManagement.vue'
 import Category from '../views/Category.vue'
+import Admin from '../views/Admin/Admin.vue'
 
 
 const routes = [
@@ -17,7 +18,8 @@ const routes = [
     { path: '/MyStore', name:'MyStore', component:MyStore},
     { path: '/Chat', name:'Chat', component:Chat},
     { path: '/ProductManagement', name:'ProductManagement', component:ProductManagement},
-    { path: '/Category', name:'Category', component:Category}
+    { path: '/Category', name:'Category', component:Category},
+    { path: '/Admin', name:'Admin', component:Admin}
     
 
 ];
