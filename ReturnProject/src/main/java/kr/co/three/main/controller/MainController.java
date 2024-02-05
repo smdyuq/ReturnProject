@@ -6,34 +6,46 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.three.main.dto.MainDTO;
 import kr.co.three.main.service.MainServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
 
-@Controller
+//@Controller
+//public class MainController {
+//
+//	@Autowired
+//	private MainServiceImpl mainService;
+//
+////	메인 페이지로 이동
+//	@RequestMapping("/")
+//	public String mainPage(SalesDTO sales, Model model) {
+//
+//		// 상품 리스트
+//		List<SalesDTO> list = mainService.mainSalesList(sales);
+//
+//		model.addAttribute("sales", list);
+//
+//		return "main/mainPage";
+//	}
+@RestController
+@RequestMapping("/main")
 public class MainController {
 
 	@Autowired
 	private MainServiceImpl mainService;
 
-//	메인 페이지로 이동
-	@RequestMapping("/")
-	public String mainPage(SalesDTO sales, Model model) {
-
-		// 상품 리스트
-		List<SalesDTO> list = mainService.mainSalesList(sales);
-
-		model.addAttribute("sales", list);
-
-		return "main/mainPage";
+	@GetMapping("/")
+	@ResponseBody
+	public List<SalesDTO> mainPage(SalesDTO sales) {
+		return mainService.mainSalesList(sales);
 	}
 
 //	검색 페이지로 이동
@@ -122,5 +134,5 @@ public class MainController {
 
 		return "main/bannerPage";
 	}
-	
+
 }
