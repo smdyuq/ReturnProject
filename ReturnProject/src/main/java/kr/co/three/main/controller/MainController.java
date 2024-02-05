@@ -42,7 +42,7 @@ public class MainController {
 	@Autowired
 	private MainServiceImpl mainService;
 
-	@GetMapping("/")
+	@GetMapping
 	@ResponseBody
 	public List<SalesDTO> mainPage(SalesDTO sales) {
 		return mainService.mainSalesList(sales);
