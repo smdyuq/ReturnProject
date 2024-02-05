@@ -18,6 +18,7 @@
 			alias="board" />
 		<typeAlias type="kr.co.three.reply.dto.ReplyDTO"
 			alias="reply" />
+		<typeAlias type="kr.co.three.pay.dto.PayDTO" alias="pay" />
 	</typeAliases>
 
 	<mappers>
@@ -27,6 +28,7 @@
 		<mapper resource="/mappers/admin/admin-mapper.xml" />
 		<mapper resource="/mappers/board/board-mapper.xml" />
 		<mapper resource="/mappers/reply/reply-mapper.xml" />
+		<mapper resource="/mappers/pay/pay-mapper.xml" />
 	</mappers>
 </configuration>
 

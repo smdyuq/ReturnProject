@@ -8,6 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<a href="/">로고</a>
@@ -44,7 +48,7 @@
 				test="${not empty sessionScope.memberNo && sessionScope.memberNo != sales.memberNo}">
 				<button onclick="likeBtn(${sales.salesNo})">찜</button>
 				<a href="">채팅</a>
-				<a href="/pay/payPage.do?salesNo=${sales.salesNo}">구매하기</a>
+				<a id="buyModal" href="#" >구매하기</a>
 			</c:when>
 			<c:otherwise>
 				<button onclick="location.href='/member/loginForm.do'">찜</button>
@@ -64,6 +68,31 @@
 		<p>카테고리</p>
 		<p>${sales.salesCategory }</p>
 	</div>
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">구매 방법</h4>
+				</div>
+				<div class="modal-body">
+					<p>구매 방법 선택 : 직거래 / 택배거래</p>
+					<a href="/pay/payCheckPage.do?salesNo=${sales.salesNo}"
+						class="btn btn-primary">택배 거래</a>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+
 </body>
 </html>
 
@@ -81,4 +110,11 @@
 			}
 		});
 	}
-</script>
+	
+	$(document).ready(function(){
+		  $("#buyModal").click(function(e){
+		    e.preventDefault();
+		    $("#myModal").modal('show');
+		  });
+		});
+		</script>

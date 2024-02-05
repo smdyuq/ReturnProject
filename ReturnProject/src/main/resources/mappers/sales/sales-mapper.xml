@@ -213,5 +213,13 @@
 		INSERT INTO LIKES
 		VALUES(LIKES_SEQ.NEXTVAL, #{memberNo}, #{salesNo}, DEFAULT)
 	</insert>
+	
+	
+	<!-- 상품 상세 -->
+	<select id="payCheck" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_NO = #{salesNo}
+	</select>
 
 </mapper>
