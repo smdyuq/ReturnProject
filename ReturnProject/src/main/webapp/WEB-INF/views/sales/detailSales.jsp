@@ -48,7 +48,7 @@
 				test="${not empty sessionScope.memberNo && sessionScope.memberNo != sales.memberNo}">
 				<button onclick="likeBtn(${sales.salesNo})">찜</button>
 				<a href="">채팅</a>
-				<a id="buyModal" href="#" >구매하기</a>
+				<a id="buyModal" href="#">구매하기</a>
 			</c:when>
 			<c:otherwise>
 				<button onclick="location.href='/member/loginForm.do'">찜</button>
@@ -81,8 +81,10 @@
 				</div>
 				<div class="modal-body">
 					<p>구매 방법 선택 : 직거래 / 택배거래</p>
-					<a href="/pay/payCheckPage.do?salesNo=${sales.salesNo}"
-						class="btn btn-primary">택배 거래</a>
+					<a href="/pay/payDeliveryPage.do?salesNo=${sales.salesNo}"
+						class="btn btn-primary" type="delivery">택배 거래</a> 
+					<a href="/pay/payDirectPage.do?salesNo=${sales.salesNo}"
+						class="btn btn-primary" type="direct">직거래</a>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>

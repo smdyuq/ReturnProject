@@ -20,4 +20,8 @@ public class PayServiceImpl implements PayService{
 		return payDao.payCheck(salesNo, sqlSession);
 	}
 
+	public int insertPay(PayDTO pay) {
+		return payDao.insertPay(pay, sqlSession);
+	}
+
 }

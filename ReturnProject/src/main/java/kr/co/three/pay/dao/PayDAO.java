@@ -13,4 +13,8 @@ public class PayDAO {
 		return sqlSession.selectOne("payMapper.payCheck", salesNo);
 	}
 
+	public int insertPay(PayDTO pay, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("payMapper.insertPay", pay);
+	}
+
 }

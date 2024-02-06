@@ -10,10 +10,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
+<!-- <script>
 	$(document).ready(function() {
 		$('#productDiv').hide();
-		
+
 		$("#option").change(function() {
 			$('#productDiv').show();
 			var selectedOption = $(this).children("option:selected").val();
@@ -32,11 +32,11 @@
 			}
 		});
 	});
-</script>
+</script> -->
 </head>
 <body>
 
-	<h2>상품 상세</h2>
+	<h2>택배 거래</h2>
 	<hr>
 
 	<div>
@@ -48,10 +48,11 @@
 		<p>${salesCheck.salesName }</p>
 		<hr>
 		<hr>
-		<label for="option">거래 방법:</label> <select id="option" name="option">
-			<option value="deliveryTransaction">택배 거래</option>
-			<option value="directTransaction">직접 거래</option>
-		</select>
+		<p>거래 방법:</p>
+		<div class="RadioButton">
+			<input id="other" type="checkbox" value="kakao">
+			<option value="direct">직접 거래</option>
+		</div>
 		<hr>
 		<div id="productDiv">
 			<p>상품 가격</p>
@@ -59,17 +60,22 @@
 			<hr>
 			<p id="deliveryCost">배송비 : ${salesCheck.salesDelivery }</p>
 			<hr>
-			<!-- 택배거래시 -->
-			<p id="total1">합계: ${salesCheck.salesPrice + salesCheck.salesDelivery }</p>
-			<!-- 직거래시 -->
-			<p id="total2">합계2: ${salesCheck.salesPrice}</p>
-	
-			<p id="address">지역 :	${salesCheck.salesAddress }</p>
+			<p id="total">합계: ${salesCheck.salesPrice + salesCheck.salesDelivery }</p>
+
+			<p id="address">거래 지역 : ${salesCheck.salesAddress }</p>
 			<hr>
 		</div>
 	</div>
 
-
+<form action="yourAction.do" method="post">
+    <input type="checkbox" id="option1" name="option" value="1">
+    <label for="option1">옵션 1</label><br>
+    <input type="checkbox" id="option2" name="option" value="2">
+    <label for="option2">옵션 2</label><br>
+    <input type="checkbox" id="option3" name="option" value="3">
+    <label for="option3">옵션 3</label><br>
+    <input type="submit" value="제출">
+</form>
 
 
 
