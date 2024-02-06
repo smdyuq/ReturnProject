@@ -27,6 +27,7 @@ public class SalesDTO {
 	private Date salesDeleteDate;
 	private int salesComplete;
 	private int memberNo;
+	private String salesChatLink;
 
 	private String searchText = "";
 	private String searchWord = "";

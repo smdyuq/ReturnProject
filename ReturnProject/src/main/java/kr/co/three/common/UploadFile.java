@@ -27,15 +27,17 @@ public class UploadFile {
 		File file2 = new File(UPLOAD_PATH + "121x96\\" + fileName);
 		File file3 = new File(UPLOAD_PATH + "194x194\\" + fileName);
 		File file4 = new File(UPLOAD_PATH + "428x428\\" + fileName);
-		File file5 = new File(UPLOAD_PATH + fileName);
+		File file5 = new File(UPLOAD_PATH + "66x66\\" + fileName);
+		File file6 = new File(UPLOAD_PATH + fileName);
 
 		boolean deleted1 = file1.delete();
 		boolean deleted2 = file2.delete();
 		boolean deleted3 = file3.delete();
 		boolean deleted4 = file4.delete();
 		boolean deleted5 = file5.delete();
+		boolean deleted6 = file6.delete();
 
-		return deleted1 || deleted2 || deleted3 || deleted4 || deleted5;
+		return deleted1 || deleted2 || deleted3 || deleted4 || deleted5 || deleted6;
 	}
 
 	public static void uploadMethod(MultipartFile upload, SalesDTO sales, HttpSession session) {
@@ -139,6 +141,21 @@ public class UploadFile {
 				ImageIO.write(resizedImage4, extension.substring(1), resizedFilePath4.toFile());
 
 				sales.setSalesImagePath(UPLOAD_PATH + "121x96\\"); // 리사이징된 이미지의 경로
+				sales.setSalesImageName(fileName); // 수정된 파일명
+				sales.setSalesOriginImageName(originName);
+
+				// 66x66
+				String resizedPathName5 = UPLOAD_PATH + "66x66\\" + fileName; // 194x194 크기의 폴더에 저장 예시
+				Path resizedFilePath5 = Paths.get(resizedPathName5);
+
+				BufferedImage originalImage5 = ImageIO.read(filePath.toFile());
+				int targetWidth5 = 66; // 리사이징할 가로 크기
+				int targetHeight5 = 66; // 리사이징할 세로 크기
+				BufferedImage resizedImage5 = resizeImage(originalImage5, targetWidth5, targetHeight5);
+
+				ImageIO.write(resizedImage5, extension.substring(1), resizedFilePath5.toFile());
+
+				sales.setSalesImagePath(UPLOAD_PATH + "66x66\\"); // 리사이징된 이미지의 경로
 				sales.setSalesImageName(fileName); // 수정된 파일명
 				sales.setSalesOriginImageName(originName);
 

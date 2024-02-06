@@ -45,12 +45,15 @@ public class MainController {
 
 	@Autowired
 	private MainServiceImpl mainService;
-	
+
 	// 메인 페이지
 	@GetMapping("/mainPage")
 	public ResponseEntity<?> mainPage(SalesDTO sales) {
 
+		// response.data
 		List<SalesDTO> salesList = mainService.mainSalesList(sales);
+
+		// response.data.list
 		HashMap<String, Object> response = new HashMap<>();
 		response.put("list", salesList);
 

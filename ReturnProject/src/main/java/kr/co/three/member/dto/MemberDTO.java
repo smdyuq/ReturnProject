@@ -17,4 +17,10 @@ public class MemberDTO {
 	private String memberImagePath;
 	private int memberVisit;
 	private String memberContent;
+
+	private String confirmPassword;
+	private String verficationCode;
+	private boolean isVerficiationCodeSent;
+	private String checkCode;
+	private String authenticationCode;
 }
