@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.three.member.dto.MemberDTO;
 import kr.co.three.sales.dto.SalesDTO;
 
 public class UploadFile {
@@ -28,7 +29,8 @@ public class UploadFile {
 		File file3 = new File(UPLOAD_PATH + "194x194\\" + fileName);
 		File file4 = new File(UPLOAD_PATH + "428x428\\" + fileName);
 		File file5 = new File(UPLOAD_PATH + "66x66\\" + fileName);
-		File file6 = new File(UPLOAD_PATH + fileName);
+		File file6 = new File(UPLOAD_PATH + "303x310\\" + fileName);
+		File file7 = new File(UPLOAD_PATH + fileName);
 
 		boolean deleted1 = file1.delete();
 		boolean deleted2 = file2.delete();
@@ -36,10 +38,12 @@ public class UploadFile {
 		boolean deleted4 = file4.delete();
 		boolean deleted5 = file5.delete();
 		boolean deleted6 = file6.delete();
+		boolean deleted7 = file7.delete();
 
-		return deleted1 || deleted2 || deleted3 || deleted4 || deleted5 || deleted6;
+		return deleted1 || deleted2 || deleted3 || deleted4 || deleted5 || deleted6 || deleted7;
 	}
 
+//	판매 이미지
 	public static void uploadMethod(MultipartFile upload, SalesDTO sales, HttpSession session) {
 
 		if (!upload.isEmpty()) {
@@ -85,7 +89,7 @@ public class UploadFile {
 
 				// 리사이징된 이미지 저장
 				// 110x150
-				String resizedPathName1 = UPLOAD_PATH + "110x150\\" + fileName; // 110x150 크기의 폴더에 저장 예시
+				String resizedPathName1 = UPLOAD_PATH + "110x150\\" + fileName;
 				Path resizedFilePath = Paths.get(resizedPathName1);
 
 				BufferedImage originalImage = ImageIO.read(filePath.toFile());
@@ -100,7 +104,7 @@ public class UploadFile {
 				sales.setSalesOriginImageName(originName);
 
 				// 194x194
-				String resizedPathName2 = UPLOAD_PATH + "194x194\\" + fileName; // 194x194 크기의 폴더에 저장 예시
+				String resizedPathName2 = UPLOAD_PATH + "194x194\\" + fileName;
 				Path resizedFilePath2 = Paths.get(resizedPathName2);
 
 				BufferedImage originalImage2 = ImageIO.read(filePath.toFile());
@@ -115,7 +119,7 @@ public class UploadFile {
 				sales.setSalesOriginImageName(originName);
 
 				// 428x428
-				String resizedPathName3 = UPLOAD_PATH + "428x428\\" + fileName; // 194x194 크기의 폴더에 저장 예시
+				String resizedPathName3 = UPLOAD_PATH + "428x428\\" + fileName;
 				Path resizedFilePath3 = Paths.get(resizedPathName3);
 
 				BufferedImage originalImage3 = ImageIO.read(filePath.toFile());
@@ -130,7 +134,7 @@ public class UploadFile {
 				sales.setSalesOriginImageName(originName);
 
 				// 121x96
-				String resizedPathName4 = UPLOAD_PATH + "121x96\\" + fileName; // 194x194 크기의 폴더에 저장 예시
+				String resizedPathName4 = UPLOAD_PATH + "121x96\\" + fileName;
 				Path resizedFilePath4 = Paths.get(resizedPathName4);
 
 				BufferedImage originalImage4 = ImageIO.read(filePath.toFile());
@@ -145,7 +149,7 @@ public class UploadFile {
 				sales.setSalesOriginImageName(originName);
 
 				// 66x66
-				String resizedPathName5 = UPLOAD_PATH + "66x66\\" + fileName; // 194x194 크기의 폴더에 저장 예시
+				String resizedPathName5 = UPLOAD_PATH + "66x66\\" + fileName;
 				Path resizedFilePath5 = Paths.get(resizedPathName5);
 
 				BufferedImage originalImage5 = ImageIO.read(filePath.toFile());
@@ -158,6 +162,88 @@ public class UploadFile {
 				sales.setSalesImagePath(UPLOAD_PATH + "66x66\\"); // 리사이징된 이미지의 경로
 				sales.setSalesImageName(fileName); // 수정된 파일명
 				sales.setSalesOriginImageName(originName);
+
+				// 303x310
+				String resizedPathName6 = UPLOAD_PATH + "303x310\\" + fileName;
+				Path resizedFilePath6 = Paths.get(resizedPathName6);
+
+				BufferedImage originalImage6 = ImageIO.read(filePath.toFile());
+				int targetWidth6 = 303; // 리사이징할 가로 크기
+				int targetHeight6 = 310; // 리사이징할 세로 크기
+				BufferedImage resizedImage6 = resizeImage(originalImage6, targetWidth6, targetHeight6);
+
+				ImageIO.write(resizedImage6, extension.substring(1), resizedFilePath5.toFile());
+
+				sales.setSalesImagePath(UPLOAD_PATH + "303x310\\"); // 리사이징된 이미지의 경로
+				sales.setSalesImageName(fileName); // 수정된 파일명
+				sales.setSalesOriginImageName(originName);
+
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+//	멤버 이미지
+	public static void uploadMethod(MultipartFile upload, MemberDTO member, HttpSession session) {
+
+		if (!upload.isEmpty()) {
+			// 원본 파일명 구하기
+			String originName = upload.getOriginalFilename();
+
+			// 확장자 구하기
+			String extension = originName.substring(originName.lastIndexOf("."));
+
+			// 현재 년-월-일-시-분-초
+			LocalDateTime nowDate = LocalDateTime.now();
+
+			// 데이터포맷을 년월일시분초로 가공
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyMMddHHmmss");
+			String output = nowDate.format(formatter);
+
+			// 랜덤 문자열 생성
+			int length = 8;
+			String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+			Random random = new Random();
+			String randomString = random.ints(length, 0, characters.length()) // 길이가 length인 난수 생성
+					.mapToObj(characters::charAt) // 각 난수들을 characters에서 해당하는 문자의 인덱스로 매핑
+					.map(Object::toString) // 위의 문자를 문자열로 변환
+					.collect(Collectors.joining()); // 문자열 스트림을 하나의 문자열로 변환
+
+			// 파일명 : 날짜_랜덤문자열.확장자
+			// 231229144025_aK834NNM.png
+			String fileName = (output + "_" + randomString + extension);
+
+			// 경로+파일명
+			// RESIZED_PATH : C:\\spring\\Project\\src\\main\\webapp\\resources\\uploads\\
+			// path : info\\
+			// fileName : 231229144025_aK834NNM.png
+			// C:\\spring\\Project\\src\\main\\webapp\\resources\\uploads\\info\\231229144025_aK834NNM.png
+			String filePathName = UPLOAD_PATH + fileName;
+
+			// 서버에 원본 파일 저장
+			Path filePath = Paths.get(filePathName);
+
+			try {
+				upload.transferTo(filePath);
+
+				// 303x310
+				String resizedPathName6 = UPLOAD_PATH + "303x310\\" + fileName;
+				Path resizedFilePath6 = Paths.get(resizedPathName6);
+
+				BufferedImage originalImage6 = ImageIO.read(filePath.toFile());
+				int targetWidth6 = 303; // 리사이징할 가로 크기
+				int targetHeight6 = 310; // 리사이징할 세로 크기
+				BufferedImage resizedImage6 = resizeImage(originalImage6, targetWidth6, targetHeight6);
+
+				ImageIO.write(resizedImage6, extension.substring(1), resizedFilePath6.toFile());
+
+				member.setMemberImagePath(UPLOAD_PATH + "303x310\\"); // 리사이징된 이미지의 경로
+				member.setMemberImageName(fileName); // 수정된 파일명
+				member.setMemberOriginImageName(originName);
 
 			} catch (IllegalStateException e) {
 				e.printStackTrace();

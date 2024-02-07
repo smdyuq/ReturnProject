@@ -1,64 +1,61 @@
 package kr.co.three.main.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.three.main.dto.MainDTO;
 import kr.co.three.main.service.MainServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
 
-//@Controller
-//public class MainController {
-//
-//	@Autowired
-//	private MainServiceImpl mainService;
-//
-////	메인 페이지로 이동
-//	@RequestMapping("/")
-//	public String mainPage(SalesDTO sales, Model model) {
-//
-//		// 상품 리스트
-//		List<SalesDTO> list = mainService.mainSalesList(sales);
-//
-//		model.addAttribute("sales", list);
-//
-//		return "main/mainPage";
-//	}
-
-@RestController
-@RequestMapping("/main")
+@Controller
 public class MainController {
 
 	@Autowired
 	private MainServiceImpl mainService;
 
-	// 메인 페이지
-	@GetMapping("/mainPage")
-	public ResponseEntity<?> mainPage(SalesDTO sales) {
+//	메인 페이지로 이동
+	@RequestMapping("/")
+	public String mainPage(SalesDTO sales, Model model) {
 
-		// response.data
-		List<SalesDTO> salesList = mainService.mainSalesList(sales);
+		// 상품 리스트
+		List<SalesDTO> list = mainService.mainSalesList(sales);
 
-		// response.data.list
-		HashMap<String, Object> response = new HashMap<>();
-		response.put("list", salesList);
+		model.addAttribute("sales", list);
 
-		return new ResponseEntity<>(response, HttpStatus.OK);
+		return "main/mainPage";
 	}
+
+//@RestController
+//@RequestMapping("/main")
+//public class MainController {
+//
+//	@Autowired
+//	private MainServiceImpl mainService;
+//
+//	// 메인 페이지
+//	@GetMapping("/mainPage")
+//	public ResponseEntity<?> mainPage(SalesDTO sales) {
+//
+//		// response.data
+//		List<SalesDTO> salesList = mainService.mainSalesList(sales);
+//
+//		// response.data.list
+//		HashMap<String, Object> response = new HashMap<>();
+//		response.put("list", salesList);
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
 
 //	검색 페이지로 이동
 	@PostMapping("/main/search.do")

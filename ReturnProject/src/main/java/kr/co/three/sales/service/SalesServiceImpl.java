@@ -91,4 +91,10 @@ public class SalesServiceImpl implements SalesService {
 		return salesDAO.likeBtn(sales, sqlSession);
 	}
 
+//	판매 상태 : 판매 중
+	@Override
+	public int salesStatus(int salesNo) {
+		return salesDAO.salesStatus(salesNo, sqlSession);
+	}
+
 }

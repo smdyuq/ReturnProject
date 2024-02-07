@@ -141,7 +141,7 @@ public class SalesController {
 		return "sales/detailSales";
 	}
 
-//	판매등록
+//	판매 등록
 	@PostMapping("/enrollSales.do")
 	public String enrollSales(SalesDTO sales, MultipartFile upload, HttpSession session) {
 
@@ -156,6 +156,8 @@ public class SalesController {
 		int result = salesService.enrollSales(sales);
 
 		if (result == 1) {
+			// 판매 상태 : 판매 중
+			int statusResult = salesService.salesStatus(sales.getSalesNo());
 			return "redirect:/sales/manageSalesForm.do";
 		} else {
 			return "common/error";

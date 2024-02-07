@@ -25,7 +25,7 @@ public interface SalesService {
 
 //	상품 상세
 	SalesDTO detailSales(int salesNo);
-	
+
 //	최근 본 상품
 	int recentSales(SalesDTO sales);
 
@@ -43,5 +43,8 @@ public interface SalesService {
 
 //	찜 목록 추가
 	int likeBtn(SalesDTO sales);
+
+//	판매 상태 : 판매 중
+	int salesStatus(int salesNo);
 
 }

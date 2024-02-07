@@ -79,4 +79,9 @@ public class SalesDAO {
 		return sqlSession.insert("salesMapper.likeBtn", sales);
 	}
 
+//	판매 상태 : 판매 중
+	public int salesStatus(int salesNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("salesMapper.salesStatus", salesNo);
+	}
+
 }

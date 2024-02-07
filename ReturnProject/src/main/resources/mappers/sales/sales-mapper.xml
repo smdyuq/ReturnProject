@@ -218,4 +218,20 @@
 		VALUES(LIKES_SEQ.NEXTVAL, #{memberNo}, #{salesNo}, DEFAULT)
 	</insert>
 
+	<!-- 찜 조회 -->
+	<select id="selectLikeData" resultMap="salesResultSet">
+		SELECT *
+		FROM SALES
+		JOIN
+		LIKES ON SALES.SALES_NO = LIKES.SALES_NO
+		WHERE LIKES.MEMBER_NO =
+		#{memberNo}
+	</select>
+
+	<!-- 판매 상태 : 판매 중 -->
+	<insert id="salesStatus" parameterType="int">
+		INSERT INTO SALES_STATUS
+		VALUES(SALES_STATUS_SEQ.NEXTVAL, DEFAULT, #{salesNo})
+	</insert>
+
 </mapper>
