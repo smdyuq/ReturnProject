@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="payMapper">
+	 <resultMap type="pay" id="payResultSet">
+		<result column="PAY_NO" property="payNo"></result>
+		<result column="PAY_RECEIPT" property="payReceipt"></result>
+		<result column="PAY_ADDRESS" property="payAddress"></result>
+		<result column="PAY_METHOD" property="payMethod"></result>
+		<result column="PAY_AGREE" property="payAgree"></result>
+		<result column="MEMBER_NO" property="memberNo"></result>
+		<result column="SALES_NO" property="salesNo"></result>
+	</resultMap> 
+	
+	
+	<!-- pay 테이블 등록 -->
+<!-- 	<insert id="insertPay" parameterType="pay">
+		INSERT INTO PAY
+		VALUES(PAY_SEQ.NEXTVAL,
+		#{payReceipt},
+		#{payAddress},
+		#{payMethod},
+		#{payAgree},
+		#{memberNo},
+		#{salesNo})
+	</insert> -->
+
+
+</mapper>

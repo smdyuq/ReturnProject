@@ -97,4 +97,10 @@ public class SalesServiceImpl implements SalesService {
 		return salesDAO.salesStatus(salesNo, sqlSession);
 	}
 
+//	결제 정보 체크
+	@Override
+	public SalesDTO payCheck(int salesNo) {
+		return salesDAO.payCheck(salesNo, sqlSession);
+	}
+
 }

@@ -146,6 +146,7 @@ public class SalesController {
 	public String enrollSales(SalesDTO sales, MultipartFile upload, HttpSession session) {
 
 		int memberNo = (int) session.getAttribute("memberNo");
+		System.out.println(memberNo);
 		sales.setMemberNo(memberNo);
 
 		// 업로드된 파일이 존재하는지 확인

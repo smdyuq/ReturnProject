@@ -46,5 +46,8 @@ public interface SalesService {
 
 //	판매 상태 : 판매 중
 	int salesStatus(int salesNo);
+	
+//	결제 정보 체크
+	SalesDTO payCheck(int salesNo);
 
 }

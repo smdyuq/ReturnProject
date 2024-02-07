@@ -84,4 +84,9 @@ public class SalesDAO {
 		return sqlSession.insert("salesMapper.salesStatus", salesNo);
 	}
 
+//	결제 정보 체크
+	public SalesDTO payCheck(int salesNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.payCheck", salesNo);
+	}
+
 }
