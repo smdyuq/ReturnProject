@@ -79,4 +79,8 @@ public class SalesDAO {
 		return sqlSession.insert("salesMapper.likeBtn", sales);
 	}
 
+	public SalesDTO payCheck(int salesNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.payCheck", salesNo);
+	}
+
 }

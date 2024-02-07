@@ -91,4 +91,9 @@ public class SalesServiceImpl implements SalesService {
 		return salesDAO.likeBtn(sales, sqlSession);
 	}
 
+	//payCheck 에서 사용
+	public SalesDTO payCheck(int salesNo) {
+		return salesDAO.payCheck(salesNo, sqlSession);
+	}
+
 }
