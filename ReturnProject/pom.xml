@@ -23,9 +23,7 @@
 	</repositories>
 
 	<dependencies>
-	
-		
-		
+
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -221,6 +219,7 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.4</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
