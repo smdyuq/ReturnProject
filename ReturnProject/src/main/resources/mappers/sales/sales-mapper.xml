@@ -217,14 +217,6 @@
 		INSERT INTO LIKES
 		VALUES(LIKES_SEQ.NEXTVAL, #{memberNo}, #{salesNo}, DEFAULT)
 	</insert>
-	
-	
-	<!-- 상품 상세 -->
-	<select id="payCheck" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_NO = #{salesNo}
-	</select>
 
 	<!-- 찜 조회 -->
 	<select id="selectLikeData" resultMap="salesResultSet">
@@ -241,5 +233,12 @@
 		INSERT INTO SALES_STATUS
 		VALUES(SALES_STATUS_SEQ.NEXTVAL, DEFAULT, #{salesNo})
 	</insert>
+
+	<!-- 결제 정보 체크 -->
+	<select id="payCheck" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_NO = #{salesNo}
+	</select>
 
 </mapper>
