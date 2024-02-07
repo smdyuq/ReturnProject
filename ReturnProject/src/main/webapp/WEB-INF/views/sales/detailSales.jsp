@@ -33,6 +33,9 @@
 		<p>상품 상태</p>
 		<p>${sales.salesCondition }</p>
 		<hr>
+		<p>판매 수량</p>
+		<p>${sales.salesCount }</p>
+		<hr>
 		<p>배송비</p>
 		<p>${sales.salesDelivery }</p>
 		<hr>

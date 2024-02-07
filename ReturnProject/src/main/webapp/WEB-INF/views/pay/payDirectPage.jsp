@@ -36,10 +36,15 @@
 			<p>상품 가격</p>
 			<p>${salesCheck.salesPrice }</p>
 			<hr>
+			<p>구매 수량</p>
+			<input type="number" id="purchaseQuantity" min="1" max="${salesCheck.salesCount}" value="1">
+			
+			
+			<!-- 배송비 -->
 			<input type="hidden" value="${salesCheck.salesDelivery }">
 			<hr>
-			<!-- 합계 = 상품가격+배송비 -->
-			<p id="total">합계: ${salesCheck.salesPrice + salesCheck.salesDelivery }</p>
+			<!-- 합계 = 상품가격 * 구매 수량 + 배송비 -->
+			<p id="total">합계: <span id="totalValue">${salesCheck.salesPrice + salesCheck.salesDelivery }</span></p>
 
 			<p id="address">거래 지역 : ${salesCheck.salesAddress }</p>
 			<hr>
@@ -95,6 +100,38 @@
             	}
             }
             )};
+            $(document).ready(function(){
+                $('#purchaseQuantity').on('input', function(){
+                    var max = parseInt($(this).attr('max'));
+                    var min = parseInt($(this).attr('min'));
+                    var curr = parseInt($(this).val());
+
+                    if(curr > max) {
+                        $(this).val(max);
+                    } else if(curr < min) {
+                        $(this).val(min);
+                    }
+                });
+            });
+            $(document).ready(function(){
+                $('#purchaseQuantity').on('input', function(){
+                    var max = parseInt($(this).attr('max'));
+                    var min = parseInt($(this).attr('min'));
+                    var curr = parseInt($(this).val());
+
+                    if(curr > max) {
+                        $(this).val(max);
+                    } else if(curr < min) {
+                        $(this).val(min);
+                    }
+
+                    var salesPrice = ${salesCheck.salesPrice}; // 상품 가격
+                    var salesDelivery = ${salesCheck.salesDelivery}; // 배송비
+                    var totalValue = (salesPrice * curr) + salesDelivery; // 합계 계산
+
+                    $('#totalValue').text(totalValue); // 합계 업데이트
+                });
+            });
 /*             function tossPay() {
                 IMP.request_pay({
                     pg : 'tosspay.tosstest',

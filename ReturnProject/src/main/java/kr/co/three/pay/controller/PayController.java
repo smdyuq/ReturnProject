@@ -78,81 +78,8 @@ public class PayController {
 		
 		
 		return null;
-		
-		
-		
-		
-		
-		//pay 테이블 등록(결재에서 써야함)
-//		pay.setPayReceipt("직거래");
-//		pay.setPayAddress("직거래");
-		
-		
-//		session.setAttribute("salesNo", salesNo);
-//	    int memberNo = (int) session.getAttribute("memberNo");
-//
-//	    int salesNum = (int) session.getAttribute("salesNo"); // 세션에서 salesNo 값을 가져옴
-//		System.out.println(salesNum);
-//		System.out.println(memberNo);
-//		pay.setSalesNo(salesNum);
-//		pay.setMemberNo(memberNo);
-//		
-//		
-//		int result = payService.insertPay(pay);
-//		
-//		
-//
-//		if (result == 1) {
-//			return "redirect:/pay/payDirectPage.do";
-//		} else {
-//			return "common/error";
-//		}
+
 	}
-	
-	@RequestMapping("/kakaopay.cls")
-	@ResponseBody
-	public String kakaopay() {
-		
-		try {
-			URL address = new URL("https://open-api.kakaopay.com/online/v1/payment/ready");
-			HttpsURLConnection connect = (HttpsURLConnection) address.openConnection();
-			connect.setRequestMethod("POST");
-			connect.setRequestProperty("Authorization", "SECRET_KEY DEVCAA44D02689C6566DAD7E211D3E510F0BCDA9");
-			connect.setRequestProperty("Content-Type", "application/json");
-			connect.setDoOutput(true);
-			
-			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=60000&vat_amount=200&tax_free_amount=0&approval_url=https://developers.kakao.com/success&fail_url=https://developers.kakao.com/fail&cancel_url=https://developers.kakao.com/cancel";
-		
-			OutputStream output = connect.getOutputStream();				//연결
-			DataOutputStream dataOutput = new DataOutputStream(output);		//데이터 주는곳
-			dataOutput.writeBytes(parameter);								//데이터 쓰기
-//			dataOutput.flush();
-			dataOutput.close();
-			
-			int result = connect.getResponseCode();
-			
-			InputStream input;
-			if(result == 200) {
-				input = connect.getInputStream();
-			}else {
-				input = connect.getErrorStream();
-			}
-			
-			InputStreamReader inputReader = new InputStreamReader(input);
-			BufferedReader bufferedReader = new BufferedReader(inputReader);
-			
-			return bufferedReader.readLine();
-			
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return "{\"result\":\"NO\"}";
-	}
-	
-	
 	
 	
 	
