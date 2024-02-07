@@ -1,5 +1,15 @@
 package kr.co.three.pay.controller;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.three.pay.dto.PayDTO;
 import kr.co.three.pay.service.PayServiceImpl;
@@ -25,7 +36,7 @@ public class PayController {
 	@Autowired
 	private SalesServiceImpl salesService;
 	
-//	결제확인 페이지로 이동
+//	결제확인 페이지로 이동(sales dao,serviceImpl에서 처리)
 	@GetMapping("/payCheckPage.do")
 	public String payPage(@RequestParam(value = "salesNo") int salesNo, @RequestParam(value = "type") String type, SalesDTO sales, Model model,
 			HttpSession session) {
@@ -98,7 +109,48 @@ public class PayController {
 //		}
 	}
 	
-	
+	@RequestMapping("/kakaopay.cls")
+	@ResponseBody
+	public String kakaopay() {
+		
+		try {
+			URL address = new URL("https://open-api.kakaopay.com/online/v1/payment/ready");
+			HttpsURLConnection connect = (HttpsURLConnection) address.openConnection();
+			connect.setRequestMethod("POST");
+			connect.setRequestProperty("Authorization", "SECRET_KEY DEVCAA44D02689C6566DAD7E211D3E510F0BCDA9");
+			connect.setRequestProperty("Content-Type", "application/json");
+			connect.setDoOutput(true);
+			
+			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=60000&vat_amount=200&tax_free_amount=0&approval_url=https://developers.kakao.com/success&fail_url=https://developers.kakao.com/fail&cancel_url=https://developers.kakao.com/cancel";
+		
+			OutputStream output = connect.getOutputStream();				//연결
+			DataOutputStream dataOutput = new DataOutputStream(output);		//데이터 주는곳
+			dataOutput.writeBytes(parameter);								//데이터 쓰기
+//			dataOutput.flush();
+			dataOutput.close();
+			
+			int result = connect.getResponseCode();
+			
+			InputStream input;
+			if(result == 200) {
+				input = connect.getInputStream();
+			}else {
+				input = connect.getErrorStream();
+			}
+			
+			InputStreamReader inputReader = new InputStreamReader(input);
+			BufferedReader bufferedReader = new BufferedReader(inputReader);
+			
+			return bufferedReader.readLine();
+			
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return "{\"result\":\"NO\"}";
+	}
 	
 	
 	
