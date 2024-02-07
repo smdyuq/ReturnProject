@@ -5,7 +5,7 @@
                 <SlideVue/>
                 <p style="font-size: x-large; display:flex; width:1024px; margin-top:1rem; font-weight:bold;">오늘의 상품추천</p>
                 <CardWrapperVue/>
-            <FooterVue/>
+            <FooterVue></FooterVue>
     
     </template>
 
@@ -15,7 +15,9 @@ import FooterVue from '../components/layout/Footer.vue';
 import SlideVue from '../components/layout/Slide.vue';
 import CardWrapperVue from '../components/layout/CardWrapper.vue';
 import SidebarVue from '../components/layout/Sidebar.vue';
-import axios from 'axios';
+import axiosApi from '../services/axios';
+import { mapActions } from 'pinia';
+import { usersStore } from '../stores/Home';
 
 
 export default {
@@ -25,13 +27,7 @@ export default {
         };
     },
     mounted() {
-        axios.get('https://api.example.com/users')
-        .then(response => {
-            this.users = response.data;
-        })
-        .catch(error => {
-            console.error(error);
-        })
+        this.getUsers();
     },
         components: {   
         HeaderVue,
@@ -39,6 +35,18 @@ export default {
         FooterVue,
         CardWrapperVue,
         SidebarVue
+    },
+    methods: {
+        ...mapActions(usersStore, ['addUsers']),
+        getUsers () {
+            axiosApi.get('main/mainPage')
+                .then(response => {
+                    this.addUsers(response.data.list);
+                })
+                .catch(error => {
+                    console.error(error);
+                })
+        }
     }
 }
 </script>

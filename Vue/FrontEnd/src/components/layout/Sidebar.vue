@@ -8,7 +8,9 @@
 <div style="display:inline-block; margin:4px;">0</div>
 </a>
         </div>
-        <div style="width:100%; height:160px; border:1px solid gray">최근본상품</div>
+        <div style="width:100%; height:160px; border:1px solid gray">최근본상품
+        <!-- <img :src="'http://192.168.0.15/resources/uploads/' + item.salesImageName" style="width: 194px; height: 194px;"> -->
+        </div>
         <div style="width:100%; height:60px; border:1px solid gray">TOP</div>
     </div>
 </template>

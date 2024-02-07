@@ -12,17 +12,20 @@
       <div class="store">
         <div class="storeWrap">
           <div class="storeContents" id="content1">
-            User ID
-            <button>상점명 수정</button>
+            <span>닉네임</span>
+            <button style="margin-left:12px;">상점명 수정</button>
           </div>
   
           <div class="storeContents" id="content2">
-            <div>상점 방문수</div>
-            <div>상품 판매수</div>
+            <div class="storeContent"> <div>상점 방문수</div><span>0</span></div>
+            <div class="storeContent"> <div>상품 판매수</div><span>0</span></div>
           </div>
   
-          <div class="storeContents" id="content3">소개글</div>
-          <div style="display:inline;">안녕하세요 소개글입니다.</div>
+          <div class="storeContents" id="content3">
+            <textarea></textarea>
+            <button>확인</button>
+          </div>
+          
   
           <div class="storeContents" id="content4">
             <button>소개글 수정</button>
@@ -30,6 +33,100 @@
         </div>
       </div>
     </div>
+
+<div>
+  <div class="storeList">
+    <span>상품</span>
+    <span style="margin-left:12px;">찜</span>
+    <div>전체</div>
+  </div>
+  
+  <div class="cardContainer">
+
+    <div class="cardWrapper">
+        <div class="cardWrap">
+            <div class="imgWrapper" >
+            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            </div>
+            <div> 
+                <div><router-link to="/ProductDetail">상품명</router-link></div>
+                <div>
+                    <span><router-link to="/ProductDetail">200,000 원</router-link></span>
+                    <span><router-link to="/ProductDetail">날짜</router-link></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardWrapper">
+        <div class="cardWrap">
+            <div class="imgWrapper" >
+            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            </div>
+            <div> 
+                <div><router-link to="/ProductDetail">상품명</router-link></div>
+                <div>
+                    <span><router-link to="/ProductDetail">200,000 원</router-link></span>
+                    <span><router-link to="/ProductDetail">날짜</router-link></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardWrapper">
+        <div class="cardWrap">
+            <div class="imgWrapper" >
+            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            </div>
+            <div> 
+                <div><router-link to="/ProductDetail">상품명</router-link></div>
+                <div>
+                    <span><router-link to="/ProductDetail">200,000 원</router-link></span>
+                    <span><router-link to="/ProductDetail">날짜</router-link></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardWrapper">
+        <div class="cardWrap">
+            <div class="imgWrapper" >
+            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            </div>
+            <div> 
+                <div><router-link to="/ProductDetail">상품명</router-link></div>
+                <div>
+                    <span><router-link to="/ProductDetail">200,000 원</router-link></span>
+                    <span><router-link to="/ProductDetail">날짜</router-link></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardWrapper">
+        <div class="cardWrap">
+            <div class="imgWrapper" >
+            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            </div>
+            <div> 
+                <div><router-link to="/ProductDetail">상품명</router-link></div>
+                <div>
+                    <span><router-link to="/ProductDetail">200,000 원</router-link></span>
+                    <span><router-link to="/ProductDetail">날짜</router-link></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</div>
+
+
+
+</div>
   </template>
   
   <script>
@@ -39,6 +136,26 @@
   </script>
   
   <style scoped>
+
+textarea {
+  width:580px;
+  height:140px;
+}
+
+  button {
+    width:90px;
+    height:25px;
+    font-size:small;
+    border:0.5px solid gray;
+  }
+
+  #content3 > button {
+    height:auto;
+  }
+
+  .storeList {
+    font-size:larger;
+  }
   .storeWrapper {
     border: 1px solid gray;
     width: 1024px;
@@ -62,32 +179,53 @@
     display: flex;
     margin-left: 20px;
     width: 714px;
-    /* background-color:yellow; */
-    font-size: large;
+
+    
   }
   
   .storeContents {
     display: flex;
+    
+  }
+
+  .storeContent {
+    display:flex;
+    margin-right:12px;
   }
   
   .storeWrap {
     flex-direction: column;
     display: flex;
-    display: inline-grid;
-    margin-top:20px;
-    width: 250px;
+    width: 700px;
+    justify-content: space-between;
+
   }
   
   #content1 {
-    height: 50px;
+    margin-top:20px;
   }
-  
-  #content2 {
-    height: 50px;
-  }
-  
+
   #content4 {
-    height: 50px;
+    margin-bottom:20px;
   }
+
+/* 카드 */
+
+.cardContainer{
+  display:flex;
+}
+.cardWrapper {
+        display:flex;
+        width:1024px;
+        justify-content: space-between;
+        flex-wrap: wrap;     
+    }
+    .cardWrap {
+        display:block;
+        margin-bottom:25px;
+
+        }
+
+
   </style>
   

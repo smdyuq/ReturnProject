@@ -40,7 +40,7 @@
         </div>
 
         <div>
-
+            <button id="registerBtn">등록하기</button>
         </div>
     </div>
     </template>
@@ -97,6 +97,19 @@
     }
     .infoContent{
         display:inline;
+    }
+
+    #registerBtn{
+    
+        width:120px;
+        height:50px;
+        background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        padding: 8px;
+        cursor: pointer;
+        float:right;
     }
 
     </style>

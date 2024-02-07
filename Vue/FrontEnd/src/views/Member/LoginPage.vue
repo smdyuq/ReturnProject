@@ -1,20 +1,25 @@
 <template>
     <div class="loginWrapper">
       <div class="loginWrap">
-        <div class="title">Login</div>
         
+              <router-link to="/">
+                  <div class="headerLogo">리턴나라</div>
+              </router-link>
+      
+        <!-- <div class="title">Login</div>
+         -->
         <form @submit.prevent="login">
           <div class="input-box">
-            <input v-model="username" type="text" name="username" placeholder="Username">
+            <input v-model="username" type="text" name="username" placeholder="아이디">
             <label for="username" hidden>아이디</label>
           </div>
   
           <div class="input-box">
-            <input v-model="password" type="password" name="password" placeholder="Password">
+            <input v-model="password" type="password" name="password" placeholder="비밀번호">
             <label for="password" hidden>비밀번호</label>
           </div>
   
-          <button type="submit" class="btn" @click="login()">LOGIN</button>
+          <button type="submit" class="btn" @click="login()">로그인</button>
         </form>
       </div>
     </div>
@@ -94,6 +99,17 @@
 
   .btn {
     background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+  }
+
+  .headerLogo {
+    font-size:xx-large;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
+            -webkit-background-clip: text; /* 웹킷 브라우저에 대한 설정 */
+            background-clip: text;
+            color: transparent;
+
   }
   
   </style>
