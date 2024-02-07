@@ -23,4 +23,13 @@ public interface MemberService {
 
 //	상품 테이블 데이터 조회
 	List<SalesDTO> selectSalesData(int memberNo);
+
+//	기존 파일 이름 조회
+	String selectFileName(int memberNo);
+
+//	상점 이미지 수정
+	int storeImageUpdate(MemberDTO member);
+
+//	찜 조회
+	List<SalesDTO> selectLikeData(int memberNo);
 }

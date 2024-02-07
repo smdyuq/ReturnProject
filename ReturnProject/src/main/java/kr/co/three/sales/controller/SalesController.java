@@ -75,7 +75,7 @@ public class SalesController {
 	public String updateSales(SalesDTO sales, HttpSession session, MultipartFile upload) {
 
 		// 판매등록 작성자 조회
-		int salesMember = salesService.selectSalesMember(sales.getMemberNo()); // 판매등록 작성자
+		int salesMember = salesService.selectSalesMember(sales.getSalesNo()); // 판매등록 작성자
 
 		int memberNo = (int) session.getAttribute("memberNo"); // 로그인 유저
 
@@ -83,7 +83,7 @@ public class SalesController {
 
 		if (salesMember == memberNo && !upload.isEmpty()) {
 			// 기존 파일이름 조회
-			String fileName = salesService.selectFileName(sales.getMemberNo());
+			String fileName = salesService.selectFileName(sales.getSalesNo());
 
 			sales.setSalesImageName(fileName);
 
@@ -141,7 +141,7 @@ public class SalesController {
 		return "sales/detailSales";
 	}
 
-//	판매등록
+//	판매 등록
 	@PostMapping("/enrollSales.do")
 	public String enrollSales(SalesDTO sales, MultipartFile upload, HttpSession session) {
 
@@ -157,6 +157,8 @@ public class SalesController {
 		int result = salesService.enrollSales(sales);
 
 		if (result == 1) {
+			// 판매 상태 : 판매 중
+			int statusResult = salesService.salesStatus(sales.getSalesNo());
 			return "redirect:/sales/manageSalesForm.do";
 		} else {
 			return "common/error";

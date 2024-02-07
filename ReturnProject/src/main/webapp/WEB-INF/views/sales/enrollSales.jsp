@@ -102,6 +102,13 @@
 								name="salesCount" value="1">
 
 						</div>
+						
+						<div class="col-12">
+							<label for="salesChatLink" class="form-label">상품 채팅 링크</label> <input
+								type="text" class="form-control" id="salesChatLink"
+								name="salesChatLink">
+
+						</div>
 
 						<button class="w-100 btn btn-primary btn-lg" type="submit"
 							id="submit-btn">등록</button>

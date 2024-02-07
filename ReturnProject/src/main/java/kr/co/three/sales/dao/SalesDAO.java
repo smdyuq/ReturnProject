@@ -60,13 +60,13 @@ public class SalesDAO {
 	}
 
 //	판매등록 작성자 조회
-	public int selectSalesMember(int memberNo, SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("salesMapper.selectSalesMember", memberNo);
+	public int selectSalesMember(int salesNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.selectSalesMember", salesNo);
 	}
 
 //	기존 파일이름 조회
-	public String selectFileName(int memberNo, SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("salesMapper.selectFileName", memberNo);
+	public String selectFileName(int salesNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.selectFileName", salesNo);
 	}
 
 //	상품 수정(upload가 비어있을 때)
@@ -79,6 +79,12 @@ public class SalesDAO {
 		return sqlSession.insert("salesMapper.likeBtn", sales);
 	}
 
+//	판매 상태 : 판매 중
+	public int salesStatus(int salesNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("salesMapper.salesStatus", salesNo);
+	}
+
+//	결제 정보 체크
 	public SalesDTO payCheck(int salesNo, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("salesMapper.payCheck", salesNo);
 	}
