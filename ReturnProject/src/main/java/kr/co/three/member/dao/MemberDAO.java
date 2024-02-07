@@ -38,4 +38,19 @@ public class MemberDAO {
 		return sqlSession.selectList("salesMapper.selectSalesData", memberNo);
 	}
 
+//	기존 파일 이름 조회
+	public String selectFileName(int memberNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.selectFileName", memberNo);
+	}
+
+//	상점 이미지 수정
+	public int storeImageUpdate(MemberDTO member, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("memberMapper.storeImageUpdate", member);
+	}
+
+//	찜 조회
+	public List<SalesDTO> selectLikeData(int memberNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("salesMapper.selectLikeData", memberNo);
+	}
+
 }

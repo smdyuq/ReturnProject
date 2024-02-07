@@ -70,7 +70,7 @@
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${row}</td>
 										<td
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'"><img
-											src="/resources/uploads/${item.salesImageName}"></td>
+											src="/resources/uploads/194x194/${item.salesImageName}"></td>
 										<td
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesName}</td>
 										<td

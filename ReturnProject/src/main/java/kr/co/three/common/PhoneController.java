@@ -3,6 +3,8 @@ package kr.co.three.common;
 import java.util.Random;
 
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +28,7 @@ public class PhoneController {
 	}
 
 	@PostMapping("/send-one")
-	public String sendOne(@RequestParam("memberPhone") String memberPhone) {
+	public ResponseEntity<String> sendOne(@RequestParam("memberPhone") String memberPhone) {
 //		Message message = new Message();
 		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
 //		message.setFrom("01024749245");
@@ -41,6 +43,6 @@ public class PhoneController {
 //		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 //		System.out.println(response);
 
-		return verificationCode;
+		return new ResponseEntity<>(verificationCode, HttpStatus.OK);
 	}
 }

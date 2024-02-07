@@ -51,4 +51,22 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectSalesData(memberNo, sqlSession);
 	}
 
+//	기존 파일 이름 조회
+	@Override
+	public String selectFileName(int memberNo) {
+		return memberDAO.selectFileName(memberNo, sqlSession);
+	}
+
+//	상점 이미지 수정
+	@Override
+	public int storeImageUpdate(MemberDTO member) {
+		return memberDAO.storeImageUpdate(member, sqlSession);
+	}
+
+//	찜 조회
+	@Override
+	public List<SalesDTO> selectLikeData(int memberNo) {
+		return memberDAO.selectLikeData(memberNo, sqlSession);
+	}
+
 }

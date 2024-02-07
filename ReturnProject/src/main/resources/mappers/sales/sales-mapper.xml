@@ -20,6 +20,7 @@
 		<result column="SALES_COMPLETE" property="salesComplete"></result>
 		<result column="SALES_ORIGIN_IMAGE_PATH"
 			property="salesOriginImagePath"></result>
+		<result column="SALES_CHAT_LINK" property="salesChatLink"></result>
 	</resultMap>
 
 	<!-- 상품관리 전체 리스트 수 -->
@@ -64,7 +65,8 @@
 		SALES_IMAGE_PATH =
 		#{salesImagePath},
 		SALES_ORIGIN_IMAGE_NAME = #{salesOriginImageName},
-		SALES_UPDATE_DATE = SYSDATE
+		SALES_UPDATE_DATE = SYSDATE,
+		SALES_CHAT_LINK = #{salesChatLink}
 		WHERE
 		SALES_NO = #{salesNo}
 	</update>
@@ -108,14 +110,15 @@
 		NULL,
 		DEFAULT,
 		#{memberNo},
-		#{salesOriginImageName})
+		#{salesOriginImageName},
+		#{salesChatLink})
 	</insert>
 
 	<!-- 판매등록 작성자 조회 -->
 	<select id="selectSalesMember" resultType="_int">
 		SELECT MEMBER_NO FROM
 		SALES
-		WHERE MEMBER_NO = #{memberNo}
+		WHERE SALES_NO = #{salesNo}
 	</select>
 
 	<!-- 기존 파일이름 조회 -->
@@ -123,7 +126,7 @@
 		SELECT SALES_IMAGE_NAME
 		FROM
 		SALES
-		WHERE MEMBER_NO = #{memberNo}
+		WHERE SALES_NO = #{salesNo}
 	</select>
 
 	<!-- 상품 수정(upload가 비어있을 때) -->
@@ -138,7 +141,8 @@
 		SALES_DELIVERY = #{salesDelivery},
 		SALES_COMMENT = #{salesComment},
 		SALES_COUNT = #{salesCount},
-		SALES_UPDATE_DATE = SYSDATE
+		SALES_UPDATE_DATE = SYSDATE,
+		SALES_CHAT_LINK = #{salesChatLink}
 		WHERE
 		SALES_NO = #{salesNo}
 	</update>
@@ -212,6 +216,30 @@
 	<insert id="likeBtn" parameterType="sales">
 		INSERT INTO LIKES
 		VALUES(LIKES_SEQ.NEXTVAL, #{memberNo}, #{salesNo}, DEFAULT)
+	</insert>
+	
+	
+	<!-- 상품 상세 -->
+	<select id="payCheck" resultMap="salesResultSet">
+		SELECT * FROM SALES
+		WHERE
+		SALES_NO = #{salesNo}
+	</select>
+
+	<!-- 찜 조회 -->
+	<select id="selectLikeData" resultMap="salesResultSet">
+		SELECT *
+		FROM SALES
+		JOIN
+		LIKES ON SALES.SALES_NO = LIKES.SALES_NO
+		WHERE LIKES.MEMBER_NO =
+		#{memberNo}
+	</select>
+
+	<!-- 판매 상태 : 판매 중 -->
+	<insert id="salesStatus" parameterType="int">
+		INSERT INTO SALES_STATUS
+		VALUES(SALES_STATUS_SEQ.NEXTVAL, DEFAULT, #{salesNo})
 	</insert>
 
 </mapper>

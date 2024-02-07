@@ -12,13 +12,15 @@
 		<result column="MEMBER_IMAGE_PATH" property="memberImagePath"></result>
 		<result column="MEMBER_VISIT" property="memberVisit"></result>
 		<result column="MEMBER_CONTENT" property="memberContent"></result>
+		<result column="MEMBER_ORIGIN_IMAGE_NAME"
+			property="memberOriginImageName"></result>
 	</resultMap>
 
 	<!-- 회원가입 -->
 	<insert id="registerMember" parameterType="member">
 		INSERT INTO MEMBER
 		VALUES(MEMBER_SEQ.NEXTVAL, #{memberId}, #{memberPwd}, #{memberName},
-		#{memberPhone}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, NULL)
+		#{memberPhone}, DEFAULT, DEFAULT, DEFAULT, DEFAULT, NULL, DEFAULT)
 	</insert>
 
 	<!-- 아이디 중복검사 -->
@@ -42,4 +44,24 @@
 		WHERE
 		MEMBER_NO = #{memberNo}
 	</select>
+
+	<!-- 기존 파일 이름 조회 -->
+	<select id="selectFileName" resultType="string">
+		SELECT MEMBER_IMAGE_NAME
+		FROM
+		MEMBER
+		WHERE MEMBER_NO = #{memberNo}
+	</select>
+
+	<!-- 상점 이미지 수정 -->
+	<update id="storeImageUpdate" parameterType="member">
+		UPDATE MEMBER
+		SET
+		MEMBER_IMAGE_NAME = #{memberImageName},
+		MEMBER_IMAGE_PATH =
+		#{memberImagePath},
+		MEMBER_ORIGIN_IMAGE_NAME = #{memberOriginImageName}
+		WHERE
+		MEMBER_NO = #{memberNo}
+	</update>
 </mapper>

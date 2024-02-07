@@ -36,6 +36,27 @@ public class MainController {
 		return "main/mainPage";
 	}
 
+//@RestController
+//@RequestMapping("/main")
+//public class MainController {
+//
+//	@Autowired
+//	private MainServiceImpl mainService;
+//
+//	// 메인 페이지
+//	@GetMapping("/mainPage")
+//	public ResponseEntity<?> mainPage(SalesDTO sales) {
+//
+//		// response.data
+//		List<SalesDTO> salesList = mainService.mainSalesList(sales);
+//
+//		// response.data.list
+//		HashMap<String, Object> response = new HashMap<>();
+//		response.put("list", salesList);
+//
+//		return new ResponseEntity<>(response, HttpStatus.OK);
+//	}
+
 //	검색 페이지로 이동
 	@PostMapping("/main/search.do")
 	public String search(SalesDTO sales, MainDTO main, Model model, HttpSession session) {
@@ -122,5 +143,5 @@ public class MainController {
 
 		return "main/bannerPage";
 	}
-	
+
 }
