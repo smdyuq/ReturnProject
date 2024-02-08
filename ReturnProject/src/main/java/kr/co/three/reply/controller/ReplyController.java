@@ -30,8 +30,8 @@ public class ReplyController {
 //		replyDto.setMember_no(52);
 		System.out.println("댓글 등록 통신 성공");
 
-		String memberType = (String) session.getAttribute("memberType");
-		if (!memberType.equals("0")) {
+		int memberType = (int) session.getAttribute("memberType");
+		if (memberType != 0 ) {
 			return "fail";
 		} else {
 			System.out.println("로그인함. 스크랩 진행");

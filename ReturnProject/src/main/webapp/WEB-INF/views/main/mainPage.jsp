@@ -88,7 +88,7 @@
 <body>
 	<hr>
 	<h2>배너 이미지</h2>
-	<a href="/main/bannerPage.do"><img src="배너 이미지"></a>
+	<a href="/main/bannerPage.do"><img src=""></a>
 	<hr>
 	<h2>상품 리스트</h2>
 	<hr>
@@ -99,7 +99,7 @@
 					onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
 					<p>상품이미지</p>
 					<a href="#"><img class="popular_img"
-						src="/resources/uploads/outerimage/300x300/${item.salesImageName }"></a>
+						src="/resources/uploads/303x310/${item.salesImageName }"></a>
 
 					<div class="projectCardDetail">
 

@@ -1,6 +1,7 @@
 package kr.co.three.board.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,7 +37,7 @@ public class boardController {
 	private ReplyServiceImpl replyService;
 
 	@GetMapping("/boardList.do")
-	public String boardList(boardDTO board, @RequestParam(value = "cpage", defaultValue = "1") int cpage, Model model,
+	public String boardList(boardDTO board, @RequestParam(value = "cpage", defaultValue = "1") int cpage, ReplyDTO reply, Model model,
 			HttpSession session) {
 
 		int listCount = boardService.selectListCount(board);
@@ -47,10 +48,14 @@ public class boardController {
 		PageInfo pi = Pagination.getPageInfo(listCount, cpage, pageLimit, boardLimit);
 
 		List<boardDTO> list = boardService.selectListAll(pi, board);
-
-		for (boardDTO item : list) {
-			String indate = item.getAsk_date().substring(0, 10);
-			item.setAsk_date(indate);
+		
+		for(boardDTO boardDto : list) {
+			boardDto.getAsk_no();
+//			System.out.println("qqqq:"+boardDto.getAsk_no());
+			int commentCount = boardService.selectCommentCount(boardDto);
+			boardDto.setCommentCount(commentCount);
+//			System.out.println("asd :"+commentCount);
+			model.addAttribute("commentCount", commentCount);
 		}
 
 		String msg = (String) session.getAttribute("msg");

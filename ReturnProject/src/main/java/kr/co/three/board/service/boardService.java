@@ -14,4 +14,7 @@ public interface boardService {
 	boardDTO detailBoard(int idx);
 	// 목록 불러오기
 	List<boardDTO> selectListAll(PageInfo pi, boardDTO board);
+	
+	//댓글 수 구하기
+	int selectCommentCount(boardDTO board);
 }
