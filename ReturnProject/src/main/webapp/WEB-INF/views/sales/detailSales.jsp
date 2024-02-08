@@ -20,6 +20,9 @@
 	<hr>
 
 	<div>
+		<p>상점 이미지</p>
+		<a href="/member/storeForm.do?memberNo=${member.memberNo }"><img
+			src="/resources/uploads/303x310/${member.memberImageName}"></a>
 		<p>상품 이미지</p>
 		<img src="/resources/uploads/110x150/${sales.salesImageName}">
 		<p>${sales.salesImageName}</p>
@@ -85,8 +88,8 @@
 				<div class="modal-body">
 					<p>구매 방법 선택 : 직거래 / 택배거래</p>
 					<a href="/pay/payDeliveryPage.do?salesNo=${sales.salesNo}"
-						class="btn btn-primary" type="delivery">택배 거래</a> 
-					<a href="/pay/payDirectPage.do?salesNo=${sales.salesNo}"
+						class="btn btn-primary" type="delivery">택배 거래</a> <a
+						href="/pay/payDirectPage.do?salesNo=${sales.salesNo}"
 						class="btn btn-primary" type="direct">직거래</a>
 				</div>
 				<div class="modal-footer">
