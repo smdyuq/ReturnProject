@@ -42,7 +42,7 @@ public class adminController {
 	public String register(adminDTO admin) {
 
 		admin.setMemberPhone("01012345678");
-		admin.setMemberType("0");
+		admin.setMemberType(0);
 
 //		패스워드 암호화
 		String pwd = bcryptPasswordEncoder.encode(admin.getMemberPwd());
@@ -78,17 +78,30 @@ public class adminController {
 
 		adminDTO loginAdmin = adminService.loginAdmin(admin);
 		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
-		if (!Objects.isNull(loginAdmin)
-				&& bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())) {
-			session.setAttribute("memberNo", loginAdmin.getMemberNo());
-			session.setAttribute("memberId", loginAdmin.getMemberId());
-			session.setAttribute("memberType", loginAdmin.getMemberType());
+//		if (!Objects.isNull(loginAdmin)
+//				&& bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())) {
+//			session.setAttribute("memberNo", loginAdmin.getMemberNo());
+//			session.setAttribute("memberId", loginAdmin.getMemberId());
+//			session.setAttribute("memberType", loginAdmin.getMemberType());
+//
+//			model.addAttribute("admin", admin);
+//			return "admin/main/adminMain";
+//		} else {
+//			return "common/error";
+//		}
+		 if (!Objects.isNull(loginAdmin)
+		            && bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())
+		            && loginAdmin.getMemberType() == 0) {
+			 
+		        session.setAttribute("memberNo", loginAdmin.getMemberNo());
+		        session.setAttribute("memberId", loginAdmin.getMemberId());
+		        session.setAttribute("memberType", loginAdmin.getMemberType());
 
-			model.addAttribute("admin", admin);
-			return "admin/main/adminMain";
-		} else {
-			return "common/error";
-		}
+		        model.addAttribute("admin", admin);
+		        return "admin/main/adminMain";
+		    } else {
+		        return "common/error";
+		    }
 	}
 
 	// 로그아웃

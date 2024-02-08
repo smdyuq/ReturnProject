@@ -33,8 +33,8 @@
 		VALUES(ASK_SEQ.NEXTVAL,
 		#{ask_title},
 		#{ask_content},
-		#{member_no},
 		DEFAULT,
+		#{member_no},
 		#{ask_image_name},
 		#{ask_image_path}
 		)
@@ -45,6 +45,11 @@
 		FROM ask
 		WHERE ask_no
 		= #{ask_no}
+	</select>
+	<!-- 댓글 수량 구하기 -->
+	<select id="selectCommentCount" resultType="_int">
+		SELECT COUNT(*) FROM ASK_COMMENT
+		WHERE ASK_NO = #{ask_no}
 	</select>
 </mapper>
 	

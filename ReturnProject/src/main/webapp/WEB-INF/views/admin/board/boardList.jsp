@@ -26,6 +26,7 @@
 			  	  <td>제목</td>
 			  	  <td>작성자</td>
 			  	  <td>작성일</td>
+			  	  <td>코멘트</td>
 			  	</tr>
 			  </thead>
 			  <tbody>
@@ -45,6 +46,7 @@
 			  				<td>${item.ask_title}</td>
 			  				<td>${sessionScope.memberId}</td>
 			  				<td>${item.ask_date}</td>
+			  				<td>${0 < item.commentCount ? 'O' : ''}</td>
 			  			</tr>
 			  			<c:set var="row" value="${row-1}" />
 			  		</c:forEach>
