@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,6 +21,7 @@ import kr.co.three.common.UploadFile;
 import kr.co.three.member.dto.MemberDTO;
 import kr.co.three.member.service.MemberServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
+import kr.co.three.sales.service.SalesServiceImpl;
 
 @Controller
 @RequestMapping("/member")
@@ -26,6 +29,9 @@ public class MemberController {
 
 	@Autowired
 	private MemberServiceImpl memberService;
+
+	@Autowired
+	private SalesServiceImpl salesService;
 
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -108,8 +114,7 @@ public class MemberController {
 
 //	내 상점
 	@GetMapping("storeForm.do")
-	public String storeForm(HttpSession session, Model model) {
-		int memberNo = (int) session.getAttribute("memberNo");
+	public String storeForm(@RequestParam(value = "memberNo") int memberNo, HttpSession session, Model model) {
 
 		// 멤버 테이블 데이터 조회
 		MemberDTO memberResult = memberService.selectMemberData(memberNo);
@@ -117,6 +122,8 @@ public class MemberController {
 		List<SalesDTO> salesResult = memberService.selectSalesData(memberNo);
 		// 찜 조회
 		List<SalesDTO> likeResult = memberService.selectLikeData(memberNo);
+		// 상점 방문 수 증가
+		int storeVisitCount = memberService.storeVisitCount(memberNo);
 
 		model.addAttribute("member", memberResult);
 		model.addAttribute("sales", salesResult);
@@ -146,6 +153,24 @@ public class MemberController {
 		result = memberService.storeImageUpdate(member);
 
 		return "redirect:/member/storeForm.do";
+	}
+
+//	소개글 수정
+	@PostMapping("/storeContentUpdate.do")
+	@ResponseBody
+	public String storeContentUpdate(@RequestBody MemberDTO member, HttpSession session) {
+
+		int memberNo = (int) session.getAttribute("memberNo");
+		member.setMemberNo(memberNo);
+
+		System.out.println("aaa : " + member.getMemberContent());
+		int result = memberService.storeContentUpdate(member);
+
+		if (result == 1) {
+			return "success";
+		} else {
+			return "error";
+		}
 	}
 
 	// 회원가입 폼으로 이동

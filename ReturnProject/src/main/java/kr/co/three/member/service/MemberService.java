@@ -32,4 +32,11 @@ public interface MemberService {
 
 //	찜 조회
 	List<SalesDTO> selectLikeData(int memberNo);
+
+//	상점 방문 수 증가
+	int storeVisitCount(int memberNo);
+
+//	소개글 수정
+	int storeContentUpdate(MemberDTO member);
+
 }

@@ -58,7 +58,7 @@
 			<a href="/member/loginForm.do">내상점</a>
 		</c:when>
 		<c:otherwise>
-			<a href="/member/storeForm.do">내상점</a>
+			<a href="/member/storeForm.do?memberNo=${sessionScope.memberNo }">내상점</a>
 		</c:otherwise>
 	</c:choose>
 

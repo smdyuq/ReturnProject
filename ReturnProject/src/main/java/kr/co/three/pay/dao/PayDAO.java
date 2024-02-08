@@ -8,7 +8,6 @@ import kr.co.three.pay.dto.PayDTO;
 @Repository
 public class PayDAO {
 
-
 	public PayDTO payCheck(int salesNo, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("payMapper.payCheck", salesNo);
 	}

@@ -104,4 +104,16 @@ public class SalesServiceImpl implements SalesService {
 		return salesDAO.payCheck(salesNo, sqlSession);
 	}
 
+//	판매 번호 조회
+	@Override
+	public int selectSalesNo(int memberNo) {
+		return salesDAO.selectSalesNo(memberNo, sqlSession);
+	}
+
+//	판매상품 회원번호 조회
+	@Override
+	public int selectMemberNo(int salesNo) {
+		return salesDAO.selectMemberNo(salesNo, sqlSession);
+	}
+
 }
