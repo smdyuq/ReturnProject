@@ -89,6 +89,7 @@ public class MemberController {
 				&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("memberNo", loginUser.getMemberNo());
 			session.setAttribute("memberId", loginUser.getMemberId());
+			session.setAttribute("memberType", loginUser.getMemberType());
 
 			return "redirect:/";
 		} else {

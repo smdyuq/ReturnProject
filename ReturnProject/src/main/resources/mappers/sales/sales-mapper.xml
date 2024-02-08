@@ -219,7 +219,7 @@
 	</insert>
 	
 	
-	<!-- 상품 상세 -->
+	<!-- 결제 정보 체크 -->
 	<select id="payCheck" resultMap="salesResultSet">
 		SELECT * FROM SALES
 		WHERE

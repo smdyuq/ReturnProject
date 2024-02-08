@@ -11,7 +11,7 @@ public class MemberDTO {
 	private String memberPwd;
 	private String memberName;
 	private String memberPhone;
-	private String memberType;
+	private int memberType;
 
 	private String memberImageName;
 	private String memberImagePath;
