@@ -69,4 +69,15 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.selectLikeData(memberNo, sqlSession);
 	}
 
+//	상점 방문 수 증가
+	@Override
+	public int storeVisitCount(int memberNo) {
+		return memberDAO.storeVisitCount(memberNo, sqlSession);
+	}
+
+//	소개글 수정
+	public int storeContentUpdate(MemberDTO member) {
+		return memberDAO.storeContentUpdate(member, sqlSession);
+	}
+
 }

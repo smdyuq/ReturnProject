@@ -53,4 +53,14 @@ public class MemberDAO {
 		return sqlSession.selectList("salesMapper.selectLikeData", memberNo);
 	}
 
+//	상점 방문 수 증가
+	public int storeVisitCount(int memberNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("memberMapper.storeVisitCount", memberNo);
+	}
+
+//	소개글 수정
+	public int storeContentUpdate(MemberDTO member, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("memberMapper.storeContentUpdate", member);
+	}
+
 }
