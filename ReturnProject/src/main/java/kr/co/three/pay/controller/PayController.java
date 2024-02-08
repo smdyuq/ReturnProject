@@ -36,7 +36,7 @@ public class PayController {
 	@Autowired
 	private SalesServiceImpl salesService;
 
-//	결제확인 페이지로 이동(sales dao,serviceImpl에서 처리)
+//	결제확인 페이지로 이동(sales dao, serviceImpl에서 처리)
 	@GetMapping("/payCheckPage.do")
 	public String payPage(@RequestParam(value = "salesNo") int salesNo, @RequestParam(value = "type") String type,
 			SalesDTO sales, Model model, HttpSession session) {

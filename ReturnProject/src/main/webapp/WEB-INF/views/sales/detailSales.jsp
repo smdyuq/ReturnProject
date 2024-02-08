@@ -48,7 +48,7 @@
 		<c:choose>
 			<c:when
 				test="${not empty sessionScope.memberNo && sessionScope.memberNo == sales.memberNo}">
-				<a href="/member/storeForm.do">내 상점 관리</a>
+				<a href="/member/storeForm.do?memberNo=${sessionScope.memberNo }">내 상점 관리</a>
 			</c:when>
 			<c:when
 				test="${not empty sessionScope.memberNo && sessionScope.memberNo != sales.memberNo}">
@@ -60,6 +60,8 @@
 				<button onclick="location.href='/member/loginForm.do'">찜</button>
 				<a href="/member/loginForm.do">채팅</a>
 				<a href="/member/loginForm.do">구매하기</a>
+				
+				
 			</c:otherwise>
 		</c:choose>
 		<hr>
