@@ -221,6 +221,7 @@ public class SalesController {
 		// 찜 목록 추가
 		int result = salesService.likeBtn(sales);
 
+		// 찜 카운트 증가
 		int updateLikesCount = salesService.updateLikesCount(sales);
 
 		if (result == 1) {
