@@ -106,6 +106,10 @@
             	if(status === "paid"){
             		const {imp_uid} = response;
             		verifyPayment(imp_uid);
+            		
+            		 sendPaymentSMS();
+            		
+            		window.location.href = "/payComplete.jsp";
             	}
             }
             )}; /* 카카오 결제 */

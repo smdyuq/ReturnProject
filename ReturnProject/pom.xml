@@ -222,6 +222,12 @@
 			<version>1.4</version>
 		</dependency>
 
+		<!-- sms문자 보내기 -->
+		<dependency>
+			<groupId>net.nurigo</groupId>
+			<artifactId>javaSDK</artifactId>
+			<version>2.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
