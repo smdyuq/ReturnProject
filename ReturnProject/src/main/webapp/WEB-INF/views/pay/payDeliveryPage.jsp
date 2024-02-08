@@ -87,6 +87,7 @@
         
 
         function kakaoPay() {
+        	 var buyer_addr = document.getElementById("sample6_address").value;
             IMP.request_pay({
                 pg : 'kakaopay.TC0ONETIME',
                 pay_method: "card",
@@ -96,7 +97,7 @@
                 buyer_id : '개똥이',
                 buyer_name : '개똥이',
                 buyer_tel : '010-1234-5678',
-                buyer_addr : '직거래',
+                buyer_addr : buyer_addr,
                 buyer_postcode : '123-456'
             }, function(response){
             	const {status, err_msg} = response;
@@ -106,8 +107,6 @@
             	if(status === "paid"){
             		const {imp_uid} = response;
             		verifyPayment(imp_uid);
-            		
-            		 sendPaymentSMS();
             		
             		window.location.href = "/payComplete.jsp";
             	}
