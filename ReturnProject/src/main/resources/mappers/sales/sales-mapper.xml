@@ -241,4 +241,22 @@
 		SALES_NO = #{salesNo}
 	</select>
 
+	<!-- 판매 정보 조회 -->
+	<select id="selectSalesNo" resultType="_int">
+		SELECT SALES_NO
+		FROM SALES
+		WHERE MEMBER_NO = #{memberNo}
+		ORDER BY SALES_DATE DESC
+		FETCH FIRST 1 ROW
+		ONLY
+	</select>
+
+	<!-- 판매상품 회원번호 조회 -->
+	<select id="selectMemberNo" resultType="_int">
+		SELECT MEMBER_NO
+		FROM
+		SALES
+		WHERE SALES_NO = #{salesNo}
+	</select>
+
 </mapper>

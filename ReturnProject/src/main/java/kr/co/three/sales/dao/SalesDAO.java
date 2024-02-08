@@ -89,4 +89,14 @@ public class SalesDAO {
 		return sqlSession.selectOne("salesMapper.payCheck", salesNo);
 	}
 
+//	판매 정보 조회
+	public int selectSalesNo(int memberNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.selectSalesNo", memberNo);
+	}
+
+//	판매상품 회원번호 조회
+	public int selectMemberNo(int salesNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("salesMapper.selectMemberNo", salesNo);
+	}
+
 }

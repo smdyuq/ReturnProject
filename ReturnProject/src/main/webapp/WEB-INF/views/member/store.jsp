@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 	<a href="/">로고</a>
@@ -24,14 +25,17 @@
 			</c:if>
 			<hr>
 			<p>상점 아이디</p>
-			<p>${sessionScope.memberId }</p>
+			<p>${member.memberId }</p>
 			<hr>
 			<p>상점 방문수</p>
 			<p>${member.memberVisit }</p>
 			<hr>
 			<p>소개글</p>
-			<p>${member.memberContent }</p>
-			<button>소개글 수정</button>
+			<input type="text" value="${member.memberContent }"
+				name="memberContent" id="memberContent">
+			<c:if test="${sessionScope.memberId == member.memberId }">
+				<button id="storeContentUpdateBtn">소개글 수정</button>
+			</c:if>
 
 
 			<table class="table table-hover">
@@ -123,3 +127,26 @@
 			</table>
 </body>
 </html>
+
+<script>
+	$(document).ready(function() {
+		$("#storeContentUpdateBtn").click(function() {
+			const memberContent = document.getElementById("memberContent").value;
+			console.log(memberContent)
+			$.ajax({
+				url : "/member/storeContentUpdate.do",
+				type : "POST",	
+				data : {
+					memberContent : memberContent
+				},
+				success : function(response) {
+					alert("수정되었습니다.");
+				},
+				error : function(xhr, status, error) {
+					alert("수정이 실패하였습니다.", error, status 	);
+				}
+			});
+		});
+	});
+</script>
+
