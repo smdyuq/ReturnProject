@@ -20,7 +20,7 @@ public class PhoneController {
 	private DefaultMessageService messageService;
 
 	public PhoneController() {
-		// 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다!
+		// 반드시 계정 내 등록된 유효한 API 키, API Secret Key를 입력해주셔야 합니다.
 		this.messageService = NurigoApp.INSTANCE.initialize("NCS6JWGE9OSKRXIQ", "JI1KAFFQVKXLGHRFYRD2XTNWG4YOQLFW",
 				"https://api.coolsms.co.kr");
 	}
