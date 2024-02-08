@@ -1,9 +1,11 @@
 <template>
-    <HeaderVue></HeaderVue>
-    <SidebarVue></SidebarVue>
-    <NavVue></NavVue>
-    <ProductRegistrationVue></ProductRegistrationVue>
-    <FooterVue></FooterVue>
+    <div style="height:310vh;">
+        <HeaderVue></HeaderVue>
+        <SidebarVue></SidebarVue>
+        <NavVue></NavVue>
+        <ProductRegistrationVue></ProductRegistrationVue>
+    </div>
+    <FooterVue id="footer"></FooterVue>
 </template>
 
 <script>
@@ -23,3 +25,15 @@ export default {
 }
 }
 </script>
+
+<style>
+div {
+    position:relative;
+    
+}
+
+#footer {
+    position:absolute;
+    bottom:0;
+}
+</style>

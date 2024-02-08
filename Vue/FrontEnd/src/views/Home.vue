@@ -1,11 +1,12 @@
     <template>
-    
+        <div>
             <HeaderVue></HeaderVue>
             <SidebarVue></SidebarVue>
                 <SlideVue/>
                 <p style="font-size: x-large; display:flex; width:1024px; margin-top:1rem; font-weight:bold;">오늘의 상품추천</p>
                 <CardWrapperVue/>
-            <FooterVue></FooterVue>
+            </div>
+                <FooterVue id="footer"></FooterVue>
     
     </template>
 
@@ -52,6 +53,14 @@ export default {
 </script>
 
 <style scoped>
+div {
+    position:relative;
+}
 
+#footer {
+    position:absolute;
+    bottom:0;
+}
 </style>
+
 

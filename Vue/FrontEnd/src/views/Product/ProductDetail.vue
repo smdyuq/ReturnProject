@@ -54,12 +54,12 @@
 </template>
 
 <script>
-import HeaderVue from '../components/layout/Header.vue'
-import SidebarVue from '../components/layout/Sidebar.vue'
-import FooterVue from '../components/layout/Footer.vue'
+import HeaderVue from '../../components/layout/Header.vue'
+import SidebarVue from '../../components/layout/Sidebar.vue'
+import FooterVue from '../../components/layout/Footer.vue'
 import axios from 'axios';
 import { mapActions } from 'pinia';
-import { usersStore } from '../stores/Home';
+import { usersStore } from '../../stores/Home';
 
 
 export default {

@@ -61,7 +61,7 @@
     <div class="cardWrapper">
         <div class="cardWrap">
             <div class="imgWrapper" >
-            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            <div><router-link to="/ProductDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
             </div>
             <div> 
                 <div><router-link to="/ProductDetail">상품명</router-link></div>
@@ -76,7 +76,7 @@
     <div class="cardWrapper">
         <div class="cardWrap">
             <div class="imgWrapper" >
-            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            <div><router-link to="/ProductDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
             </div>
             <div> 
                 <div><router-link to="/ProductDetail">상품명</router-link></div>
@@ -91,7 +91,7 @@
     <div class="cardWrapper">
         <div class="cardWrap">
             <div class="imgWrapper" >
-            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            <div><router-link to="/ProductDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
             </div>
             <div> 
                 <div><router-link to="/ProductDetail">상품명</router-link></div>
@@ -106,7 +106,7 @@
     <div class="cardWrapper">
         <div class="cardWrap">
             <div class="imgWrapper" >
-            <div><router-link to="/producDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
+            <div><router-link to="/ProductDetail"><img src="https://via.placeholder.com/194x194.jpg" alt="194 * 194 size image"></router-link></div>
             </div>
             <div> 
                 <div><router-link to="/ProductDetail">상품명</router-link></div>

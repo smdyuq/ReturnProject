@@ -1,6 +1,21 @@
 <template>
 <div class="cardContainer">
     <div class="cardWrapper">
+        <div class="cardWrap">
+            <div class="imgWrapper">
+            <div><router-link to="/productDetail"><img src="" style="width: 194px; height: 194px;"></router-link></div>
+            </div>
+            <div> 
+                <div><router-link to="/productDetail">dd</router-link></div>
+                <div>
+                    <span><router-link to="/productDetail">dd</router-link></span>
+                    <span><router-link to="/productDetail">dd</router-link></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cardWrapper">
         <div class="cardWrap" v-for="(item, index) in getUsers" :key="index">
             <div class="imgWrapper" >
             <div><router-link to="/productDetail"><img :src="'http://192.168.0.4/resources/uploads/' + item.salesImageName" style="width: 194px; height: 194px;"></router-link></div>

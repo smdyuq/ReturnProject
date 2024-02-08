@@ -45,7 +45,6 @@
     
 
 
-
     <button type="submit" class="btn" @click="joinForm()">회원 가입</button>
   </form>
     </div>
@@ -68,10 +67,10 @@ export default {
         memberPhone: '',
         confirmPassword: '',
         verificationCode: '',
-        checkCode: 'TEST',
         isVerificationCodeSent: false,
         authenticationCode: ''
-      }
+      },
+      checkCode: 'TEST'
     };
   },
   methods: {
@@ -88,17 +87,20 @@ export default {
         });
     },
     sendVerificationCode() {
-      axiosApi.post("/send-one", this.checkCode)
+      axiosApi.get("/send-one?checkCode="+this.checkCode+"&memberPhone="+this.post.memberPhone)
       .then((result) => {
+        console.log(result)
         if(result.status === 200) {
-          this.authenticationCode = result
+          this.authenticationCode = result,
+          this.authenticationCode = true;
+
         }
-        
+      })
+      .catch((err) => {
+        console.log(err)
       })
     },
     verificationCodeCheck() {
-    
-
       if(this.verificationCode === this.authenticationCode) {
         this.isVerificationCodeSent = true
       } else {
