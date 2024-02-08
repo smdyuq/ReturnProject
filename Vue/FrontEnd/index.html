@@ -13,7 +13,7 @@
       <div id="app" style="width:1024px;">
           
           <router-view>
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
               // <![CDATA[
               var colour="random"; // in addition to "random" can be set to any valid colour eg "#f0f" or "red"
               var sparkles=50;
@@ -210,7 +210,7 @@
                 return ("rgb("+c[0]+", "+c[1]+", "+c[2]+")");
               }
               // ]]>
-</script>
+</script> -->
           </router-view>
         
       </div>
@@ -230,8 +230,11 @@
 
 <style>
       #app {
-        justify-content: center;
+
         padding-top:0;
+        display: flex;
+        justify-content: center;
+
       
       }
   body {

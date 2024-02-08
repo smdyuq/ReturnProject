@@ -1,42 +1,107 @@
 <template>
-<div class="paymentWrapper">
-    <div>
-        <div>결제 페이지</div>
-        <div class="paymentWrap">
-            <div>
-                <img src="https://via.placeholder.com/400.jpg" alt="400 * 400 size image"> 
-            </div>
-            <div class="paymentContents">
-                <div>상품가격</div>
-                <div>상품명</div>
-                <div>수령방법</div>
-            </div>
-        </div>
-    </div>
+    <div class="paymentWrapper">
 
-    <div class="paymentList">
         <div>
-            <div>배송지</div>
-            <div>배송지 내용</div>
+            <div style="font-size: x-large; font-weight: bold;">결제하기</div>
+            <div class="paymentWrap">
+                <div>
+                    <img src="https://via.placeholder.com/300.jpg" alt="400 * 400 size image">
+                </div>
+                <div class="paymentsWrap">
+                    <div class="paymentContents">
+                        <div class="paymentsTitle">상품가격</div>
+                        <div class="paymentsTitle">상품명</div>
+                        <div class="paymentsTitle">수령방법</div>
+                    </div>
+                    <div class="paymentContent">
+                        <div class="paymentsDetail">300,000 원</div>
+                        <div class="paymentsDetail">스투시 패딩</div>
+                        <div class="paymentsDetail">직거래</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div>결제수단</div>
-        <div>결제금액</div>
+
+        <div class="paymentList">
+            <div style="display:flex;">
+                <div>배송지</div>
+                <div>배송지 내용</div>
+            </div>
+            <div>결제수단</div>
+            <div>결제금액</div>
+        </div>
+
+        <div>
+            <button class="paymentBtn" @click="goPaymentCompleted">결제하기</button>
+        </div>
     </div>
-</div>
 </template>
 
 <script>
+export default {
+    data() {
+        return {
 
+        }
+    },
+    methods: {
+        goPaymentCompleted() {
+            this.$router.push('/PaymentCompleted')
+
+        }
+    }
+}
 </script>
 <style>
+.paymentWrapper {
+    width: 700px;
+    /* background-color: yellow; */
 
-    .paymentWrapper{
-    width:1024px;
-    background-color:yellow;
+}
 
-    }
+.paymentWrap {
+    display: flex;
+}
 
-    .paymentWrap {
-        display:flex;
-    }
+.paymentContents {
+    font-size: x-large;
+    margin-left: 20px;
+
+}
+
+.paymentContent {
+    font-size: large;
+    margin-left: 20px;
+}
+
+.paymentsWrap {
+    display: flex;
+}
+
+.paymentsDetail {
+    width: 100%;
+    height: 33%;
+}
+
+.paymentsTitle {
+    width: 100%;
+    height: 33%;
+}
+
+.paymentList {
+    font-size: large
+}
+
+.paymentBtn {
+
+    background: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: dimgray;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
 </style>

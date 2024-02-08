@@ -6,7 +6,7 @@
                 <p style="font-size: x-large; display:flex; width:1024px; margin-top:1rem; font-weight:bold;">오늘의 상품추천</p>
                 <CardWrapperVue/>
             </div>
-                <FooterVue id="footer"></FooterVue>
+                <FooterVue></FooterVue>
     
     </template>
 
@@ -56,11 +56,11 @@ export default {
 div {
     position:relative;
 }
-
+/* 
 #footer {
     position:absolute;
     bottom:0;
-}
+} */
 </style>
 
 

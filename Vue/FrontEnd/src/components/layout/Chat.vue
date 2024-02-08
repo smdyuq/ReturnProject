@@ -1,154 +1,74 @@
 <template>
-    <div class="ChatWrapper">
-      <div class="ChatList">
-        <!-- 전체 대화방 목록 -->
-        <h2>전체 대화방 목록</h2>
-        <div class="ChatListContainer">
-          <ul class="ChatRoomList">
-            <li v-for="room in chatRooms" :key="room.id" @click="openChatRoom(room.id)">
-              {{ room.name }}
-            </li>
-          </ul>
-        </div>
+  <div class="contact-us">
+    <h1>1:1 문의하기</h1>
+    <form @submit.prevent="submitForm">
+      <div class="form-group">
+        <label for="name">이름</label>
+        <input type="text" id="name" v-model="formData.name" required>
       </div>
-  
-      <div class="ChatRoom" v-if="selectedChatRoom">
-        <!-- 선택된 실시간 채팅방 -->
-        
-        <h2>{{ selectedChatRoom.name }}</h2>
-        <div>
-          <ul class="chat-messages">
-            <li v-for="message in selectedChatRoom.messages" :key="message.id">
-              {{ message.content }}
-            </li>
-          </ul>
-  
-          <input type="text" v-model="newMessage" />
-          <button @click="sendMessage">전송</button>
-        </div>
+      <div class="form-group">
+        <label for="email">이메일</label>
+        <input type="email" id="email" v-model="formData.email" required>
       </div>
-    </div>
-  </template>
-  
-  <script>
-  import { ref } from 'vue';
-  
-  export default {
-    data() {
-      return {
-        chatRooms: [
-          { id: 1, name: '방 1', messages: [] },
-          { id: 2, name: '방 2', messages: [] },
-          { id: 3, name: '방 3', messages: [] },
-          { id: 1, name: '방 1', messages: [] },
-          { id: 2, name: '방 2', messages: [] },
-          { id: 3, name: '방 3', messages: [] },
-          { id: 1, name: '방 1', messages: [] },
-          { id: 2, name: '방 2', messages: [] },
-          { id: 3, name: '방 3', messages: [] },
-          
-        ],
-        selectedChatRoom: null,
-        newMessage: '',
+      <div class="form-group">
+        <label for="message">메시지</label>
+        <textarea id="message" v-model="formData.message" required></textarea>
+      </div>
+      <button type="submit">전송</button>
+    </form>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      formData: {
+        name: '',
+        email: '',
+        message: ''
+      }
+    };
+  },
+  methods: {
+    submitForm() {
+      // 여기에 폼 데이터를 서버로 전송하는 로직을 추가할 수 있습니다.
+      console.log('Form submitted!', this.formData);
+      // 전송 후에 폼을 초기화하거나 다음 단계로 넘어갈 수 있습니다.
+      this.formData = {
+        name: '',
+        email: '',
+        message: ''
       };
-    },
-    methods: {
-      openChatRoom(roomId) {
-        this.selectedChatRoom = this.chatRooms.find((room) => room.id === roomId);
-      },
-      sendMessage() {
-        if (this.newMessage && this.selectedChatRoom) {
-          const newId = this.selectedChatRoom.messages.length + 1;
-          const newMessage = {
-            id: newId,
-            content: this.newMessage,
-          };
-          this.selectedChatRoom.messages.push(newMessage);
-          this.newMessage = '';
-        }
-      },
-    },
-  };
-  </script>
+    }
+  }
+}
+</script>
 
 <style scoped>
-/* 전체 대화방 목록 스타일 */
-h2 {
-  font-size: 24px;
-  font-weight: bold;
+.form-group {
+  margin-bottom: 20px;
 }
-
-ul {
-  list-style-type: none;
-  padding: 0;
+label {
+  display: block;
+  margin-bottom: 5px;
 }
-
-li {
-  margin-bottom: 8px;
-  cursor: pointer;
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
-
-/* 실시간 채팅방 스타일 */
-input[type="text"] {
-  width: 200px;
-  height: 30px;
-  margin-right: 8px;
-}
-
 button {
-  padding: 8px 16px;
-  background-image: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
+  padding: 10px 20px;
+  background-color: #007bff;
   color: #fff;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
-
 button:hover {
-  background-image: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
-}
-
-ul.chat-messages {
-  list-style-type: none;
-  padding: 0;
-}
-
-ul.chat-messages li {
-  margin-bottom: 4px;
-}
-
-.ChatWrapper {
-  display: flex;
-  width: 1024px;
-  height: 100%;
-  border: 1px solid gray;
-}
-
-.ChatList {
-  width: 50%;
-  margin-left: 3%;
-  margin-top: 3%;
-  overflow-y: auto;
-}
-
-.ChatListContainer {
-  max-height: 300px; /* 원하는 높이로 조정하세요 */
-}
-
-.ChatRoom {
-  width: 50%;
-  margin-left: 3%;
-  margin-top: 3%;
-  content: "대화방을 선택해주세요";
-}
-
-/* 대화방 선택 안내 문구 스타일 */
-.chat-messages::before {
-  content: "대화방을 선택해주세요";
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  font-size: 16px;
-  font-weight: bold;
-  color: gray;
+  background-color: #0056b3;
 }
 </style>

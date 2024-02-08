@@ -7,7 +7,7 @@
               </router-link>
       
         <!-- <div class="title">Login</div>
-         -->
+      -->
         <form @submit.prevent="login">
           <div class="input-box">
             <input v-model="username" type="text" name="username" placeholder="아이디">

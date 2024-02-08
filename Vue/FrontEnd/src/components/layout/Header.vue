@@ -21,7 +21,7 @@
                 <ul class="headerList">
                 <li><router-link to="/SalesManagement"><img src="../../assets/img/판매.png" width="30" height="30" style="margin-right:5px 0px">판매</router-link></li>
                 <li><router-link to="/MyStore"><img src="../../assets/img/내상점.png" width="30" height="30" style="margin-right:5px 0px">내상점</router-link></li>
-                <li><router-link to="/Chat"><img src="../../assets/img/채팅.png" width="30" height="30" style="margin-right:5px 0px">채팅</router-link></li>
+                <li><router-link to="/Chat"><img src="../../assets/img/문의하기.png" width="30" height="30" style="margin-right:5px 0px">문의</router-link></li>
                 </ul>
             </div>
             </div>

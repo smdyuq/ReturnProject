@@ -3,13 +3,13 @@
     <div class="cardWrapper">
         <div class="cardWrap">
             <div class="imgWrapper">
-            <div><router-link to="/productDetail"><img src="" style="width: 194px; height: 194px;"></router-link></div>
+            <div><router-link to="/productDetail"><img src="https://via.placeholder.com/194.jpg" alt="194 * 194 size image"></router-link></div>
             </div>
             <div> 
-                <div><router-link to="/productDetail">dd</router-link></div>
+                <div><router-link to="/productDetail">상품판매 제목입니다.</router-link></div>
                 <div>
-                    <span><router-link to="/productDetail">dd</router-link></span>
-                    <span><router-link to="/productDetail">dd</router-link></span>
+                    <span><router-link to="/productDetail">상품가격</router-link></span>
+                    <span><router-link to="/productDetail">업데이트 시간</router-link></span>
                 </div>
             </div>
         </div>

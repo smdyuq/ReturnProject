@@ -13,6 +13,7 @@ import Event1 from '../views/Event/Event1.vue'
 import Event2 from '../views/Event/Event2.vue'
 import Event3 from '../views/Event/Event3.vue'
 import Payment from '../views/Payment.vue'
+import PaymentCompleted from '../views/PaymentCompleted.vue'
 
 
 const routes = [
@@ -29,7 +30,8 @@ const routes = [
     { path: '/Event1', name:'Event1', component:Event1},
     { path: '/Event2', name:'Event2', component:Event2},
     { path: '/Event3', name:'Event3', component:Event3},
-    { path: '/Payment', name:'Payment', component:Payment}
+    { path: '/Payment', name:'Payment', component:Payment},
+    { path: '/PaymentCompleted', name:'PaymentCompleted', component:PaymentCompleted}
     
 
 ];

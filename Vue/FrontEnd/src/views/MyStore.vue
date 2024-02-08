@@ -11,7 +11,7 @@ import HeaderVue from '../components/layout/Header.vue'
 import SidebarVue from '../components/layout/Sidebar.vue'
 import FooterVue from '../components/layout/Footer.vue'
 import StoreVue from '../components/layout/Store.vue'
-import CardWrapper from '@/components/layout/CardWrapper.vue'
+import CardWrapper from '..//components/layout/CardWrapper.vue'
 
 export default {
     components: {

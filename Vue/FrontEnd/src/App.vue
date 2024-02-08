@@ -12,7 +12,7 @@ import Home from "./views/Home.vue";
 
 
 export default {
-  components:{ Home, Headers}
+  components:{ Home, Header}
 }
 </script>
 
@@ -21,7 +21,6 @@ export default {
     /* background-color: lightblue; */
     width:1024px;
     min-height: 100vh;
-  
   }
 </style>
 
