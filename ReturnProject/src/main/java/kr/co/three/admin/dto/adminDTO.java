@@ -11,7 +11,7 @@ public class adminDTO {
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
-	private String memberType;
+	private int memberType;
 	private String memberPhone;
 	
 	

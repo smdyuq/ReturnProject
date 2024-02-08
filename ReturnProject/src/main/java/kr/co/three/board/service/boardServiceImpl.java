@@ -34,5 +34,9 @@ public class boardServiceImpl implements boardService{
 	public boardDTO detailBoard(int ask_no) {
 		return boardDao.detailBoard(sqlSession,ask_no);
 	}
+	@Override
+	public int selectCommentCount(boardDTO board) {
+		return boardDao.selectCommentCount(sqlSession, board);
+	}
 
 }

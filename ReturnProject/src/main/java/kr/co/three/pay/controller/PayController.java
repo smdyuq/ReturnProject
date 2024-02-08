@@ -67,7 +67,20 @@ public class PayController {
 	}
 
 	@GetMapping("/payDirectPage.do")
-	public String payPage(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, SalesDTO sales, Model model,
+	public String DirectPayPage(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, SalesDTO sales, Model model,
+			HttpSession session) {
+		
+
+		SalesDTO salesCheck = salesService.payCheck(salesNo);
+
+		model.addAttribute("salesCheck", salesCheck);
+		
+		
+		return null;
+
+	}
+	@GetMapping("/payDeliveryPage.do")
+	public String DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, SalesDTO sales, Model model,
 			HttpSession session) {
 
 		SalesDTO salesCheck = salesService.payCheck(salesNo);
@@ -77,5 +90,6 @@ public class PayController {
 		return null;
 
 	}
+
 
 }
