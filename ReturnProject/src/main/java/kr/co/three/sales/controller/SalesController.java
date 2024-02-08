@@ -137,7 +137,7 @@ public class SalesController {
 			memberNo = (int) session.getAttribute("memberNo");
 			sales.setMemberNo(memberNo);
 			sales.setSalesNo(salesNo);
-			
+
 			// 최근 본 상품
 			int recentSales = salesService.recentSales(sales);
 
@@ -220,6 +220,8 @@ public class SalesController {
 
 		// 찜 목록 추가
 		int result = salesService.likeBtn(sales);
+
+		int updateLikesCount = salesService.updateLikesCount(sales);
 
 		if (result == 1) {
 			return "success";

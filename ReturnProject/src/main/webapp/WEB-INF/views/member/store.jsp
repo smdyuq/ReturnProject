@@ -31,9 +31,9 @@
 			<p>${member.memberVisit }</p>
 			<hr>
 			<p>소개글</p>
-			<input type="text" value="${member.memberContent }"
+			<input type="text" value="${member.memberContent}"
 				name="memberContent" id="memberContent">
-			<c:if test="${sessionScope.memberId == member.memberId }">
+			<c:if test="${sessionScope.memberId == member.memberId}">
 				<button id="storeContentUpdateBtn">소개글 수정</button>
 			</c:if>
 
@@ -131,11 +131,11 @@
 <script>
 	$(document).ready(function() {
 		$("#storeContentUpdateBtn").click(function() {
-			const memberContent = document.getElementById("memberContent").value;
-			console.log(memberContent)
+			const memberContent = $("#memberContent").val();
+			console.log(memberContent);
 			$.ajax({
 				url : "/member/storeContentUpdate.do",
-				type : "POST",	
+				type : "POST",
 				data : {
 					memberContent : memberContent
 				},
@@ -143,10 +143,11 @@
 					alert("수정되었습니다.");
 				},
 				error : function(xhr, status, error) {
-					alert("수정이 실패하였습니다.", error, status 	);
+					alert("수정이 실패하였습니다." + error + " " + status);
 				}
 			});
 		});
 	});
 </script>
+
 

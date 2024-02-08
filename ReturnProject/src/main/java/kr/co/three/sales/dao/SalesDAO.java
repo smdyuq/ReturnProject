@@ -99,4 +99,9 @@ public class SalesDAO {
 		return sqlSession.selectOne("salesMapper.selectMemberNo", salesNo);
 	}
 
+//	찜 카운트 증가
+	public int updateLikesCount(SalesDTO sales, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("salesMapper.updateLikesCount", sales);
+	}
+
 }

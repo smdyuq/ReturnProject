@@ -115,4 +115,9 @@ public class SalesServiceImpl implements SalesService {
 		return salesDAO.selectMemberNo(salesNo, sqlSession);
 	}
 
+//	찜 카운트 증가
+	public int updateLikesCount(SalesDTO sales) {
+		return salesDAO.updateLikesCount(sales, sqlSession);
+	}
+
 }

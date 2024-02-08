@@ -111,7 +111,8 @@
 		DEFAULT,
 		#{memberNo},
 		#{salesOriginImageName},
-		#{salesChatLink})
+		#{salesChatLink},
+		DEFAULT)
 	</insert>
 
 	<!-- 판매등록 작성자 조회 -->
@@ -258,5 +259,13 @@
 		SALES
 		WHERE SALES_NO = #{salesNo}
 	</select>
+
+	<!-- 찜 카운트 증가 -->
+	<update id="updateLikesCount" parameterType="sales">
+		UPDATE SALES
+		SET
+		SALES_LIKES_COUNT = SALES_LIKES_COUNT + 1
+		WHERE SALES_NO = #{salesNo}
+	</update>
 
 </mapper>
