@@ -84,22 +84,27 @@
                 merchant_uid: "IMP"+makeMerchantUid, 
                 name : '${salesCheck.salesName}',
                 amount : ${salesCheck.salesPrice + salesCheck.salesDelivery },
-                buyer_id : '개똥이',
-                buyer_name : '개똥이',
-                buyer_tel : '010-1234-5678',
+                buyer_id : '${member.memberId}',
+                buyer_name : '${member.memberName}',
+                buyer_tel : '${member.memberPhone}',
                 buyer_addr : '직거래',
                 buyer_postcode : '123-456'
-            }, function(response){
-            	const {status, err_msg} = response;
-            	if(err_msg){
-            		alert(err_msg);
-            	}
-            	if(status === "paid"){
-            		const {imp_uid} = response;
-            		verifyPayment(imp_uid);
-            	}
-            }
-            )};
+            }, function (rsp) { // callback
+                if (rsp.success) {
+                    console.log(rsp);
+                    window.location=
+                    $.ajax({
+                       type:
+                       url:
+                       data: {
+
+                       }
+                    })
+                } else {
+                    console.log(jyp);
+                    window.location=
+                }
+            });
             $(document).ready(function(){
                 $('#purchaseQuantity').on('input', function(){
                     var max = parseInt($(this).attr('max'));

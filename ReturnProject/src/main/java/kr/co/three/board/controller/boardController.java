@@ -20,6 +20,8 @@ import kr.co.three.board.dto.boardDTO;
 import kr.co.three.board.service.boardServiceImpl;
 import kr.co.three.common.PageInfo;
 import kr.co.three.common.Pagination;
+import kr.co.three.member.dto.MemberDTO;
+import kr.co.three.member.service.MemberServiceImpl;
 import kr.co.three.reply.dto.ReplyDTO;
 import kr.co.three.reply.service.ReplyServiceImpl;
 
@@ -35,9 +37,11 @@ public class boardController {
 	private boardServiceImpl boardService;
 	@Autowired
 	private ReplyServiceImpl replyService;
+	@Autowired
+	private MemberServiceImpl memberService;
 
 	@GetMapping("/boardList.do")
-	public String boardList(boardDTO board, @RequestParam(value = "cpage", defaultValue = "1") int cpage, ReplyDTO reply, Model model,
+	public String boardList(boardDTO board, @RequestParam(value = "cpage", defaultValue = "1") int cpage, ReplyDTO reply,MemberDTO member, Model model,
 			HttpSession session) {
 
 		int listCount = boardService.selectListCount(board);

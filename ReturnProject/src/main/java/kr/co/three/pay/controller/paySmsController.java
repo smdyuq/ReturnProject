@@ -3,35 +3,35 @@ package kr.co.three.pay.controller;
 import java.util.HashMap;
 
 import org.json.simple.JSONObject;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
+@RestController
 public class paySmsController {
+    @PostMapping("/paySmsController")
+    public String sendSms() {
+        String api_key = "NCS6JWGE9OSKRXIQ";						//api키 숨기기(spring 숨기기 찾아보기)
+        String api_secret = "JI1KAFFQVKXLGHRFYRD2XTNWG4YOQLFW";		//api키 숨기기
+        Message coolsms = new Message(api_key, api_secret);
 
+        // 4 params(to, from, type, text) are mandatory. must be filled
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("to", "01024749245");    // 수신전화번호
+        params.put("from", "01024749245");  // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+        params.put("type", "SMS");
+        params.put("text", "등록 하신 물건이 판매 되었습니다. 확인해 주세요");
+        params.put("app_version", "test app 1.2"); // application name and version
 
-
-	public static void main(String[] args) {
-	    String api_key = "가입후 받은 API KEY 값";
-	    String api_secret = "API Secret 값";
-	    Message coolsms = new Message(api_key, api_secret);
-
-	    // 4 params(to, from, type, text) are mandatory. must be filled
-	    HashMap<String, String> params = new HashMap<String, String>();
-	    params.put("to", "01000000000");	// 수신전화번호
-	    params.put("from", "01000000000");	// 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
-	    params.put("type", "SMS");
-	    params.put("text", "첫번째 보내는 테스트 문자 메시지!");
-	    params.put("app_version", "test app 1.2"); // application name and version
-
-	    try {
-	      JSONObject obj = (JSONObject) coolsms.send(params);
-	      System.out.println(obj.toString());
-	    } catch (CoolsmsException e) {
-	      System.out.println(e.getMessage());
-	      System.out.println(e.getCode());
-	    }
-	  }
-
-
-	}
+//        try {
+//            JSONObject obj = (JSONObject) coolsms.send(params);
+//            System.out.println(obj.toString());
+//        } catch (CoolsmsException e) {
+//            System.out.println(e.getMessage());
+//            System.out.println(e.getCode());
+//        }
+        return "success";
+    }
+}
