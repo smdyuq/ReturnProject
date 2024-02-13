@@ -38,5 +38,16 @@ public class boardServiceImpl implements boardService{
 	public int selectCommentCount(boardDTO board) {
 		return boardDao.selectCommentCount(sqlSession, board);
 	}
+	
+	//memberNo에 따른 게시글 조회
+	@Override
+	public int selectListCountByMemberNo(int memberNo) {
+		return boardDao.selectListCountByMemberNo(sqlSession, memberNo);
+	}
+	//memberNo에 따른 게시글 리스트 작성
+	@Override
+	public List<boardDTO> selectListByMemberNo(PageInfo pi, int memberNo) {
+		return boardDao.selectListByMemberNo(sqlSession,pi,memberNo);
+	}
 
 }

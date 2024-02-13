@@ -70,6 +70,15 @@
 			<a href="/">채팅</a>
 		</c:otherwise>
 	</c:choose>
+	
+	<c:choose>
+		<c:when test="${sessionScope.memberNo == null }">
+			<a href="/member/loginForm.do">1:1 문의</a>
+		</c:when>
+		<c:otherwise>
+			<a href="/inquiry/boardList.do">1:1 문의</a>
+		</c:otherwise>
+	</c:choose>
 	<hr>
 	<p>카테고리</p>
 	<ul>

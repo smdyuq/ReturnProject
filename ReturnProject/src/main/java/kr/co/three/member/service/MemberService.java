@@ -33,6 +33,9 @@ public interface MemberService {
 //	찜 조회
 	List<SalesDTO> selectLikeData(int memberNo);
 
+//	로그인 멤버 정보 조회	
+	MemberDTO userCheck(int memberNo);
+	
 //	상점 방문 수 증가
 	int storeVisitCount(int memberNo);
 

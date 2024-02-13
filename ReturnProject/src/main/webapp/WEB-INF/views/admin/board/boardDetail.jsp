@@ -5,100 +5,117 @@
 <html lang="ko" class="h-100">
 <head>
 <%@ include file="../common/adminHead.jsp"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
 </head>
-<!-- Fixed navbar -->
-<%@ include file="/WEB-INF/views/admin/common/adminHeader.jsp"%>
-<!-- Begin page content -->
-<main class="flex-shrink-0">
-	<div class="container">
-		<h3>상세보기</h3>
-		<hr>
-		<br />
-		<!-- 타이틀 컴포넌트 : components/board/title.vue -->
-		<div class="mb-3 justify-content-center">
-			<input type="text" class="form-control" name="ask_title"
-				id="exampleFormControlInput" value="${board.ask_title }"
-				placeholder="제목을 입력하세요." readonly>
-		</div>
-		<div class="row mb-3">
-			<%--<div class="col-md-4">
+<body>
+
+	<%
+	int memberType = (int) session.getAttribute("memberType");
+	%>
+
+
+
+	<!-- Fixed navbar -->
+	<%@ include file="/WEB-INF/views/admin/common/adminHeader.jsp"%>
+	<!-- Begin page content -->
+	<main class="flex-shrink-0">
+		<div class="container">
+			<h3>상세보기</h3>
+			<hr>
+			<br />
+			<!-- 타이틀 컴포넌트 : components/board/title.vue -->
+			<div class="mb-3 justify-content-center">
+				<input type="text" class="form-control" name="ask_title"
+					id="exampleFormControlInput" value="${board.ask_title }"
+					placeholder="제목을 입력하세요." readonly>
+			</div>
+			<div class="row mb-3">
+				<%--<div class="col-md-4">
 		                    <p class="fw-bold">조회수: ${free.views}</p>
 		                </div> --%>
-			<div class="col-md-4">
-				<p class="fw-bold">작성자: ${sessionScope.memberId}</p>
+				<div class="col-md-4">
+					<p class="fw-bold">작성자: ${sessionScope.memberId}</p>
+				</div>
 			</div>
-		</div>
 
-		<!-- 타이틀 컴포넌트 : components/board/content.vue -->
-		<div>${board.ask_content }</div>
+			<!-- 타이틀 컴포넌트 : components/board/content.vue -->
+			<div>${board.ask_content }</div>
 
-		<div class="row">
-			<div class="col text-center">
-				<button type="button" class="btn btn-danger"
-					onclick="history.back()">취소</button>
-				<%-- <c:if test="${sessionScope.memberName eq free.writer}"> --%>
-				<%-- <button type="submit"
+			<div class="row">
+				<div class="col text-center">
+					<button type="button" class="btn btn-danger"
+						onclick="history.back()">취소</button>
+					<%-- <c:if test="${sessionScope.memberName eq free.writer}"> --%>
+					<%-- <button type="submit"
 							onclick="location.href='/inquiry/editForm.do?boardIdx=${free.idx}'"
 							class="btn btn-primary">수정</button> --%>
-				<button type="submit"
-					onclick="location.href='/inquiry/delete.do?boardIdx=${ask.ask_no}'"
-					class="btn btn-primary">삭제</button>
-				<%-- </c:if> --%>
-			</div>
-
-			<div class="comment_Box" style="border: 1px solid gray;">
-				<!-- 댓글이 들어갈 박스 -->
-				<table id="comment_tb">
-				<c:choose>
-					<c:when test="${empty list}">
-						<tr>
-							<td>
-								<h3 class="text-center">등록된 댓글이 없습니다.</h3>
-							</td>
-						</tr>
-					</c:when>
-					<c:otherwise>
-						<c:forEach var="item" items="${list }">
-							<tr>
-								<td>${item.ask_comment_content}</td>
-							</tr>
-						</c:forEach>
-					</c:otherwise>
-				</c:choose>
-				</table>
-				<!-- <p>asdsasd</p> -->
-			</div>
-
-			<div class="comment-box">
-
-				<div class="comment-count">댓글</div>
-
-				<!-- <span class="c-icon"><i class="fa-solid fa-user"></i>  -->
-				<div class="comment-name">
-					<span class="anonym">작성자 : <input type="text"
-						class="form-control" id="com_writer" placeholder="이름" value='관리자'
-						readonly style="width: 100px; border: none;">
-					</span>
+					<button type="submit"
+						onclick="location.href='/inquiry/delete.do?boardIdx=${ask.ask_no}'"
+						class="btn btn-primary">삭제</button>
+					<%-- </c:if> --%>
 				</div>
 
-				<!-- </span> -->
-				<!--<img src="/익명.jpg" width ="50px" alt="My Image"><!-->
-				<div class="comment-box">
-					<textarea class="comment-input" id="com_content" cols="80" rows="2"
-						name="ask_comment_content"></textarea>
-					<!-- <span class="com-function-btn" type="hidden">
+				<div class="comment_Box" style="border: 1px solid gray;">
+					<!-- 댓글이 들어갈 박스 -->
+					<table id="comment_tb">
+						<c:choose>
+							<c:when test="${empty list}">
+								<tr>
+									<td>
+										<h3 class="text-center">등록된 댓글이 없습니다.</h3>
+									</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="item" items="${list }">
+									<tr>
+										<td>${item.ask_comment_content}</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</table>
+					<!-- <p>asdsasd</p> -->
+				</div>
+
+				<div class="comment-box" id="comment-box">
+
+					<div class="comment-count">댓글</div>
+
+					<!-- <span class="c-icon"><i class="fa-solid fa-user"></i>  -->
+					<div class="comment-name">
+						<span class="anonym">작성자 : <input type="text"
+							class="form-control" id="com_writer" placeholder="이름" value='관리자'
+							readonly style="width: 100px; border: none;">
+						</span>
+					</div>
+
+					<!-- </span> -->
+					<!--<img src="/익명.jpg" width ="50px" alt="My Image"><!-->
+					<div class="comment-box">
+						<textarea class="comment-input" id="com_content" cols="80"
+							rows="2" name="ask_comment_content"></textarea>
+						<!-- <span class="com-function-btn" type="hidden">
                             
                             <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="#"><i class="fa-solid fa-trash-can"></i></a>
                          </span> -->
+					</div>
+					<div class="regBtn">
+						<button id="Comment_regist">댓글등록</button>
+					</div>
 				</div>
-				<div class="regBtn">
-					<button id="Comment_regist">댓글등록</button>
-				</div>
-</main>
+				<script>
+		var memberType = <%=memberType%>;
+
+		if (memberType == '0') {
+    		document.getElementById('comment-box').style.display = "block";
+		} else {
+    		document.getElementById('comment-box').style.display = "none";
+		}
+</script>
+	</main>
 </body>
 </html>
 
@@ -211,4 +228,5 @@ var reply={};
 							}
 						}); // getJson
 	}
+
 </script>

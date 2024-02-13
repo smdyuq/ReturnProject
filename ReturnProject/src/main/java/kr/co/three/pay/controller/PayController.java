@@ -1,15 +1,5 @@
 package kr.co.three.pay.controller;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.three.member.dto.MemberDTO;
+import kr.co.three.member.service.MemberServiceImpl;
 import kr.co.three.pay.dto.PayDTO;
 import kr.co.three.pay.service.PayServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
@@ -36,7 +27,10 @@ public class PayController {
 	@Autowired
 	private SalesServiceImpl salesService;
 
-//	결제확인 페이지로 이동(sales dao, serviceImpl에서 처리)
+	@Autowired
+	private MemberServiceImpl memberService;
+
+//	결제확인 페이지로 이동(sales dao,serviceImpl에서 처리)
 	@GetMapping("/payCheckPage.do")
 	public String payPage(@RequestParam(value = "salesNo") int salesNo, @RequestParam(value = "type") String type,
 			SalesDTO sales, Model model, HttpSession session) {
@@ -69,27 +63,42 @@ public class PayController {
 	@GetMapping("/payDirectPage.do")
 	public String DirectPayPage(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, SalesDTO sales, Model model,
 			HttpSession session) {
-		
 
 		SalesDTO salesCheck = salesService.payCheck(salesNo);
 
 		model.addAttribute("salesCheck", salesCheck);
-		
-		
+
 		return null;
 
 	}
+
 	@GetMapping("/payDeliveryPage.do")
-	public String DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, SalesDTO sales, Model model,
-			HttpSession session) {
+	public String DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, MemberDTO member, PayDTO pay,
+			SalesDTO sales, Model model, HttpSession session) {
 
 		SalesDTO salesCheck = salesService.payCheck(salesNo);
 
+		int memberNo = (int) session.getAttribute("memberNo");
+		member.setMemberNo(memberNo);
+
+		member = memberService.selectMemberData(memberNo);
+
 		model.addAttribute("salesCheck", salesCheck);
+		model.addAttribute("member", member);
 
 		return null;
 
 	}
 
-
+	@GetMapping("/payComplete.do")
+	public String payComplete() {
+	 
+		return "pay/payComplete";
+	}
+	@GetMapping("/payError.do")
+	public String payError() {
+	 
+		return "common/error";
+	}
+	 
 }
