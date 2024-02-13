@@ -35,7 +35,7 @@ public interface MemberService {
 
 //	로그인 멤버 정보 조회	
 	MemberDTO userCheck(int memberNo);
-	
+
 //	상점 방문 수 증가
 	int storeVisitCount(int memberNo);
 
