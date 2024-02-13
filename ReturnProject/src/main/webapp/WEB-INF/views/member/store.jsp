@@ -17,7 +17,7 @@
 			<hr>
 			<p>상점 이미지</p>
 			<p>
-				<img src="/resources/uploads/303x310/${member.memberImageName }">
+				<img src="/resources/uploads/303x310/${member.memberImageName}">
 			</p>
 			<c:if test="${sessionScope.memberId == member.memberId }">
 				<button onclick="location.href='/member/storeImageUpdateForm.do'">이미지
@@ -36,7 +36,6 @@
 			<c:if test="${sessionScope.memberId == member.memberId}">
 				<button id="storeContentUpdateBtn">소개글 수정</button>
 			</c:if>
-
 
 			<table class="table table-hover">
 				<thead>
