@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>택배거래 결제 확인 페이지</title>
 <!-- jQuery -->
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -14,7 +14,8 @@
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <!-- 주소 api -->
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <body>
 
@@ -87,32 +88,49 @@
         
 
         function kakaoPay() {
+        	 var buyer_addr = document.getElementById("sample6_address").value;
             IMP.request_pay({
                 pg : 'kakaopay.TC0ONETIME',
                 pay_method: "card",
                 merchant_uid: "IMP"+makeMerchantUid, 
                 name : '${salesCheck.salesName}',
                 amount : ${salesCheck.salesPrice + salesCheck.salesDelivery },
-                buyer_id : '개똥이',
-                buyer_name : '개똥이',
-                buyer_tel : '010-1234-5678',
-                buyer_addr : '직거래',
+                buyer_id : '${member.memberId}',
+                buyer_name : '${member.memberName}',
+                buyer_tel : '${member.memberPhone}',
+                buyer_addr : buyer_addr,
                 buyer_postcode : '123-456'
+                                
             }, function(response){
+            	
             	const {status, err_msg} = response;
             	if(err_msg){
             		alert(err_msg);
             	}
             	if(status === "paid"){
-            		const {imp_uid} = response;
-            		verifyPayment(imp_uid);
-            		
-            		 sendPaymentSMS();
-            		
-            		window.location.href = "/payComplete.jsp";
-            	}
+            		  $.ajax({
+            	            url: "/paySmsController", // 이 URL은 paySmsController의 실제 경로를 나타내야 합니다.
+            	            type: "POST", // 또는 "GET", "PUT" 등이 될 수 있습니다. 이는 서버 측 설정에 따라 달라집니다.
+            	            success: function(response) {
+            	                // 서버에서 응답이 올 경우 이 함수가 호출됩니다.
+            	                // 필요하다면 여기에 로직을 추가할 수 있습니다.
+            	                console.log(response)
+            	                if(response === "success") {
+            	                	window.location.href = "/pay/payComplete.do";
+            	                }
+            	               /*  window.location.href = "/pay/payComplete"; */
+            	            },
+            	            error: function(jqXHR, textStatus, errorThrown) {
+            	                // 서버에서 오류 응답이 올 경우 이 함수가 호출됩니다.
+            	                // 필요하다면 여기에 오류 처리 로직을 추가할 수 있습니다.
+            	                /* console.error(textStatus, errorThrown); */
+            	            	window.location.href = "/pay/payError.do";
+            	            }
+            	})
             }
-            )}; /* 카카오 결제 */
+            })
+           }; /* 카카오 결제 */
+        
             /* 주문 수량 */
             $(document).ready(function(){
                 $('#purchaseQuantity').on('input', function(){

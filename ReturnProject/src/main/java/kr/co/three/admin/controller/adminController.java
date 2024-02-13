@@ -43,6 +43,7 @@ public class adminController {
 
 		admin.setMemberPhone("01012345678");
 		admin.setMemberType(0);
+		
 
 //		패스워드 암호화
 		String pwd = bcryptPasswordEncoder.encode(admin.getMemberPwd());
@@ -51,7 +52,7 @@ public class adminController {
 		int result = adminService.registerAdmin(admin);
 
 		if (result == 1) {
-			return "admin/main/adminMain";
+			return "admin/member/adminLogin";
 		} else {
 			return "common/error";
 		}

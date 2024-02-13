@@ -10,11 +10,20 @@ public interface boardService {
 	int selectListCount(boardDTO board);
 
 	int enrollBoard(boardDTO board);
+
 	// 게시글 상세보기
 	boardDTO detailBoard(int idx);
+
 	// 목록 불러오기
 	List<boardDTO> selectListAll(PageInfo pi, boardDTO board);
-	
-	//댓글 수 구하기
+
+	// 댓글 수 구하기
 	int selectCommentCount(boardDTO board);
+
+	// memberNo에 따른 게시글 카운트 
+	int selectListCountByMemberNo(int memberNo);
+	// memberNo에 따른 리스트 작성
+	List<boardDTO> selectListByMemberNo(PageInfo pi, int memberNo);
+	
+
 }

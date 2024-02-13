@@ -20,6 +20,7 @@ public class boardDTO {
 	private String ask_image_path;
 	private String ask_image_name;
 	private int member_no;
+	private String member_id;
 	
 	
 	private String searchText = "";

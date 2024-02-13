@@ -52,7 +52,12 @@ public class MemberDAO {
 	public List<SalesDTO> selectLikeData(int memberNo, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("salesMapper.selectLikeData", memberNo);
 	}
-
+	
+//	로그인 멤버 정보 조회
+	public MemberDTO userCheck(int memberNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.userCheck", memberNo);
+	}
+	
 //	상점 방문 수 증가
 	public int storeVisitCount(int memberNo, SqlSessionTemplate sqlSession) {
 		return sqlSession.update("memberMapper.storeVisitCount", memberNo);
