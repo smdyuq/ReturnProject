@@ -8,8 +8,6 @@
 <%@ include file="../common/head.jsp"%>
 <link rel="canonical"
 	href="https://getbootstrap.kr/docs/5.2/examples/checkout-rtl/">
-<!-- Custom styles for this template -->
-<link href="/resources/css/auth/registerForm.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
@@ -62,14 +60,14 @@
 						<div class="input-wrapper">
 							<input type="number" id="memberPhone" name="memberPhone"
 								onkeyup="" placeholder="숫자만 입력해주세요." required>
-							<button type="button" id="sendPhoneNumber">인증요청</button>
+							<button type="button" id="sendPhoneNumber1">인증요청</button>
 						</div>
 
 						<!-- 인증 요청 성공하면 보이게  -->
 						<div id="verificationSection" style="display: none;">
 							<input type="number" placeholder="인증번호를 입력해주세요."
 								id="verificationCode">
-							<button type="button" id="sendPhoneNumber"
+							<button type="button" id="sendPhoneNumber2"
 								onclick="randomExample()">인증하기</button>
 
 						</div>
@@ -169,7 +167,7 @@
 	}
 
 	//	인증번호
-	$('#sendPhoneNumber').click(function(e) {
+	$('#sendPhoneNumber1').click(function(e) {
 		e.preventDefault(); // 기본 이벤트를 막음 (페이지 리로드 방지)
 
 		let phoneNumber = $('#memberPhone').val();
@@ -196,7 +194,7 @@
 
 	// 인증 요청 버튼 클릭 시 처리
 	document
-			.getElementById("sendPhoneNumber")
+			.getElementById("sendPhoneNumber1")
 			.addEventListener(
 					"click",
 					function() {
