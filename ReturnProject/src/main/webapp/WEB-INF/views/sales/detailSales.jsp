@@ -20,6 +20,9 @@
 	<hr>
 
 	<div>
+		<p>상점 이미지</p>
+		<a href="/member/storeForm.do?memberNo=${member.memberNo }"><img
+			src="/resources/uploads/303x310/${member.memberImageName}"></a>
 		<p>상품 이미지</p>
 		<img src="/resources/uploads/110x150/${sales.salesImageName}">
 		<p>${sales.salesImageName}</p>
@@ -45,7 +48,7 @@
 		<c:choose>
 			<c:when
 				test="${not empty sessionScope.memberNo && sessionScope.memberNo == sales.memberNo}">
-				<a href="/member/storeForm.do">내 상점 관리</a>
+				<a href="/member/storeForm.do?memberNo=${sessionScope.memberNo }">내 상점 관리</a>
 			</c:when>
 			<c:when
 				test="${not empty sessionScope.memberNo && sessionScope.memberNo != sales.memberNo}">
@@ -57,6 +60,8 @@
 				<button onclick="location.href='/member/loginForm.do'">찜</button>
 				<a href="/member/loginForm.do">채팅</a>
 				<a href="/member/loginForm.do">구매하기</a>
+				
+				
 			</c:otherwise>
 		</c:choose>
 		<hr>
@@ -85,8 +90,8 @@
 				<div class="modal-body">
 					<p>구매 방법 선택 : 직거래 / 택배거래</p>
 					<a href="/pay/payDeliveryPage.do?salesNo=${sales.salesNo}"
-						class="btn btn-primary" type="delivery">택배 거래</a> 
-					<a href="/pay/payDirectPage.do?salesNo=${sales.salesNo}"
+						class="btn btn-primary" type="delivery">택배 거래</a> <a
+						href="/pay/payDirectPage.do?salesNo=${sales.salesNo}"
 						class="btn btn-primary" type="direct">직거래</a>
 				</div>
 				<div class="modal-footer">

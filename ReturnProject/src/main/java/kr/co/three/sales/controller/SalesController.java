@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.co.three.common.PageInfo;
 import kr.co.three.common.Pagination;
 import kr.co.three.common.UploadFile;
+import kr.co.three.member.dto.MemberDTO;
+import kr.co.three.member.service.MemberServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
 import kr.co.three.sales.service.SalesServiceImpl;
 
@@ -26,6 +28,9 @@ public class SalesController {
 
 	@Autowired
 	private SalesServiceImpl salesService;
+
+	@Autowired
+	private MemberServiceImpl memberService;
 
 //	판매하기 페이지로 이동
 	@GetMapping("/enrollSalesForm.do")
@@ -125,20 +130,57 @@ public class SalesController {
 	@GetMapping("detailSales.do")
 	public String detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales, Model model,
 			HttpSession session) {
-		int memberNo = (int) session.getAttribute("memberNo");
 
-		sales.setMemberNo(memberNo);
-		sales.setSalesNo(salesNo);
+		int memberNo = 0;
 
-		// 최근 본 상품
-		int recentSales = salesService.recentSales(sales);
+		try {
+			memberNo = (int) session.getAttribute("memberNo");
+			sales.setMemberNo(memberNo);
+			sales.setSalesNo(salesNo);
 
-		// 상품 상세
-		SalesDTO result = salesService.detailSales(salesNo);
+			// 최근 본 상품
+			int recentSales = salesService.recentSales(sales);
 
-		model.addAttribute("sales", result);
+			// 상품 상세
+			SalesDTO result = salesService.detailSales(salesNo);
 
-		return "sales/detailSales";
+			// 판매상품 회원번호 조회
+			int selectMemberNo = salesService.selectMemberNo(sales.getSalesNo());
+
+			// 멤버 테이블 데이터 조회
+			if (memberNo == selectMemberNo) {
+				MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
+				model.addAttribute("member", memberResult);
+			} else {
+				MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
+				model.addAttribute("member", memberResult);
+			}
+
+			model.addAttribute("sales", result);
+
+			return "sales/detailSales";
+
+		} catch (NullPointerException e) {
+
+			// 상품 상세
+			SalesDTO result = salesService.detailSales(salesNo);
+
+			// 판매상품 회원번호 조회
+			int selectMemberNo = salesService.selectMemberNo(sales.getSalesNo());
+
+			// 멤버 테이블 데이터 조회
+			if (memberNo == selectMemberNo) {
+				MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
+				model.addAttribute("member", memberResult);
+			} else {
+				MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
+				model.addAttribute("member", memberResult);
+			}
+
+			model.addAttribute("sales", result);
+
+			return "sales/detailSales";
+		}
 	}
 
 //	판매 등록
@@ -146,7 +188,6 @@ public class SalesController {
 	public String enrollSales(SalesDTO sales, MultipartFile upload, HttpSession session) {
 
 		int memberNo = (int) session.getAttribute("memberNo");
-		System.out.println(memberNo);
 		sales.setMemberNo(memberNo);
 
 		// 업로드된 파일이 존재하는지 확인
@@ -157,6 +198,9 @@ public class SalesController {
 		int result = salesService.enrollSales(sales);
 
 		if (result == 1) {
+			// 판매 번호 조회
+			int selectSalesNo = salesService.selectSalesNo(memberNo);
+			sales.setSalesNo(selectSalesNo);
 			// 판매 상태 : 판매 중
 			int statusResult = salesService.salesStatus(sales.getSalesNo());
 			return "redirect:/sales/manageSalesForm.do";
@@ -176,6 +220,9 @@ public class SalesController {
 
 		// 찜 목록 추가
 		int result = salesService.likeBtn(sales);
+
+		// 찜 카운트 증가
+		int updateLikesCount = salesService.updateLikesCount(sales);
 
 		if (result == 1) {
 			return "success";

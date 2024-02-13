@@ -46,8 +46,17 @@ public interface SalesService {
 
 //	판매 상태 : 판매 중
 	int salesStatus(int salesNo);
-	
+
 //	결제 정보 체크
 	SalesDTO payCheck(int salesNo);
+
+//	판매 번호 조회
+	int selectSalesNo(int memberNo);
+
+//	판매상품 회원번호 조회
+	int selectMemberNo(int salesNo);
+	
+//	찜 카운트 증가
+	int updateLikesCount(SalesDTO sales);
 
 }

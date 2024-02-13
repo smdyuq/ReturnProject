@@ -71,5 +71,22 @@
 		WHERE
 		MEMBER_NO = #{memberNo}
 	</select>
+	
+	<!-- 상점 방문 수 증가 -->
+	<update id="storeVisitCount" parameterType="int">
+		UPDATE MEMBER
+		SET
+		MEMBER_VISIT = MEMBER_VISIT + 1
+		WHERE MEMBER_NO = #{memberNo}
+	</update>
+
+	<!-- 소개글 수정 -->
+	<update id="storeContentUpdate" parameterType="member">
+		UPDATE MEMBER
+		SET
+		MEMBER_CONTENT = #{memberContent}
+		WHERE
+		MEMBER_NO = #{memberNo}
+	</update>
 
 </mapper>

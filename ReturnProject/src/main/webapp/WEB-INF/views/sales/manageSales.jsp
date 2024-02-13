@@ -49,6 +49,7 @@
 							<td>사진</td>
 							<td>상품명</td>
 							<td>가격</td>
+							<td>찜</td>
 							<td>최근수정일</td>
 							<td>기능</td>
 						</tr>
@@ -58,7 +59,7 @@
 						<c:choose>
 							<c:when test="${empty list}">
 								<tr>
-									<td colspan="6">
+									<td colspan="7">
 										<h3 class="text-center">등록된 상품이 없습니다.</h3>
 									</td>
 								</tr>
@@ -75,6 +76,8 @@
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesName}</td>
 										<td
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesPrice}</td>
+										<td
+											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesLikesCount}</td>
 										<td
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesUpdateDate}</td>
 										<td><button

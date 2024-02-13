@@ -28,6 +28,7 @@ public class SalesDTO {
 	private int salesComplete;
 	private int memberNo;
 	private String salesChatLink;
+	private int salesLikesCount;
 
 	private String searchText = "";
 	private String searchWord = "";
