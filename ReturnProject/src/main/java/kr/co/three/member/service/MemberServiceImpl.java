@@ -68,5 +68,11 @@ public class MemberServiceImpl implements MemberService {
 	public List<SalesDTO> selectLikeData(int memberNo) {
 		return memberDAO.selectLikeData(memberNo, sqlSession);
 	}
+	
+//	로그인 멤버 정보 조회
+	@Override
+	public MemberDTO userCheck(int memberNo) {
+		return memberDAO.userCheck(memberNo, sqlSession);
+	}
 
 }

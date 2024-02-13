@@ -41,24 +41,48 @@ public class boardController {
 	private MemberServiceImpl memberService;
 
 	@GetMapping("/boardList.do")
-	public String boardList(boardDTO board, @RequestParam(value = "cpage", defaultValue = "1") int cpage, ReplyDTO reply,MemberDTO member, Model model,
-			HttpSession session) {
+	public String boardList(boardDTO board, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
+			ReplyDTO reply, MemberDTO member, Model model, HttpSession session) {
+		// 세션에서 로그인한 사용자의 정보를 가져옵니다.
+		int memberType = (int)session.getAttribute("memberType");
+		int memberNo = (int)session.getAttribute("memberNo");
+		
+//		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
+//
+//		System.out.println("login :" + loginUser);
+//		System.out.println("memberType :" + loginUser.getMemberType());
 
-		int listCount = boardService.selectListCount(board);
+		int listCount;
+		List<boardDTO> list;
+
 		int pageLimit = 10;
 		int boardLimit = 15;
-		int row = listCount - (cpage - 1) * boardLimit;
 
+		if (memberType == 0) {
+			// memberType이 0이면 모든 게시글을 가져옵니다.
+			listCount = boardService.selectListCount(board);
+		} else if (memberType == 1) {
+			// memberType이 1이면 해당 사용자가 작성한 게시글만 가져옵니다.
+			listCount = boardService.selectListCountByMemberNo(memberNo);
+		} else {
+			// memberType이 0이나 1이 아닌 다른 값이면 리스트가 비어있음을 나타냅니다.
+			listCount = 0;
+		}
+
+		int row = listCount - (cpage - 1) * boardLimit;
 		PageInfo pi = Pagination.getPageInfo(listCount, cpage, pageLimit, boardLimit);
 
-		List<boardDTO> list = boardService.selectListAll(pi, board);
-		
-		for(boardDTO boardDto : list) {
-			boardDto.getAsk_no();
-//			System.out.println("qqqq:"+boardDto.getAsk_no());
+		if (memberType == 0) {
+			list = boardService.selectListAll(pi, board);
+		} else if (memberType == 1) {
+			list = boardService.selectListByMemberNo(pi, memberType);
+		} else {
+			list = new ArrayList<>();
+		}
+
+		for (boardDTO boardDto : list) {
 			int commentCount = boardService.selectCommentCount(boardDto);
 			boardDto.setCommentCount(commentCount);
-//			System.out.println("asd :"+commentCount);
 			model.addAttribute("commentCount", commentCount);
 		}
 
@@ -70,6 +94,7 @@ public class boardController {
 		model.addAttribute("pi", pi);
 		model.addAttribute("msg", msg);
 		model.addAttribute("status", status);
+		model.addAttribute("listCount", listCount);
 
 		session.setAttribute("action", "/inquiry/boardList.do");
 
@@ -77,7 +102,6 @@ public class boardController {
 		session.removeAttribute("status");
 
 		return "admin/board/boardList";
-
 	}
 
 	@GetMapping("enrollForm.do")
@@ -125,10 +149,13 @@ public class boardController {
 	}
 
 	@GetMapping("/detail.do")
-	public String detailBoard(@RequestParam("ask_no") int askNo, Model model) {
+	public String detailBoard(@RequestParam("ask_no") int askNo, Model model,HttpSession session) {
 		boardDTO board = boardService.detailBoard(askNo);
 		List<ReplyDTO> list = replyService.getList(askNo);
 		System.out.println(list);
+		
+		//댓글 memberType 사용
+		int memberType = (int)session.getAttribute("memberType");
 
 		if (board != null) {
 			model.addAttribute("board", board);

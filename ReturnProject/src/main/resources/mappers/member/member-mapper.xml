@@ -64,4 +64,12 @@
 		WHERE
 		MEMBER_NO = #{memberNo}
 	</update>
+
+	<!-- 로그인 멤버 정보 조회 -->
+	<select id="userCheck" resultMap="memberResultSet">
+		SELECT * FROM MEMBER
+		WHERE
+		MEMBER_NO = #{memberNo}
+	</select>
+
 </mapper>

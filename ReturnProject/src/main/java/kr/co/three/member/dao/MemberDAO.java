@@ -53,4 +53,9 @@ public class MemberDAO {
 		return sqlSession.selectList("salesMapper.selectLikeData", memberNo);
 	}
 
+//	로그인 멤버 정보 조회
+	public MemberDTO userCheck(int memberNo, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.userCheck", memberNo);
+	}
+
 }
