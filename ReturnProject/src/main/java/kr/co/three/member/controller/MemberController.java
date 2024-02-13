@@ -115,7 +115,7 @@ public class MemberController {
 	@GetMapping("storeForm.do")
 	public String storeForm(@RequestParam(value = "memberNo", defaultValue = "0") int memberNo, HttpSession session,
 			Model model) {
-		// 클라이언트에서 새로고침 이벤트를 감지하여 서버에 요청을 보내지 않도록 처리
+		// 클라이언트에서 새로고침 이벤트를 감지하여 서버에 요청을 보내지 않도록
 		boolean isRefreshRequest = isRefreshRequest(session);
 		if (memberNo == 0) {
 			memberNo = (int) session.getAttribute("memberNo");
