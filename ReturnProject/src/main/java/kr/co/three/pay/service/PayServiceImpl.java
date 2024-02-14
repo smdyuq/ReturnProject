@@ -8,20 +8,24 @@ import kr.co.three.pay.dao.PayDAO;
 import kr.co.three.pay.dto.PayDTO;
 
 @Service
-public class PayServiceImpl implements PayService{
-	
+public class PayServiceImpl implements PayService {
+
 	@Autowired
-	private PayDAO payDao;
+	private PayDAO payDAO;
 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public PayDTO payCheck(int salesNo) {
-		return payDao.payCheck(salesNo, sqlSession);
+//	직거래용 페이 테이블 인설트
+	@Override
+	public int insertDirectPay(PayDTO pay) {
+		return payDAO.insertDirectPay(pay, sqlSession);
 	}
 
-	public int insertPay(PayDTO pay) {
-		return payDao.insertPay(pay, sqlSession);
+//	택배거래용 페이 테이블 인설트
+	@Override
+	public int insertDeliveryPay(PayDTO pay) {
+		return payDAO.insertDeliveryPay(pay, sqlSession);
 	}
 
 }

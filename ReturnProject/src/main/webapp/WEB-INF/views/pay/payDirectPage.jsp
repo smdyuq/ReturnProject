@@ -22,6 +22,7 @@
 	<hr>
 
 	<div>
+		<input type="hidden" value="${salesCheck.salesNo }" name="salesNo">
 		<p>상품 이미지</p>
 		<img src="/resources/uploads/${salesCheck.salesImageName}">
 		<p>${salesCheck.salesImageName}</p>
@@ -37,13 +38,16 @@
 			<p>${salesCheck.salesPrice }</p>
 			<hr>
 			<p>구매 수량</p>
-			<input type="number" id="purchaseQuantity" min="1" max="${salesCheck.salesCount}" value="1">
-			
-			
+			<input type="number" id="purchaseQuantity" min="1"
+				max="${salesCheck.salesCount}" value="1">
+
+
 			<!-- 배송비 -->
 			<hr>
 			<!-- 합계 = 상품가격 * 구매 수량 + 배송비 -->
-			<p id="total">합계: <span id="totalValue">${salesCheck.salesPrice}</span></p>
+			<p id="total">
+				합계: <span id="totalValue">${salesCheck.salesPrice}</span>
+			</p>
 
 			<p id="address">거래 지역 : ${salesCheck.salesAddress }</p>
 			<hr>
@@ -103,7 +107,7 @@
             	                // 필요하다면 여기에 로직을 추가할 수 있습니다.
             	                console.log(response)
             	                if(response === "success") {
-            	                	window.location.href = "/pay/payComplete.do";
+            	                	window.location.href = "/pay/payDirectComplete.do?salesNo=${salesCheck.salesNo}";
             	                }
             	               /*  window.location.href = "/pay/payComplete"; */
             	            },

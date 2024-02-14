@@ -8,12 +8,14 @@ import kr.co.three.pay.dto.PayDTO;
 @Repository
 public class PayDAO {
 
-	public PayDTO payCheck(int salesNo, SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("payMapper.payCheck", salesNo);
+//	직거래용 페이 테이블 인설트
+	public int insertDirectPay(PayDTO pay, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("payMapper.insertDirectPay", pay);
 	}
 
-	public int insertPay(PayDTO pay, SqlSessionTemplate sqlSession) {
-		return sqlSession.insert("payMapper.insertPay", pay);
+//	택배거래용 페이 테이블 인설트
+	public int insertDeliveryPay(PayDTO pay, SqlSessionTemplate sqlSession) {
+		return sqlSession.insert("payMapper.insertDeliveryPay", pay);
 	}
 
 }
