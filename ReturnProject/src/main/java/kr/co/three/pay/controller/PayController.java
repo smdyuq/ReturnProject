@@ -93,30 +93,55 @@ public class PayController {
 	}
 
 //	직거래 결제완료 페이지 불러오기
-	@GetMapping("/payDirectComplete.do")
-	public String payDirectComplete(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, HttpSession session) {
+	@PostMapping("/payDirectComplete.do")
+	public String payDirectComplete(PayDTO pay, HttpSession session, SalesDTO sales) {
 		int memberNo = (int) session.getAttribute("memberNo");
 		pay.setMemberNo(memberNo);
-		pay.setSalesNo(salesNo);
 		pay.setPayMethod("카카오 페이");
 		pay.setPayReceipt("직거래");
 
+		// 총 가격
+		pay.setPayAllPrice(sales.getSalesPrice() * sales.getSalesCount());
+
+		sales.setSalesNo(pay.getSalesNo());
+
 		// 직거래용 페이 테이블 인설트
 		int result = payService.insertDirectPay(pay);
+
+		// 판매 수량 업데이트
+		int updateCount = salesService.updateCount(sales);
+
+		// 상품 판매 수 업데이트
+		int updateCompleteCount = salesService.updateCompleteCount(sales);
+
+		// 상품 상태 업데이트
+		int salesStatusUpdate = salesService.salesStatusUpdate(sales);
 
 		return "pay/payComplete";
 	}
 
 //	택배거래 결제완료 페이지 불러오기
 	@PostMapping("/payDeliveryComplete.do")
-	public String payDeliveryComplete(PayDTO pay, HttpSession session) {
+	public String payDeliveryComplete(PayDTO pay, HttpSession session, SalesDTO sales) {
 		int memberNo = (int) session.getAttribute("memberNo");
 		pay.setMemberNo(memberNo);
 		pay.setPayMethod("카카오 페이");
 		pay.setPayReceipt("택배거래");
 
+		// 총 가격
+		pay.setPayAllPrice((sales.getSalesPrice() * sales.getSalesCount()) + sales.getSalesDelivery());
+
 		// 택배거래용 페이 테이블 인설트
 		int result = payService.insertDeliveryPay(pay);
+
+		// 판매 수량 업데이트
+		int updateCount = salesService.updateCount(sales);
+
+		// 상품 판매 수 업데이트
+		int updateCompleteCount = salesService.updateCompleteCount(sales);
+
+		// 상품 상태 업데이트
+		int salesStatusUpdate = salesService.salesStatusUpdate(sales);
 
 		return "pay/payComplete";
 	}

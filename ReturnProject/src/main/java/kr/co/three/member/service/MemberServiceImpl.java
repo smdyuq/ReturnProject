@@ -87,4 +87,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.storeContentUpdate(member, sqlSession);
 	}
 
+//	상품 판매수 데이터 조회
+	public int selectSalesComplete(int memberNo) {
+		return memberDAO.selectSalesComplete(memberNo, sqlSession);
+	}
+
 }

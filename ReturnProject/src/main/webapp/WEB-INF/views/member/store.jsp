@@ -29,6 +29,8 @@
 			<hr>
 			<p>상점 방문수</p>
 			<p>${member.memberVisit }</p>
+			<p>상품 판매수</p>
+			<p>${salesComplete }
 			<hr>
 			<p>소개글</p>
 			<input type="text" value="${member.memberContent}"
@@ -41,11 +43,11 @@
 				<thead>
 					<h2>상품 관리</h2>
 					<tr>
-						<td>번호</td>
 						<td>사진</td>
 						<td>상품명</td>
 						<td>가격</td>
 						<td>최근수정일</td>
+						<td>판매상태</td>
 						<td>기능</td>
 					</tr>
 				</thead>
@@ -63,15 +65,18 @@
 							<c:forEach var="item" items="${sales }">
 								<tr
 									onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
+
 									<td><img src="${item.salesImageName}"></td>
 									<td>${item.salesName}</td>
 									<td>${item.salesPrice}</td>
 									<td>${item.salesUpdateDate}</td>
+									<td>${item.salesStatus }</td>
 									<td><button
 											onclick="location.href='/sales/updateSalesForm.do?salesNo=${item.salesNo}'">수정</button>
 										<button
 											onclick="location.href='/sales/deleteSales.do?salesNo=${item.salesNo}'">삭제</button></td>
 								</tr>
+
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>

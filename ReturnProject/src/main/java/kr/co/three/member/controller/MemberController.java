@@ -132,10 +132,15 @@ public class MemberController {
 		List<SalesDTO> salesResult = memberService.selectSalesData(memberNo);
 		// 찜 조회
 		List<SalesDTO> likeResult = memberService.selectLikeData(memberNo);
+		// 상품 판매수 데이터 조회
+		int salesCompleteResult = memberService.selectSalesComplete(memberNo);
+		System.out.println(salesCompleteResult);
+		
 
 		model.addAttribute("member", memberResult);
 		model.addAttribute("sales", salesResult);
 		model.addAttribute("like", likeResult);
+		model.addAttribute("salesComplete", salesCompleteResult);
 
 		return "member/store";
 	}

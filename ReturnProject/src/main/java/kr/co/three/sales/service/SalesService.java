@@ -55,8 +55,17 @@ public interface SalesService {
 
 //	판매상품 회원번호 조회
 	int selectMemberNo(int salesNo);
-	
+
 //	찜 카운트 증가
 	int updateLikesCount(SalesDTO sales);
+
+//	판매 수량 업데이트
+	int updateCount(SalesDTO sales);
+
+//	상품 판매 수 업데이트
+	int updateCompleteCount(SalesDTO sales);
+
+//	상품 상태 업데이트
+	int salesStatusUpdate(SalesDTO sales);
 
 }

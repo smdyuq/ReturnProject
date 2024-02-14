@@ -10,6 +10,7 @@
 		<result column="MEMBER_NO" property="memberNo"></result>
 		<result column="SALES_NO" property="salesNo"></result>
 		<result column="PAY_SUB_ADDRESS" property="paySubAddress"></result>
+		<result column="PAY_ALL_PRICE" property="payAllPrice"></result>
 	</resultMap>
 
 	<!-- 직거래용 페이 테이블 인설트 -->
@@ -21,7 +22,8 @@
 		#{payMethod},
 		#{memberNo},
 		#{salesNo},
-		NULL)
+		NULL,
+		#{payAllPrice})
 	</insert>
 
 	<!-- 택배거래용 페이 테이블 인설트 -->
@@ -33,7 +35,8 @@
 		#{payMethod},
 		#{memberNo},
 		#{salesNo},
-		#{paySubAddress})
+		#{paySubAddress},
+		#{payAllPrice})
 	</insert>
 
 </mapper>
