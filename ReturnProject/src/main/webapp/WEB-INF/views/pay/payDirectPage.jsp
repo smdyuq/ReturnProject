@@ -17,43 +17,45 @@
 
 </head>
 <body>
-
-	<h2>직거래</h2>
-	<hr>
-
-	<div>
+	<form action="/pay/payDirectComplete.do" method="POST" id="payForm">
 		<input type="hidden" value="${salesCheck.salesNo }" name="salesNo">
-		<p>상품 이미지</p>
-		<img src="/resources/uploads/${salesCheck.salesImageName}">
-		<p>${salesCheck.salesImageName}</p>
+		<input type="hidden" value="1" id="salesCountHidden" name="salesCount">
+		<h2>직거래</h2>
 		<hr>
-		<p>상품 명</p>
-		<p>${salesCheck.salesName }</p>
-		<hr>
-		<hr>
-		<label>거래 방법:</label> <a>직접 거래</a>
-		<hr>
-		<div id="productDiv">
-			<p>상품 가격</p>
-			<p>${salesCheck.salesPrice }</p>
+
+		<div>
+			<p>상품 이미지</p>
+			<img src="/resources/uploads/${salesCheck.salesImageName}">
+			<p>${salesCheck.salesImageName}</p>
 			<hr>
-			<p>구매 수량</p>
-			<input type="number" id="purchaseQuantity" min="1"
-				max="${salesCheck.salesCount}" value="1">
+			<p>상품 명</p>
+			<p>${salesCheck.salesName }</p>
+			<hr>
+			<hr>
+			<label>거래 방법:</label> <a>직접 거래</a>
+			<hr>
+			<div id="productDiv">
+				<p>상품 가격</p>
+				<input value="${salesCheck.salesPrice }" name="salesPrice">
+				<hr>
+				<p>구매 수량</p>
+				<input type="number" id="purchaseQuantity" min="1"
+					max="${salesCheck.salesCount}" value="1" name="salesCount">
 
 
-			<!-- 배송비 -->
-			<hr>
-			<!-- 합계 = 상품가격 * 구매 수량 + 배송비 -->
-			<p id="total">
-				합계: <span id="totalValue">${salesCheck.salesPrice}</span>
-			</p>
+				<!-- 배송비 -->
+				<hr>
+				<!-- 합계 = 상품가격 * 구매 수량 + 배송비 -->
+				<p id="total">
+					합계: <span id="totalValue">${salesCheck.salesPrice}</span>
+				</p>
 
-			<p id="address">거래 지역 : ${salesCheck.salesAddress }</p>
-			<hr>
-			<p id="PAY_METHOD">결제 수단:</p>
+				<p id="address">거래 지역 : ${salesCheck.salesAddress }</p>
+				<hr>
+				<p id="PAY_METHOD">결제 수단:</p>
+			</div>
 		</div>
-	</div>
+	</form>
 
 	<div class="box-footer text-center">
 		<button onclick="kakaoPay()">카카오 페이 결제</button>
@@ -81,12 +83,16 @@
         
 
         function kakaoPay() {
+        	  var salesCount = document.getElementById("purchaseQuantity").value;
+              var salesCountHidden = document.getElementById("salesCountHidden");
+              
+              salesCountHidden.value = salesCount;
             IMP.request_pay({
                 pg : 'kakaopay.TC0ONETIME',
                 pay_method: "card",
                 merchant_uid: "IMP"+makeMerchantUid, 
                 name : '${salesCheck.salesName}',
-                amount : ${salesCheck.salesPrice},
+                amount : ${salesCheck.salesPrice} * salesCountHidden.value,
                 buyer_id : '${member.memberId}',
                 buyer_name : '${member.memberName}',
                 buyer_tel : '${member.memberPhone}',
@@ -107,7 +113,8 @@
             	                // 필요하다면 여기에 로직을 추가할 수 있습니다.
             	                console.log(response)
             	                if(response === "success") {
-            	                	window.location.href = "/pay/payDirectComplete.do?salesNo=${salesCheck.salesNo}";
+            	                	document.getElementById("salesCountHidden").value = salesCountHidden.value;
+            	                	document.getElementById("payForm").submit();
             	                }
             	               /*  window.location.href = "/pay/payComplete"; */
             	            },

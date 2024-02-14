@@ -11,6 +11,7 @@ public class PayDTO {
 	private String payAddress;
 	private String payMethod;
 	private String paySubAddress;
+	private int payAllPrice;
 	private int memberNo;
 	private int salesNo;
 }

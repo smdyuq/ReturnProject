@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="salesMapper">
+
 	<resultMap type="sales" id="salesResultSet">
 		<result column="SALES_NO" property="salesNo"></result>
 		<result column="SALES_NAME" property="salesName"></result>
@@ -21,7 +22,9 @@
 		<result column="SALES_ORIGIN_IMAGE_PATH"
 			property="salesOriginImagePath"></result>
 		<result column="SALES_CHAT_LINK" property="salesChatLink"></result>
+		<result column="SALES_STATUS_STATUS" property="salesStatus"></result>
 	</resultMap>
+
 
 	<!-- 상품관리 전체 리스트 수 -->
 	<select id="salesSelectListCount" resultType="_int">
@@ -33,13 +36,17 @@
 
 	<!-- 상품관리 목록 불러오기 -->
 	<select id="salesSelectListAll" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE SALES_NAME LIKE '%' || #{searchText} || '%' AND
-		MEMBER_NO =
-		#{memberNo}
-		ORDER BY
-		SALES_NO DESC
+		SELECT s.*,
+		ss.SALES_STATUS_STATUS
+		FROM SALES s
+		JOIN SALES_STATUS ss ON s.SALES_NO =
+		ss.SALES_NO
+		WHERE s.SALES_NAME LIKE '%' || #{searchText} || '%'
+		AND
+		s.MEMBER_NO = #{memberNo}
+		ORDER BY s.SALES_NO DESC
 	</select>
+
 
 	<!-- 상품 수정 폼 이동 -->
 	<select id="updateSalesForm" resultMap="salesResultSet">
@@ -150,11 +157,13 @@
 
 	<!-- 상품 테이블 데이터 조회 -->
 	<select id="selectSalesData" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		MEMBER_NO = #{memberNo}
-		ORDER BY
-		SALES_NO DESC
+		SELECT s.*,
+		ss.SALES_STATUS_STATUS
+		FROM SALES s
+		JOIN SALES_STATUS ss ON s.SALES_NO =
+		ss.SALES_NO
+		WHERE s.MEMBER_NO = #{memberNo}
+		ORDER BY s.SALES_NO DESC
 	</select>
 
 	<!-- 상품 리스트 -->
@@ -267,5 +276,53 @@
 		SALES_LIKES_COUNT = SALES_LIKES_COUNT + 1
 		WHERE SALES_NO = #{salesNo}
 	</update>
+
+	<!-- 판매 수량 업데이트 -->
+	<update id="updateCount" parameterType="sales">
+		UPDATE SALES
+		SET
+		SALES_COUNT = SALES_COUNT - #{salesCount}
+		WHERE SALES_NO = #{salesNo}
+		AND EXISTS (
+		SELECT 1
+		FROM SALES_STATUS
+		WHERE SALES.SALES_NO =
+		SALES_STATUS.SALES_NO
+		AND SALES_STATUS.SALES_STATUS_STATUS = 'Y'
+		AND
+		SALES.SALES_COUNT > 0)
+	</update>
+
+	<!-- 상품 판매 수 업데이트 -->
+	<update id="updateCompleteCount" parameterType="sales">
+		UPDATE SALES
+		SET
+		SALES_COMPLETE = SALES_COMPLETE + 1
+		WHERE SALES_COUNT = 0 AND SALES_NO
+		= #{salesNo}
+	</update>
+
+	<!-- 상품 상태 업데이트 -->
+	<update id="salesStatusUpdate" parameterType="sales">
+		UPDATE SALES_STATUS
+		SET SALES_STATUS_STATUS = 'N'
+		WHERE SALES_NO = #{salesNo}
+		AND EXISTS (
+		SELECT 1
+		FROM SALES
+		WHERE SALES_NO = SALES_STATUS.SALES_NO
+		AND
+		SALES_COUNT = 0)
+	</update>
+
+	<!-- 상품 판매수 데이터 조회 -->
+	<select id="selectSalesComplete" resultType="_int">
+		SELECT
+		SUM(SALES_COMPLETE)
+		AS TOTAL_SALES_COMPLETE
+		FROM SALES
+		WHERE MEMBER_NO =
+		#{memberNo}
+	</select>
 
 </mapper>

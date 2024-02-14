@@ -3,6 +3,7 @@ package kr.co.three.pay.controller;
 import java.util.HashMap;
 
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,10 +12,20 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @RestController
 public class paySmsController {
-    @PostMapping("/paySmsController")
+
+	//api 키 숨기기
+	@Value("#{config['api_key']}")
+	private String api_key;
+	@Value("#{config['api_secret']}")
+	private String api_secret;
+    
+	@PostMapping("/paySmsController")
     public String sendSms() {
-        String api_key = "NCS6JWGE9OSKRXIQ";						//api키 숨기기(spring 숨기기 찾아보기)
-        String api_secret = "JI1KAFFQVKXLGHRFYRD2XTNWG4YOQLFW";		//api키 숨기기
+
+		System.out.println(api_key);
+		System.out.println(api_secret);
+		
+		
         Message coolsms = new Message(api_key, api_secret);
 
         // 4 params(to, from, type, text) are mandatory. must be filled

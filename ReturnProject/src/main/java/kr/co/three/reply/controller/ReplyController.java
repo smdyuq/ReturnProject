@@ -27,9 +27,6 @@ public class ReplyController {
 		int memberNo = (int)session.getAttribute("memberNo");
 		reply.setMember_no(memberNo);
 
-//		replyDto.setMember_no(52);
-		System.out.println("댓글 등록 통신 성공");
-
 		int memberType = (int) session.getAttribute("memberType");
 		if (memberType != 0 ) {
 			return "fail";
@@ -43,16 +40,4 @@ public class ReplyController {
 			return "InsertSuccess";
 		}
 	}
-
-//	//댓글 리스트 불러오기
-//	@GetMapping("/CommentList/{ask_no}")
-//	public Map<String, Object> getList(@PathVariable int ask_no) {
-//		List<ReplyDTO> list = replyService.getList(ask_no);
-//		System.out.println(list);
-//
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("list", list);
-//
-//		return map;
-//	}
 }
