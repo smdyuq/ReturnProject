@@ -2,270 +2,270 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="salesMapper">
-	<resultMap type="sales" id="salesResultSet">
-		<result column="SALES_NO" property="salesNo"></result>
-		<result column="SALES_NAME" property="salesName"></result>
-		<result column="SALES_CATEGORY" property="salesCategory"></result>
-		<result column="SALES_ADDRESS" property="salesAddress"></result>
-		<result column="SALES_CONDITION" property="salesCondition"></result>
-		<result column="SALES_PRICE" property="salesPrice"></result>
-		<result column="SALES_DELIVERY" property="salesDelivery"></result>
-		<result column="SALES_COMMENT" property="salesComment"></result>
-		<result column="SALES_COUNT" property="salesCount"></result>
-		<result column="SALES_IMAGE_NAME" property="salesImageName"></result>
-		<result column="SALES_IMAGE_PATH" property="salesImagePath"></result>
-		<result column="SALES_DATE" property="salesDate"></result>
-		<result column="SALES_UPDATE_DATE" property="salesUpdateDate"></result>
-		<result column="SALES_DELETE_DATE" property="salesDeleteDate"></result>
-		<result column="SALES_COMPLETE" property="salesComplete"></result>
-		<result column="SALES_ORIGIN_IMAGE_PATH"
-			property="salesOriginImagePath"></result>
-		<result column="SALES_CHAT_LINK" property="salesChatLink"></result>
-	</resultMap>
+   <resultMap type="sales" id="salesResultSet">
+      <result column="SALES_NO" property="salesNo"></result>
+      <result column="SALES_NAME" property="salesName"></result>
+      <result column="SALES_CATEGORY" property="salesCategory"></result>
+      <result column="SALES_ADDRESS" property="salesAddress"></result>
+      <result column="SALES_CONDITION" property="salesCondition"></result>
+      <result column="SALES_PRICE" property="salesPrice"></result>
+      <result column="SALES_DELIVERY" property="salesDelivery"></result>
+      <result column="SALES_COMMENT" property="salesComment"></result>
+      <result column="SALES_COUNT" property="salesCount"></result>
+      <result column="SALES_IMAGE_NAME" property="salesImageName"></result>
+      <result column="SALES_IMAGE_PATH" property="salesImagePath"></result>
+      <result column="SALES_DATE" property="salesDate"></result>
+      <result column="SALES_UPDATE_DATE" property="salesUpdateDate"></result>
+      <result column="SALES_DELETE_DATE" property="salesDeleteDate"></result>
+      <result column="SALES_COMPLETE" property="salesComplete"></result>
+      <result column="SALES_ORIGIN_IMAGE_PATH"
+         property="salesOriginImagePath"></result>
+      <result column="SALES_CHAT_LINK" property="salesChatLink"></result>
+   </resultMap>
 
-	<!-- 상품관리 전체 리스트 수 -->
-	<select id="salesSelectListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM SALES
-		WHERE SALES_NAME LIKE '%' || #{searchText} || '%' AND
-		MEMBER_NO = #{memberNo}
-	</select>
+   <!-- 상품관리 전체 리스트 수 -->
+   <select id="salesSelectListCount" resultType="_int">
+      SELECT COUNT(*)
+      FROM SALES
+      WHERE SALES_NAME LIKE '%' || #{searchText} || '%' AND
+      MEMBER_NO = #{memberNo}
+   </select>
 
-	<!-- 상품관리 목록 불러오기 -->
-	<select id="salesSelectListAll" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE SALES_NAME LIKE '%' || #{searchText} || '%' AND
-		MEMBER_NO =
-		#{memberNo}
-		ORDER BY
-		SALES_NO DESC
-	</select>
+   <!-- 상품관리 목록 불러오기 -->
+   <select id="salesSelectListAll" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE SALES_NAME LIKE '%' || #{searchText} || '%' AND
+      MEMBER_NO =
+      #{memberNo}
+      ORDER BY
+      SALES_NO DESC
+   </select>
 
-	<!-- 상품 수정 폼 이동 -->
-	<select id="updateSalesForm" resultMap="salesResultSet">
-		SELECT *
-		FROM SALES
-		WHERE
-		SALES_NO = #{salesNo}
-	</select>
+   <!-- 상품 수정 폼 이동 -->
+   <select id="updateSalesForm" resultMap="salesResultSet">
+      SELECT *
+      FROM SALES
+      WHERE
+      SALES_NO = #{salesNo}
+   </select>
 
-	<!-- 상품 수정 -->
-	<update id="updateSales" parameterType="sales">
-		UPDATE SALES
-		SET
-		SALES_NAME = #{salesName},
-		SALES_CATEGORY = #{salesCategory},
-		SALES_ADDRESS = #{salesAddress},
-		SALES_CONDITION = #{salesCondition},
-		SALES_PRICE = #{salesPrice},
-		SALES_DELIVERY = #{salesDelivery},
-		SALES_COMMENT = #{salesComment},
-		SALES_COUNT = #{salesCount},
-		SALES_IMAGE_NAME = #{salesImageName},
-		SALES_IMAGE_PATH =
-		#{salesImagePath},
-		SALES_ORIGIN_IMAGE_NAME = #{salesOriginImageName},
-		SALES_UPDATE_DATE = SYSDATE,
-		SALES_CHAT_LINK = #{salesChatLink}
-		WHERE
-		SALES_NO = #{salesNo}
-	</update>
+   <!-- 상품 수정 -->
+   <update id="updateSales" parameterType="sales">
+      UPDATE SALES
+      SET
+      SALES_NAME = #{salesName},
+      SALES_CATEGORY = #{salesCategory},
+      SALES_ADDRESS = #{salesAddress},
+      SALES_CONDITION = #{salesCondition},
+      SALES_PRICE = #{salesPrice},
+      SALES_DELIVERY = #{salesDelivery},
+      SALES_COMMENT = #{salesComment},
+      SALES_COUNT = #{salesCount},
+      SALES_IMAGE_NAME = #{salesImageName},
+      SALES_IMAGE_PATH =
+      #{salesImagePath},
+      SALES_ORIGIN_IMAGE_NAME = #{salesOriginImageName},
+      SALES_UPDATE_DATE = SYSDATE,
+      SALES_CHAT_LINK = #{salesChatLink}
+      WHERE
+      SALES_NO = #{salesNo}
+   </update>
 
-	<!-- 상품 삭제 -->
-	<delete id="deleteSales" parameterType="sales">
-		DELETE FROM SALES
-		WHERE
-		SALES_NO = #{salesNo}
-	</delete>
+   <!-- 상품 삭제 -->
+   <delete id="deleteSales" parameterType="sales">
+      DELETE FROM SALES
+      WHERE
+      SALES_NO = #{salesNo}
+   </delete>
 
-	<!-- 상품 상세 -->
-	<select id="detailSales" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_NO = #{salesNo}
-	</select>
+   <!-- 상품 상세 -->
+   <select id="detailSales" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      SALES_NO = #{salesNo}
+   </select>
 
-	<!-- 최근 본 상품 -->
-	<insert id="recentSales" parameterType="sales">
-		INSERT INTO RECENT
-		VALUES(RECENT_SEQ.NEXTVAL, DEFAULT, #{memberNo}, #{salesNo})
-	</insert>
+   <!-- 최근 본 상품 -->
+   <insert id="recentSales" parameterType="sales">
+      INSERT INTO RECENT
+      VALUES(RECENT_SEQ.NEXTVAL, DEFAULT, #{memberNo}, #{salesNo})
+   </insert>
 
-	<!-- 판매 등록 -->
-	<insert id="enrollSales" parameterType="sales">
-		INSERT INTO SALES
-		VALUES(SALES_SEQ.NEXTVAL,
-		#{salesName},
-		#{salesCategory},
-		#{salesAddress},
-		#{salesCondition},
-		#{salesPrice},
-		#{salesDelivery},
-		#{salesComment},
-		#{salesCount},
-		#{salesImageName},
-		#{salesImagePath},
-		DEFAULT,
-		NULL,
-		NULL,
-		DEFAULT,
-		#{memberNo},
-		#{salesOriginImageName},
-		#{salesChatLink},
-		DEFAULT)
-	</insert>
+   <!-- 판매 등록 -->
+   <insert id="enrollSales" parameterType="sales">
+      INSERT INTO SALES
+      VALUES(SALES_SEQ.NEXTVAL,
+      #{salesName},
+      #{salesCategory},
+      #{salesAddress},
+      #{salesCondition},
+      #{salesPrice},
+      #{salesDelivery},
+      #{salesComment},
+      #{salesCount},
+      #{salesImageName},
+      #{salesImagePath},
+      DEFAULT,
+      NULL,
+      NULL,
+      DEFAULT,
+      #{memberNo},
+      #{salesOriginImageName},
+      #{salesChatLink},
+      DEFAULT)
+   </insert>
 
-	<!-- 판매등록 작성자 조회 -->
-	<select id="selectSalesMember" resultType="_int">
-		SELECT MEMBER_NO FROM
-		SALES
-		WHERE SALES_NO = #{salesNo}
-	</select>
+   <!-- 판매등록 작성자 조회 -->
+   <select id="selectSalesMember" resultType="_int">
+      SELECT MEMBER_NO FROM
+      SALES
+      WHERE SALES_NO = #{salesNo}
+   </select>
 
-	<!-- 기존 파일이름 조회 -->
-	<select id="selectFileName" resultType="string">
-		SELECT SALES_IMAGE_NAME
-		FROM
-		SALES
-		WHERE SALES_NO = #{salesNo}
-	</select>
+   <!-- 기존 파일이름 조회 -->
+   <select id="selectFileName" resultType="string">
+      SELECT SALES_IMAGE_NAME
+      FROM
+      SALES
+      WHERE SALES_NO = #{salesNo}
+   </select>
 
-	<!-- 상품 수정(upload가 비어있을 때) -->
-	<update id="updateSalesEmptyUpload" parameterType="sales">
-		UPDATE SALES
-		SET
-		SALES_NAME = #{salesName},
-		SALES_CATEGORY = #{salesCategory},
-		SALES_ADDRESS = #{salesAddress},
-		SALES_CONDITION = #{salesCondition},
-		SALES_PRICE = #{salesPrice},
-		SALES_DELIVERY = #{salesDelivery},
-		SALES_COMMENT = #{salesComment},
-		SALES_COUNT = #{salesCount},
-		SALES_UPDATE_DATE = SYSDATE,
-		SALES_CHAT_LINK = #{salesChatLink}
-		WHERE
-		SALES_NO = #{salesNo}
-	</update>
+   <!-- 상품 수정(upload가 비어있을 때) -->
+   <update id="updateSalesEmptyUpload" parameterType="sales">
+      UPDATE SALES
+      SET
+      SALES_NAME = #{salesName},
+      SALES_CATEGORY = #{salesCategory},
+      SALES_ADDRESS = #{salesAddress},
+      SALES_CONDITION = #{salesCondition},
+      SALES_PRICE = #{salesPrice},
+      SALES_DELIVERY = #{salesDelivery},
+      SALES_COMMENT = #{salesComment},
+      SALES_COUNT = #{salesCount},
+      SALES_UPDATE_DATE = SYSDATE,
+      SALES_CHAT_LINK = #{salesChatLink}
+      WHERE
+      SALES_NO = #{salesNo}
+   </update>
 
-	<!-- 상품 테이블 데이터 조회 -->
-	<select id="selectSalesData" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		MEMBER_NO = #{memberNo}
-		ORDER BY
-		SALES_NO DESC
-	</select>
+   <!-- 상품 테이블 데이터 조회 -->
+   <select id="selectSalesData" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      MEMBER_NO = #{memberNo}
+      ORDER BY
+      SALES_NO DESC
+   </select>
 
-	<!-- 상품 리스트 -->
-	<select id="mainSalesList" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_NAME LIKE '%' || #{searchWord} || '%'
-		ORDER BY
-		SALES_DATE DESC
-	</select>
+   <!-- 상품 리스트 -->
+   <select id="mainSalesList" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      SALES_NAME LIKE '%' || #{searchWord} || '%'
+      ORDER BY
+      SALES_DATE DESC
+   </select>
 
-	<!-- 카테고리 페이지 -->
+   <!-- 카테고리 페이지 -->
 
-	<!-- 가전 카테고리 -->
-	<select id="homeAppliances" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_CATEGORY = 'homeAppliances'
-		ORDER BY
-		SALES_DATE DESC
-	</select>
+   <!-- 가전 카테고리 -->
+   <select id="homeAppliances" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      SALES_CATEGORY = 'homeAppliances'
+      ORDER BY
+      SALES_DATE DESC
+   </select>
 
-	<!-- 의류 카테고리 -->
-	<select id="clothes" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_CATEGORY = 'clothes'
-		ORDER BY
-		SALES_DATE DESC
-	</select>
+   <!-- 의류 카테고리 -->
+   <select id="clothes" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      SALES_CATEGORY = 'clothes'
+      ORDER BY
+      SALES_DATE DESC
+   </select>
 
-	<!-- 향수 카테고리 -->
-	<select id="perfume" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_CATEGORY = 'perfume'
-		ORDER BY
-		SALES_DATE DESC
-	</select>
+   <!-- 향수 카테고리 -->
+   <select id="perfume" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      SALES_CATEGORY = 'perfume'
+      ORDER BY
+      SALES_DATE DESC
+   </select>
 
-	<!-- 푸드 카테고리 -->
-	<select id="food" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_CATEGORY = 'food'
-		ORDER BY
-		SALES_DATE DESC
-	</select>
+   <!-- 푸드 카테고리 -->
+   <select id="food" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      SALES_CATEGORY = 'food'
+      ORDER BY
+      SALES_DATE DESC
+   </select>
 
-	<!-- 주얼리 카테고리 -->
-	<select id="jewelry" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_CATEGORY = 'jewelry'
-		ORDER BY
-		SALES_DATE DESC
-	</select>
+   <!-- 주얼리 카테고리 -->
+   <select id="jewelry" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      SALES_CATEGORY = 'jewelry'
+      ORDER BY
+      SALES_DATE DESC
+   </select>
 
-	<!-- 찜 목록 추가 -->
-	<insert id="likeBtn" parameterType="sales">
-		INSERT INTO LIKES
-		VALUES(LIKES_SEQ.NEXTVAL, #{memberNo}, #{salesNo}, DEFAULT)
-	</insert>
+   <!-- 찜 목록 추가 -->
+   <insert id="likeBtn" parameterType="sales">
+      INSERT INTO LIKES
+      VALUES(LIKES_SEQ.NEXTVAL, #{memberNo}, #{salesNo}, DEFAULT)
+   </insert>
 
-	<!-- 찜 조회 -->
-	<select id="selectLikeData" resultMap="salesResultSet">
-		SELECT *
-		FROM SALES
-		JOIN
-		LIKES ON SALES.SALES_NO = LIKES.SALES_NO
-		WHERE LIKES.MEMBER_NO =
-		#{memberNo}
-	</select>
+   <!-- 찜 조회 -->
+   <select id="selectLikeData" resultMap="salesResultSet">
+      SELECT *
+      FROM SALES
+      JOIN
+      LIKES ON SALES.SALES_NO = LIKES.SALES_NO
+      WHERE LIKES.MEMBER_NO =
+      #{memberNo}
+   </select>
 
-	<!-- 판매 상태 : 판매 중 -->
-	<insert id="salesStatus" parameterType="int">
-		INSERT INTO SALES_STATUS
-		VALUES(SALES_STATUS_SEQ.NEXTVAL, DEFAULT, #{salesNo})
-	</insert>
+   <!-- 판매 상태 : 판매 중 -->
+   <insert id="salesStatus" parameterType="int">
+      INSERT INTO SALES_STATUS
+      VALUES(SALES_STATUS_SEQ.NEXTVAL, DEFAULT, #{salesNo})
+   </insert>
 
-	<!-- 결제 정보 체크 -->
-	<select id="payCheck" resultMap="salesResultSet">
-		SELECT * FROM SALES
-		WHERE
-		SALES_NO = #{salesNo}
-	</select>
+   <!-- 결제 정보 체크 -->
+   <select id="payCheck" resultMap="salesResultSet">
+      SELECT * FROM SALES
+      WHERE
+      SALES_NO = #{salesNo}
+   </select>
 
-	<!-- 판매 정보 조회 -->
-	<select id="selectSalesNo" resultType="_int">
-		SELECT SALES_NO
-		FROM SALES
-		WHERE MEMBER_NO = #{memberNo}
-		ORDER BY SALES_DATE DESC
-		FETCH FIRST 1 ROW
-		ONLY
-	</select>
+   <!-- 판매 정보 조회 -->
+   <select id="selectSalesNo" resultType="_int">
+      SELECT SALES_NO
+      FROM SALES
+      WHERE MEMBER_NO = #{memberNo}
+      ORDER BY SALES_DATE DESC
+      FETCH FIRST 1 ROW
+      ONLY
+   </select>
 
-	<!-- 판매상품 회원번호 조회 -->
-	<select id="selectMemberNo" resultType="_int">
-		SELECT MEMBER_NO
-		FROM
-		SALES
-		WHERE SALES_NO = #{salesNo}
-	</select>
+   <!-- 판매상품 회원번호 조회 -->
+   <select id="selectMemberNo" resultType="_int">
+      SELECT MEMBER_NO
+      FROM
+      SALES
+      WHERE SALES_NO = #{salesNo}
+   </select>
 
-	<!-- 찜 카운트 증가 -->
-	<update id="updateLikesCount" parameterType="sales">
-		UPDATE SALES
-		SET
-		SALES_LIKES_COUNT = SALES_LIKES_COUNT + 1
-		WHERE SALES_NO = #{salesNo}
-	</update>
+   <!-- 찜 카운트 증가 -->
+   <update id="updateLikesCount" parameterType="sales">
+      UPDATE SALES
+      SET
+      SALES_LIKES_COUNT = SALES_LIKES_COUNT + 1
+      WHERE SALES_NO = #{salesNo}
+   </update>
 
 </mapper>

@@ -113,39 +113,20 @@ public class boardController {
 	public String boardEnroll(boardDTO board, MultipartFile upload, HttpSession session)
 			throws IllegalStateException, IOException {
 
-//	public ResponseEntity<?> infoEnroll(@RequestBody InfoDTO info, MultipartFile upload, HttpSession session)
-//			throws IllegalStateException, IOException {
-//		board.setMEMBER_NO((int) session.getAttribute("memberName"));
 		int memberNo = (int) session.getAttribute("memberNo");
 		board.setMember_no(memberNo);
 		board.setAsk_image_name("임시 이미지 이름");
 		board.setAsk_image_path("임시 이미지 경로");
 		System.out.println("asd : " + board.getAsk_title());
-//		boolean titleLengthCheck = DataValidation.CheckLength(board.getAsk_title(), 150);
-//		boolean titleEmptyCheck = DataValidation.emptyCheck(board.getAsk_title());
-
-//		if (titleLengthCheck && titleEmptyCheck) {
-//			if (!upload.isEmpty()) {
-//				UploadFile.uploadMethod(upload, board, session, BOARD_NAME);
-//			}
 
 		int result = boardService.enrollBoard(board);
 
 		if (result > 0) {
 			return "redirect:/inquiry/boardList.do";
-//				return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
 			return "common/errorPage";
-//				return new ResponseEntity<>("failed", HttpStatus.OK);
 		}
 
-//			} else if(!titleLengthCheck) {
-//			return sessionMessage.setSessionMessage("제목이 너무 깁니다.", "error", "/inquiry/boardList.do", session);
-//		} else if(!titleEmptyCheck) {
-//			return sessionMessage.setSessionMessage("제목을 입력해주세요.", "error", "/inquiry/boardList.do", session);
-//		} else {
-//			return sessionMessage.setSessionMessage("에러가 발생했습니다.", "error", "/inquiry/boardList.do", session);
-//		}
 	}
 
 	@GetMapping("/detail.do")
@@ -168,12 +149,4 @@ public class boardController {
 		}
 
 	}
-
-	@DeleteMapping("/delete/{idx}")
-	public String deleteBoard(@RequestParam(value = "boardIdx") int idx, HttpSession session) {
-		return null;
-	}
-
-//	댓글
-
 }

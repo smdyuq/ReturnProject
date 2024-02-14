@@ -60,7 +60,9 @@ public class PayController {
 
 	}
 
-//	직거래 
+
+	//모달에서 직거래 클릭했을때
+
 	@GetMapping("/payDirectPage.do")
 	public String DirectPayPage(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, SalesDTO sales, Model model,
 			HttpSession session) {
@@ -73,7 +75,9 @@ public class PayController {
 
 	}
 
-//	택배거래
+
+	//모달에서 택배거래 클릭했을때
+
 	@GetMapping("/payDeliveryPage.do")
 	public String DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, MemberDTO member, PayDTO pay,
 			SalesDTO sales, Model model, HttpSession session) {
