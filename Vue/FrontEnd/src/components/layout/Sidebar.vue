@@ -11,7 +11,9 @@
         <div style="width:100%; height:160px; border:1px solid gray">최근본상품
         <!-- <img :src="'http://192.168.0.15/resources/uploads/' + item.salesImageName" style="width: 194px; height: 194px;"> -->
         </div>
-        <div style="width:100%; height:60px; border:1px solid gray">TOP</div>
+        <div style="width:100%; height:60px; border:1px solid gray">
+            <button class="topBtn">TOP</button>
+        </div>
     </div>
 </template>
 
@@ -34,7 +36,12 @@ export default {
     /* bottom: calc(50% - 41px);
     right: calc(50% - 650px); */
     z-index: 20;
-    
+}
 
+.topBtn {
+    border-style: none;
+    background-color:white;
+    width:100%;
+    height:100%;
 }
 </style>
