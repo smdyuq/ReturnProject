@@ -40,11 +40,14 @@
   </div>
 
   <div>
-    <div class="storeList">
-      <span style="border: 1px solid black">상품</span>
-      <span style="margin-left: 12px; border: 1px solid black"></span>
-
+    <div class="storeListWrap">
+      <div class="storeList">
+        <routerLink to="/StoreProduct"><div class="storeProduct">상품</div></routerLink>
+        <routerLink to="/StoreLike"><div class="storeLike">찜</div></routerLink>
+        </div>
       <div>전체</div>
+
+      <div>내상품 페이지 입니다.</div>
 
       <div style="border: 0.5px solid gray"></div>
     </div>
@@ -72,7 +75,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+
+};
 </script>
 
 <style scoped>
@@ -92,8 +97,14 @@ button {
   height: auto;
 }
 
-.storeList {
+.storeListWrap {
   font-size: larger;
+}
+
+.storeList {
+  width:1024px;
+  display:flex;
+  margin-bottom:30px;
 }
 
 .storeWrapper {
@@ -119,6 +130,23 @@ button {
   display: flex;
   margin-left: 20px;
   width: 714px;
+}
+
+.storeProduct {
+  border: 0.5px solid gray;
+  /* background-color:green; */
+  text-align: center;
+  width:200px;
+  height:35px;
+
+}
+
+.storeLike {
+  text-align: center;
+  border: 0.5px solid gray;
+  width:200px;
+  height:35px;
+  /* background-color:yellow; */
 }
 
 .storeContents {

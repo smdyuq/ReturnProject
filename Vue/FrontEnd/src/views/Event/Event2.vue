@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="eventSecondPage">
         이벤트2 페이지
     </div>
 </template>
@@ -9,3 +9,10 @@ export default {
     
 }
 </script>
+<style>
+.eventSecondPage {
+    width:1024px;
+    height:900px;
+    background-color:antiquewhite;
+}
+</style>

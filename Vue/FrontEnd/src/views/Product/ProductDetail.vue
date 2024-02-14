@@ -46,7 +46,7 @@
 
                     <div v-if="isModalOpen" class="modal">
                         <div class="modal-content">
-                            <!-- 모달 내용 -->
+                            <!-- <router-Link to="/"><div><img class="leftArrow" src="../../assets/img/뒤로가기.png" style="width:22px;"></div></router-Link> -->
                             <div class="deliveryTransaction" @click="goPayment">
                                 <div class="TransactionWrap">
                                     <div class="Transaction">택배거래</div>
@@ -173,6 +173,8 @@ button {
     width: 166px;
     height: 56px;
     border: none;
+    background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+    color:white;
 }
 
 .buttonWrap {

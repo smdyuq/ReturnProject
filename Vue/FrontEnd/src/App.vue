@@ -22,6 +22,10 @@ export default {
     width:1024px;
     min-height: 100vh;
   }
+
+  router-link {
+    color:black;
+  }
 </style>
 
 

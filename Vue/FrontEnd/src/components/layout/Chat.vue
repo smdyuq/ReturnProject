@@ -1,18 +1,14 @@
 <template>
   <div class="contact-us">
-    <h1>1:1 문의하기</h1>
+    <h2>1:1 문의하기</h2>
     <form @submit.prevent="submitForm">
       <div class="form-group">
-        <label for="name">이름</label>
-        <input type="text" id="name" v-model="formData.name" required>
+        <label for="title">제목</label>
+        <input type="text" id="title" v-model="formData.title" required>
       </div>
       <div class="form-group">
-        <label for="email">이메일</label>
-        <input type="email" id="email" v-model="formData.email" required>
-      </div>
-      <div class="form-group">
-        <label for="message">메시지</label>
-        <textarea id="message" v-model="formData.message" required></textarea>
+        <label for="message">내용</label>
+        <textarea id="message" v-model="formData.content" required></textarea>
       </div>
       <button type="submit">전송</button>
     </form>
@@ -24,9 +20,8 @@ export default {
   data() {
     return {
       formData: {
-        name: '',
-        email: '',
-        message: ''
+        title: '',
+        content: ''
       }
     };
   },
@@ -36,9 +31,8 @@ export default {
       console.log('Form submitted!', this.formData);
       // 전송 후에 폼을 초기화하거나 다음 단계로 넘어갈 수 있습니다.
       this.formData = {
-        name: '',
-        email: '',
-        message: ''
+        title: '',
+        content: ''
       };
     }
   }
@@ -62,7 +56,7 @@ textarea {
 }
 button {
   padding: 10px 20px;
-  background-color: #007bff;
+  background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -70,5 +64,9 @@ button {
 }
 button:hover {
   background-color: #0056b3;
+}
+
+#message {
+  height:300px;
 }
 </style>

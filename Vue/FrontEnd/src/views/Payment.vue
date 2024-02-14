@@ -1,6 +1,6 @@
 <template>
     <div class="paymentWrapper">
-
+        <router-Link to="/ProductDetail"><div><img class="leftArrow" src="../assets/img/뒤로가기.png" style="width:22px;"></div></router-Link>
         <div>
             <div style="font-size: x-large; font-weight: bold;">결제하기</div>
             <div class="paymentWrap">
@@ -56,6 +56,10 @@ export default {
 .paymentWrapper {
     width: 700px;
     /* background-color: yellow; */
+    flex-direction: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 
 }
 
