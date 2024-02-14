@@ -7,7 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.co.three.common.PageInfo;
-import kr.co.three.main.dto.MainDTO;
+import kr.co.three.pay.dto.PayDTO;
 import kr.co.three.sales.dto.SalesDTO;
 
 @Repository
@@ -104,4 +104,20 @@ public class SalesDAO {
       return sqlSession.update("salesMapper.updateLikesCount", sales);
    }
 
+//	판매 수량 업데이트
+	public int updateCount(SalesDTO sales, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("salesMapper.updateCount", sales);
+	}
+
+//	상품 판매 수 업데이트
+	public int updateCompleteCount(SalesDTO sales, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("salesMapper.updateCompleteCount", sales);
+	}
+
+//	상품 상태 업데이트
+	public int salesStatusUpdate(SalesDTO sales, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("salesMapper.salesStatusUpdate", sales);
+	}
+
 }
+

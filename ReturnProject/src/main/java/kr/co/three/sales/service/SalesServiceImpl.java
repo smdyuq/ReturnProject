@@ -1,6 +1,5 @@
 package kr.co.three.sales.service;
 
-
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.three.common.PageInfo;
+import kr.co.three.pay.dto.PayDTO;
 import kr.co.three.sales.dao.SalesDAO;
 import kr.co.three.sales.dto.SalesDTO;
 
@@ -121,5 +121,23 @@ public class SalesServiceImpl implements SalesService {
    public int updateLikesCount(SalesDTO sales) {
       return salesDAO.updateLikesCount(sales, sqlSession);
    }
+
+//	판매 수량 업데이트
+	@Override
+	public int updateCount(SalesDTO sales) {
+		return salesDAO.updateCount(sales, sqlSession);
+	}
+
+//	상품 판매 수 업데이트
+	@Override
+	public int updateCompleteCount(SalesDTO sales) {
+		return salesDAO.updateCompleteCount(sales, sqlSession);
+	}
+
+//	상품 상태 업데이트
+	@Override
+	public int salesStatusUpdate(SalesDTO sales) {
+		return salesDAO.salesStatusUpdate(sales, sqlSession);
+	}
 
 }

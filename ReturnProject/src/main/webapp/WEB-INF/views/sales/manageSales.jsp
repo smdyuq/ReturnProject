@@ -51,6 +51,7 @@
 							<td>가격</td>
 							<td>찜</td>
 							<td>최근수정일</td>
+							<td>상품상태</td>
 							<td>기능</td>
 						</tr>
 					</thead>
@@ -80,6 +81,7 @@
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesLikesCount}</td>
 										<td
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesUpdateDate}</td>
+										<td>${item.salesStatus }</td>
 										<td><button
 												onclick="location.href='/sales/updateSalesForm.do?salesNo=${item.salesNo}'">수정</button>
 											<button
