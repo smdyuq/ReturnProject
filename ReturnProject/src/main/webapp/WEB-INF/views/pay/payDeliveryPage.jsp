@@ -42,7 +42,7 @@
 				max="${salesCheck.salesCount}" value="1">
 
 			<p>배송비</p>
-			<input value="${salesCheck.salesDelivery }">
+			<input value="${salesCheck.salesDelivery }" readonly>
 			<hr>
 			<!-- 합계 = 상품가격 * 구매 수량 + 배송비 -->
 			<p id="total">
@@ -89,6 +89,8 @@
 
         function kakaoPay() {
         	 var buyer_addr = document.getElementById("sample6_address").value;
+        	 var buyer_postcode = document.getElementById("sample6_postcode").value;
+        	 
             IMP.request_pay({
                 pg : 'kakaopay.TC0ONETIME',
                 pay_method: "card",
@@ -99,7 +101,7 @@
                 buyer_name : '${member.memberName}',
                 buyer_tel : '${member.memberPhone}',
                 buyer_addr : buyer_addr,
-                buyer_postcode : '123-456'
+                buyer_postcode : buyer_postcode
                                 
             }, function(response){
             	
