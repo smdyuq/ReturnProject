@@ -23,6 +23,7 @@
 	<hr>
 
 	<div>
+		<input type="hidden" value="${salesCheck.salesNo }" name="salesNo">
 		<p>상품 이미지</p>
 		<img src="/resources/uploads/${salesCheck.salesImageName}">
 		<p>${salesCheck.salesImageName}</p>
@@ -48,14 +49,17 @@
 			<p id="total">
 				합계: <span id="totalValue">${salesCheck.salesPrice + salesCheck.salesDelivery }</span>
 			</p>
-
-			<p id="deliveryAddress">배송지 :</p>
-			<input type="text" id="sample6_postcode" placeholder="우편번호">
-			<input type="button" onclick="sample6_execDaumPostcode()"
-				value="우편번호 찾기"><br> <input type="text"
-				id="sample6_address" placeholder="주소"><br> <input
-				type="text" id="sample6_detailAddress" placeholder="상세주소"> <input
-				type="text" id="sample6_extraAddress" placeholder="참고항목">
+			<form action="/pay/payDeliveryComplete.do" method="POST" id="payForm">
+				<input type="hidden" value="${salesCheck.salesNo }" name="salesNo">
+				<p id="deliveryAddress">배송지 :</p>
+				<input type="text" id="sample6_postcode" placeholder="우편번호">
+				<input type="button" onclick="sample6_execDaumPostcode()"
+					value="우편번호 찾기"><br> <input type="text"
+					id="sample6_address" placeholder="주소" name="payAddress"><br>
+				<input type="text" id="sample6_detailAddress" placeholder="상세주소"
+					name="paySubAddress"> <input type="text"
+					id="sample6_extraAddress" placeholder="참고항목">
+			</form>
 			<hr>
 			<p id="PAY_METHOD">결제 수단:</p>
 		</div>
@@ -88,9 +92,11 @@
         
 
         function kakaoPay() {
+
         	 var buyer_addr = document.getElementById("sample6_address").value;
         	 var buyer_postcode = document.getElementById("sample6_postcode").value;
         	 
+
             IMP.request_pay({
                 pg : 'kakaopay.TC0ONETIME',
                 pay_method: "card",
@@ -102,7 +108,7 @@
                 buyer_tel : '${member.memberPhone}',
                 buyer_addr : buyer_addr,
                 buyer_postcode : buyer_postcode
-                                
+
             }, function(response){
             	
             	const {status, err_msg} = response;
@@ -116,9 +122,9 @@
             	            success: function(response) {
             	                // 서버에서 응답이 올 경우 이 함수가 호출됩니다.
             	                // 필요하다면 여기에 로직을 추가할 수 있습니다.
-            	                console.log(response)
             	                if(response === "success") {
-            	                	window.location.href = "/pay/payComplete.do";
+            	                	document.getElementById("payForm").submit();
+            	                	
             	                }
             	               /*  window.location.href = "/pay/payComplete"; */
             	            },

@@ -35,7 +35,7 @@ public class PayController {
 	public String payPage(@RequestParam(value = "salesNo") int salesNo, @RequestParam(value = "type") String type,
 			SalesDTO sales, Model model, HttpSession session) {
 
-		// 데이터 불러오기(salesService 사용)
+		// sales 데이터 불러오기
 		SalesDTO salesCheck = salesService.payCheck(salesNo);
 
 		model.addAttribute("salesCheck", salesCheck);
@@ -60,7 +60,9 @@ public class PayController {
 
 	}
 
+
 	//모달에서 직거래 클릭했을때
+
 	@GetMapping("/payDirectPage.do")
 	public String DirectPayPage(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, SalesDTO sales, Model model,
 			HttpSession session) {
@@ -73,7 +75,9 @@ public class PayController {
 
 	}
 
+
 	//모달에서 택배거래 클릭했을때
+
 	@GetMapping("/payDeliveryPage.do")
 	public String DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, MemberDTO member, PayDTO pay,
 			SalesDTO sales, Model model, HttpSession session) {
@@ -92,15 +96,40 @@ public class PayController {
 
 	}
 
-	@GetMapping("/payComplete.do")
-	public String payComplete() {
-	 
+//	직거래 결제완료 페이지 불러오기
+	@GetMapping("/payDirectComplete.do")
+	public String payDirectComplete(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, HttpSession session) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		pay.setMemberNo(memberNo);
+		pay.setSalesNo(salesNo);
+		pay.setPayMethod("카카오 페이");
+		pay.setPayReceipt("직거래");
+
+		// 직거래용 페이 테이블 인설트
+		int result = payService.insertDirectPay(pay);
+
 		return "pay/payComplete";
 	}
+
+//	택배거래 결제완료 페이지 불러오기
+	@PostMapping("/payDeliveryComplete.do")
+	public String payDeliveryComplete(PayDTO pay, HttpSession session) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		pay.setMemberNo(memberNo);
+		pay.setPayMethod("카카오 페이");
+		pay.setPayReceipt("택배거래");
+
+		// 택배거래용 페이 테이블 인설트
+		int result = payService.insertDeliveryPay(pay);
+
+		return "pay/payComplete";
+	}
+
+//	에러
 	@GetMapping("/payError.do")
 	public String payError() {
-	 
+
 		return "common/error";
 	}
-	 
+
 }
