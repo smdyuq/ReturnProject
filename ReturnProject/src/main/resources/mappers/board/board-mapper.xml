@@ -6,6 +6,7 @@
 		<result column="ASK_TITLE" property="ask_title"></result>
 		<result column="ASK_CONTENT" property="ask_content"></result>
 		<result column="ASK_DATE" property="ask_date"></result>
+		<result column="member_id" property="member_id"></result>
 	</resultMap>
 
 	<!-- 리스트 카운트 -->
@@ -22,7 +23,9 @@
 	</select>
 
 	<select id="selectListAll" resultMap="boardResultSet">
-		SELECT * FROM ASK
+		SELECT ask_no, ask_title, ask_content, ask_date, member_id FROM ASK a
+		JOIN MEMBER m 
+		ON a.MEMBER_NO = m.MEMBER_NO
 		ORDER BY
 		ASK_NO DESC
 	</select>
@@ -34,9 +37,9 @@
 		#{ask_title},
 		#{ask_content},
 		DEFAULT,
-		#{member_no},
 		#{ask_image_name},
-		#{ask_image_path}
+		#{ask_image_path},
+		#{member_no}
 		)
 	</insert>
 
@@ -51,5 +54,20 @@
 		SELECT COUNT(*) FROM ASK_COMMENT
 		WHERE ASK_NO = #{ask_no}
 	</select>
+	<!--  -->
+	<select id="selectListCountByMemberNo" resultType="_int">
+        SELECT COUNT(*)
+        FROM ask
+        WHERE member_No = #{member_No}
+    </select>
+	
+    <select id="selectListByMemberNo" resultMap="boardResultSet">
+        SELECT *
+        FROM ask
+        WHERE member_No = #{member_No}
+        ORDER BY
+		ASK_NO DESC
+    </select>
+	
 </mapper>
 	

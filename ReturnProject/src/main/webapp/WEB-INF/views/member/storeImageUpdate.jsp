@@ -11,7 +11,6 @@
 		class="needs-validation" enctype="multipart/form-data">
 		<div class="row g-3">
 			<div class="col-12">
-				<img src="/resources/uploads/303x310/${member.memberImageName }">
 				<label for="memberImageName" class="form-label">상품이미지</label> <input
 					type="file" class="form-control" id="memberImageName" name="upload">
 			</div>

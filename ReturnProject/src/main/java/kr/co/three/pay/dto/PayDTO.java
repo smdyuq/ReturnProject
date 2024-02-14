@@ -10,7 +10,7 @@ public class PayDTO {
 	private String payReceipt;
 	private String payAddress;
 	private String payMethod;
-	private int payAgree;
+	private String paySubAddress;
 	private int memberNo;
 	private int salesNo;
 }

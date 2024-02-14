@@ -22,6 +22,7 @@
 	<hr>
 
 	<div>
+		<input type="hidden" value="${salesCheck.salesNo }" name="salesNo">
 		<p>상품 이미지</p>
 		<img src="/resources/uploads/${salesCheck.salesImageName}">
 		<p>${salesCheck.salesImageName}</p>
@@ -37,14 +38,16 @@
 			<p>${salesCheck.salesPrice }</p>
 			<hr>
 			<p>구매 수량</p>
-			<input type="number" id="purchaseQuantity" min="1" max="${salesCheck.salesCount}" value="1">
-			
-			
+			<input type="number" id="purchaseQuantity" min="1"
+				max="${salesCheck.salesCount}" value="1">
+
+
 			<!-- 배송비 -->
-			<input type="hidden" value="${salesCheck.salesDelivery }">
 			<hr>
 			<!-- 합계 = 상품가격 * 구매 수량 + 배송비 -->
-			<p id="total">합계: <span id="totalValue">${salesCheck.salesPrice + salesCheck.salesDelivery }</span></p>
+			<p id="total">
+				합계: <span id="totalValue">${salesCheck.salesPrice}</span>
+			</p>
 
 			<p id="address">거래 지역 : ${salesCheck.salesAddress }</p>
 			<hr>
@@ -83,23 +86,41 @@
                 pay_method: "card",
                 merchant_uid: "IMP"+makeMerchantUid, 
                 name : '${salesCheck.salesName}',
-                amount : ${salesCheck.salesPrice + salesCheck.salesDelivery },
-                buyer_id : '개똥이',
-                buyer_name : '개똥이',
-                buyer_tel : '010-1234-5678',
+                amount : ${salesCheck.salesPrice},
+                buyer_id : '${member.memberId}',
+                buyer_name : '${member.memberName}',
+                buyer_tel : '${member.memberPhone}',
                 buyer_addr : '직거래',
-                buyer_postcode : '123-456'
+                buyer_postcode : '0'
             }, function(response){
+            	
             	const {status, err_msg} = response;
             	if(err_msg){
             		alert(err_msg);
             	}
             	if(status === "paid"){
-            		const {imp_uid} = response;
-            		verifyPayment(imp_uid);
-            	}
+            		  $.ajax({
+            	            url: "/paySmsController", // 이 URL은 paySmsController의 실제 경로를 나타내야 합니다.
+            	            type: "POST", // 또는 "GET", "PUT" 등이 될 수 있습니다. 이는 서버 측 설정에 따라 달라집니다.
+            	            success: function(response) {
+            	                // 서버에서 응답이 올 경우 이 함수가 호출됩니다.
+            	                // 필요하다면 여기에 로직을 추가할 수 있습니다.
+            	                console.log(response)
+            	                if(response === "success") {
+            	                	window.location.href = "/pay/payDirectComplete.do?salesNo=${salesCheck.salesNo}";
+            	                }
+            	               /*  window.location.href = "/pay/payComplete"; */
+            	            },
+            	            error: function(jqXHR, textStatus, errorThrown) {
+            	                // 서버에서 오류 응답이 올 경우 이 함수가 호출됩니다.
+            	                // 필요하다면 여기에 오류 처리 로직을 추가할 수 있습니다.
+            	                /* console.error(textStatus, errorThrown); */
+            	            	window.location.href = "/pay/payError.do";
+            	            }
+            	})
             }
-            )};
+            })
+        };
             $(document).ready(function(){
                 $('#purchaseQuantity').on('input', function(){
                     var max = parseInt($(this).attr('max'));
@@ -126,8 +147,7 @@
                     }
 
                     var salesPrice = ${salesCheck.salesPrice}; // 상품 가격
-                    var salesDelivery = ${salesCheck.salesDelivery}; // 배송비
-                    var totalValue = (salesPrice * curr) + salesDelivery; // 합계 계산
+                    var totalValue = salesPrice * curr; // 합계 계산
 
                     $('#totalValue').text(totalValue); // 합계 업데이트
                 });

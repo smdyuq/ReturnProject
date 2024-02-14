@@ -44,7 +44,7 @@
 			  			<tr onclick="location.href='/inquiry/detail.do?ask_no=${item.ask_no}'">               
 			  				<td>${row}</td>
 			  				<td>${item.ask_title}</td>
-			  				<td>${sessionScope.memberId}</td>
+			  				<td>${item.member_id}</td>
 			  				<td>${item.ask_date}</td>
 			  				<td>${0 < item.commentCount ? 'O' : ''}</td>
 			  			</tr>

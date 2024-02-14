@@ -34,13 +34,27 @@
 				<form action="/sales/enrollSales.do" method="POST"
 					class="needs-validation" enctype="multipart/form-data">
 
-					<div class="row g-3">
-						<div class="col-12">
-							<label for="salesImageName" class="form-label">상품이미지</label> <input
-								type="file" class="form-control" id="salesImageName"
-								name="upload">
-						</div>
+					<div>
+						<input type="file" name="upload" id="files"
+							class="files form-control form-control-sm" multiple>
 					</div>
+					<div class="file_drag">
+						<div class="file_list_header" style="display: none;">
+							<div class="file_list_header_task">
+								<button type="button" class="button_svg_delete">
+									<span class="blind">전체 삭제</span>
+								</button>
+							</div>
+							<div class="file_list_header_title">
+								<span class="text">파일명</span>
+							</div>
+							<div class="file_list_header_volume">
+								<span class="text">용량</span><span id="fileSize">0</span>
+							</div>
+						</div>
+						<ul id="fileList"></ul>
+					</div>
+
 
 					<div class="row g-3">
 						<div class="col-12">
@@ -102,7 +116,7 @@
 								name="salesCount" value="1">
 
 						</div>
-						
+
 						<div class="col-12">
 							<label for="salesChatLink" class="form-label">상품 채팅 링크</label> <input
 								type="text" class="form-control" id="salesChatLink"
@@ -118,3 +132,29 @@
 	</main>
 </body>
 </html>
+
+<script>
+	const dataTransfer = new DataTransfer();
+
+	$("#files")
+			.change(
+					function() {
+
+						let fileArr = document.getElementById("files").files
+
+						if (fileArr != null && fileArr.length > 0) {
+
+							// =====DataTransfer 파일 관리========
+							for (var i = 0; i < fileArr.length; i++) {
+								dataTransfer.items.add(fileArr[i])
+							}
+							document.getElementById("files").files = dataTransfer.files;
+							console.log("dataTransfer =>", dataTransfer.files)
+							console.log("input FIles =>", document
+									.getElementById("files").files)
+							// ==========================================
+
+						}
+
+					})
+</script>

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -114,9 +113,14 @@ public class MemberController {
 
 //	내 상점
 	@GetMapping("storeForm.do")
-	public String storeForm(@RequestParam(value = "memberNo") int memberNo, HttpSession session, Model model) {
-		// 클라이언트에서 새로고침 이벤트를 감지하여 서버에 요청을 보내지 않도록 처리
+	public String storeForm(@RequestParam(value = "memberNo", defaultValue = "0") int memberNo, HttpSession session,
+			Model model) {
+		// 클라이언트에서 새로고침 이벤트를 감지하여 서버에 요청을 보내지 않도록 함
 		boolean isRefreshRequest = isRefreshRequest(session);
+		if (memberNo == 0) {
+			memberNo = (int) session.getAttribute("memberNo");
+		}
+
 		if (!isRefreshRequest) {
 			// 상점 방문 수 증가
 			int storeVisitCount = memberService.storeVisitCount(memberNo);
@@ -155,17 +159,15 @@ public class MemberController {
 
 //	상점 이미지 수정
 	@PostMapping("/storeImageUpdate.do")
-	public String storeImageUpdate(HttpSession session, MemberDTO member, MultipartFile upload) {
+	public String storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> upload) {
 
 		int memberNo = (int) session.getAttribute("memberNo");
 		member.setMemberNo(memberNo);
 
-		int result = 0;
-
 		UploadFile.uploadMethod(upload, member, session);
 
 		// 상품 수정
-		result = memberService.storeImageUpdate(member);
+		int result = memberService.storeImageUpdate(member);
 
 		return "redirect:/member/storeForm.do";
 	}

@@ -33,5 +33,14 @@ public class boardDAO {
 	public int selectCommentCount(SqlSessionTemplate sqlSession, boardDTO board) {
 		return sqlSession.selectOne("boardMapper.selectCommentCount", board);
 	}
+	//memberType 별 게시글 불러오기
+	public int selectListCountByMemberNo(SqlSessionTemplate sqlSession, int memberNo) {
+		return sqlSession.selectOne("boardMapper.selectListCountByMemberNo",memberNo);
+	}
+	public List<boardDTO> selectListByMemberNo(SqlSessionTemplate sqlSession, PageInfo pi, int memberNo) {
+		int offset = (pi.getCpage()-1) * pi.getBoardLimit();
+		RowBounds rb = new RowBounds(offset, pi.getBoardLimit());
+		return sqlSession.selectList("boardMapper.selectListByMemberNo", memberNo, rb);
+	}
 
 }

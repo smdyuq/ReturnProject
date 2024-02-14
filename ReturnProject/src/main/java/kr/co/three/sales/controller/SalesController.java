@@ -77,7 +77,7 @@ public class SalesController {
 
 //	상품 수정
 	@PostMapping("updateSales.do")
-	public String updateSales(SalesDTO sales, HttpSession session, MultipartFile upload) {
+	public String updateSales(SalesDTO sales, HttpSession session, List<MultipartFile> upload) {
 
 		// 판매등록 작성자 조회
 		int salesMember = salesService.selectSalesMember(sales.getSalesNo()); // 판매등록 작성자
@@ -92,14 +92,11 @@ public class SalesController {
 
 			sales.setSalesImageName(fileName);
 
-			boolean deleteFile = UploadFile.deleteFile(fileName);
+			UploadFile.uploadMethod(upload, sales, session);
 
-			if (deleteFile) {
-				UploadFile.uploadMethod(upload, sales, session);
+			// 상품 수정
+			result = salesService.updateSales(sales);
 
-				// 상품 수정
-				result = salesService.updateSales(sales);
-			}
 		}
 		if (salesMember == memberNo) {
 			// upload가 비어있을 경우 : 기존 업로드 정보 유지
@@ -185,7 +182,7 @@ public class SalesController {
 
 //	판매 등록
 	@PostMapping("/enrollSales.do")
-	public String enrollSales(SalesDTO sales, MultipartFile upload, HttpSession session) {
+	public String enrollSales(SalesDTO sales, List<MultipartFile> upload, HttpSession session) {
 
 		int memberNo = (int) session.getAttribute("memberNo");
 		sales.setMemberNo(memberNo);
