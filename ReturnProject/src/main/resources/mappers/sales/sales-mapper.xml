@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="salesMapper">
+
 	<resultMap type="sales" id="salesResultSet">
 		<result column="SALES_NO" property="salesNo"></result>
 		<result column="SALES_NAME" property="salesName"></result>
@@ -24,6 +25,7 @@
 		<result column="SALES_STATUS_STATUS" property="salesStatus"></result>
 	</resultMap>
 
+
 	<!-- 상품관리 전체 리스트 수 -->
 	<select id="salesSelectListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -44,6 +46,7 @@
 		s.MEMBER_NO = #{memberNo}
 		ORDER BY s.SALES_NO DESC
 	</select>
+
 
 	<!-- 상품 수정 폼 이동 -->
 	<select id="updateSalesForm" resultMap="salesResultSet">

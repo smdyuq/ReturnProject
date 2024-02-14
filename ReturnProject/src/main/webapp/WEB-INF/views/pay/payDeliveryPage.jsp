@@ -24,13 +24,16 @@
 
 		<div>
 			<input type="hidden" value="${salesCheck.salesNo }" name="salesNo">
-			<input type="hidden" value="1" id="salesCountHidden" name="salesCount">
+			<input type="hidden" value="1" id="salesCountHidden"
+				name="salesCount">
 			<p>상품 이미지</p>
 			<img src="/resources/uploads/${salesCheck.salesImageName}">
 			<p>${salesCheck.salesImageName}</p>
 			<hr>
+
 			<p>상품 명</p>
 			<p>${salesCheck.salesName }</p>
+
 			<hr>
 			<hr>
 			<label>거래 방법:</label> <a>택배 거래</a>
@@ -92,6 +95,7 @@
         
 
         function kakaoPay() {
+
             var buyer_addr = document.getElementById("sample6_address").value;
             var buyer_postcode = document.getElementById("sample6_postcode").value;
             var salesCount = document.getElementById("purchaseQuantity").value;
@@ -99,6 +103,7 @@
             
             salesCountHidden.value = salesCount;
             
+
             IMP.request_pay({
                 pg : 'kakaopay.TC0ONETIME',
                 pay_method: "card",
@@ -110,7 +115,7 @@
                 buyer_tel : '${member.memberPhone}',
                 buyer_addr : buyer_addr,
                 buyer_postcode : buyer_postcode
-                
+
             }, function(response){
             	
             	const {status, err_msg} = response;
