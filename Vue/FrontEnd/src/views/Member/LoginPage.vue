@@ -10,13 +10,13 @@
       -->
         <form @submit.prevent="login">
           <div class="input-box">
-            <input v-model="username" type="text" name="username" placeholder="아이디">
-            <label for="username" hidden>아이디</label>
+            <input v-model="MemberId" type="text" placeholder="아이디">
+            <label for="MemberId" hidden>아이디</label>
           </div>
   
           <div class="input-box">
-            <input v-model="password" type="password" name="password" placeholder="비밀번호">
-            <label for="password" hidden>비밀번호</label>
+            <input v-model="MemberPwd" type="password" placeholder="비밀번호">
+            <label for="MemberPwd" hidden>비밀번호</label>
           </div>
   
           <button type="submit" class="btn" @click="login()">로그인</button>
@@ -26,21 +26,41 @@
   </template>
   
   <script>
+import axios from 'axios'
+
   export default {
     data() {
       return {
-        username: '',
-        password: ''
+        MemberId: '',
+        MemberPwd: ''
       }
     },
     methods: {
       login() {
+    const userData = {
+      MemberId: this.MemberId,
+      MemberPwd: this.MemberPwd
+    };
+
+    axios.post('/member/login.do', userData)
+      .then(response => {
+        // 로그인 성공 시 처리
+        console.log(response.data); // 서버로부터 받은 데이터
         this.$router.push('/')
+        // 성공적으로 로그인한 후에 다음 단계 수행
+        alert("로그인이 완료되었습니다.")
+      })
+      .catch(error => {
+        alert("로그인을 실패하였습니다.")
+        console.error(error);
+      });
+  }
+        
         // 로그인 로직을 작성예정
         // 서버로 아이디와 비밀번호를 전송하고 응답을 처리하는 코드 등을 추가예정
       }
     }
-  }
+  
   </script>
   
   <style scoped>

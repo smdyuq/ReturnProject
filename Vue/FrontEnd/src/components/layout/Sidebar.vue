@@ -71,8 +71,17 @@ export default {
     position: fixed;
     flex-direction: column;
     justify-content: space-between;
-    z-index: 20;
+    z-index: 20;   
 }
+
+/* 이 부분은 브라우저 창의 크기에 따라 스타일을 변경합니다. */
+/* @media screen and (max-width: 800px) {
+  .SidebarWrapper {
+    width: 70px;
+    height: 200px;
+  }
+} */
+
 
 .topBtn {
     border-style: none;
