@@ -20,17 +20,34 @@
             </div>
             <div>전체페이지</div>
         </div>
-        <div></div>
+        <div class="cardWrapper">
+            <div class="cardWrap" v-for="(item, index) in getUsers" :key="index">
+                <div class="imgWrapper">
+                    <router-link :to="{ path: `/productDetail/${item.id}` }">
+                        <img :src="'http://192.168.0.4/resources/uploads/' + item.salesImageName" style="width: 194px; height: 194px;">
+                    </router-link>
+                </div>
+                <div>
+                    <div>
+                        <router-link :to="{ path: `/productDetail/${item.id}` }">{{ item.salesName }}</router-link>
+                    </div>
+                    <div>
+                        <span>{{ item.salesPrice }}원</span>
+                        <span>{{ item.salesDate }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
-  
+
 <script>
-import { defineComponent, watch } from 'vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
     data() {
         return {
-            selectedCategory: '' // 초기에는 선택된 카테고리가 없도록 빈 문자열로 설정합니다.
+            selectedCategory: ''
         };
     },
     methods: {
@@ -55,7 +72,6 @@ export default defineComponent({
         }
     },
     mounted() {
-        // 현재 라우트에 따라 선택된 카테고리 설정
         switch (this.$route.path) {
             case '/CategoryCloth':
                 this.selectedCategory = '의류';
@@ -76,7 +92,7 @@ export default defineComponent({
     }
 });
 </script>
-  
+
 <style scoped>
 .categoryBar {
     display: flex;
@@ -96,4 +112,3 @@ export default defineComponent({
     text-align: center;
 }
 </style>
-  

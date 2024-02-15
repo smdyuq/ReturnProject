@@ -1,6 +1,6 @@
 <template>
 <div class="cardContainer">
-    <div class="cardWrapper">
+    <!-- <div class="cardWrapper">
         <div class="cardWrap">
             <div class="imgWrapper">
             <div><router-link to="/productDetail"><img src="https://via.placeholder.com/194.jpg" alt="194 * 194 size image"></router-link></div>
@@ -13,12 +13,12 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="cardWrapper">
         <div class="cardWrap" v-for="(item, index) in getUsers" :key="index">
             <div class="imgWrapper" >
-            <div><router-link to="/productDetail"><img :src="'http://192.168.0.4/resources/uploads/' + item.salesImageName" style="width: 194px; height: 194px;"></router-link></div>
+            <div><router-link to="/productDetail"><img :src="'http://192.168.0.24/resources/uploads/' + item.imageName" style="width: 194px; height: 194px;"></router-link></div>
             </div>
             <div> 
                 <div><router-link to="/productDetail">{{ item.salesName }}</router-link></div>
@@ -48,7 +48,7 @@ export default {
     .cardWrapper {
         display:flex;
         width:1024px;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         flex-wrap: wrap;     
     }
     .cardWrap {

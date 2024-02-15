@@ -21,39 +21,41 @@
 </template>
 
 <style scoped>
-    .footerIcon>img {
-        margin-right:2%;
-        margin-top: 5%;
-    }
-    Footer {
-     
-        left: 0;
-        bottom:0;
-        right:0;
-        height: 12rem;
-        width: 100%;
+.footerIcon>img {
+    margin-right: 2%;
+    margin-top: 5%;
+}
 
-        
-    }
+Footer {
 
-    .footerWrapper {
-        text-align: center;
-        display:flex;
-    
-    } 
-    .footerWrap{
-        width:50%;
-        text-align: left;
-        bottom:0;
-        margin-top: 2%;
-        
-    }
-    .footerIcon {
-        justify-content: right;
-        width:50%;
-        display:flex;
-    }
-    
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 12rem;
+    width: 100%;
+
+
+}
+
+.footerWrapper {
+    text-align: center;
+    display: flex;
+
+}
+
+.footerWrap {
+    width: 50%;
+    text-align: left;
+    bottom: 0;
+    margin-top: 2%;
+
+}
+
+.footerIcon {
+    justify-content: right;
+    width: 50%;
+    display: flex;
+}
 </style>
 
 

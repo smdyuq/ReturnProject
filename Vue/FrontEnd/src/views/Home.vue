@@ -38,9 +38,9 @@
     methods: {
       ...mapActions(usersStore, ['addUsers']),
       getUsers() {
-        axiosApi.get('main/mainPage')
+        axiosApi.get('/')
           .then(response => {
-            this.addUsers(response.data.list);
+            this.addUsers(response.data.sales);
           })
           .catch(error => {
             console.error(error);

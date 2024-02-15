@@ -1,6 +1,6 @@
 <template>
   <div class="contact-us">
-    <h2>1:1 문의하기</h2>
+    <h2 style="margin-top:20px; margin-bottom:20px;">1:1 문의하기</h2>
     <form @submit.prevent="submitForm">
       <div class="form-group">
         <label for="title">제목</label>
@@ -10,7 +10,7 @@
         <label for="message">내용</label>
         <textarea id="message" v-model="formData.content" required></textarea>
       </div>
-      <button type="submit">전송</button>
+      <button type="submit" @click="navigateToHome">전송</button>
     </form>
   </div>
 </template>
@@ -34,6 +34,9 @@ export default {
         title: '',
         content: ''
       };
+    },
+    navigateToHome() {
+      this.$router.push('/Board')
     }
   }
 }
@@ -61,6 +64,8 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width:120px;
+  height:50px;
 }
 button:hover {
   background-color: #0056b3;
