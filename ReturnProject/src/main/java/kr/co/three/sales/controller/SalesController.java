@@ -1,17 +1,21 @@
 package kr.co.three.sales.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.three.common.PageInfo;
@@ -22,7 +26,7 @@ import kr.co.three.member.service.MemberServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
 import kr.co.three.sales.service.SalesServiceImpl;
 
-@Controller
+@RestController
 @RequestMapping("/sales")
 public class SalesController {
 
@@ -33,15 +37,17 @@ public class SalesController {
    private MemberServiceImpl memberService;
 
 //   판매하기 페이지로 이동
-   @GetMapping("/enrollSalesForm.do")
-   public String enrollSalesForm() {
-      return "sales/enrollSales";
-   }
+//   @GetMapping("/enrollSalesForm.do")
+//   public String enrollSalesForm() {
+//      return "sales/enrollSales";
+//   }
 
 //   상품관리 페이지로 이동
    @GetMapping("manageSalesForm.do")
-   public String manageSalesForm(SalesDTO sales, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
-         Model model, HttpSession session) {
+   public ResponseEntity<?> manageSalesForm(SalesDTO sales, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
+         HttpSession session) {
+//   public String manageSalesForm(SalesDTO sales, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
+//		 Model model, HttpSession session) {
 
       int memberNo = (int) session.getAttribute("memberNo");
       sales.setMemberNo(memberNo);
@@ -60,24 +66,35 @@ public class SalesController {
       // 목록 불러오기
       List<SalesDTO> list = salesService.salesSelectListAll(pi, sales);
 
-      model.addAttribute("list", list);
-      model.addAttribute("pi", pi);
-      model.addAttribute("row", row);
-      return "sales/manageSales";
+      Map<String, Object> response = new HashMap<>();
+      response.put("list", list);
+      response.put("pi", pi);
+      response.put("row", row);
+//      model.addAttribute("list", list);
+//      model.addAttribute("pi", pi);
+//      model.addAttribute("row", row);
+      return new ResponseEntity<>(response, HttpStatus.OK);
    }
 
 //   상품수정 페이지로 이동
    @GetMapping("updateSalesForm.do")
-   public String updateSalesForm(@RequestParam(value = "salesNo") int salesNo, Model model) {
+	public ResponseEntity<?> updateSalesForm(@RequestParam(value = "salesNo") int salesNo, Model model) {
+//	   public String updateSalesForm(@RequestParam(value = "salesNo") int salesNo, Model model) {
       SalesDTO result = salesService.updateSalesForm(salesNo);
 
-      model.addAttribute("sales", result);
-      return "sales/updateSales";
+      Map<String, Object> response = new HashMap<>();
+      
+      response.put("sales", result);
+//      model.addAttribute("sales", result);
+
+      return new ResponseEntity<>(response, HttpStatus.OK);
+//      return "sales/updateSales";
    }
 
 //   상품 수정
    @PostMapping("updateSales.do")
-   public String updateSales(SalesDTO sales, HttpSession session, List<MultipartFile> upload) {
+   public ResponseEntity<?> updateSales(SalesDTO sales, HttpSession session, List<MultipartFile> upload) {
+//   public String updateSales(SalesDTO sales, HttpSession session, List<MultipartFile> upload) {
 
       // 판매등록 작성자 조회
       int salesMember = salesService.selectSalesMember(sales.getSalesNo()); // 판매등록 작성자
@@ -107,29 +124,37 @@ public class SalesController {
       }
 
       if (result == 1) {
-         return "redirect:/sales/manageSalesForm.do";
+    	  return new ResponseEntity<>("success", HttpStatus.OK);
+//       return "redirect:/sales/manageSalesForm.do";
       } else {
-         return "common/error";
+    	  return new ResponseEntity<>("error", HttpStatus.OK);
+//         return "common/error";
       }
    }
 
 //   상품 삭제
    @GetMapping("deleteSales.do")
-   public String deleteSales(@RequestParam(value = "salesNo") int salesNo) {
+   public ResponseEntity<?> deleteSales(@RequestParam(value = "salesNo") int salesNo) {
+//	public String deleteSales(@RequestParam(value = "salesNo") int salesNo) {
 
       int result = salesService.deleteSales(salesNo);
 
-      return "redirect:/sales/manageSalesForm.do";
+      return new ResponseEntity<>("success", HttpStatus.OK);
+//      return "redirect:/sales/manageSalesForm.do";
 
    }
 
 //   상품 상세
    @GetMapping("detailSales.do")
-   public String detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales, Model model,
+   public ResponseEntity<?> detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales,
          HttpSession session) {
+//	   public String detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales, Model model,
+//			   HttpSession session) {
 
       int memberNo = 0;
-
+      
+      Map<String, Object> response = new HashMap<>();
+      
       try {
          memberNo = (int) session.getAttribute("memberNo");
          sales.setMemberNo(memberNo);
@@ -147,15 +172,19 @@ public class SalesController {
          // 멤버 테이블 데이터 조회
          if (memberNo == selectMemberNo) {
             MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
-            model.addAttribute("member", memberResult);
+            response.put("member", memberResult);
+//            model.addAttribute("member", memberResult);
          } else {
             MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
-            model.addAttribute("member", memberResult);
+            response.put("member", memberResult);
+//            model.addAttribute("member", memberResult);
          }
 
-         model.addAttribute("sales", result);
+         response.put("sales", result);
+//         model.addAttribute("sales", result);
 
-         return "sales/detailSales";
+         return new ResponseEntity<>(response, HttpStatus.OK);
+//         return "sales/detailSales";
 
       } catch (NullPointerException e) {
 
@@ -168,21 +197,26 @@ public class SalesController {
          // 멤버 테이블 데이터 조회
          if (memberNo == selectMemberNo) {
             MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
-            model.addAttribute("member", memberResult);
+            response.put("member", memberResult);
+//            model.addAttribute("member", memberResult);
          } else {
             MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
-            model.addAttribute("member", memberResult);
+            response.put("member", memberResult);
+//            model.addAttribute("member", memberResult);
          }
 
-         model.addAttribute("sales", result);
+         response.put("sales", result);
+//         model.addAttribute("sales", result);
 
-         return "sales/detailSales";
+         return new ResponseEntity<>(response, HttpStatus.OK);
+//         return "sales/detailSales";
       }
    }
 
 //   판매 등록
    @PostMapping("/enrollSales.do")
-   public String enrollSales(SalesDTO sales, List<MultipartFile> upload, HttpSession session) {
+   public ResponseEntity<?> enrollSales(SalesDTO sales, List<MultipartFile> upload, HttpSession session) {
+//	   public String enrollSales(SalesDTO sales, List<MultipartFile> upload, HttpSession session) {
 
       int memberNo = (int) session.getAttribute("memberNo");
       sales.setMemberNo(memberNo);
@@ -200,16 +234,19 @@ public class SalesController {
          sales.setSalesNo(selectSalesNo);
          // 판매 상태 : 판매 중
          int statusResult = salesService.salesStatus(sales.getSalesNo());
-         return "redirect:/sales/manageSalesForm.do";
+         return new ResponseEntity<>("success", HttpStatus.OK);
+//         return "redirect:/sales/manageSalesForm.do";
       } else {
-         return "common/error";
+    	  return new ResponseEntity<>("error", HttpStatus.OK);
+//         return "common/error";
       }
    }
 
 //   찜 목록 추가
    @GetMapping("/likeBtn.do")
    @ResponseBody
-   public String likeBtn(@RequestParam("salesNo") int salesNo, SalesDTO sales, HttpSession session) {
+   public ResponseEntity<?> likeBtn(@RequestParam("salesNo") int salesNo, SalesDTO sales, HttpSession session) {
+//	   public String likeBtn(@RequestParam("salesNo") int salesNo, SalesDTO sales, HttpSession session) {
       int memberNo = (int) session.getAttribute("memberNo");
 
       sales.setMemberNo(memberNo);
@@ -222,9 +259,11 @@ public class SalesController {
       int updateLikesCount = salesService.updateLikesCount(sales);
 
       if (result == 1) {
-         return "success";
+    	  return new ResponseEntity<>("success", HttpStatus.OK);
+//         return "success";
       } else {
-         return "failed";
+    	  return new ResponseEntity<>("failed", HttpStatus.OK);
+//         return "failed";
       }
    }
 

@@ -1,22 +1,26 @@
 package kr.co.three.admin.controller;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.three.admin.dto.adminDTO;
 import kr.co.three.admin.service.adminServiceImpl;
 
-@Controller
+@RestController
 @RequestMapping("/admin")
 public class adminController {
 
@@ -25,21 +29,21 @@ public class adminController {
 	@Autowired
 	private adminServiceImpl adminService;
 
-//	가입 폼으로 이동
-	@GetMapping("/registerForm.do")
-	public String registerForm() {
-		return "admin/member/adminRegister";
-	}
+////	가입 폼으로 이동
+//	@GetMapping("/registerForm.do")
+//	public String registerForm() {
+//		return "admin/member/adminRegister";
+//	}
+//
+//////	로그인 폼으로 이동
+//	@GetMapping("/loginForm.do")
+//	public String loginForm() {
+//		return "admin/main/adminMain";
+//	}
 
-////	로그인 폼으로 이동
-	@GetMapping("/loginForm.do")
-	public String loginForm() {
-		return "admin/main/adminMain";
-	}
-
-//	회원가입
+//	관리자 등록
 	@PostMapping("/register.do")
-	public String register(adminDTO admin) {
+	public ResponseEntity<?> register(adminDTO admin) {
 
 		admin.setMemberPhone("01012345678");
 		admin.setMemberType(0);
@@ -52,30 +56,35 @@ public class adminController {
 		int result = adminService.registerAdmin(admin);
 
 		if (result == 1) {
-			return "admin/member/adminLogin";
+	        return new ResponseEntity<>("success", HttpStatus.OK);
+//			return "admin/member/adminLogin";
 		} else {
-			return "common/error";
+			return new ResponseEntity<>("error", HttpStatus.OK);
+//			return "common/error";
 		}
 	}
 
 //	아이디 중복검사
 	@PostMapping("/checkId.do")
 	@ResponseBody
-	public String checkId(String adminId) {
+	public ResponseEntity<?> checkId(String adminId) {
+//		public String checkId(String adminId) {
 
 		// 아이디 중복검사
 		int result = adminService.checkId(adminId);
 
 		if (result == 1) {
-			return "duplication";
+			return new ResponseEntity<>("duplication", HttpStatus.OK);
+//			return "duplication";
 		} else {
-			return "available";
+			return new ResponseEntity<>("available", HttpStatus.OK);
+//			return "available";
 		}
 	}
 
 //	로그인
 	@PostMapping("/login.do")
-	public String loginIndex(adminDTO admin, HttpSession session, Model model) {
+	public ResponseEntity<?> loginIndex(adminDTO admin, HttpSession session, Model model) {
 
 		adminDTO loginAdmin = adminService.loginAdmin(admin);
 		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
@@ -97,22 +106,27 @@ public class adminController {
 		        session.setAttribute("memberNo", loginAdmin.getMemberNo());
 		        session.setAttribute("memberId", loginAdmin.getMemberId());
 		        session.setAttribute("memberType", loginAdmin.getMemberType());
-
-		        model.addAttribute("admin", admin);
-		        return "admin/main/adminMain";
+		        
+		        Map<String, Object> response = new HashMap<>();
+		        response.put("admin", admin);
+		        return new ResponseEntity<>(response, HttpStatus.OK);
+//		        return "admin/main/adminMain";
 		    } else {
-		        return "common/error";
+		    	return new ResponseEntity<>("error", HttpStatus.OK);
+//		        return "common/error";
 		    }
 	}
 
 	// 로그아웃
 	@GetMapping("/logout.do")
-	public String logout(HttpSession session) {
+	public ResponseEntity<?> logout(HttpSession session) {
+//		public String logout(HttpSession session) {
 
 		session.removeAttribute("memberNo");
 		session.invalidate();
 
-		return "admin/member/adminLogin";
+		return new ResponseEntity<>("success", HttpStatus.OK);
+//		return "admin/member/adminLogin";
 	}
 
 }
