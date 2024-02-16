@@ -91,46 +91,59 @@ public class SalesController {
 //      return "sales/updateSales";
    }
 
-//   상품 수정
-   @PostMapping("updateSales.do")
-   public ResponseEntity<?> updateSales(SalesDTO sales, HttpSession session, List<MultipartFile> upload) {
-//   public String updateSales(SalesDTO sales, HttpSession session, List<MultipartFile> upload) {
+// 상품 수정
+ @PostMapping("updateSales.do")
+ public ResponseEntity<?> updateSales(SalesDTO sales, HttpSession session, List<MultipartFile> uploads) {
+//	 public String updateSales(SalesDTO sales, HttpSession session, List<MultipartFile> uploads) {
 
-      // 판매등록 작성자 조회
-      int salesMember = salesService.selectSalesMember(sales.getSalesNo()); // 판매등록 작성자
+    // 판매등록 작성자 조회
+    int salesMember = salesService.selectSalesMember(sales.getSalesNo()); // 판매등록 작성자
 
-      int memberNo = (int) session.getAttribute("memberNo"); // 로그인 유저
+    int memberNo = (int) session.getAttribute("memberNo"); // 로그인 유저
 
-      int result = 0;
+    int result = 0;
 
-      if (salesMember == memberNo && !upload.isEmpty()) {
-         // 기존 파일이름 조회
-         String fileName = salesService.selectFileName(sales.getSalesNo());
+    int imageResult = 0;
+    int deleteCount = 0;
+    int enrollCount = 0;
+    for (MultipartFile m : uploads) {
+       if (salesMember == memberNo && !m.isEmpty()) {
+          UploadFile.uploadMethod(m, sales, session);
 
-         sales.setSalesImageName(fileName);
+          if (deleteCount == 0) {
+             // 상품 삭제
+             int deleteSales = salesService.deleteUpdateSales(sales);
+             deleteCount++;
+          }
 
-         UploadFile.uploadMethod(upload, sales, session);
+          if (enrollCount == 0) {
+             result = salesService.enrollSales(sales);
+             int salesNoSelect = salesService.salesNoSelect();
+             sales.setSalesNo(salesNoSelect);
+             enrollCount++;
+          }
+          int imageInsert = salesService.imageInsert(sales);
 
-         // 상품 수정
-         result = salesService.updateSales(sales);
-
-      }
-      if (salesMember == memberNo) {
-         // upload가 비어있을 경우 : 기존 업로드 정보 유지
-         // uploadPath, uploadName, uploadOriginName이 비워져있는 상태
-
-         // 상품 수정(upload가 비어있을 때)
-         result = salesService.updateSalesEmptyUpload(sales);
-      }
-
-      if (result == 1) {
-    	  return new ResponseEntity<>("success", HttpStatus.OK);
+       } else if (salesMember == memberNo && m.isEmpty()) {
+          int salesNoSelect = salesService.salesNoSelect();
+          sales.setSalesNo(salesNoSelect);
+          int deleteSaleStatus = salesService.deleteSaleStatus(sales);
+          result = salesService.updateSales(sales);
+       }
+    }
+    if (result == 1) {
+       // 판매 번호 조회
+       int selectSalesNo = salesService.selectSalesNo(memberNo);
+       sales.setSalesNo(selectSalesNo);
+       // 판매 상태 : 판매 중
+       int statusResult = salesService.salesStatus(sales.getSalesNo());
+       return new ResponseEntity<>("success", HttpStatus.OK);
 //       return "redirect:/sales/manageSalesForm.do";
-      } else {
-    	  return new ResponseEntity<>("error", HttpStatus.OK);
-//         return "common/error";
-      }
-   }
+    } else {
+    	return new ResponseEntity<>("error", HttpStatus.OK);
+//       return "common/error";
+    }
+ }
 
 //   상품 삭제
    @GetMapping("deleteSales.do")
@@ -144,103 +157,111 @@ public class SalesController {
 
    }
 
-//   상품 상세
-   @GetMapping("detailSales.do")
-   public ResponseEntity<?> detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales,
-         HttpSession session) {
-//	   public String detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales, Model model,
-//			   HttpSession session) {
+// 상품 상세
+ @GetMapping("detailSales.do")
+ public ResponseEntity<?> detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales, Model model,
+       HttpSession session) {
+//	 public String detailSales(@RequestParam(value = "salesNo") int salesNo, SalesDTO sales, Model model,
+//			 HttpSession session) {
 
-      int memberNo = 0;
-      
-      Map<String, Object> response = new HashMap<>();
-      
-      try {
-         memberNo = (int) session.getAttribute("memberNo");
-         sales.setMemberNo(memberNo);
-         sales.setSalesNo(salesNo);
+    int memberNo = 0;
+    
+    Map<String, Object> response = new HashMap<>();
 
-         // 최근 본 상품
-         int recentSales = salesService.recentSales(sales);
+    try {
+       memberNo = (int) session.getAttribute("memberNo");
+       sales.setMemberNo(memberNo);
+       sales.setSalesNo(salesNo);
 
-         // 상품 상세
-         SalesDTO result = salesService.detailSales(salesNo);
+       // 최근 본 상품
+       int recentSales = salesService.recentSales(sales);
 
-         // 판매상품 회원번호 조회
-         int selectMemberNo = salesService.selectMemberNo(sales.getSalesNo());
+       // 상품 상세
+       SalesDTO result = salesService.detailSales(salesNo);
 
-         // 멤버 테이블 데이터 조회
-         if (memberNo == selectMemberNo) {
-            MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
-            response.put("member", memberResult);
-//            model.addAttribute("member", memberResult);
-         } else {
-            MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
-            response.put("member", memberResult);
-//            model.addAttribute("member", memberResult);
-         }
+       // 이미지 상세
+       List<String> ImageSelect = salesService.ImageSelect(salesNo);
 
-         response.put("sales", result);
-//         model.addAttribute("sales", result);
+       // 판매상품 회원번호 조회
+       int selectMemberNo = salesService.selectMemberNo(sales.getSalesNo());
 
-         return new ResponseEntity<>(response, HttpStatus.OK);
-//         return "sales/detailSales";
+       // 멤버 테이블 데이터 조회
+       if (memberNo == selectMemberNo) {
+          MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
+          response.put("member", memberResult);
+//          model.addAttribute("member", memberResult);
+       } else {
+          MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
+          response.put("member", memberResult);
+//          model.addAttribute("member", memberResult);
+       }
 
-      } catch (NullPointerException e) {
+       response.put("sales", result);
+       response.put("image", ImageSelect);
 
-         // 상품 상세
-         SalesDTO result = salesService.detailSales(salesNo);
+       return new ResponseEntity<>(response, HttpStatus.OK);
+//       return "sales/detailSales";
 
-         // 판매상품 회원번호 조회
-         int selectMemberNo = salesService.selectMemberNo(sales.getSalesNo());
+    } catch (NullPointerException e) {
 
-         // 멤버 테이블 데이터 조회
-         if (memberNo == selectMemberNo) {
-            MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
-            response.put("member", memberResult);
-//            model.addAttribute("member", memberResult);
-         } else {
-            MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
-            response.put("member", memberResult);
-//            model.addAttribute("member", memberResult);
-         }
+       // 상품 상세
+       SalesDTO result = salesService.detailSales(salesNo);
 
-         response.put("sales", result);
-//         model.addAttribute("sales", result);
+       // 판매상품 회원번호 조회
+       int selectMemberNo = salesService.selectMemberNo(sales.getSalesNo());
 
-         return new ResponseEntity<>(response, HttpStatus.OK);
-//         return "sales/detailSales";
-      }
-   }
+       // 멤버 테이블 데이터 조회
+       if (memberNo == selectMemberNo) {
+          MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
+          response.put("member", memberResult);
+//          model.addAttribute("member", memberResult);
+       } else {
+          MemberDTO memberResult = memberService.selectMemberData(selectMemberNo);
+          response.put("member", memberResult);
+//          model.addAttribute("member", memberResult);
+       }
 
-//   판매 등록
-   @PostMapping("/enrollSales.do")
-   public ResponseEntity<?> enrollSales(SalesDTO sales, List<MultipartFile> upload, HttpSession session) {
-//	   public String enrollSales(SalesDTO sales, List<MultipartFile> upload, HttpSession session) {
+       response.put("sales", result);
+//       model.addAttribute("sales", result);
 
-      int memberNo = (int) session.getAttribute("memberNo");
-      sales.setMemberNo(memberNo);
+       return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+ }
 
-      // 업로드된 파일이 존재하는지 확인
-      if (upload != null && !upload.isEmpty()) {
-         UploadFile.uploadMethod(upload, sales, session);
-      }
+//판매 등록
+@PostMapping("/enrollSales.do")
+public ResponseEntity<?> enrollSales(SalesDTO sales, List<MultipartFile> uploads, HttpSession session) {
+//	public String enrollSales(SalesDTO sales, List<MultipartFile> uploads, HttpSession session) {
 
-      int result = salesService.enrollSales(sales);
+  int memberNo = (int) session.getAttribute("memberNo");
+  sales.setMemberNo(memberNo);
 
-      if (result == 1) {
-         // 판매 번호 조회
-         int selectSalesNo = salesService.selectSalesNo(memberNo);
-         sales.setSalesNo(selectSalesNo);
-         // 판매 상태 : 판매 중
-         int statusResult = salesService.salesStatus(sales.getSalesNo());
-         return new ResponseEntity<>("success", HttpStatus.OK);
-//         return "redirect:/sales/manageSalesForm.do";
-      } else {
-    	  return new ResponseEntity<>("error", HttpStatus.OK);
-//         return "common/error";
-      }
-   }
+  int result = salesService.enrollSales(sales);
+
+  int salesNoSelect = salesService.salesNoSelect();
+  sales.setSalesNo(salesNoSelect);
+
+  // 업로드된 파일이 존재하는지 확인
+  for (MultipartFile m : uploads) {
+     if (m != null && !m.isEmpty()) {
+        UploadFile.uploadMethod(m, sales, session);
+        int imageInsert = salesService.imageInsert(sales);
+     }
+  }
+
+  if (result == 1) {
+     // 판매 번호 조회
+     int selectSalesNo = salesService.selectSalesNo(memberNo);
+     sales.setSalesNo(selectSalesNo);
+     // 판매 상태 : 판매 중
+     int statusResult = salesService.salesStatus(sales.getSalesNo());
+     return new ResponseEntity<>("success", HttpStatus.OK);
+//     return "redirect:/sales/manageSalesForm.do";
+  } else {
+	  return new ResponseEntity<>("error", HttpStatus.OK);
+//     return "common/error";
+  }
+}
 
 //   찜 목록 추가
    @GetMapping("/likeBtn.do")

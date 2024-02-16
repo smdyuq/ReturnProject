@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.three.common.PageInfo;
-import kr.co.three.pay.dto.PayDTO;
 import kr.co.three.sales.dao.SalesDAO;
 import kr.co.three.sales.dto.SalesDTO;
 
@@ -122,22 +121,50 @@ public class SalesServiceImpl implements SalesService {
       return salesDAO.updateLikesCount(sales, sqlSession);
    }
 
-//	판매 수량 업데이트
-	@Override
-	public int updateCount(SalesDTO sales) {
-		return salesDAO.updateCount(sales, sqlSession);
-	}
+//   판매 수량 업데이트
+   @Override
+   public int updateCount(SalesDTO sales) {
+      return salesDAO.updateCount(sales, sqlSession);
+   }
 
-//	상품 판매 수 업데이트
-	@Override
-	public int updateCompleteCount(SalesDTO sales) {
-		return salesDAO.updateCompleteCount(sales, sqlSession);
-	}
+//   상품 판매 수 업데이트
+   @Override
+   public int updateCompleteCount(SalesDTO sales) {
+      return salesDAO.updateCompleteCount(sales, sqlSession);
+   }
 
-//	상품 상태 업데이트
-	@Override
-	public int salesStatusUpdate(SalesDTO sales) {
-		return salesDAO.salesStatusUpdate(sales, sqlSession);
-	}
+//   상품 상태 업데이트
+   @Override
+   public int salesStatusUpdate(SalesDTO sales) {
+      return salesDAO.salesStatusUpdate(sales, sqlSession);
+   }
+
+   public int salesNoSelect() {
+      return salesDAO.salesNoSelect(sqlSession);
+   }
+
+   public int imageInsert(SalesDTO sales) {
+      return salesDAO.imageInsert(sales, sqlSession);
+   }
+
+   public int salesInsert(SalesDTO sales) {
+      return salesDAO.salesInsert(sales, sqlSession);
+   }
+
+   public int deleteUpdateSales(SalesDTO sales) {
+      return salesDAO.deleteUpdateSales(sales, sqlSession);
+   }
+
+   public int deleteImage(SalesDTO sales) {
+      return salesDAO.deleteImage(sales, sqlSession);
+   }
+
+   public int deleteSaleStatus(SalesDTO sales) {
+      return salesDAO.deleteSaleStatus(sales, sqlSession);
+   }
+
+   public List<String> ImageSelect(int salesNo) {
+      return salesDAO.ImageSelect(salesNo, sqlSession);
+   }
 
 }

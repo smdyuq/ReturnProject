@@ -25,7 +25,6 @@ public class SalesDAO {
 
       // 작은 규모일 경우에만 사용하는것을 권장
       RowBounds rb = new RowBounds(offset, pi.getBoardLimit());
-
       return sqlSession.selectList("salesMapper.salesSelectListAll", sales, rb);
    }
 
@@ -104,20 +103,47 @@ public class SalesDAO {
       return sqlSession.update("salesMapper.updateLikesCount", sales);
    }
 
-//	판매 수량 업데이트
-	public int updateCount(SalesDTO sales, SqlSessionTemplate sqlSession) {
-		return sqlSession.update("salesMapper.updateCount", sales);
-	}
+//   판매 수량 업데이트
+   public int updateCount(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.update("salesMapper.updateCount", sales);
+   }
 
-//	상품 판매 수 업데이트
-	public int updateCompleteCount(SalesDTO sales, SqlSessionTemplate sqlSession) {
-		return sqlSession.update("salesMapper.updateCompleteCount", sales);
-	}
+//   상품 판매 수 업데이트
+   public int updateCompleteCount(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.update("salesMapper.updateCompleteCount", sales);
+   }
 
-//	상품 상태 업데이트
-	public int salesStatusUpdate(SalesDTO sales, SqlSessionTemplate sqlSession) {
-		return sqlSession.update("salesMapper.salesStatusUpdate", sales);
-	}
+//   상품 상태 업데이트
+   public int salesStatusUpdate(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.update("salesMapper.salesStatusUpdate", sales);
+   }
+
+   public int salesNoSelect(SqlSessionTemplate sqlSession) {
+      return sqlSession.selectOne("salesMapper.salesNoSelect");
+   }
+
+   public int imageInsert(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.insert("salesMapper.imageInsert", sales);
+   }
+
+   public int salesInsert(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.insert("salesMapper.salesInsert", sales);
+   }
+
+   public int deleteUpdateSales(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.delete("salesMapper.deleteUpdateSales", sales);
+   }
+
+   public int deleteImage(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.delete("salesMapper.deleteImage", sales);
+   }
+
+   public int deleteSaleStatus(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.delete("salesMapper.deleteSaleStatus", sales);
+   }
+
+   public List<String> ImageSelect(int salesNo, SqlSessionTemplate sqlSession) {
+      return sqlSession.selectList("salesMapper.ImageSelect", salesNo);
+   }
 
 }
-

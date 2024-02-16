@@ -184,22 +184,24 @@ public class MemberController {
 //		return "member/storeImageUpdate";
 //	}
 
-//	상점 이미지 수정
-	@PostMapping("/storeImageUpdate.do")
-	public ResponseEntity<?> storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> upload) {
-//		public String storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> upload) {
+//  상점 이미지 수정
+  @PostMapping("/storeImageUpdate.do")
+  public ResponseEntity<?> storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> uploads) {
+//	  public String storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> uploads) {
 
-		int memberNo = (int) session.getAttribute("memberNo");
-		member.setMemberNo(memberNo);
+     int memberNo = (int) session.getAttribute("memberNo");
+     member.setMemberNo(memberNo);
 
-		UploadFile.uploadMethod(upload, member, session);
-
-		// 상품 수정
-		int result = memberService.storeImageUpdate(member);
-
-		 return new ResponseEntity<>("success", HttpStatus.OK);
-//		return "redirect:/member/storeForm.do";
-	}
+     for (MultipartFile m : uploads) {
+        if (m != null && !m.isEmpty()) {
+           UploadFile.uploadMethod(m, member, session);
+           // 상품 수정
+           int result = memberService.storeImageUpdate(member);
+        }
+     }
+     return new ResponseEntity<>("success", HttpStatus.OK);
+//     return "redirect:/member/storeForm.do";
+  }
 
 //	소개글 수정
 	@PostMapping("/storeContentUpdate.do")
