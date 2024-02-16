@@ -23,6 +23,7 @@ export default {
     min-height: 100vh;
   }
 
+  
   router-link {
     color:black;
   }

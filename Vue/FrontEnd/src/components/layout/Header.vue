@@ -22,7 +22,7 @@
             </div>
           </div>
           <div style="width:300px;">
-            <ul class="headerList">
+            <ul class="headerList" style="color:white;">
               <li><router-link to="/SalesManagement"><img src="../../assets/img/판매.png" width="30" height="30" style="margin-right:5px 0px">판매</router-link></li>
               <li><router-link to="/StoreProduct"><img src="../../assets/img/내상점.png" width="30" height="30" style="margin-right:5px 0px">내상점</router-link></li>
               <li><a href="/Board" target="_blank"><img src="../../assets/img/문의하기.png" width="30" height="30" style="margin-right:5px 0px">문의</a></li>
@@ -178,6 +178,7 @@ input:focus {
 
 .search {
     width: 32rem;
+    height:30px;
     border: none;
     margin-left: 10px;
 
@@ -196,6 +197,8 @@ ul {
     padding-left: 10px;
     width: 300px;
     float: right;
+    color:turquoise;
+    font-weight:bold;
 }
 
 button {
@@ -274,12 +277,35 @@ a>img {
     font-weight:bold;
     background: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
     -webkit-background-clip: text;
-    /* 웹킷 브라우저에 대한 설정 */
     background-clip: text;
     color: transparent;
     border-bottom:1.5px solid blue;
 
 }
 
+.headerList li {
+    position: relative;
+}
+
+.headerList li::after {
+    content: '';
+    position: absolute;
+    left: 0px;
+    bottom: -5px;
+    width: 0;
+    height: 2px; 
+    background: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
+    transition: width 0.1s ease;
+}
+
+.headerList li:hover::after {
+    width: 100%;
+}
+
+li> a {
+  color:cornflowerblue;
+  font-size:15px;
+  font-weight:bold;
+}
 
 </style>

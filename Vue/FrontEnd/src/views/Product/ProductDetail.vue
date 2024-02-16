@@ -36,13 +36,12 @@
                     <div>전국</div>
                 </div>
                 <div class="buttonWrap">
-                    <button>
+                    <button class="likeBtn">
                         <span></span>
                         <span>찜</span>
                         <span>0</span>
                     </button>
-                    <button>톡</button>
-                    <button @click="showModal">바로구매</button>
+                    <button class="buyBtn" @click="showModal">바로구매</button>
 
                     <div v-if="isModalOpen" class="modal">
                         <div class="modal-content">
@@ -169,12 +168,20 @@ export default {
     /* background-color:skyblue; */
 }
 
-button {
+.buyBtn {
+    background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+    color:white;
     width: 166px;
     height: 56px;
     border: none;
-    background: linear-gradient(125deg,#81ecec,#6c5ce7,#81ecec);
+}
+
+.likeBtn {
+    /* background:gray; */
     color:white;
+    width: 166px;
+    height: 56px;
+    border: none;
 }
 
 .buttonWrap {
