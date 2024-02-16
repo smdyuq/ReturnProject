@@ -75,11 +75,14 @@ export default {
   },
   methods: {
     joinForm() {
+      console.log("a: "  + this.post.memberPwd)
       axiosApi.post("/member/register", this.post)
-        .then((result) => {
-          if (result.status === 200 && this.isVerificationCodeSent ) {
+      .then((result) => {
+          console.log(result);
+          // if (result.status === 200 && this.isVerificationCodeSent ) {
+          if (result.status === 200) {
             alert("회원 가입 성공");
-            this.$router.push("/login");
+            this.$router.push("/loginPage");
           }
         })
         .catch((err) => {

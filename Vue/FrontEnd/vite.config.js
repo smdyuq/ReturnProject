@@ -15,7 +15,7 @@ export default defineConfig({
   },
   proxy: {
     '/*': {
-      target: 'http://192.168.0.4',
+      target: 'http://192.168.0.16',
       changeOrigin: true,
     }
 }
