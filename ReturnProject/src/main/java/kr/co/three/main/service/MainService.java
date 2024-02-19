@@ -30,10 +30,7 @@ public interface MainService {
 //	의류 카테고리
 	List<SalesDTO> clothes();
 
-//	향수 카테고리
-	List<SalesDTO> perfume();
-
-//	푸드 카테고리
+//	식품 카테고리
 	List<SalesDTO> food();
 
 //	주얼리 카테고리

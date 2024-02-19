@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.three.common.PageInfo;
-import kr.co.three.pay.dto.PayDTO;
 import kr.co.three.sales.dao.SalesDAO;
 import kr.co.three.sales.dto.SalesDTO;
 
@@ -122,22 +121,70 @@ public class SalesServiceImpl implements SalesService {
       return salesDAO.updateLikesCount(sales, sqlSession);
    }
 
-//	판매 수량 업데이트
-	@Override
-	public int updateCount(SalesDTO sales) {
-		return salesDAO.updateCount(sales, sqlSession);
-	}
+//   판매 수량 업데이트
+   @Override
+   public int updateCount(SalesDTO sales) {
+      return salesDAO.updateCount(sales, sqlSession);
+   }
 
-//	상품 판매 수 업데이트
-	@Override
-	public int updateCompleteCount(SalesDTO sales) {
-		return salesDAO.updateCompleteCount(sales, sqlSession);
-	}
+//   상품 판매 수 업데이트
+   @Override
+   public int updateCompleteCount(SalesDTO sales) {
+      return salesDAO.updateCompleteCount(sales, sqlSession);
+   }
 
-//	상품 상태 업데이트
-	@Override
-	public int salesStatusUpdate(SalesDTO sales) {
-		return salesDAO.salesStatusUpdate(sales, sqlSession);
-	}
+//   상품 상태 업데이트
+   @Override
+   public int salesStatusUpdate(SalesDTO sales) {
+      return salesDAO.salesStatusUpdate(sales, sqlSession);
+   }
+
+//   sales 번호 가져오기
+   @Override
+   public int salesNoSelect() {
+      return salesDAO.salesNoSelect(sqlSession);
+   }
+
+//   이미지 등록
+   @Override
+   public int imageInsert(SalesDTO sales) {
+      return salesDAO.imageInsert(sales, sqlSession);
+   }
+
+//   sales 인설트
+   @Override
+   public int salesInsert(SalesDTO sales) {
+      return salesDAO.salesInsert(sales, sqlSession);
+   }
+
+//   sales 삭제
+   @Override
+   public int deleteUpdateSales(SalesDTO sales) {
+      return salesDAO.deleteUpdateSales(sales, sqlSession);
+   }
+
+//   이미지 삭제
+   @Override
+   public int deleteImage(SalesDTO sales) {
+      return salesDAO.deleteImage(sales, sqlSession);
+   }
+
+//   salesStatus 삭제
+   @Override
+   public int deleteSaleStatus(SalesDTO sales) {
+      return salesDAO.deleteSaleStatus(sales, sqlSession);
+   }
+
+//   이미지 조회
+   @Override
+   public List<String> ImageSelect(int salesNo) {
+      return salesDAO.ImageSelect(salesNo, sqlSession);
+   }
+
+//   결제 완료 정보 조회
+   @Override
+   public int selectPayInfo(SalesDTO sales) {
+      return salesDAO.selectPayInfo(sales, sqlSession);
+   }
 
 }

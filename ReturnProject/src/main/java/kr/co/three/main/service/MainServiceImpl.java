@@ -63,13 +63,7 @@ public class MainServiceImpl implements MainService {
 		return mainDAO.clothes(sqlSession);
 	}
 
-//	향수 카테고리
-	@Override
-	public List<SalesDTO> perfume() {
-		return mainDAO.perfume(sqlSession);
-	}
-
-//	푸드 카테고리
+//	식품 카테고리
 	@Override
 	public List<SalesDTO> food() {
 		return mainDAO.food(sqlSession);

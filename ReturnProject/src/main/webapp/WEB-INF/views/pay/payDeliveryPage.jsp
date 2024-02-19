@@ -27,8 +27,7 @@
 			<input type="hidden" value="1" id="salesCountHidden"
 				name="salesCount">
 			<p>상품 이미지</p>
-			<img src="/resources/uploads/${salesCheck.salesImageName}">
-			<p>${salesCheck.salesImageName}</p>
+			<img src="/resources/uploads/${salesCheck.imageName}">
 			<hr>
 
 			<p>상품 명</p>
