@@ -160,16 +160,33 @@ public class boardController {
 //		return "admin/board/boardEnroll";
 //	}
 
+////	1:1 문의 등록
+//	@PostMapping("/enroll.do")
+//	public String boardEnroll(boardDTO board, HttpSession session)
+//			throws IllegalStateException, IOException {
+//
+//		int memberNo = (int) session.getAttribute("memberNo");
+//		board.setMember_no(memberNo);
+//
+//		System.out.println("asd : " + board.getAsk_title());
+//
+//		int result = boardService.enrollBoard(board);
+//
+//		if (result > 0) {
+//			return "success";
+//		} else {
+//			return "error";
+//		}
+//
+//	}
+
 //	1:1 문의 등록
-	@PostMapping("enroll")
-	public ResponseEntity<?> boardEnroll(@RequestBody boardDTO board, MultipartFile upload, HttpSession session)
+	@PostMapping("/enroll")
+	public ResponseEntity<?> boardEnroll(@RequestBody boardDTO board, HttpSession session)
 			throws IllegalStateException, IOException {
 
 		int memberNo = (int) session.getAttribute("memberNo");
 		board.setMember_no(memberNo);
-		board.setAsk_image_name("임시 이미지 이름");
-		board.setAsk_image_path("임시 이미지 경로");
-		System.out.println("asd : " + board.getAsk_title());
 
 		int result = boardService.enrollBoard(board);
 

@@ -401,9 +401,8 @@ public class SalesController {
 
 //	판매 등록
 	@PostMapping("/enrollSales")
-	public ResponseEntity<?> enrollSales(@RequestBody SalesDTO sales, List<MultipartFile> uploads,
+	public ResponseEntity<?> enrollSales(List<MultipartFile> uploads, @RequestBody SalesDTO sales,
 			HttpSession session) {
-
 		int memberNo = (int) session.getAttribute("memberNo");
 		sales.setMemberNo(memberNo);
 

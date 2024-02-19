@@ -1,7 +1,8 @@
 package kr.co.three.sales.dto;
 
 import java.sql.Date;
-import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,5 +37,6 @@ public class SalesDTO {
 	private String imageName;
 	private String imagePath;
 	private String originImageName;
-
+	
+	private MultipartFile data;
 }
