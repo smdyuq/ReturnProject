@@ -1,8 +1,8 @@
 <template>
     <HeaderVue></HeaderVue>
     <SidebarVue></SidebarVue>
-    <NavVue></NavVue>
-    <product-manager/>
+    <StoreLike></StoreLike>
+    <card-wrapper></card-wrapper>
     <FooterVue></FooterVue>
 </template>
 
@@ -10,16 +10,16 @@
 import HeaderVue from '../components/layout/Header.vue'
 import SidebarVue from '../components/layout/Sidebar.vue'
 import FooterVue from '../components/layout/Footer.vue'
-import NavVue from '../components/layout/Nav.vue'
-import ProductManager from '../components/product/ProductManager.vue'
+import StoreLike from '../components/layout/StoreLike.vue'
+import CardWrapper from '..//components/layout/CardWrapper.vue'
 
 export default {
     components: {
         HeaderVue,
         SidebarVue,
         FooterVue,
-        NavVue,
-        ProductManager
+        StoreLike,
+        CardWrapper
 
     }
 }

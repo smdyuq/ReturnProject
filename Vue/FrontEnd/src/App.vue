@@ -1,22 +1,31 @@
 <template>
   <div class="app">
-    <router-view></router-view>
+    <router-view>
+   
+    </router-view>
   </div>
 </template>
 
 <script>
-import Home from "./views/Home.vue"
+import Header from "./components/layout/Header.vue";
+import Home from "./views/Home.vue";
+
+
 export default {
-  components:{Home}
+  components:{ Home, Header}
 }
 </script>
 
 <style scoped>
   .app {
     /* background-color: lightblue; */
-   width:1024px;
-   min-height: 100vh;
-   
+    width:1024px;
+    min-height: 100vh;
+  }
+
+  
+  router-link {
+    color:black;
   }
 </style>
 

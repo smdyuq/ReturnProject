@@ -37,6 +37,7 @@ public class SalesDTO {
 	private String imageName;
 	private String imagePath;
 	private String originImageName;
-	
+
 	private MultipartFile data;
+
 }
