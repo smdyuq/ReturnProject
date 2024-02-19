@@ -111,10 +111,10 @@ public class boardController {
 //		model.addAttribute("status", status);
 //		model.addAttribute("listCount", listCount);
 
-//		session.setAttribute("action", "/inquiry/boardList.do");
-//
-//		session.removeAttribute("msg");
-//		session.removeAttribute("status");
+		session.setAttribute("action", "/inquiry/boardList.do");
+
+		session.removeAttribute("msg");
+		session.removeAttribute("status");
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 //		return "admin/board/boardList";

@@ -101,18 +101,23 @@ public class MemberController {
 		
 		MemberDTO loginUser = memberService.loginMember(member);
 
-		System.out.println();
+		Map<String, Object> response = new HashMap<>();
+		
 		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
 		if (!Objects.isNull(loginUser)
 				&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
-			session.setAttribute("memberNo", loginUser.getMemberNo());
-			session.setAttribute("memberId", loginUser.getMemberId());
-			session.setAttribute("memberType", loginUser.getMemberType());
+			response.put("memberNo", loginUser.getMemberNo());
+			response.put("memberId", loginUser.getMemberId());
+			response.put("memberType", loginUser.getMemberType());
+//			session.setAttribute("memberNo", loginUser.getMemberNo());
+//			session.setAttribute("memberId", loginUser.getMemberId());
+//			session.setAttribute("memberType", loginUser.getMemberType());
 
-			 return new ResponseEntity<>("success", HttpStatus.OK);
+			 return new ResponseEntity<>(response, HttpStatus.OK);
+//			 return new ResponseEntity<>("success", HttpStatus.OK);
 //			return "redirect:/";
 		} else {
-			return new ResponseEntity<>("error", HttpStatus.OK);
+			return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
 //			return "common/error";
 		}
 	}
