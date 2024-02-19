@@ -72,18 +72,33 @@ public class MemberController {
 		}
 	}
 
+////	아이디 중복검사
+//	@PostMapping("/checkId.do")
+//	@ResponseBody
+//	public String checkId(String memberId) {
+//
+//		// 아이디 중복검사
+//		int result = memberService.checkId(memberId);
+//
+//		if (result == 1) {
+//			return "duplication";
+//		} else {
+//			return "available";
+//		}
+//	}
+
 //	아이디 중복검사
-	@PostMapping("/checkId.do")
+	@PostMapping("/checkId")
 	@ResponseBody
-	public String checkId(String memberId) {
+	public ResponseEntity<?> checkId(String memberId) {
 
 		// 아이디 중복검사
 		int result = memberService.checkId(memberId);
 
 		if (result == 1) {
-			return "duplication";
+			return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
-			return "available";
+			return new ResponseEntity<>("error", HttpStatus.OK);
 		}
 	}
 
@@ -127,19 +142,71 @@ public class MemberController {
 		}
 	}
 
+////	로그아웃
+//	@GetMapping("/logout.do")
+//	public String logout(HttpSession session) {
+//
+//		session.invalidate();
+//
+//		return "redirect:/";
+//	}
+
 //	로그아웃
-	@GetMapping("/logout.do")
-	public String logout(HttpSession session) {
+	@GetMapping("/logout")
+	public ResponseEntity<?> logout(HttpSession session) {
 
 		session.invalidate();
 
-		return "redirect:/";
+		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
+////	내 상점
+//	@GetMapping("/storeForm.do")
+//	public String storeForm(@RequestParam(value = "memberNo", defaultValue = "0") int memberNo, HttpSession session,
+//			Model model) {
+//		// 클라이언트에서 새로고침 이벤트를 감지하여 서버에 요청을 보내지 않도록 함
+//		boolean isRefreshRequest = isRefreshRequest(session);
+//		if (memberNo == 0) {
+//			memberNo = (int) session.getAttribute("memberNo");
+//		}
+//
+//		if (!isRefreshRequest) {
+//			// 상점 방문 수 증가
+//			int storeVisitCount = memberService.storeVisitCount(memberNo);
+//		}
+//
+//		// 멤버 테이블 데이터 조회
+//		MemberDTO memberResult = memberService.selectMemberData(memberNo);
+//		// 상품 테이블 데이터 조회
+//		List<SalesDTO> salesResult = memberService.selectSalesData(memberNo);
+//		// 찜 조회
+//		List<SalesDTO> likeResult = memberService.selectLikeData(memberNo);
+//		// 상품 판매수 데이터 조회
+//		int salesCompleteResult = memberService.selectSalesComplete(memberNo);
+//
+//		model.addAttribute("member", memberResult);
+//		model.addAttribute("sales", salesResult);
+//		model.addAttribute("like", likeResult);
+//		model.addAttribute("salesComplete", salesCompleteResult);
+//
+//		return "member/store";
+//	}
+//
+//	private boolean isRefreshRequest(HttpSession session) {
+//		// 이전 요청 시간을 세션에 저장하여 새로고침 여부를 확인
+//		Long previousRequestTime = (Long) session.getAttribute("previousRequestTime");
+//		long currentRequestTime = System.currentTimeMillis();
+//		session.setAttribute("previousRequestTime", currentRequestTime);
+//
+//		// 이전 요청 시간이 존재하지 않거나, 일정 시간 내에 중복 요청이 들어온 경우 새로고침으로 간주
+//		long refreshInterval = 1000; // 1초
+//		return previousRequestTime != null && (currentRequestTime - previousRequestTime) < refreshInterval;
+//	}
+
 //	내 상점
-	@GetMapping("storeForm.do")
-	public String storeForm(@RequestParam(value = "memberNo", defaultValue = "0") int memberNo, HttpSession session,
-			Model model) {
+	@GetMapping("/storeForm")
+	public ResponseEntity<?> storeForm(@RequestParam(value = "memberNo", defaultValue = "0") int memberNo,
+			HttpSession session) {
 		// 클라이언트에서 새로고침 이벤트를 감지하여 서버에 요청을 보내지 않도록 함
 		boolean isRefreshRequest = isRefreshRequest(session);
 		if (memberNo == 0) {
@@ -160,12 +227,14 @@ public class MemberController {
 		// 상품 판매수 데이터 조회
 		int salesCompleteResult = memberService.selectSalesComplete(memberNo);
 
-		model.addAttribute("member", memberResult);
-		model.addAttribute("sales", salesResult);
-		model.addAttribute("like", likeResult);
-		model.addAttribute("salesComplete", salesCompleteResult);
+		Map<String, Object> response = new HashMap<>();
 
-		return "member/store";
+		response.put("member", memberResult);
+		response.put("sales", salesResult);
+		response.put("like", likeResult);
+		response.put("salesComplete", salesCompleteResult);
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
 	private boolean isRefreshRequest(HttpSession session) {
@@ -179,15 +248,33 @@ public class MemberController {
 		return previousRequestTime != null && (currentRequestTime - previousRequestTime) < refreshInterval;
 	}
 
-//	상점 이미지 수정폼
-	@GetMapping("/storeImageUpdateForm.do")
-	public String storeImageUpdateForm() {
-		return "member/storeImageUpdate";
-	}
+////	상점 이미지 수정폼
+//	@GetMapping("/storeImageUpdateForm.do")
+//	public String storeImageUpdateForm() {
+//		return "member/storeImageUpdate";
+//	}
+
+////	상점 이미지 수정
+//	@PostMapping("/storeImageUpdate.do")
+//	public String storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> uploads) {
+//
+//		int memberNo = (int) session.getAttribute("memberNo");
+//		member.setMemberNo(memberNo);
+//
+//		for (MultipartFile m : uploads) {
+//			if (m != null && !m.isEmpty()) {
+//				UploadFile.uploadMethod(m, member, session);
+//				// 상품 수정
+//				int result = memberService.storeImageUpdate(member);
+//			}
+//		}
+//		return "redirect:/member/storeForm.do";
+//	}
 
 //	상점 이미지 수정
-	@PostMapping("/storeImageUpdate.do")
-	public String storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> uploads) {
+	@PostMapping("/storeImageUpdate")
+	public ResponseEntity<?> storeImageUpdate(HttpSession session, @RequestBody MemberDTO member,
+			List<MultipartFile> uploads) {
 
 		int memberNo = (int) session.getAttribute("memberNo");
 		member.setMemberNo(memberNo);
@@ -199,14 +286,32 @@ public class MemberController {
 				int result = memberService.storeImageUpdate(member);
 			}
 		}
-		return "redirect:/member/storeForm.do";
+		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
+////	소개글 수정
+//	@PostMapping("/storeContentUpdate.do")
+//	@ResponseBody
+//	public String storeContentUpdate(@RequestParam("memberContent") String memberContent, HttpSession session,
+//			MemberDTO member) {
+//		int memberNo = (int) session.getAttribute("memberNo");
+//		member.setMemberNo(memberNo);
+//		member.setMemberContent(memberContent);
+//
+//		int result = memberService.storeContentUpdate(member);
+//
+//		if (result == 1) {
+//			return "success";
+//		} else {
+//			return "error";
+//		}
+//	}
+
 //	소개글 수정
-	@PostMapping("/storeContentUpdate.do")
+	@PostMapping("/storeContentUpdate")
 	@ResponseBody
-	public String storeContentUpdate(@RequestParam("memberContent") String memberContent, HttpSession session,
-			MemberDTO member) {
+	public ResponseEntity<?> storeContentUpdate(@RequestParam("memberContent") String memberContent,
+			HttpSession session, @RequestBody MemberDTO member) {
 		int memberNo = (int) session.getAttribute("memberNo");
 		member.setMemberNo(memberNo);
 		member.setMemberContent(memberContent);
@@ -214,22 +319,22 @@ public class MemberController {
 		int result = memberService.storeContentUpdate(member);
 
 		if (result == 1) {
-			return "success";
+			return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
-			return "error";
+			return new ResponseEntity<>("error", HttpStatus.OK);
 		}
 	}
 
-	// 회원가입 폼으로 이동
-	@GetMapping("/registerForm.do")
-	public String registerForm() {
-		return "member/register";
-	}
+//	// 회원가입 폼으로 이동
+//	@GetMapping("/registerForm.do")
+//	public String registerForm() {
+//		return "member/register";
+//	}
 
-	// 로그인 폼으로 이동
-	@GetMapping("/loginForm.do")
-	public String loginForm() {
-		return "member/login";
-	}
+//	// 로그인 폼으로 이동
+//	@GetMapping("/loginForm.do")
+//	public String loginForm() {
+//		return "member/login";
+//	}
 
 }
