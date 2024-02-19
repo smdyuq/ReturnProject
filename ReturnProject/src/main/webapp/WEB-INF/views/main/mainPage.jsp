@@ -64,15 +64,6 @@
 
 	<c:choose>
 		<c:when test="${sessionScope.memberNo == null }">
-			<a href="/member/loginForm.do">채팅</a>
-		</c:when>
-		<c:otherwise>
-			<a href="/">채팅</a>
-		</c:otherwise>
-	</c:choose>
-	
-	<c:choose>
-		<c:when test="${sessionScope.memberNo == null }">
 			<a href="/member/loginForm.do">1:1 문의</a>
 		</c:when>
 		<c:otherwise>
@@ -83,15 +74,15 @@
 	<p>카테고리</p>
 	<ul>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=homeAppliances'">가전</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=가전'">가전</p></li>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=clothes'">의류</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=의류'">의류</p></li>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=perfume'">향수</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=향수'">향수</p></li>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=food'">푸드</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=푸드'">푸드</p></li>
 		<li><p
-				onclick="location.href='/main/categorySales.do?salesCategory=jewelry'">주얼리</p></li>
+				onclick="location.href='/main/categorySales.do?salesCategory=주얼리'">주얼리</p></li>
 	</ul>
 </header>
 <body>
@@ -108,7 +99,7 @@
 					onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
 					<p>상품이미지</p>
 					<a href="#"><img class="popular_img"
-						src="/resources/uploads/303x310/${item.salesImageName }"></a>
+						src="/resources/uploads/303x310/${item.imageName }"></a>
 
 					<div class="projectCardDetail">
 

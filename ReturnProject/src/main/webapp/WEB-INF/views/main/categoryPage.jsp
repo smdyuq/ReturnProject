@@ -18,7 +18,7 @@
 		<div class="popula-img"
 			onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
 			<a href="#"><img class="popular_img"
-				src="/resources/uploads/outerimage/300x300/${item.salesImageName }"></a>
+				src="/resources/uploads/121x96/${item.imageName }"></a>
 
 			<div class="projectCardDetail">
 

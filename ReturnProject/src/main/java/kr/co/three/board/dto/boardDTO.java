@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class boardDTO {
-	
+
 	private int ask_no;
 	private String ask_title;
 	private String ask_content;
@@ -21,14 +21,9 @@ public class boardDTO {
 	private String ask_image_name;
 	private int member_no;
 	private String member_id;
-	
-	
+
 	private String searchText = "";
 	private String searchCategory = "";
-		
+
 	private int commentCount;
-	
-//	private String uploadPath; // 파일 경로
-//	private String uploadName; // 수정된 파일 이름
-//	private String uploadOriginName; // 원본 파일 이름
 }

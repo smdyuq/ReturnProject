@@ -42,4 +42,7 @@ public interface MemberService {
 //	소개글 수정
 	int storeContentUpdate(MemberDTO member);
 
+//	상품 판매수 데이터 조회
+	int selectSalesComplete(int memberNo);
+
 }

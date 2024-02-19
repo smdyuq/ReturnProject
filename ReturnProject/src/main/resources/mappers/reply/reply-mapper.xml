@@ -3,7 +3,8 @@
 
 <mapper namespace="replyMapper">
 	<resultMap type="reply" id="replyResultSet">
-		<result column="ask_comment_content" property="ask_comment_content"></result>
+		<result column="ask_comment_content"
+			property="ask_comment_content"></result>
 		<result column="member_no" property="member_no"></result>
 		<result column="ask_no" property="ask_no"></result>
 	</resultMap>
@@ -14,17 +15,12 @@
 		ask_comment
 		WHERE ask_no = #{ask_no}
 	</select>
+
 	<!-- 댓글 작성 -->
 	<insert id="CommentRegist" parameterType="reply">
 		INSERT INTO
 		ask_comment(ask_comment_content, member_no, ask_no)
 		VALUES(#{ask_comment_content}, #{member_no}, #{ask_no})
 	</insert>
-	<!-- 댓글 삭제 -->
-	<delete id="commentDelete">
-		DELETE FROM ask_comment
-		WHERE ask_comment_content =
-		#{ask_comment_content}
-	</delete>
-	
+
 </mapper>

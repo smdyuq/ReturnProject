@@ -12,7 +12,7 @@
 		<div class="row g-3">
 			<div class="col-12">
 				<label for="memberImageName" class="form-label">상품이미지</label> <input
-					type="file" class="form-control" id="memberImageName" name="upload">
+					type="file" class="form-control" id="memberImageName" name="uploads">
 			</div>
 
 			<button type="submit">수정</button>

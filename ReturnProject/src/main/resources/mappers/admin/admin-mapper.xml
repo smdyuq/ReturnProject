@@ -11,11 +11,12 @@
 		<result column="MEMBER_TYPE" property="memberType"></result>
 	</resultMap>
 
-	<!-- 회원가입 -->
+	<!-- 관리자 등록 -->
 	<insert id="registerAdmin" parameterType="admin">
 		INSERT INTO MEMBER
 		VALUES(MEMBER_SEQ.NEXTVAL, #{memberId}, #{memberPwd}, #{memberName},
-		#{memberPhone}, #{memberType}, DEFAULT, DEFAULT, DEFAULT, NULL, DEFAULT)
+		#{memberPhone}, #{memberType}, DEFAULT, DEFAULT, DEFAULT, NULL,
+		DEFAULT)
 	</insert>
 
 	<!-- 아이디 중복검사 -->
