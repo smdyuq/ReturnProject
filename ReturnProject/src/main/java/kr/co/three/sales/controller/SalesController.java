@@ -418,7 +418,6 @@ public class SalesController {
 				int imageInsert = salesService.imageInsert(sales);
 			}
 		}
-
 		if (result == 1) {
 			// 판매 번호 조회
 			int selectSalesNo = salesService.selectSalesNo(memberNo);
