@@ -48,12 +48,7 @@ public class MainDAO {
 		return sqlSession.selectList("salesMapper.clothes");
 	}
 
-//	향수 카테고리
-	public List<SalesDTO> perfume(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("salesMapper.perfume");
-	}
-
-//	푸드 카테고리
+//	식품 카테고리
 	public List<SalesDTO> food(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("salesMapper.food");
 	}

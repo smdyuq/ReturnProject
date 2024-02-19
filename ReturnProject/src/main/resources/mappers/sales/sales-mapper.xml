@@ -236,45 +236,25 @@
       ORDER BY s.SALES_DATE DESC
    </select>
 
-   <!-- 향수 카테고리 -->
-   <select id="perfume" resultMap="salesResultSet">
-      SELECT s.*, i.IMAGE_NAME
-      FROM
-      SALES s
-      LEFT JOIN (
-      SELECT IMAGE_NAME, SALES_NO
-      FROM IMAGE
-      WHERE
-      ROWNUM = 1
-      ORDER BY
-      IMAGE_NO ASC
-      ) i ON s.SALES_NO =
-      i.SALES_NO
-      WHERE
-      s.SALES_CATEGORY =
-      '향수'
-      ORDER BY s.SALES_DATE DESC
-   </select>
-
-   <!-- 푸드 카테고리 -->
-   <select id="food" resultMap="salesResultSet">
-      SELECT s.*, i.IMAGE_NAME
-      FROM
-      SALES s
-      LEFT JOIN (
-      SELECT IMAGE_NAME, SALES_NO
-      FROM IMAGE
-      WHERE
-      ROWNUM = 1
-      ORDER
-      BY
-      IMAGE_NO ASC
-      ) i ON s.SALES_NO = i.SALES_NO
-      WHERE
-      s.SALES_CATEGORY =
-      '푸드'
-      ORDER BY s.SALES_DATE DESC
-   </select>
+	<!-- 푸드 카테고리 -->
+	<select id="food" resultMap="salesResultSet">
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
+		WHERE
+		ROWNUM = 1
+		ORDER
+		BY
+		IMAGE_NO ASC
+		) i ON s.SALES_NO = i.SALES_NO
+		WHERE
+		s.SALES_CATEGORY =
+		'식품'
+		ORDER BY s.SALES_DATE DESC
+	</select>
 
    <!-- 주얼리 카테고리 -->
    <select id="jewelry" resultMap="salesResultSet">
