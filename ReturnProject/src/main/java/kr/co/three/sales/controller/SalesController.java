@@ -368,69 +368,70 @@ public class SalesController {
    }
 
 ////   판매 등록
-//   @PostMapping("/enrollSales.do")
-//   public String enrollSales(SalesDTO sales, List<MultipartFile> uploads, HttpSession session) {
+//	@PostMapping("/enrollSales.do")
+//	public String enrollSales(SalesDTO sales, List<MultipartFile> uploads, HttpSession session) {
 //
-//      int memberNo = (int) session.getAttribute("memberNo");
-//      sales.setMemberNo(memberNo);
+//		int memberNo = (int) session.getAttribute("memberNo");
+//		sales.setMemberNo(memberNo);
 //
-//      int result = salesService.enrollSales(sales);
+//		int result = salesService.enrollSales(sales);
 //
-//      int salesNoSelect = salesService.salesNoSelect();
-//      sales.setSalesNo(salesNoSelect);
+//		int salesNoSelect = salesService.salesNoSelect();
+//		sales.setSalesNo(salesNoSelect);
 //
-//      // 업로드된 파일이 존재하는지 확인
-//      for (MultipartFile m : uploads) {
-//         if (m != null && !m.isEmpty()) {
-//            UploadFile.uploadMethod(m, sales, session);
-//            int imageInsert = salesService.imageInsert(sales);
-//         }
-//      }
+//		// 업로드된 파일이 존재 하는지 확인
+//		for (MultipartFile m : uploads) {
+//			if (m != null && !m.isEmpty()) {
+//				UploadFile.uploadMethod(m, sales, session);
+//				int imageInsert = salesService.imageInsert(sales);
+//			}
+//		}
 //
-//      if (result == 1) {
-//         // 판매 번호 조회
-//         int selectSalesNo = salesService.selectSalesNo(memberNo);
-//         sales.setSalesNo(selectSalesNo);
-//         // 판매 상태 : 판매 중
-//         int statusResult = salesService.salesStatus(sales.getSalesNo());
-//         return "redirect:/sales/manageSalesForm.do";
-//      } else {
-//         return "common/error";
-//      }
-//   }
+//		if (result == 1) {
+//			// 판매 번호 조회
+//			int selectSalesNo = salesService.selectSalesNo(memberNo);
+//			sales.setSalesNo(selectSalesNo);
+//			// 판매 상태 : 판매 중
+//			int statusResult = salesService.salesStatus(sales.getSalesNo());
+//			return "redirect:/sales/manageSalesForm.do";
+//		} else {
+//			return "common/error";
+//		}
+//	}
 
-//   판매 등록
-   @PostMapping("/enrollSales")
-   public ResponseEntity<?> enrollSales(@RequestBody SalesDTO sales, List<MultipartFile> uploads,
-         HttpSession session) {
+//	판매 등록
+	@PostMapping("/enrollSales")
+	public ResponseEntity<?> enrollSales(@RequestBody SalesDTO sales, List<MultipartFile> uploads,
+			HttpSession session) {
 
-      int memberNo = (int) session.getAttribute("memberNo");
-      sales.setMemberNo(memberNo);
+		int memberNo = (int) session.getAttribute("memberNo");
+		sales.setMemberNo(memberNo);
 
-      int result = salesService.enrollSales(sales);
+		int result = salesService.enrollSales(sales);
 
-      int salesNoSelect = salesService.salesNoSelect();
-      sales.setSalesNo(salesNoSelect);
+		int salesNoSelect = salesService.salesNoSelect();
+		sales.setSalesNo(salesNoSelect);
 
-      // 업로드된 파일이 존재하는지 확인
-      for (MultipartFile m : uploads) {
-         if (m != null && !m.isEmpty()) {
-            UploadFile.uploadMethod(m, sales, session);
-            int imageInsert = salesService.imageInsert(sales);
-         }
-      }
+		// 업로드된 파일이 존재하는지 확인
+		for (MultipartFile m : uploads) {
+			if (m != null && !m.isEmpty()) {
+				UploadFile.uploadMethod(m, sales, session);
+				int imageInsert = salesService.imageInsert(sales);
+			}
+		}
 
-      if (result == 1) {
-         // 판매 번호 조회
-         int selectSalesNo = salesService.selectSalesNo(memberNo);
-         sales.setSalesNo(selectSalesNo);
-         // 판매 상태 : 판매 중
-         int statusResult = salesService.salesStatus(sales.getSalesNo());
-         return new ResponseEntity<>("success", HttpStatus.OK);
-      } else {
-         return new ResponseEntity<>("error", HttpStatus.OK);
-      }
-   }
+		if (result == 1) {
+			// 판매 번호 조회
+			int selectSalesNo = salesService.selectSalesNo(memberNo);
+			sales.setSalesNo(selectSalesNo);
+			// 판매 상태 : 판매 중
+			int statusResult = salesService.salesStatus(sales.getSalesNo());
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("error", HttpStatus.OK);
+		}
+	}
+
 
 ////   찜 목록 추가
 //   @GetMapping("/likeBtn.do")
