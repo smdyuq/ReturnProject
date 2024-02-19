@@ -1,7 +1,8 @@
 <template>
     <HeaderVue></HeaderVue>
     <SidebarVue></SidebarVue>
-    <ChatVue></ChatVue>
+    <StoreProduct></StoreProduct>
+    <card-wrapper></card-wrapper>
     <FooterVue></FooterVue>
 </template>
 
@@ -9,16 +10,16 @@
 import HeaderVue from '../components/layout/Header.vue'
 import SidebarVue from '../components/layout/Sidebar.vue'
 import FooterVue from '../components/layout/Footer.vue'
-import ChatVue from '../components/layout/Chat.vue'
+import CardWrapper from '../components/layout/CardWrapper.vue'
+import StoreProduct from '../components/layout/StoreProduct.vue'
 
 export default {
     components: {
-        HeaderVue,
-        SidebarVue,
-        ChatVue,
-        FooterVue
-
-    }
+    HeaderVue,
+    SidebarVue,
+    FooterVue,
+    CardWrapper,
+    StoreProduct
+}
 }
 </script>
-

@@ -2,13 +2,13 @@
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="../../assets/img/배너이미지1.jpg" min-width="1024px" height="300px" class="d-block w-100" alt="...">
+      <router-link to="/Event1"><img src="../../assets/img/배너이미지1.jpg" min-width="1024px" height="300px" class="d-block w-100" alt="..."></router-link>
     </div>
     <div class="carousel-item">
-      <img src="../../assets/img/배너2.jpg" min-width="1024px" height="300px" class="d-block w-100" alt="...">
+      <router-link to="/Event2"><img src="../../assets/img/배너2.jpg" min-width="1024px" height="300px" class="d-block w-100" alt="..."></router-link>
     </div>
     <div class="carousel-item">
-      <img src="../../assets/img/배너3.jpg" width="1024px" height="300px" class="d-block w-100" alt="...">
+      <router-link to="/Event3"><img src="../../assets/img/배너3.jpg" width="1024px" height="300px" class="d-block w-100" alt="..."></router-link>
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -24,7 +24,7 @@
 
 <script>
 export default {
-   
+
     }
 
 </script>

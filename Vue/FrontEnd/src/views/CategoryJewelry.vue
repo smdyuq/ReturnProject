@@ -1,7 +1,7 @@
 <template>
     <Header-vue/>
     <Sidebar-vue/>
-    <CategoryMenu-Vue/>
+    <CategoryJewelryVue/>
     <CardWrapper-Vue/>
     <Footer-Vue/>
 </template>
@@ -12,7 +12,7 @@ import FooterVue from '../components/layout/Footer.vue';
 import SlideVue from '../components/layout/Slide.vue';
 import CardWrapperVue from '../components/layout/CardWrapper.vue';
 import SidebarVue from '../components/layout/Sidebar.vue';
-import CategoryMenuVue from '../components/layout/CategoryMenu.vue';
+import CategoryJewelryVue from '../components/layout/CategoryJewelry.vue';
 
 
 
@@ -23,7 +23,7 @@ export default {
         FooterVue,
         CardWrapperVue,
         SidebarVue,
-        CategoryMenuVue
+        CategoryJewelryVue
     }
 }
 </script>

@@ -2,14 +2,14 @@
     <div class="productManagerWrapper">
 
 <div class="filter">
-    <div>
-        <input style="height:" type="text" v-model="searchQuery" placeholder="검색어를 입력하세요">
+    <div style="border:1px solid black;">
+        <input style="height:46px" type="text" v-model="searchQuery" placeholder="검색어를 입력하세요">
         <button @click="search()" style="float:right;">
             <img class="searchImg" src="../../assets/img/검색.png" width="16" height="16">
         </button>
     </div>
 
-        <div style="display:flex;">
+        <div class="searchCondition" style="display:flex;">
             <select style="height:50px;">
                 <option>1</option>
                 <option>2</option>
@@ -18,7 +18,7 @@
                 <option>5</option>
             </select>
         </div>
-        <div>
+        <div class="searchCondition">
             <select style="height:50px;">
                 <option>전체</option>
                 <option>판매 중</option>
@@ -139,9 +139,9 @@ export default {
         width:1024px;
     }
     button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
 }
     .list {
         display: flex;
@@ -189,10 +189,24 @@ export default {
     }
 
     #select {
-        width:80px;
+        width:90px;
         height:50px;
     
     }
+    input:focus {outline:none;}
 
+    input {
+        border: none;
+        height: 46px;
+        margin-left:20px;
+        margin-right:20px;
+    }
     
+    div > button {
+        height:46px;
+    }
+
+    .searchCondition {
+        margin-left: 20px;
+    }
 </style>
