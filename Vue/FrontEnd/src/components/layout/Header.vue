@@ -59,21 +59,23 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { userStore } from '../../stores/Member';
+
 export default {
   computed: {
-    isLoggedIn() {
-      return this.$session.exists('user'); // 세션이 존재하면 로그인 상태로 판단합니다
-    }
+    isLoggedIn: computed(() => userStore.getMemberId() !== ''), // 로그인 여부 확인
   },
   methods: {
     goLogin() {
       this.$router.push('/loginPage');
+      
     },
     goSignUp() {
       this.$router.push('/signupPage');
     },
     logout() {
-      this.$session.destroy(); // 세션을 파기하여 로그아웃 상태로 만듭니다
+      userStore.setMemberId(''); // 로그아웃 시 회원 정보 초기화
       this.$router.push('/loginPage');
     },
     showMenu() {

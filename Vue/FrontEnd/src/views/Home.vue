@@ -3,9 +3,9 @@
     <HeaderVue></HeaderVue>
     <SidebarVue></SidebarVue>
     <SlideVue />
-    <p v-if="loggedIn">환영합니다, {{ user }}님!</p>
-    <p v-else>로그인이 필요합니다.</p>
-    <p class="todayProduct">오늘의 상품추천</p>
+    <!-- <p v-if="loggedIn">환영합니다, {{ user }}님!</p>
+    <p v-else>로그인이 필요합니다.</p> -->
+    <p class="todayProduct">오늘의 상품추천 {{ getMemberNo }}</p>
     <CardWrapperVue />
     <FooterVue></FooterVue>
   </div>
@@ -18,8 +18,9 @@ import SlideVue from '../components/layout/Slide.vue';
 import CardWrapperVue from '../components/layout/CardWrapper.vue';
 import SidebarVue from '../components/layout/Sidebar.vue';
 import axiosApi from '../services/axios';
-import { mapActions } from 'pinia';
+import { mapActions, mapState } from 'pinia';
 import { usersStore } from '../stores/Home';
+import { userStore } from '../stores/Member';
 
 export default {
   components: {
@@ -36,6 +37,9 @@ export default {
   },
   mounted() {
     this.getUsers();
+  },
+  computed: {
+    ...mapState(userStore, ['getMemberNo'])
   },
   methods: {
     ...mapActions(usersStore, ['addUsers']),

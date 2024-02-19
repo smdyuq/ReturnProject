@@ -4,18 +4,15 @@
       <router-link to="/">
         <div class="headerLogo">리턴나라</div>
       </router-link>
-
       <form @submit.prevent="login">
         <div class="input-box">
           <input v-model="memberId" type="text" placeholder="아이디">
           <label for="memberId" hidden>아이디</label>
         </div>
-
         <div class="input-box">
           <input v-model="memberPwd" type="password" placeholder="비밀번호">
           <label for="memberPwd" hidden>비밀번호</label>
         </div>
-
         <button type="submit" class="btn">로그인</button>
       </form>
     </div>
@@ -23,9 +20,12 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
 import axios from '../../services/axios';
+import { mapActions } from 'pinia';
+import { userStore } from '../../stores/Member'
 
-export default {
+export default defineComponent({
   data() {
     return {
       memberId: '',
@@ -33,6 +33,7 @@ export default {
     };
   },
   methods: {
+    ...mapActions(userStore, ['setMemberNo']),
     login() {
       if (this.memberId.trim() === '' || this.memberPwd.trim() === '') {
         alert('아이디 또는 비밀번호를 입력해주세요.');
@@ -45,10 +46,9 @@ export default {
       };
 
       axios.post('/member/login', userData)
-        .then(response => {
-          if (response.data === 'success') {
-            this.$session.start();
-            this.$session.set('user', this.memberId); // 로그인한 사용자 아이디를 세션에 저장
+      .then(response => {
+          if (response.data.status === 'success') {
+            this.setMemberNo(response.data.memberNo);
             this.$router.push('/');
             alert('로그인이 완료되었습니다.');
           } else {
@@ -61,8 +61,9 @@ export default {
         });
     }
   }
-};
+});
 </script>
+
 
 <!-- 생략: Style 부분 -->
 
