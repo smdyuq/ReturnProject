@@ -379,7 +379,7 @@ public class SalesController {
 //		int salesNoSelect = salesService.salesNoSelect();
 //		sales.setSalesNo(salesNoSelect);
 //
-//		// 업로드된 파일이 존재하는지 확인
+//		// 업로드된 파일이 존재 하는지 확인
 //		for (MultipartFile m : uploads) {
 //			if (m != null && !m.isEmpty()) {
 //				UploadFile.uploadMethod(m, sales, session);
