@@ -209,11 +209,8 @@ public class MainController {
 		} else if (salesCategory.equals("의류")) {
 			// 의류 카테고리
 			salesList = mainService.clothes();
-		} else if (salesCategory.equals("향수")) {
-			// 향수 카테고리
-			salesList = mainService.perfume();
-		} else if (salesCategory.equals("푸드")) {
-			// 푸드 카테고리
+		} else if (salesCategory.equals("식품")) {
+			// 식품 카테고리
 			salesList = mainService.food();
 		} else if (salesCategory.equals("주얼리")) {
 			// 주얼리 카테고리
