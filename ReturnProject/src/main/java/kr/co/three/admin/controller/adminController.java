@@ -31,21 +31,20 @@ public class adminController {
 		return "admin/member/adminRegister";
 	}
 
-////	로그인 폼으로 이동
+//	로그인 폼으로 이동
 	@GetMapping("/loginForm.do")
 	public String loginForm() {
 		return "admin/main/adminMain";
 	}
 
-//	회원가입
+//	관리자 등록
 	@PostMapping("/register.do")
 	public String register(adminDTO admin) {
 
 		admin.setMemberPhone("01012345678");
 		admin.setMemberType(0);
-		
 
-//		패스워드 암호화
+		// 패스워드 암호화
 		String pwd = bcryptPasswordEncoder.encode(admin.getMemberPwd());
 		admin.setMemberPwd(pwd);
 
@@ -63,7 +62,6 @@ public class adminController {
 	@ResponseBody
 	public String checkId(String adminId) {
 
-		// 아이디 중복검사
 		int result = adminService.checkId(adminId);
 
 		if (result == 1) {
@@ -78,34 +76,23 @@ public class adminController {
 	public String loginIndex(adminDTO admin, HttpSession session, Model model) {
 
 		adminDTO loginAdmin = adminService.loginAdmin(admin);
-		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
-//		if (!Objects.isNull(loginAdmin)
-//				&& bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())) {
-//			session.setAttribute("memberNo", loginAdmin.getMemberNo());
-//			session.setAttribute("memberId", loginAdmin.getMemberId());
-//			session.setAttribute("memberType", loginAdmin.getMemberType());
-//
-//			model.addAttribute("admin", admin);
-//			return "admin/main/adminMain";
-//		} else {
-//			return "common/error";
-//		}
-		 if (!Objects.isNull(loginAdmin)
-		            && bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())
-		            && loginAdmin.getMemberType() == 0) {
-			 
-		        session.setAttribute("memberNo", loginAdmin.getMemberNo());
-		        session.setAttribute("memberId", loginAdmin.getMemberId());
-		        session.setAttribute("memberType", loginAdmin.getMemberType());
 
-		        model.addAttribute("admin", admin);
-		        return "admin/main/adminMain";
-		    } else {
-		        return "common/error";
-		    }
+		if (!Objects.isNull(loginAdmin)
+				&& bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())
+				&& loginAdmin.getMemberType() == 0) {
+
+			session.setAttribute("memberNo", loginAdmin.getMemberNo());
+			session.setAttribute("memberId", loginAdmin.getMemberId());
+			session.setAttribute("memberType", loginAdmin.getMemberType());
+
+			model.addAttribute("admin", admin);
+			return "admin/main/adminMain";
+		} else {
+			return "common/error";
+		}
 	}
 
-	// 로그아웃
+//	로그아웃
 	@GetMapping("/logout.do")
 	public String logout(HttpSession session) {
 

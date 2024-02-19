@@ -19,23 +19,21 @@ public class ReplyController {
 	@Inject
 	private ReplyServiceImpl replyService;
 
-	
-	//댓글 등록
+	// 댓글 등록
 	@PostMapping("/InsertComment")
 	@ResponseBody
 	public String InsertComment(@RequestBody ReplyDTO reply, HttpSession session) {
-		int memberNo = (int)session.getAttribute("memberNo");
+		int memberNo = (int) session.getAttribute("memberNo");
 		reply.setMember_no(memberNo);
 
 		int memberType = (int) session.getAttribute("memberType");
-		if (memberType != 0 ) {
+		if (memberType != 0) {
 			return "fail";
 		} else {
 			System.out.println("로그인함. 스크랩 진행");
 
 			replyService.CommentRegist(reply);
-			
-			
+
 			System.out.println("댓글 등록 서비스 성공");
 			return "InsertSuccess";
 		}

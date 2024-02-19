@@ -29,10 +29,6 @@ import kr.co.three.reply.service.ReplyServiceImpl;
 @RequestMapping("/inquiry")
 public class boardController {
 
-	private static final String BOARD_NAME = "C:\\Users\\jaeyun\\git\\ReturnProject\\ReturnProject\\src\\main\\webapp\\resources\\uploads\\";
-
-//	@Autowired
-//	private SessionMessage sessionMessage;
 	@Autowired
 	private boardServiceImpl boardService;
 	@Autowired
@@ -40,17 +36,12 @@ public class boardController {
 	@Autowired
 	private MemberServiceImpl memberService;
 
+//	1:1 문의 게시판 불러오기
 	@GetMapping("/boardList.do")
 	public String boardList(boardDTO board, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
 			ReplyDTO reply, MemberDTO member, Model model, HttpSession session) {
-		// 세션에서 로그인한 사용자의 정보를 가져옵니다.
-		int memberType = (int)session.getAttribute("memberType");
-		int memberNo = (int)session.getAttribute("memberNo");
-		
-//		MemberDTO loginUser = (MemberDTO) session.getAttribute("loginUser");
-//
-//		System.out.println("login :" + loginUser);
-//		System.out.println("memberType :" + loginUser.getMemberType());
+		int memberType = (int) session.getAttribute("memberType");
+		int memberNo = (int) session.getAttribute("memberNo");
 
 		int listCount;
 		List<boardDTO> list;
@@ -59,13 +50,10 @@ public class boardController {
 		int boardLimit = 15;
 
 		if (memberType == 0) {
-			// memberType이 0이면 모든 게시글을 가져옵니다.
 			listCount = boardService.selectListCount(board);
 		} else if (memberType == 1) {
-			// memberType이 1이면 해당 사용자가 작성한 게시글만 가져옵니다.
 			listCount = boardService.selectListCountByMemberNo(memberNo);
 		} else {
-			// memberType이 0이나 1이 아닌 다른 값이면 리스트가 비어있음을 나타냅니다.
 			listCount = 0;
 		}
 
@@ -104,11 +92,13 @@ public class boardController {
 		return "admin/board/boardList";
 	}
 
+//	1:1 문의 등록 폼 이동
 	@GetMapping("enrollForm.do")
 	public String enrollForm() {
 		return "admin/board/boardEnroll";
 	}
 
+//	1:1 문의 등록
 	@PostMapping("enroll.do")
 	public String boardEnroll(boardDTO board, MultipartFile upload, HttpSession session)
 			throws IllegalStateException, IOException {
@@ -129,23 +119,22 @@ public class boardController {
 
 	}
 
+//	1:1 문의 상세보기
 	@GetMapping("/detail.do")
-	public String detailBoard(@RequestParam("ask_no") int askNo, Model model,HttpSession session) {
+	public String detailBoard(@RequestParam("ask_no") int askNo, Model model, HttpSession session) {
 		boardDTO board = boardService.detailBoard(askNo);
 		List<ReplyDTO> list = replyService.getList(askNo);
 		System.out.println(list);
-		
-		//댓글 memberType 사용
-		int memberType = (int)session.getAttribute("memberType");
+
+		int memberType = (int) session.getAttribute("memberType");
 
 		if (board != null) {
 			model.addAttribute("board", board);
 			model.addAttribute("list", list);
-			return "admin/board/boardDetail"; // 상세 정보를 보여줄 뷰의 이름입니다.
+			return "admin/board/boardDetail";
 		} else {
-			// 게시글을 찾을 수 없는 경우, 에러 메시지를 설정하고 에러 페이지로 이동할 수 있도록 처리합니다.
 			model.addAttribute("errorMessage", "요청하신 게시글을 찾을 수 없습니다.");
-			return "error"; // 에러 페이지의 뷰 이름입니다.
+			return "error";
 		}
 
 	}

@@ -1,19 +1,24 @@
 package kr.co.three.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.three.common.UploadFile;
@@ -22,7 +27,7 @@ import kr.co.three.member.service.MemberServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
 import kr.co.three.sales.service.SalesServiceImpl;
 
-@Controller
+@RestController
 @RequestMapping("/member")
 public class MemberController {
 
@@ -35,38 +40,37 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
-//	회원가입
-	@PostMapping("/register.do")
-	public String register(MemberDTO member) {
-
-//		패스워드 암호화
-		String pwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
-		member.setMemberPwd(pwd);
-
-		int result = memberService.registerMember(member);
-
-		if (result == 1) {
-			return "redirect:/";
-		} else {
-			return "common/error";
-		}
-	}
-
-//	// 회원가입
-//	@PostMapping("/register")
-//	public ResponseEntity<?> register(@RequestBody MemberDTO member) {
+////	회원가입
+//	@PostMapping("/register.do")
+//	public String register(MemberDTO member) {
 //
+////		패스워드 암호화
 //		String pwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 //		member.setMemberPwd(pwd);
 //
 //		int result = memberService.registerMember(member);
 //
 //		if (result == 1) {
-//			return new ResponseEntity<>("success", HttpStatus.OK);
+//			return "redirect:/";
 //		} else {
-//			return new ResponseEntity<>("error", HttpStatus.OK);
+//			return "common/error";
 //		}
 //	}
+
+	// 회원가입
+	@PostMapping("/register")
+	public ResponseEntity<?> register(@RequestBody MemberDTO member) {
+
+		String pwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+		member.setMemberPwd(pwd);
+
+		int result = memberService.registerMember(member);
+		if (result == 1) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("error", HttpStatus.OK);
+		}
+	}
 
 //	아이디 중복검사
 	@PostMapping("/checkId.do")
@@ -83,22 +87,43 @@ public class MemberController {
 		}
 	}
 
-//	로그인
-	@PostMapping("/login.do")
-	public String login(MemberDTO member, HttpSession session) {
+////	로그인
+//	@PostMapping("/login.do")
+//	public String login(MemberDTO member, HttpSession session) {
+//
+//		MemberDTO loginUser = memberService.loginMember(member);
+//
+//		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
+//		if (!Objects.isNull(loginUser)
+//				&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
+//			session.setAttribute("memberNo", loginUser.getMemberNo());
+//			session.setAttribute("memberId", loginUser.getMemberId());
+//			session.setAttribute("memberType", loginUser.getMemberType());
+//
+//			return "redirect:/";
+//		} else {
+//			return "common/error";
+//		}
+//	}
+
+	// 로그인
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody MemberDTO member, HttpSession session) {
 
 		MemberDTO loginUser = memberService.loginMember(member);
+		String status = "success";
+		Map<String, Object> response = new HashMap<>();
+		response.put("status", status);
 
-		// loginUser 객체가 비어있지 않을 때 (로그인 성공)
 		if (!Objects.isNull(loginUser)
 				&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginUser.getMemberPwd())) {
-			session.setAttribute("memberNo", loginUser.getMemberNo());
-			session.setAttribute("memberId", loginUser.getMemberId());
-			session.setAttribute("memberType", loginUser.getMemberType());
+			response.put("memberNo", loginUser.getMemberNo());
+			response.put("memberId", loginUser.getMemberId());
+			response.put("memberType", loginUser.getMemberType());
 
-			return "redirect:/";
+			return new ResponseEntity<>(response, HttpStatus.OK);
 		} else {
-			return "common/error";
+			return new ResponseEntity<>("error", HttpStatus.OK);
 		}
 	}
 
@@ -134,8 +159,6 @@ public class MemberController {
 		List<SalesDTO> likeResult = memberService.selectLikeData(memberNo);
 		// 상품 판매수 데이터 조회
 		int salesCompleteResult = memberService.selectSalesComplete(memberNo);
-		System.out.println(salesCompleteResult);
-		
 
 		model.addAttribute("member", memberResult);
 		model.addAttribute("sales", salesResult);
@@ -164,16 +187,18 @@ public class MemberController {
 
 //	상점 이미지 수정
 	@PostMapping("/storeImageUpdate.do")
-	public String storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> upload) {
+	public String storeImageUpdate(HttpSession session, MemberDTO member, List<MultipartFile> uploads) {
 
 		int memberNo = (int) session.getAttribute("memberNo");
 		member.setMemberNo(memberNo);
 
-		UploadFile.uploadMethod(upload, member, session);
-
-		// 상품 수정
-		int result = memberService.storeImageUpdate(member);
-
+		for (MultipartFile m : uploads) {
+			if (m != null && !m.isEmpty()) {
+				UploadFile.uploadMethod(m, member, session);
+				// 상품 수정
+				int result = memberService.storeImageUpdate(member);
+			}
+		}
 		return "redirect:/member/storeForm.do";
 	}
 
@@ -186,11 +211,7 @@ public class MemberController {
 		member.setMemberNo(memberNo);
 		member.setMemberContent(memberContent);
 
-		System.out.println(memberNo);
-		System.out.println(memberContent);
-
 		int result = memberService.storeContentUpdate(member);
-		System.out.println(result);
 
 		if (result == 1) {
 			return "success";

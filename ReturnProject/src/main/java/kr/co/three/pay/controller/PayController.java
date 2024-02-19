@@ -60,8 +60,7 @@ public class PayController {
 
 	}
 
-
-	//모달에서 직거래 클릭했을때
+	// 모달에서 직거래 클릭했을때
 
 	@GetMapping("/payDirectPage.do")
 	public String DirectPayPage(@RequestParam(value = "salesNo") int salesNo, PayDTO pay, SalesDTO sales, Model model,
@@ -75,8 +74,7 @@ public class PayController {
 
 	}
 
-
-	//모달에서 택배거래 클릭했을때
+	// 모달에서 택배거래 클릭했을때
 
 	@GetMapping("/payDeliveryPage.do")
 	public String DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, MemberDTO member, PayDTO pay,
@@ -98,7 +96,7 @@ public class PayController {
 
 //	직거래 결제완료 페이지 불러오기
 	@PostMapping("/payDirectComplete.do")
-	public String payDirectComplete(PayDTO pay, HttpSession session, SalesDTO sales) {
+	public String payDirectComplete(PayDTO pay, HttpSession session, SalesDTO sales, Model model) {
 		int memberNo = (int) session.getAttribute("memberNo");
 		pay.setMemberNo(memberNo);
 		pay.setPayMethod("카카오 페이");
@@ -121,7 +119,11 @@ public class PayController {
 		// 상품 상태 업데이트
 		int salesStatusUpdate = salesService.salesStatusUpdate(sales);
 
-		return "pay/payComplete";
+		// 결제완료 조회
+		int selectPayInfo = salesService.selectPayInfo(sales);
+
+		model.addAttribute("payInfo", selectPayInfo);
+		return "pay/payDirectComplete";
 	}
 
 //	택배거래 결제완료 페이지 불러오기
@@ -147,7 +149,10 @@ public class PayController {
 		// 상품 상태 업데이트
 		int salesStatusUpdate = salesService.salesStatusUpdate(sales);
 
-		return "pay/payComplete";
+		// 결제완료 조회
+		int selectPayInfo = salesService.selectPayInfo(sales);
+
+		return "pay/payDeliveryComplete";
 	}
 
 //	에러

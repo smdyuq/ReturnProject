@@ -13,16 +13,16 @@
 		<result column="SALES_DELIVERY" property="salesDelivery"></result>
 		<result column="SALES_COMMENT" property="salesComment"></result>
 		<result column="SALES_COUNT" property="salesCount"></result>
-		<result column="SALES_IMAGE_NAME" property="salesImageName"></result>
-		<result column="SALES_IMAGE_PATH" property="salesImagePath"></result>
 		<result column="SALES_DATE" property="salesDate"></result>
 		<result column="SALES_UPDATE_DATE" property="salesUpdateDate"></result>
 		<result column="SALES_DELETE_DATE" property="salesDeleteDate"></result>
 		<result column="SALES_COMPLETE" property="salesComplete"></result>
-		<result column="SALES_ORIGIN_IMAGE_PATH"
-			property="salesOriginImagePath"></result>
 		<result column="SALES_CHAT_LINK" property="salesChatLink"></result>
 		<result column="SALES_STATUS_STATUS" property="salesStatus"></result>
+		<result column="IMAGE_NO" property="imageNo"></result>
+		<result column="IMAGE_NAME" property="imageName"></result>
+		<result column="IMAGE_PATH" property="imagePath"></result>
+		<result column="ORIGIN_IMAGE_NAME" property="orginImageName"></result>
 	</resultMap>
 
 
@@ -37,10 +37,18 @@
 	<!-- 상품관리 목록 불러오기 -->
 	<select id="salesSelectListAll" resultMap="salesResultSet">
 		SELECT s.*,
-		ss.SALES_STATUS_STATUS
+		ss.SALES_STATUS_STATUS, i.IMAGE_NAME
 		FROM SALES s
-		JOIN SALES_STATUS ss ON s.SALES_NO =
-		ss.SALES_NO
+		JOIN SALES_STATUS ss
+		ON s.SALES_NO = ss.SALES_NO
+		LEFT JOIN (
+		SELECT SALES_NO, IMAGE_NAME
+		FROM
+		IMAGE
+		WHERE ROWNUM = 1
+		ORDER BY IMAGE_NO ASC
+		) i ON s.SALES_NO =
+		i.SALES_NO
 		WHERE s.SALES_NAME LIKE '%' || #{searchText} || '%'
 		AND
 		s.MEMBER_NO = #{memberNo}
@@ -60,23 +68,30 @@
 	<update id="updateSales" parameterType="sales">
 		UPDATE SALES
 		SET
-		SALES_NAME = #{salesName},
-		SALES_CATEGORY = #{salesCategory},
-		SALES_ADDRESS = #{salesAddress},
-		SALES_CONDITION = #{salesCondition},
-		SALES_PRICE = #{salesPrice},
-		SALES_DELIVERY = #{salesDelivery},
-		SALES_COMMENT = #{salesComment},
-		SALES_COUNT = #{salesCount},
-		SALES_IMAGE_NAME = #{salesImageName},
-		SALES_IMAGE_PATH =
-		#{salesImagePath},
-		SALES_ORIGIN_IMAGE_NAME = #{salesOriginImageName},
-		SALES_UPDATE_DATE = SYSDATE,
-		SALES_CHAT_LINK = #{salesChatLink}
+		SALES_NAME =
+		#{salesName},
+		SALES_CATEGORY =
+		#{salesCategory},
+		SALES_ADDRESS =
+		#{salesAddress},
+		SALES_CONDITION =
+		#{salesCondition},
+		SALES_PRICE =
+		#{salesPrice},
+		SALES_DELIVERY =
+		#{salesDelivery},
+		SALES_COMMENT =
+		#{salesComment},
+		SALES_COUNT =
+		#{salesCount},
+		SALES_UPDATE_DATE =
+		SYSDATE,
+		SALES_CHAT_LINK =
+		#{salesChatLink}
 		WHERE
 		SALES_NO = #{salesNo}
 	</update>
+
 
 	<!-- 상품 삭제 -->
 	<delete id="deleteSales" parameterType="sales">
@@ -110,14 +125,11 @@
 		#{salesDelivery},
 		#{salesComment},
 		#{salesCount},
-		#{salesImageName},
-		#{salesImagePath},
 		DEFAULT,
 		NULL,
 		NULL,
 		DEFAULT,
 		#{memberNo},
-		#{salesOriginImageName},
 		#{salesChatLink},
 		DEFAULT)
 	</insert>
@@ -131,9 +143,9 @@
 
 	<!-- 기존 파일이름 조회 -->
 	<select id="selectFileName" resultType="string">
-		SELECT SALES_IMAGE_NAME
+		SELECT IMAGE_NAME
 		FROM
-		SALES
+		IMAGE
 		WHERE SALES_NO = #{salesNo}
 	</select>
 
@@ -168,58 +180,119 @@
 
 	<!-- 상품 리스트 -->
 	<select id="mainSalesList" resultMap="salesResultSet">
-		SELECT * FROM SALES
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
 		WHERE
-		SALES_NAME LIKE '%' || #{searchWord} || '%'
+		ROWNUM = 1
 		ORDER BY
-		SALES_DATE DESC
+		IMAGE_NO ASC
+		) i ON s.SALES_NO =
+		i.SALES_NO
+		ORDER BY
+		s.SALES_DATE DESC
 	</select>
 
 	<!-- 카테고리 페이지 -->
 
 	<!-- 가전 카테고리 -->
 	<select id="homeAppliances" resultMap="salesResultSet">
-		SELECT * FROM SALES
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
 		WHERE
-		SALES_CATEGORY = 'homeAppliances'
+		ROWNUM = 1
 		ORDER BY
-		SALES_DATE DESC
+		IMAGE_NO ASC
+		) i ON s.SALES_NO = i.SALES_NO
+		WHERE
+		s.SALES_CATEGORY =
+		'가전'
+		ORDER BY s.SALES_DATE DESC
 	</select>
 
 	<!-- 의류 카테고리 -->
 	<select id="clothes" resultMap="salesResultSet">
-		SELECT * FROM SALES
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
 		WHERE
-		SALES_CATEGORY = 'clothes'
+		ROWNUM = 1
 		ORDER BY
-		SALES_DATE DESC
+		IMAGE_NO ASC
+		) i ON s.SALES_NO = i.SALES_NO
+		WHERE
+		s.SALES_CATEGORY =
+		'의류'
+		ORDER BY s.SALES_DATE DESC
 	</select>
 
 	<!-- 향수 카테고리 -->
 	<select id="perfume" resultMap="salesResultSet">
-		SELECT * FROM SALES
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
 		WHERE
-		SALES_CATEGORY = 'perfume'
+		ROWNUM = 1
 		ORDER BY
-		SALES_DATE DESC
+		IMAGE_NO ASC
+		) i ON s.SALES_NO =
+		i.SALES_NO
+		WHERE
+		s.SALES_CATEGORY =
+		'향수'
+		ORDER BY s.SALES_DATE DESC
 	</select>
 
 	<!-- 푸드 카테고리 -->
 	<select id="food" resultMap="salesResultSet">
-		SELECT * FROM SALES
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
 		WHERE
-		SALES_CATEGORY = 'food'
-		ORDER BY
-		SALES_DATE DESC
+		ROWNUM = 1
+		ORDER
+		BY
+		IMAGE_NO ASC
+		) i ON s.SALES_NO = i.SALES_NO
+		WHERE
+		s.SALES_CATEGORY =
+		'푸드'
+		ORDER BY s.SALES_DATE DESC
 	</select>
 
 	<!-- 주얼리 카테고리 -->
 	<select id="jewelry" resultMap="salesResultSet">
-		SELECT * FROM SALES
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
 		WHERE
-		SALES_CATEGORY = 'jewelry'
+		ROWNUM = 1
 		ORDER BY
-		SALES_DATE DESC
+		IMAGE_NO ASC
+		) i ON s.SALES_NO = i.SALES_NO
+		WHERE
+		s.SALES_CATEGORY =
+		'주얼리'
+		ORDER BY s.SALES_DATE DESC
 	</select>
 
 	<!-- 찜 목록 추가 -->
@@ -246,9 +319,18 @@
 
 	<!-- 결제 정보 체크 -->
 	<select id="payCheck" resultMap="salesResultSet">
-		SELECT * FROM SALES
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
 		WHERE
-		SALES_NO = #{salesNo}
+		ROWNUM = 1
+		ORDER BY
+		IMAGE_NO ASC
+		) i ON s.SALES_NO =
+		i.SALES_NO
 	</select>
 
 	<!-- 판매 정보 조회 -->
@@ -323,6 +405,61 @@
 		FROM SALES
 		WHERE MEMBER_NO =
 		#{memberNo}
+	</select>
+
+	<!-- sales 번호 가져오기 -->
+	<select id="salesNoSelect" resultType="_int">
+		SELECT SALES_NO
+		FROM SALES
+		ORDER BY SALES_DATE DESC
+		FETCH FIRST 1 ROW
+		ONLY
+	</select>
+
+	<!-- 이미지 등록 -->
+	<insert id="imageInsert" parameterType="sales">
+		INSERT INTO IMAGE
+		VALUES(IMAGE_SEQ.NEXTVAL, #{imageName}, #{imagePath},
+		#{originImageName}, #{salesNo})
+	</insert>
+
+	<!-- sales 삭제 -->
+	<delete id="deleteUpdateSales" parameterType="sales">
+		DELETE FROM SALES
+		WHERE
+		SALES_NO = #{salesNo}
+	</delete>
+
+	<!-- 이미지 삭제 -->
+	<delete id="deleteImage" parameterType="sales">
+		DELETE FROM IMAGE
+		WHERE
+		SALES_NO = #{salesNo}
+	</delete>
+
+	<!-- salesStatus 삭제 -->
+	<delete id="deleteSaleStatus" parameterType="sales">
+		DELETE FROM
+		SALES_STATUS
+		WHERE
+		SALES_NO = #{salesNo}
+	</delete>
+
+	<!-- 이미지 조회 -->
+	<select id="ImageSelect" resultMap="salesResultSet">
+		SELECT IMAGE_NAME
+		FROM IMAGE
+		WHERE
+		SALES_NO = #{salesNo}
+	</select>
+
+	<!-- 결제 완료 정보 조회 -->
+	<select id="selectPayInfo" resultType="_int">
+		SELECT *
+		FROM SALES
+		JOIN PAY
+		ON SALES.SALES_NO = PAY.SALES_NO
+		WHERE SALES.SALES_NO = #{salesNo};
 	</select>
 
 </mapper>

@@ -2,9 +2,11 @@ package kr.co.three.common;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter // 게터
 @AllArgsConstructor // 모든 매개변수가 있는 생성자
+@ToString
 public class PageInfo {
 	private int listCount;
 	private int cpage;

@@ -1,6 +1,7 @@
 package kr.co.three.sales.dto;
 
 import java.sql.Date;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,9 +20,6 @@ public class SalesDTO {
 	private int salesDelivery;
 	private String salesComment;
 	private int salesCount;
-	private String salesImageName;
-	private String salesImagePath;
-	private String salesOriginImageName;
 	private Date salesDate;
 	private Date salesUpdateDate;
 	private Date salesDeleteDate;
@@ -33,5 +31,10 @@ public class SalesDTO {
 
 	private String searchText = "";
 	private String searchWord = "";
+
+	private int imageNo;
+	private String imageName;
+	private String imagePath;
+	private String originImageName;
 
 }

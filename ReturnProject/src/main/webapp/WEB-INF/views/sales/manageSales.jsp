@@ -72,7 +72,7 @@
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${row}</td>
 										<td
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'"><img
-											src="/resources/uploads/194x194/${item.salesImageName}"></td>
+											src="/resources/uploads/194x194/${item.imageName}"></td>
 										<td
 											onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">${item.salesName}</td>
 										<td
@@ -107,15 +107,15 @@
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link"
-									href="list.do?cpage=${pi.cpage-1}" aria-label="Previous"> <span
-										aria-hidden="true">&laquo;</span>
+									href="/sales/manageSalesForm.do?cpage=${pi.cpage-1}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
 							</c:otherwise>
 						</c:choose>
 
 						<c:forEach var="page" begin="${pi.startPage}" end="${pi.endPage}">
 							<li class="page-item"><a class="page-link"
-								href="list.do?cpage=${page}">${page}</a></li>
+								href="/sales/manageSalesForm.do?cpage=${page}">${page}</a></li>
 						</c:forEach>
 
 						<c:choose>
@@ -126,8 +126,8 @@
 							</c:when>
 							<c:otherwise>
 								<li class="page-item"><a class="page-link"
-									href="list.do?cpage=${pi.cpage+1}" aria-label="Next"> <span
-										aria-hidden="true">&raquo;</span>
+									href="/sales/manageSalesForm.do?cpage=${pi.cpage+1}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 								</a></li>
 							</c:otherwise>
 						</c:choose>

@@ -115,19 +115,19 @@ public class MainController {
 
 		List<SalesDTO> salesList = new ArrayList<>();
 
-		if (salesCategory.equals("homeAppliances")) {
+		if (salesCategory.equals("가전")) {
 			// 가전 카테고리
 			salesList = mainService.homeAppliances();
-		} else if (salesCategory.equals("clothes")) {
+		} else if (salesCategory.equals("의류")) {
 			// 의류 카테고리
 			salesList = mainService.clothes();
-		} else if (salesCategory.equals("perfume")) {
+		} else if (salesCategory.equals("향수")) {
 			// 향수 카테고리
 			salesList = mainService.perfume();
-		} else if (salesCategory.equals("food")) {
+		} else if (salesCategory.equals("푸드")) {
 			// 푸드 카테고리
 			salesList = mainService.food();
-		} else if (salesCategory.equals("jewelry")) {
+		} else if (salesCategory.equals("주얼리")) {
 			// 주얼리 카테고리
 			salesList = mainService.jewelry();
 		}
