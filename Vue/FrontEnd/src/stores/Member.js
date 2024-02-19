@@ -8,8 +8,7 @@ export const userStore = defineStore("userKey", {
     return {
         memberNo: -1,
         memberId: '',
-        memberType:-1
-
+        memberType: 1
     };
   },
   actions: {

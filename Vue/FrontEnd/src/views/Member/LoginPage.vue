@@ -33,13 +33,12 @@ export default defineComponent({
     };
   },
   methods: {
-    ...mapActions(userStore, ['setMemberNo']),
+    ...mapActions(userStore, ['setMemberNo','setMemberId','setMemberType']),
     login() {
       if (this.memberId.trim() === '' || this.memberPwd.trim() === '') {
         alert('아이디 또는 비밀번호를 입력해주세요.');
         return;
       }
-
       const userData = {
         memberId: this.memberId,
         memberPwd: this.memberPwd
@@ -49,10 +48,14 @@ export default defineComponent({
       .then(response => {
           if (response.data.status === 'success') {
             this.setMemberNo(response.data.memberNo);
+            this.setMemberId(response.data.memberId);
+            this.setMemberType(response.data.memberType);
+
             this.$router.push('/');
             alert('로그인이 완료되었습니다.');
           } else {
             alert('로그인을 실패하였습니다.');
+            
           }
         })
         .catch(error => {

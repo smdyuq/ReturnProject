@@ -6,7 +6,7 @@
 
         <div class="cardWrapper">
 
-            <div class="cardWrap">
+            <!-- <div class="cardWrap">
                 <div class="imgWrapper">
                     <div><router-link to="/productDetail"><img src="https://via.placeholder.com/194.jpg"
                                 alt="194 * 194 size image"></router-link></div>
@@ -144,7 +144,7 @@
                         <span><router-link to="/productDetail">업데이트 시간</router-link></span>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             
 

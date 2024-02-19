@@ -3,9 +3,9 @@
     <div class="headerWrapper">
       <div style="display:grid">
         <div class="loginSignup" style="margin-top:0;">
-          <button v-if="!isLoggedIn" @click="goLogin()" style="color:gray;">로그인</button>
-          <button v-if="!isLoggedIn" @click="goSignUp()" style="color:gray;">회원가입</button>
-          <button v-if="isLoggedIn" @click="logout()" style="color:gray;">로그아웃</button>
+          <button v-if="!isLoggedIn()" @click="goLogin()" style="color:gray;">로그인</button>
+          <button v-if="!isLoggedIn()" @click="goSignUp()" style="color:gray;">회원가입</button>
+          <button v-if="isLoggedIn()" @click="logout()" style="color:gray;">로그아웃</button>
         </div>
         <div class="headerWrap">
           <router-link to="/">
@@ -22,13 +22,19 @@
             </div>
           </div>
           <div style="width:300px;">
-            <ul class="headerList" style="color:white;">
-              <li><router-link to="/SalesManagement"><img src="../../assets/img/판매.png" width="30" height="30"
-                    style="margin-right:5px 0px">판매</router-link></li>
-              <li><router-link to="/StoreProduct"><img src="../../assets/img/내상점.png" width="30" height="30"
-                    style="margin-right:5px 0px">내상점</router-link></li>
-              <li><a href="/Board" target="_blank"><img src="../../assets/img/문의하기.png" width="30" height="30"
-                    style="margin-right:5px 0px">문의</a></li>
+            <ul class="headerList" style="color:black;">
+
+              <li @click="goSales()" class="MyList">
+                <img src="../../assets/img/판매.png" width="30" height="30"
+                    style="margin-right:5px 0px;">판매</li>
+
+              <li @click="goStore()" class="MyList">
+                <img src="../../assets/img/내상점.png" width="30" height="30"
+                    style="margin-right:5px 0px">내상점</li>
+
+              <li @click="goBoard()" class="MyList">
+                <img src="../../assets/img/문의하기.png" width="30" height="30"
+                    style="margin-right:5px 0px">문의</li>
             </ul>
           </div>
         </div>
@@ -41,17 +47,17 @@
       <ul class="menubars" @mouseover="showMenu" @mouseleave="hideMenu">
         <li class="menuCategory"><router-link to="/CategoryAll" style="color:black;">전체 카테고리</router-link></li>
         <div class="line" style="border: 0.5px solid gray;"></div>
-        <router-link to="/CategoryCloth">
-          <li>의류</li>
-        </router-link>
-        <router-link to="/CategoryJewelry">
-          <li>주얼리</li>
-        </router-link>
         <router-link to="/CategoryHomeAppliances">
           <li>가전</li>
         </router-link>
+        <router-link to="/CategoryCloth">
+          <li>의류</li>
+        </router-link>
         <router-link to="/CategoryFood">
           <li>식품</li>
+        </router-link>
+        <router-link to="/CategoryJewelry">
+          <li>주얼리</li>
         </router-link>
       </ul>
     </div>
@@ -59,24 +65,53 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { mapState, mapActions } from 'pinia';
 import { userStore } from '../../stores/Member';
 
 export default {
   computed: {
-    isLoggedIn: computed(() => userStore.getMemberId() !== ''), // 로그인 여부 확인
+    ...mapState(userStore, ['getMemberId']),
+    // : computed(() => userStore.getMemberId() !== ''), // 로그인 여부 확인
   },
   methods: {
+    ...mapActions(userStore,['setMemberId']),
+    isLoggedIn() {
+      return this.getMemberId !== '';
+    },
+    goSales() {
+      if(this.getMemberId !== '') {
+        this.$router.push('/SalesManagement');
+      } else {
+        alert("로그인이 필요합니다.");
+      }
+    },
+    goStore() {
+      if(this.getMemberId !== '') {
+        this.$router.push('/StoreProduct');
+      } else {
+        alert("로그인이 필요합니다.");
+      }
+    },
+    goBoard() {
+      if(this.getMemberId !=='') {
+        this.$router.push('/Board');
+      } else {
+        alert("로그인이 필요합니다.");
+      }
+    },
+
+    
+
+
     goLogin() {
       this.$router.push('/loginPage');
-      
     },
     goSignUp() {
       this.$router.push('/signupPage');
     },
     logout() {
-      userStore.setMemberId(''); // 로그아웃 시 회원 정보 초기화
-      this.$router.push('/loginPage');
+      this.setMemberId('');
+      this.$router.push('/');
     },
     showMenu() {
       const menu = document.querySelector('.menubars');
@@ -202,7 +237,6 @@ ul {
 
 .headerList {
   display: flex;
-  padding-left: 10px;
   width: 300px;
   float: right;
   color: turquoise;
@@ -245,6 +279,11 @@ button {
   border-top: 1px solid #444444;
   margin: 10px 0px;
   width: 100%;
+}
+.MyList {
+  font-size:medium;
+  font-weight:bold;
+  color:steelblue;
 }
 
 .menubars>li {

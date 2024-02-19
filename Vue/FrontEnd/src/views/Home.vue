@@ -5,7 +5,7 @@
     <SlideVue />
     <!-- <p v-if="loggedIn">환영합니다, {{ user }}님!</p>
     <p v-else>로그인이 필요합니다.</p> -->
-    <p class="todayProduct">오늘의 상품추천 {{ getMemberNo }}</p>
+    <p class="todayProduct">오늘의 상품추천 <!--{{ getMemberNo }}--></p>
     <CardWrapperVue />
     <FooterVue></FooterVue>
   </div>
@@ -44,7 +44,7 @@ export default {
   methods: {
     ...mapActions(usersStore, ['addUsers']),
     getUsers() {
-      axiosApi.get('/')
+      axiosApi.get('/main/mainPage')
         .then(response => {
           this.addUsers(response.data.sales);
         })
@@ -52,15 +52,7 @@ export default {
           console.error(error);
         });
     }
-  },
-  // computed: {
-  //   user() {
-  //     return this.$session.get('user'); // 세션에서 사용자 아이디를 가져옵니다
-  //   },
-  //   loggedIn() {
-  //     return this.$session.exists(); // 세션이 존재하면 로그인 상태로 판단합니다
-  //   }
-  // }
+  }
 };
 </script>
   
