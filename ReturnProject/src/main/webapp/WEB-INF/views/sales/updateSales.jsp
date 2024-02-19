@@ -37,8 +37,8 @@
 					<input type="hidden" name="memberNo" value="${sales.memberNo }">
 
 					<div>
-						<img src="/resources/uploads/${sales.salesImageName }"> <input
-							type="file" name="upload" id="files"
+						<img src="/resources/uploads/${sales.imageName }"> <input
+							type="file" name="uploads" id="files"
 							class="files form-control form-control-sm" multiple>
 					</div>
 					<div class="file_drag">
@@ -70,13 +70,16 @@
 							<label for="salesCategory" class="form-label">카테고리</label> <select
 								class="form-select" aria-label="Default select example"
 								name="salesCategory">
-								<option value="${sales.salesCategory }" selected hidden disabled>${sales.salesCategory}</option>
-								<option value="가전">가전</option>
-								<option value="의류">의류</option>
-								<option value="뷰티">향수·뷰티</option>
-								<option value="푸드">푸드</option>
-								<option value="주얼리">주얼리</option>
-								<option value="크리스마스">크리스마스</option>
+								<option value="가전"
+									${sales.salesCategory == "가전" ? 'selected' : '' }>가전</option>
+								<option value="의류"
+									${sales.salesCategory == "의류" ? 'selected' : '' }>의류</option>
+								<option value="뷰티"
+									${sales.salesCategory == "뷰티" ? 'selected' : '' }>뷰티</option>
+								<option value="푸드"
+									${sales.salesCategory == "푸드" ? 'selected' : '' }>푸드</option>
+								<option value="주얼리"
+									${sales.salesCategory == "주얼리" ? 'selected' : '' }>주얼리</option>
 							</select>
 						</div>
 

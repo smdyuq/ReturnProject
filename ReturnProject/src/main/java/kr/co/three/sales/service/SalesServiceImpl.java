@@ -139,32 +139,52 @@ public class SalesServiceImpl implements SalesService {
       return salesDAO.salesStatusUpdate(sales, sqlSession);
    }
 
+//   sales 번호 가져오기
+   @Override
    public int salesNoSelect() {
       return salesDAO.salesNoSelect(sqlSession);
    }
 
+//   이미지 등록
+   @Override
    public int imageInsert(SalesDTO sales) {
       return salesDAO.imageInsert(sales, sqlSession);
    }
 
+//   sales 인설트
+   @Override
    public int salesInsert(SalesDTO sales) {
       return salesDAO.salesInsert(sales, sqlSession);
    }
 
+//   sales 삭제
+   @Override
    public int deleteUpdateSales(SalesDTO sales) {
       return salesDAO.deleteUpdateSales(sales, sqlSession);
    }
 
+//   이미지 삭제
+   @Override
    public int deleteImage(SalesDTO sales) {
       return salesDAO.deleteImage(sales, sqlSession);
    }
 
+//   salesStatus 삭제
+   @Override
    public int deleteSaleStatus(SalesDTO sales) {
       return salesDAO.deleteSaleStatus(sales, sqlSession);
    }
 
+//   이미지 조회
+   @Override
    public List<String> ImageSelect(int salesNo) {
       return salesDAO.ImageSelect(salesNo, sqlSession);
+   }
+
+//   결제 완료 정보 조회
+   @Override
+   public int selectPayInfo(SalesDTO sales) {
+      return salesDAO.selectPayInfo(sales, sqlSession);
    }
 
 }

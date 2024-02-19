@@ -118,32 +118,44 @@ public class SalesDAO {
       return sqlSession.update("salesMapper.salesStatusUpdate", sales);
    }
 
+//   sales 번호 가져오기
    public int salesNoSelect(SqlSessionTemplate sqlSession) {
       return sqlSession.selectOne("salesMapper.salesNoSelect");
    }
 
+//   이미지 등록
    public int imageInsert(SalesDTO sales, SqlSessionTemplate sqlSession) {
       return sqlSession.insert("salesMapper.imageInsert", sales);
    }
 
+//   sales 인설트
    public int salesInsert(SalesDTO sales, SqlSessionTemplate sqlSession) {
       return sqlSession.insert("salesMapper.salesInsert", sales);
    }
 
+//   sales 삭제
    public int deleteUpdateSales(SalesDTO sales, SqlSessionTemplate sqlSession) {
       return sqlSession.delete("salesMapper.deleteUpdateSales", sales);
    }
 
+//   이미지 삭제
    public int deleteImage(SalesDTO sales, SqlSessionTemplate sqlSession) {
       return sqlSession.delete("salesMapper.deleteImage", sales);
    }
 
+//   salesStatus 삭제
    public int deleteSaleStatus(SalesDTO sales, SqlSessionTemplate sqlSession) {
       return sqlSession.delete("salesMapper.deleteSaleStatus", sales);
    }
 
+//   이미지 조회
    public List<String> ImageSelect(int salesNo, SqlSessionTemplate sqlSession) {
       return sqlSession.selectList("salesMapper.ImageSelect", salesNo);
+   }
+
+//   결제 완료 정보 조회   
+   public int selectPayInfo(SalesDTO sales, SqlSessionTemplate sqlSession) {
+      return sqlSession.selectOne("salesMapper.selectPayInfo", sales);
    }
 
 }

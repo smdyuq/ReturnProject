@@ -88,6 +88,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 //	상품 판매수 데이터 조회
+	@Override
 	public int selectSalesComplete(int memberNo) {
 		return memberDAO.selectSalesComplete(memberNo, sqlSession);
 	}

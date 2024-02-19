@@ -66,7 +66,7 @@
 								<tr
 									onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
 
-									<td><img src="${item.salesImageName}"></td>
+									<td><img src="${item.imageName}"></td>
 									<td>${item.salesName}</td>
 									<td>${item.salesPrice}</td>
 									<td>${item.salesUpdateDate}</td>
@@ -112,7 +112,7 @@
 							<c:forEach var="item" items="${like }">
 								<tr
 									onclick="location.href='/sales/detailSales.do?salesNo=${item.salesNo}'">
-									<td><img src="${item.salesImageName}"></td>
+									<td><img src="${item.imageName}"></td>
 									<td>${item.salesName}</td>
 									<td>${item.salesPrice}</td>
 									<td>${item.salesUpdateDate}</td>

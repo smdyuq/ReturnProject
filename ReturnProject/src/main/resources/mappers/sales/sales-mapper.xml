@@ -407,6 +407,7 @@
       #{memberNo}
    </select>
 
+   <!-- sales 번호 가져오기 -->
    <select id="salesNoSelect" resultType="_int">
       SELECT SALES_NO
       FROM SALES
@@ -415,24 +416,28 @@
       ONLY
    </select>
 
+   <!-- 이미지 등록 -->
    <insert id="imageInsert" parameterType="sales">
       INSERT INTO IMAGE
       VALUES(IMAGE_SEQ.NEXTVAL, #{imageName}, #{imagePath},
       #{originImageName}, #{salesNo})
    </insert>
 
+   <!-- sales 삭제 -->
    <delete id="deleteUpdateSales" parameterType="sales">
       DELETE FROM SALES
       WHERE
       SALES_NO = #{salesNo}
    </delete>
 
+   <!-- 이미지 삭제 -->
    <delete id="deleteImage" parameterType="sales">
       DELETE FROM IMAGE
       WHERE
       SALES_NO = #{salesNo}
    </delete>
 
+   <!-- salesStatus 삭제 -->
    <delete id="deleteSaleStatus" parameterType="sales">
       DELETE FROM
       SALES_STATUS
@@ -440,11 +445,21 @@
       SALES_NO = #{salesNo}
    </delete>
 
+   <!-- 이미지 조회 -->
    <select id="ImageSelect" resultMap="salesResultSet">
       SELECT IMAGE_NAME
       FROM IMAGE
       WHERE
       SALES_NO = #{salesNo}
+   </select>
+
+   <!-- 결제 완료 정보 조회 -->
+   <select id="selectPayInfo" resultType="_int">
+      SELECT *
+      FROM SALES
+      JOIN PAY
+      ON SALES.SALES_NO = PAY.SALES_NO
+      WHERE SALES.SALES_NO = #{salesNo};
    </select>
 
 </mapper>
