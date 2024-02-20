@@ -37,7 +37,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.loginMember(member, sqlSession);
 	}
 
-// 	내 상점
+// 	<내 상점>
 
 // 	멤버 테이블 데이터 조회
 	@Override

@@ -29,15 +29,12 @@ public class SalesDTO {
 	private String salesChatLink;
 	private int salesLikesCount;
 	private String salesStatus;
-
 	private String searchText = "";
 	private String searchWord = "";
-
 	private int imageNo;
 	private String imageName;
 	private String imagePath;
 	private String originImageName;
-
 	private MultipartFile data;
 
 }
