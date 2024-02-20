@@ -26,7 +26,7 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.loginMember", member);
 	}
 
-//	내 상점
+//	<내 상점>
 
 //	멤버 테이블 데이터 조회
 	public MemberDTO selectMemberData(int memberNo, SqlSessionTemplate sqlSession) {

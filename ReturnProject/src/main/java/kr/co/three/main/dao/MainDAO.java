@@ -36,7 +36,7 @@ public class MainDAO {
 		return sqlSession.selectList("salesMapper.mainSalesList", sales);
 	}
 
-//	카테고리 페이지
+//	<카테고리 페이지>
 
 //	가전 카테고리
 	public List<SalesDTO> homeAppliances(SqlSessionTemplate sqlSession) {

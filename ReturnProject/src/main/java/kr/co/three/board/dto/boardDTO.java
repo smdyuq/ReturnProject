@@ -19,9 +19,7 @@ public class boardDTO {
 	private Date ask_date;
 	private int member_no;
 	private String member_id;
-
 	private String searchText = "";
 	private String searchCategory = "";
-
 	private int commentCount;
 }
