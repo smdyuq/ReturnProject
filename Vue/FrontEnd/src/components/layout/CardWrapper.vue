@@ -162,7 +162,7 @@
                 <div class="cardWrap" v-for="(item, index) in getUsers" :key="index">
                     <div class="imgWrapper">
                         <div><router-link to="/productDetail"><img
-                                    :src="'http://192.168.0.24/resources/uploads/' + item.imageName"
+                                    :src="'http://192.168.0.16/resources/uploads/' + item.imageName"
                                     style="width: 194px; height: 194px;"></router-link></div>
                     </div>
                     <div>

@@ -3,6 +3,7 @@
     <div class="headerWrapper">
       <div style="display:grid">
         <div class="loginSignup" style="margin-top:0;">
+          <p v-if="isLoggedIn()">환영합니다, {{ memberId }}님!</p>
           <button v-if="!isLoggedIn()" @click="goLogin()" style="color:gray;">로그인</button>
           <button v-if="!isLoggedIn()" @click="goSignUp()" style="color:gray;">회원가입</button>
           <button v-if="isLoggedIn()" @click="logout()" style="color:gray;">로그아웃</button>
@@ -213,6 +214,7 @@ header {
   border-image: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec) 1;
   border-image-slice: 1;
   outline: none;
+  height: 39px;
 }
 
 input:focus {
@@ -221,7 +223,7 @@ input:focus {
 
 .search {
   width: 32rem;
-  height: 30px;
+  height: 35px;
   border: none;
   margin-left: 10px;
 

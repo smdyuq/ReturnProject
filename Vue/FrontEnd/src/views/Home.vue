@@ -3,8 +3,8 @@
     <HeaderVue></HeaderVue>
     <SidebarVue></SidebarVue>
     <SlideVue />
-    <!-- <p v-if="loggedIn">환영합니다, {{ user }}님!</p>
-    <p v-else>로그인이 필요합니다.</p> -->
+    
+
     <p class="todayProduct">오늘의 상품추천 <!--{{ getMemberNo }}--></p>
     <CardWrapperVue />
     <FooterVue></FooterVue>
