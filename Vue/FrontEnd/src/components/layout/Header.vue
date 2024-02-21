@@ -3,7 +3,7 @@
     <div class="headerWrapper">
       <div style="display:grid">
         <div class="loginSignup" style="margin-top:0;">
-          <p v-if="isLoggedIn()">환영합니다, {{ memberId }}님!</p>
+          <p style="color:gray; margin-bottom:0; margin-right:15px;" v-if="isLoggedIn()">환영합니다, {{ memberId }}님!</p>
           <button v-if="!isLoggedIn()" @click="goLogin()" style="color:gray;">로그인</button>
           <button v-if="!isLoggedIn()" @click="goSignUp()" style="color:gray;">회원가입</button>
           <button v-if="isLoggedIn()" @click="logout()" style="color:gray;">로그아웃</button>

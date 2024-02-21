@@ -1,13 +1,8 @@
 <template>
     <div class="cardContainer">
-
-
-
-
-       
 <!-- 데이터-->
             <div class="cardWrapper">
-                <div class="cardWrap" v-for="(item, index) in getUsers" :key="index">
+                <div class="cardWrap" v-for="(item, index) in list" :key="index">
                     <div class="imgWrapper">
                         <div><router-link to="/productDetail"><img
                                     :src="'http://192.168.0.16/resources/uploads/' + item.imageName"
@@ -23,10 +18,6 @@
                 </div>
             </div>
 
-
-
-
-       
     </div>
 </template>
 
@@ -36,8 +27,18 @@ import { mapState } from 'pinia'
 import { usersStore } from '../../stores/Home'
 
 export default {
+    data() {
+        return {
+            list: ''
+        }
+    },
     computed: {
-        ...mapState(usersStore, ['getUsers'])
+        ...mapState(usersStore, ['getUsers','getCloth','getStatus'])
+    },
+    mounted() {
+        if(this.getStatus === '의류') {
+            this.list = this.getCloth;
+        }
     }
 }
 </script>
