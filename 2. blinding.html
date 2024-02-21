@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    클래스 바인딩(객체구문)
+    <!-- v-bind 줄인거 ':' -->
+    <div class="static" :class="{'active' : isActive, 'text-danger': hasError}">
+    </div>
+
+    <script>
+        // 클래스 바인딩(객체구문)
+        var vm1 = new Vue({
+            el: '.static',
+            data: {
+                isActive: true,
+                hasError: false
+            }
+        })
+    </script>
+
+    <hr>
+
+    클래스 바인딩(배열구문)
+    <div class="static-2" :class="[isActive, hasError]"></div>
+
+    <script>
+        // 클래스 바인딩(배열구문)
+        var vm2 = new Vue({
+            el: ".static-2",
+            data: {
+                isActive: 'active',
+                hasError: 'text-danger'
+            }
+        })
+    </script>
+
+    <hr>
+
+    클래스 바인딩(컴포넌트 사용)
+    <my-component class="static-3"></my-component>
+
+    <script>
+        // 클래스 바인딩(컴포넌트 사용)
+        Vue.component('my-component', {
+            template: '<div class="active"></div>'
+        })
+
+        var vm3 = new Vue({
+            el: '.static-3'
+        })
+    </script>
+
+    <hr>
+
+    인라인 스타일 바인딩(객체 구문)
+    <div id="app-1" :style="{color:activeColor, fontSize: fontSize}">
+        안녕하세요.
+    </div>
+
+    <script>
+        // 인라인 스타일 바인딩(객체 구문)
+        var vm = new Vue({
+            el: "#app-1",
+            data: {
+                activeColor: 'red',
+                fontSize: '50px'
+            }
+        })
+    </script>
+
+    <hr>
+
+    인라인 스타일 바인딩(배열 구문)
+    <div id="app-2" :style="[baseStyles, overridingStyles]">
+        반갑습니다.
+    </div>
+
+    <script>
+        //  인라인 스타일 바인딩(배열 구문)
+        var vm2 = new Vue({
+            el: '#app-2',
+            data: {
+                baseStyles: {
+                    color: 'blue',
+                    fontSize: '50px'
+                },
+                overridingStyles: {
+                    backgroundColor: 'red',
+                    fontWeight: 'bold'
+                }
+            }
+        })
+    </script>
+
+    <hr>
+
+    <div id="app-3">
+        <input type="text" v-model="message">
+        <p>입력한 메시지:{{message}}</p>
+    </div>
+
+    <script>
+        var vm3 = new Vue({
+            el: '#app-3',
+            data: {
+                message: ''
+            }
+        })
+    </script>
+
+    <hr>
+
+    <div id="app-4">
+        <input type="checkbox" id="dog" value="dog" v-model="checkedAnimals">
+        <label for="dog">강아지</label>
+        <input type="checkbox" id="cat" value="cat" v-model="checkedAnimals">
+        <label for="dog">고양이</label>
+        <input type="checkbox" id="pig" value="pig" v-model="checkedAnimals">
+        <label for="dog">돼지</label>
+        <br>
+        <span>체크한 동물: {{checkedAnimals}}</span>
+    </div>
+
+    <script>
+        var vm4 = new Vue({
+            el: '#app-4',
+            data: {
+                checkedAnimals: []
+            }
+        })
+    </script>
+
+    <hr>
+
+    <div id="app-5">
+        <select name="" id="" v-model="selected">
+            <option value="">동물을 선택해주세요.</option>
+            <option value="dog">강아지</option>
+            <option value="cat">고양이</option>
+            <option value="pig">돼지</option>
+        </select>
+        <br>
+        <span>선택한 동물: {{selected}}</span>
+    </div>
+
+    <script>
+        var vm5 = new Vue({
+            el: "#app-5",
+            data: {
+                selected: ''
+            }
+        })
+    </script>
+
+    <hr>
+
+    <div id="app-6">
+        <input type="checkbox" true-value="yes" false-value="no" v-model="toggle">
+        <br>
+        <span>체크된 경우 : {{isChecked}}</span>
+        <br>
+        <span>체크되지 않은 경우 : {{isUnChecked}}</span>
+    </div>
+
+    <script>
+        var vm6 = new Vue({
+            el: '#app-6',
+            data: {
+                toggle: 'no'
+            },
+            computed: {
+                isChecked: function () {
+                    return this.toggle === 'yes';
+                },
+                isUnChecked: function () {
+                    return this.toggle === 'no';
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
