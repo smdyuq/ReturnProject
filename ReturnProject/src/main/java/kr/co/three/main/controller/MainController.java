@@ -50,10 +50,10 @@ public class MainController {
 
 	// 메인 페이지
 	@GetMapping("/mainPage")
-	public ResponseEntity<?> mainPage(@RequestBody SalesDTO sales) {
+	public ResponseEntity<?> mainPage() {
 
 		// response.data
-		List<SalesDTO> salesList = mainService.mainSalesList(sales);
+		List<SalesDTO> salesList = mainService.mainSalesList(null);
 
 		// response.data.list
 		HashMap<String, Object> response = new HashMap<>();
