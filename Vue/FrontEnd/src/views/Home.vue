@@ -3,24 +3,26 @@
     <HeaderVue></HeaderVue>
     <SidebarVue></SidebarVue>
     <SlideVue />
-    
 
-    <p class="todayProduct">오늘의 상품추천 <!--{{ getMemberNo }}--></p>
+    <p class="todayProduct">
+      오늘의 상품추천
+      <!--{{ getMemberNo }}-->
+    </p>
     <CardWrapperVue />
     <FooterVue></FooterVue>
   </div>
 </template>
   
 <script>
-import HeaderVue from '../components/layout/Header.vue';
-import FooterVue from '../components/layout/Footer.vue';
-import SlideVue from '../components/layout/Slide.vue';
-import CardWrapperVue from '../components/layout/CardWrapper.vue';
-import SidebarVue from '../components/layout/Sidebar.vue';
-import axiosApi from '../services/axios';
-import { mapActions, mapState } from 'pinia';
-import { usersStore } from '../stores/Home';
-import { userStore } from '../stores/Member';
+import HeaderVue from "../components/layout/Header.vue";
+import FooterVue from "../components/layout/Footer.vue";
+import SlideVue from "../components/layout/Slide.vue";
+import CardWrapperVue from "../components/layout/CardWrapper.vue";
+import SidebarVue from "../components/layout/Sidebar.vue";
+import axiosApi from "../services/axios";
+import { mapActions, mapState } from "pinia";
+import { usersStore } from "../stores/Home";
+import { userStore } from "../stores/Member";
 
 export default {
   components: {
@@ -28,31 +30,32 @@ export default {
     SlideVue,
     FooterVue,
     CardWrapperVue,
-    SidebarVue
+    SidebarVue,
   },
   data() {
     return {
-      users: []
+      users: [],
     };
   },
   mounted() {
     this.getUsers();
   },
   computed: {
-    ...mapState(userStore, ['getMemberNo'])
+    ...mapState(userStore, ["getMemberNo"]),
   },
   methods: {
-    ...mapActions(usersStore, ['addUsers']),
+    ...mapActions(usersStore, ["addUsers"]),
     getUsers() {
-      axiosApi.get('/main/mainPage')
-        .then(response => {
-          this.addUsers(response.data.sales);
+      axiosApi
+        .get("/main/mainPage")
+        .then((response) => {
+          this.addUsers(response.data.list);
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
-    }
-  }
+    },
+  },
 };
 </script>
   
