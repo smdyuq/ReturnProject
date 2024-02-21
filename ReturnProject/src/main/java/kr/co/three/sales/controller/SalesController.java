@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import kr.co.three.common.PageInfo;
 import kr.co.three.common.Pagination;
@@ -399,31 +402,70 @@ public class SalesController {
 //		}
 //	}
 
+////	판매 등록
+//	@GetMapping("/enrollSales")
+//	public ResponseEntity<?> enrollSales(List<MultipartFile> uploads, @RequestBody SalesDTO sales,
+//			HttpSession session) {
+//		int memberNo = (int) session.getAttribute("memberNo");
+//		sales.setMemberNo(memberNo);
+//
+//		int result = salesService.enrollSales(sales);
+//
+//		int salesNoSelect = salesService.salesNoSelect();
+//		sales.setSalesNo(salesNoSelect);
+//
+//		// 업로드된 파일이 존재하는지 확인
+//		for (MultipartFile m : uploads) {
+//			if (m != null && !m.isEmpty()) {
+//				UploadFile.uploadMethod(m, sales, session);
+//				int imageInsert = salesService.imageInsert(sales);
+//			}
+//		}
+//		if (result == 1) {
+//			// 판매 번호 조회
+//			int selectSalesNo = salesService.selectSalesNo(memberNo);
+//			sales.setSalesNo(selectSalesNo);
+//			// 판매 상태 : 판매 중
+//			int statusResult = salesService.salesStatus(sales.getSalesNo());
+//			return new ResponseEntity<>("success", HttpStatus.OK);
+//		} else {
+//			return new ResponseEntity<>("error", HttpStatus.OK);
+//		}
+//	}
+
 //	판매 등록
-	@PostMapping("/enrollSales")
-	public ResponseEntity<?> enrollSales(List<MultipartFile> uploads, @RequestBody SalesDTO sales,
-			HttpSession session) {
-		int memberNo = (int) session.getAttribute("memberNo");
-		sales.setMemberNo(memberNo);
+	@PostMapping(value = "/enrollSales", consumes = "multipart/form-data")
+	public ResponseEntity<?> enrollSales(@RequestParam("upload") MultipartFile uploads,
+			@RequestParam("jsonSales") String jsonSales, HttpSession session) {
+
+		Gson gson = new Gson();
+
+		SalesDTO sales = gson.fromJson(jsonSales, SalesDTO.class);
+
+//		int memberNo = (int) session.getAttribute("memberNo");
+//		sales.setMemberNo(memberNo);
 
 		int result = salesService.enrollSales(sales);
 
 		int salesNoSelect = salesService.salesNoSelect();
 		sales.setSalesNo(salesNoSelect);
 
-		// 업로드된 파일이 존재하는지 확인
-		for (MultipartFile m : uploads) {
-			if (m != null && !m.isEmpty()) {
-				UploadFile.uploadMethod(m, sales, session);
-				int imageInsert = salesService.imageInsert(sales);
-			}
-		}
+//		 업로드된 파일이 존재하는지 확인
+//		for (MultipartFile m : uploads) {
+//			if (m != null && !m.isEmpty()) {
+//				UploadFile.uploadMethod(m, sales, session);
+//				int imageInsert = salesService.imageInsert(sales);
+//			}
+//		}
+		UploadFile.uploadMethod(uploads, sales, session);
+		int imageInsert = salesService.imageInsert(sales);
+
 		if (result == 1) {
 			// 판매 번호 조회
-			int selectSalesNo = salesService.selectSalesNo(memberNo);
-			sales.setSalesNo(selectSalesNo);
+//			int selectSalesNo = salesService.selectSalesNo(memberNo);
+//			sales.setSalesNo(selectSalesNo);
 			// 판매 상태 : 판매 중
-			int statusResult = salesService.salesStatus(sales.getSalesNo());
+//			int statusResult = salesService.salesStatus(sales.getSalesNo());
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>("error", HttpStatus.OK);
