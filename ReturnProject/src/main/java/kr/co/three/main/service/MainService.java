@@ -22,7 +22,7 @@ public interface MainService {
 //	상품 리스트
 	List<SalesDTO> mainSalesList(SalesDTO sales);
 
-//	카테고리 페이지
+//	<카테고리 페이지>
 
 //	가전 카테고리
 	List<SalesDTO> homeAppliances();

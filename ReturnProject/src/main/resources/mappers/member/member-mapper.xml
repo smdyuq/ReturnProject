@@ -71,7 +71,7 @@
 		WHERE
 		MEMBER_NO = #{memberNo}
 	</select>
-	
+
 	<!-- 상점 방문 수 증가 -->
 	<update id="storeVisitCount" parameterType="int">
 		UPDATE MEMBER

@@ -24,10 +24,10 @@ import kr.co.three.admin.service.adminServiceImpl;
 @RequestMapping("/admin")
 public class adminController {
 
-   @Autowired
-   private BCryptPasswordEncoder bcryptPasswordEncoder;
-   @Autowired
-   private adminServiceImpl adminService;
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	@Autowired
+	private adminServiceImpl adminService;
 
 ////   가입 폼으로 이동
 //   @GetMapping("/registerForm.do")
@@ -62,24 +62,24 @@ public class adminController {
 //   }
 
 //   관리자 등록
-   @PostMapping("/adminRegister")
-   public ResponseEntity<?> register(@RequestBody adminDTO admin) {
+	@PostMapping("/adminRegister")
+	public ResponseEntity<?> register(@RequestBody adminDTO admin) {
 
-      admin.setMemberPhone("01012345678");
-      admin.setMemberType(0);
+		admin.setMemberPhone("01012345678");
+		admin.setMemberType(0);
 
-      // 패스워드 암호화
-      String pwd = bcryptPasswordEncoder.encode(admin.getMemberPwd());
-      admin.setMemberPwd(pwd);
+		// 패스워드 암호화
+		String pwd = bcryptPasswordEncoder.encode(admin.getMemberPwd());
+		admin.setMemberPwd(pwd);
 
-      int result = adminService.registerAdmin(admin);
+		int result = adminService.registerAdmin(admin);
 
-      if (result == 1) {
-         return new ResponseEntity<>("success", HttpStatus.OK);
-      } else {
-         return new ResponseEntity<>("error", HttpStatus.OK);
-      }
-   }
+		if (result == 1) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("error", HttpStatus.OK);
+		}
+	}
 
 ////   아이디 중복검사
 //   @PostMapping("/checkId.do")
@@ -96,18 +96,18 @@ public class adminController {
 //   }
 
 //   아이디 중복검사
-   @PostMapping("/adminCheckId")
-   @ResponseBody
-   public ResponseEntity<?> checkId(String adminId) {
+	@PostMapping("/adminCheckId")
+	@ResponseBody
+	public ResponseEntity<?> checkId(String adminId) {
 
-      int result = adminService.checkId(adminId);
+		int result = adminService.checkId(adminId);
 
-      if (result == 1) {
-         return new ResponseEntity<>("success", HttpStatus.OK);
-      } else {
-         return new ResponseEntity<>("error", HttpStatus.OK);
-      }
-   }
+		if (result == 1) {
+			return new ResponseEntity<>("success", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("error", HttpStatus.OK);
+		}
+	}
 
 ////   로그인
 //   @PostMapping("/login.do")
@@ -131,27 +131,27 @@ public class adminController {
 //   }
 
 //   로그인
-   @PostMapping("/adminLogin")
-   public ResponseEntity<?> loginIndex(@RequestBody adminDTO admin, HttpSession session) {
+	@PostMapping("/adminLogin")
+	public ResponseEntity<?> loginIndex(@RequestBody adminDTO admin, HttpSession session) {
 
-      adminDTO loginAdmin = adminService.loginAdmin(admin);
+		adminDTO loginAdmin = adminService.loginAdmin(admin);
 
-      if (!Objects.isNull(loginAdmin)
-            && bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())
-            && loginAdmin.getMemberType() == 0) {
+		if (!Objects.isNull(loginAdmin)
+				&& bcryptPasswordEncoder.matches(admin.getMemberPwd(), loginAdmin.getMemberPwd())
+				&& loginAdmin.getMemberType() == 0) {
 
-         session.setAttribute("memberNo", loginAdmin.getMemberNo());
-         session.setAttribute("memberId", loginAdmin.getMemberId());
-         session.setAttribute("memberType", loginAdmin.getMemberType());
+			session.setAttribute("memberNo", loginAdmin.getMemberNo());
+			session.setAttribute("memberId", loginAdmin.getMemberId());
+			session.setAttribute("memberType", loginAdmin.getMemberType());
 
-         Map<String, Object> response = new HashMap<>();
-         response.put("admin", admin);
+			Map<String, Object> response = new HashMap<>();
+			response.put("admin", admin);
 
-         return new ResponseEntity<>(response, HttpStatus.OK);
-      } else {
-         return new ResponseEntity<>("error", HttpStatus.OK);
-      }
-   }
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("error", HttpStatus.OK);
+		}
+	}
 
 ////   로그아웃
 //   @GetMapping("/logout.do")
@@ -166,13 +166,12 @@ public class adminController {
 //}
 
 //   로그아웃
-   @GetMapping("/adminLogout")
-   public ResponseEntity<?> logout(HttpSession session) {
+	@GetMapping("/adminLogout")
+	public ResponseEntity<?> logout(HttpSession session) {
 
-      session.removeAttribute("memberNo");
-      session.invalidate();
+		session.removeAttribute("memberNo");
+		session.invalidate();
 
-      return new ResponseEntity<>("success", HttpStatus.OK);
-   }
-
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
 }

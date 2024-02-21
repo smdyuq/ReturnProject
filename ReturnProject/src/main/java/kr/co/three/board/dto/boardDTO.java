@@ -17,13 +17,9 @@ public class boardDTO {
 	private String ask_title;
 	private String ask_content;
 	private Date ask_date;
-	private String ask_image_path;
-	private String ask_image_name;
 	private int member_no;
 	private String member_id;
-
 	private String searchText = "";
 	private String searchCategory = "";
-
 	private int commentCount;
 }

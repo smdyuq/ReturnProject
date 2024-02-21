@@ -25,14 +25,14 @@ import kr.co.three.sales.service.SalesServiceImpl;
 @RequestMapping("/pay")
 public class PayController {
 
-   @Autowired
-   private PayServiceImpl payService;
+	@Autowired
+	private PayServiceImpl payService;
 
-   @Autowired
-   private SalesServiceImpl salesService;
+	@Autowired
+	private SalesServiceImpl salesService;
 
-   @Autowired
-   private MemberServiceImpl memberService;
+	@Autowired
+	private MemberServiceImpl memberService;
 
 ////   결제확인 페이지로 이동(sales dao,serviceImpl에서 처리)
 //   @GetMapping("/payCheckPage.do")
@@ -54,26 +54,26 @@ public class PayController {
 //   }
 
 //   결제확인 페이지로 이동(sales dao,serviceImpl에서 처리)
-   @GetMapping("/payCheckPage")
-   public ResponseEntity<?> payPage(@RequestParam(value = "salesNo") int salesNo,
-         @RequestParam(value = "type") String type, @RequestBody SalesDTO sales, HttpSession session) {
+	@GetMapping("/payCheckPage")
+	public ResponseEntity<?> payPage(@RequestParam(value = "salesNo") int salesNo,
+			@RequestParam(value = "type") String type, @RequestBody SalesDTO sales, HttpSession session) {
 
-      // sales 데이터 불러오기
-      SalesDTO salesCheck = salesService.payCheck(salesNo);
+		// sales 데이터 불러오기
+		SalesDTO salesCheck = salesService.payCheck(salesNo);
 
-      Map<String, Object> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
 
-      response.put("salesCheck", salesCheck);
-      response.put("type", type);
+		response.put("salesCheck", salesCheck);
+		response.put("type", type);
 
-      if ("direct".equals(type)) {
-         return new ResponseEntity<>(response, HttpStatus.OK);
-      } else if ("delivery".equals(type)) {
-         return new ResponseEntity<>(response, HttpStatus.OK);
-      } else {
-         return new ResponseEntity<>("error", HttpStatus.OK);
-      }
-   }
+		if ("direct".equals(type)) {
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else if ("delivery".equals(type)) {
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("error", HttpStatus.OK);
+		}
+	}
 
 ////   결제 완료 페이지로 이동
 //   @PostMapping("/paying.do")
@@ -99,20 +99,20 @@ public class PayController {
 //
 //   }
 
-   // 모달에서 직거래 클릭했을때
-   @GetMapping("/payDirectPage")
-   public ResponseEntity<?> DirectPayPage(@RequestParam(value = "salesNo") int salesNo, @RequestBody PayDTO pay,
-         @RequestBody SalesDTO sales, HttpSession session) {
+	// 모달에서 직거래 클릭했을때
+	@GetMapping("/payDirectPage")
+	public ResponseEntity<?> DirectPayPage(@RequestParam(value = "salesNo") int salesNo, @RequestBody PayDTO pay,
+			@RequestBody SalesDTO sales, HttpSession session) {
 
-      SalesDTO salesCheck = salesService.payCheck(salesNo);
+		SalesDTO salesCheck = salesService.payCheck(salesNo);
 
-      Map<String, Object> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
 
-      response.put("salesCheck", salesCheck);
+		response.put("salesCheck", salesCheck);
 
-      return new ResponseEntity<>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
-   }
+	}
 
 //   // 모달에서 택배거래 클릭했을때
 //   @GetMapping("/payDeliveryPage.do")
@@ -133,20 +133,20 @@ public class PayController {
 //
 //   }
 
-   // 모달에서 택배거래 클릭했을때
-   @GetMapping("/payDeliveryPage")
-   public ResponseEntity<?> DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, @RequestBody PayDTO pay,
-         @RequestBody SalesDTO sales, HttpSession session) {
+	// 모달에서 택배거래 클릭했을때
+	@GetMapping("/payDeliveryPage")
+	public ResponseEntity<?> DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, @RequestBody PayDTO pay,
+			@RequestBody SalesDTO sales, HttpSession session) {
 
-      SalesDTO salesCheck = salesService.payCheck(salesNo);
+		SalesDTO salesCheck = salesService.payCheck(salesNo);
 
-      Map<String, Object> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
 
-      response.put("salesCheck", salesCheck);
+		response.put("salesCheck", salesCheck);
 
-      return new ResponseEntity<>(response, HttpStatus.OK);
+		return new ResponseEntity<>(response, HttpStatus.OK);
 
-   }
+	}
 
 ////   직거래 결제완료 페이지 불러오기
 //   @PostMapping("/payDirectComplete.do")
@@ -181,40 +181,40 @@ public class PayController {
 //   }
 
 //   직거래 결제완료 페이지 불러오기
-   @PostMapping("/payDirectComplete")
-   public ResponseEntity<?> payDirectComplete(@RequestBody PayDTO pay, HttpSession session,
-         @RequestBody SalesDTO sales) {
-      int memberNo = (int) session.getAttribute("memberNo");
-      pay.setMemberNo(memberNo);
-      pay.setPayMethod("카카오 페이");
-      pay.setPayReceipt("직거래");
+	@PostMapping("/payDirectComplete")
+	public ResponseEntity<?> payDirectComplete(@RequestBody PayDTO pay, HttpSession session,
+			@RequestBody SalesDTO sales) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		pay.setMemberNo(memberNo);
+		pay.setPayMethod("카카오 페이");
+		pay.setPayReceipt("직거래");
 
-      // 총 가격
-      pay.setPayAllPrice(sales.getSalesPrice() * sales.getSalesCount());
+		// 총 가격
+		pay.setPayAllPrice(sales.getSalesPrice() * sales.getSalesCount());
 
-      sales.setSalesNo(pay.getSalesNo());
+		sales.setSalesNo(pay.getSalesNo());
 
-      // 직거래용 페이 테이블 인설트
-      int result = payService.insertDirectPay(pay);
+		// 직거래용 페이 테이블 인설트
+		int result = payService.insertDirectPay(pay);
 
-      // 판매 수량 업데이트
-      int updateCount = salesService.updateCount(sales);
+		// 판매 수량 업데이트
+		int updateCount = salesService.updateCount(sales);
 
-      // 상품 판매 수 업데이트
-      int updateCompleteCount = salesService.updateCompleteCount(sales);
+		// 상품 판매 수 업데이트
+		int updateCompleteCount = salesService.updateCompleteCount(sales);
 
-      // 상품 상태 업데이트
-      int salesStatusUpdate = salesService.salesStatusUpdate(sales);
+		// 상품 상태 업데이트
+		int salesStatusUpdate = salesService.salesStatusUpdate(sales);
 
-      // 결제완료 조회
-      int selectPayInfo = salesService.selectPayInfo(sales);
+		// 결제완료 조회
+		int selectPayInfo = salesService.selectPayInfo(sales);
 
-      Map<String, Object> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
 
-      response.put("payInfo", selectPayInfo);
+		response.put("payInfo", selectPayInfo);
 
-      return new ResponseEntity<>(response, HttpStatus.OK);
-   }
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 
 ////   택배거래 결제완료 페이지 불러오기
 //   @PostMapping("/payDeliveryComplete.do")
@@ -246,38 +246,38 @@ public class PayController {
 //   }
 
 //   택배거래 결제완료 페이지 불러오기
-   @PostMapping("/payDeliveryComplete")
-   public ResponseEntity<?> payDeliveryComplete(@RequestBody PayDTO pay, HttpSession session,
-         @RequestBody SalesDTO sales) {
-      int memberNo = (int) session.getAttribute("memberNo");
-      pay.setMemberNo(memberNo);
-      pay.setPayMethod("카카오 페이");
-      pay.setPayReceipt("택배거래");
+	@PostMapping("/payDeliveryComplete")
+	public ResponseEntity<?> payDeliveryComplete(@RequestBody PayDTO pay, HttpSession session,
+			@RequestBody SalesDTO sales) {
+		int memberNo = (int) session.getAttribute("memberNo");
+		pay.setMemberNo(memberNo);
+		pay.setPayMethod("카카오 페이");
+		pay.setPayReceipt("택배거래");
 
-      // 총 가격
-      pay.setPayAllPrice((sales.getSalesPrice() * sales.getSalesCount()) + sales.getSalesDelivery());
+		// 총 가격
+		pay.setPayAllPrice((sales.getSalesPrice() * sales.getSalesCount()) + sales.getSalesDelivery());
 
-      // 택배거래용 페이 테이블 인설트
-      int result = payService.insertDeliveryPay(pay);
+		// 택배거래용 페이 테이블 인설트
+		int result = payService.insertDeliveryPay(pay);
 
-      // 판매 수량 업데이트
-      int updateCount = salesService.updateCount(sales);
+		// 판매 수량 업데이트
+		int updateCount = salesService.updateCount(sales);
 
-      // 상품 판매 수 업데이트
-      int updateCompleteCount = salesService.updateCompleteCount(sales);
+		// 상품 판매 수 업데이트
+		int updateCompleteCount = salesService.updateCompleteCount(sales);
 
-      // 상품 상태 업데이트
-      int salesStatusUpdate = salesService.salesStatusUpdate(sales);
+		// 상품 상태 업데이트
+		int salesStatusUpdate = salesService.salesStatusUpdate(sales);
 
-      // 결제완료 조회
-      int selectPayInfo = salesService.selectPayInfo(sales);
+		// 결제완료 조회
+		int selectPayInfo = salesService.selectPayInfo(sales);
 
-      Map<String, Object> response = new HashMap<>();
+		Map<String, Object> response = new HashMap<>();
 
-      response.put("payInfo", selectPayInfo);
+		response.put("payInfo", selectPayInfo);
 
-      return new ResponseEntity<>(response, HttpStatus.OK);
-   }
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 
 ////   에러
 //   @GetMapping("/payError.do")
