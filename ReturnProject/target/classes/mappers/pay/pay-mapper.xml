@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="payMapper">
+
+	<resultMap type="pay" id="payResultSet">
+		<result column="PAY_NO" property="payNo"></result>
+		<result column="PAY_RECEIPT" property="payReceipt"></result>
+		<result column="PAY_ADDRESS" property="payAddress"></result>
+		<result column="PAY_METHOD" property="payMethod"></result>
+		<result column="MEMBER_NO" property="memberNo"></result>
+		<result column="SALES_NO" property="salesNo"></result>
+		<result column="PAY_SUB_ADDRESS" property="paySubAddress"></result>
+		<result column="PAY_ALL_PRICE" property="payAllPrice"></result>
+	</resultMap>
+
+	<!-- 직거래용 페이 테이블 인설트 -->
+	<insert id="insertDirectPay" parameterType="pay">
+		INSERT INTO PAY
+		VALUES(PAY_SEQ.NEXTVAL,
+		#{payReceipt},
+		NULL,
+		#{payMethod},
+		#{memberNo},
+		#{salesNo},
+		NULL,
+		#{payAllPrice})
+	</insert>
+
+	<!-- 택배거래용 페이 테이블 인설트 -->
+	<insert id="insertDeliveryPay" parameterType="pay">
+		INSERT INTO PAY
+		VALUES(PAY_SEQ.NEXTVAL,
+		#{payReceipt},
+		#{payAddress},
+		#{payMethod},
+		#{memberNo},
+		#{salesNo},
+		#{paySubAddress},
+		#{payAllPrice})
+	</insert>
+
+</mapper>
