@@ -218,7 +218,7 @@ public class MainController {
 		}
 
 		Map<String, Object> response = new HashMap<>();
-		response.put("sales", salesList);
+		response.put("list", salesList);
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
