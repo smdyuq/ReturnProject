@@ -37,19 +37,19 @@
                         <div class="category" v-for="(item, index) in radioList" :key="index">
                             <div>
                                 <div>
-                                    <input type="radio" :id="item.key" name="category" v-model="userProduct.salesCategory"><label
+                                    <input type="radio" :id="item.key" name="category" v-model="userProduct.salesCategory" value="가전"><label
                                     :for="item.key">가전</label>
                                 </div>
                                 <div>
-                                    <input type="radio" :id="item.key" name="category" v-model="userProduct.salesCategory" /><label
+                                    <input type="radio" :id="item.key" name="category" v-model="userProduct.salesCategory" value="의류"/><label
                                     :for="item.key">의류</label>
                                 </div>
                                 <div>
-                                    <input type="radio" :id="item.key" name="category" v-model="userProduct.salesCategory" /><label
+                                    <input type="radio" :id="item.key" name="category" v-model="userProduct.salesCategory" value="식품"/><label
                                     :for="item.key">식품</label>
                                 </div>
                                 <div>
-                                    <input type="radio" :id="item.key" name="category" v-model="userProduct.salesCategory" /><label
+                                    <input type="radio" :id="item.key" name="category" v-model="userProduct.salesCategory" value="주얼리"/><label
                                     :for="item.key">주얼리</label>
                                 </div>
                             </div>
@@ -70,27 +70,27 @@
                 <span class="basicInfo">상품상태<span class="sectionSign">*</span></span>
                 <div>
                     <div>
-                        <input type="radio" id="ProductStatus1" name="ProductStatus" v-model="userProduct.salesCondition" /><label
+                        <input type="radio" id="ProductStatus1" name="ProductStatus" v-model="userProduct.salesCondition" value="새상품(미사용)" /><label
                             for="ProductStatus1">새
                             상품(미사용)</label>
                     </div>
                     <div>
-                        <input type="radio" id="ProductStatus2" name="ProductStatus" v-model="userProduct.salesCondition" /><label
+                        <input type="radio" id="ProductStatus2" name="ProductStatus" v-model="userProduct.salesCondition" value="사용감 없음"/><label
                             for="ProductStatus2">사용감
                             없음</label>
                     </div>
                     <div>
-                        <input type="radio" id="ProductStatus3" name="ProductStatus" v-model="userProduct.salesCondition" /><label
+                        <input type="radio" id="ProductStatus3" name="ProductStatus" v-model="userProduct.salesCondition" value="사용감 적음"/><label
                             for="ProductStatus3">사용감
                             적음</label>
                     </div>
                     <div>
-                        <input type="radio" id="ProductStatus4" name="ProductStatus" v-model="userProduct.salesCondition" /><label
+                        <input type="radio" id="ProductStatus4" name="ProductStatus" v-model="userProduct.salesCondition" value="사용감 많음"/><label
                             for="ProductStatus4">사용감
                             많음</label>
                     </div>
                     <div>
-                        <input type="radio" id="ProductStatus5" name="ProductStatus" v-model="userProduct.salesCondition" /><label
+                        <input type="radio" id="ProductStatus5" name="ProductStatus" v-model="userProduct.salesCondition" value="고장/파손 상품"/><label
                             for="ProductStatus5">고장/파손
                             상품</label>
                     </div>
@@ -135,6 +135,7 @@
 import axiosApi from '../../services/axios';
 import { mapActions, mapState } from 'pinia';
 import { userProduct } from '../../stores/Product/Product';
+import {userStore} from '../../stores/Member';
 
 export default {
     data() {
@@ -148,7 +149,8 @@ export default {
                 salesDelivery: '',
                 salesComment: '',
                 salesCount: '',
-                salesChatLink: ''
+                salesChatLink: '',
+                memberNo: ''
             },
             radioList: [
                 {
@@ -159,13 +161,17 @@ export default {
         }
     },
     computed: {
-        ...mapState(userProduct, ['getUsers'])
+        ...mapState(userProduct, ['getUsers']),
+
+        ...mapState(userStore, ['getMemberNo'])
     },
 
     methods: {
         ...mapActions(userProduct, ['addUsers']),
         registerProduct() {
             const imageFile = document.getElementById('upload').files[0];
+            this.userProduct.memberNo = this.getMemberNo;
+
             const jsonSales = JSON.stringify(this.userProduct);
 
             const data = new FormData();   // <form> </form>
