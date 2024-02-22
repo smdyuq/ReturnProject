@@ -35,10 +35,18 @@ export default {
     computed: {
         ...mapState(usersStore, ['getUsers','getCloth','getStatus'])
     },
-    mounted() {
-        if(this.getStatus === '의류') {
-            this.list = this.getCloth;
+    methods: {
+        printList() {
+            if(this.getStatus === '의류') {
+                console.log("status : " + this.getStatus);
+                console.log("getCloth : " + this.getCloth);
+                this.list = '';
+                this.list = this.getCloth;
+            }
         }
+    },
+    mounted() {
+        this.printList();
     }
 }
 </script>

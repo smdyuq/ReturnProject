@@ -4,6 +4,7 @@ export const usersStore = defineStore('usersStore', {
     state() {
         return {
             userList: [],
+            alllist: [],
             clothList: [],
             status: ''
         }
@@ -15,6 +16,9 @@ export const usersStore = defineStore('usersStore', {
         addCloth(data) {
             this.clothList.push(data);
         },
+        addAll(data) {
+            this.allList.push(data);
+        },
         addStatus(data) {
             this.status = data;
         }
@@ -22,6 +26,9 @@ export const usersStore = defineStore('usersStore', {
     getters: {
         getUsers(state) {
             return state.userList[0];
+        },
+        getAll(state) {
+            return state.allList[0];
         },
         getCloth(state) {
             return state.clothList[0];

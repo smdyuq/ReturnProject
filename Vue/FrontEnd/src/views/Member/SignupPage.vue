@@ -34,9 +34,9 @@
     </div>
 
     <div class="input-box">
-      <input v-model="post.verificationCode" type="text" name="verificationCode" :hidden="verificationCode" placeholder="인증 코드">
-      <label for="verificationCode" hidden>인증 코드</label>
-      <button type="button" class="btn-verification" @click="verificationCodeCheck" :hidden="!isVerificationCodeSent">인증 코드 확인</button>
+      <input v-model="post.verificationCode" type="text" name="authenticationCode" placeholder="인증 코드">
+      <label for="authenticationCode" hidden>인증 코드</label>
+      <button type="button" class="btn-verification" @click="verificationCodeCheck">인증 코드 확인</button>
     </div>
 
     <button type="submit" class="btn" @click="joinForm">회원 가입</button>
@@ -60,7 +60,7 @@ export default {
         confirmPassword: '',
         verificationCode: '',
         isVerificationCodeSent: false,
-        authenticationCode: ''
+        authenticationCode: 0
       },
       checkCode: 'TEST'
     };
@@ -84,10 +84,10 @@ export default {
     sendVerificationCode() {
       axiosApi.get("/send-one?checkCode="+this.checkCode+"&memberPhone="+this.post.memberPhone)
       .then((result) => {
-        console.log(result)
         if(result.status === 200) {
-          this.authenticationCode = result.data, // 수정: result.data를 저장하도록 수정
+          this.post.authenticationCode = result.data, // 수정: result.data를 저장하도록 수정
           this.isVerificationCodeSent = true; // 수정: isVerificationCodeSent를 true로 설정하여 버튼 활성화
+          console.log()
         }
       })
       .catch((err) => {
@@ -95,7 +95,7 @@ export default {
       })
     },
     verificationCodeCheck() {
-  if(this.post.verificationCode === this.authenticationCode) {
+  if(Number(this.post.verificationCode) === this.post.authenticationCode) {
     this.isVerificationCodeSent = true; // 인증 코드가 맞으면 isVerificationCodeSent를 true로 설정하여 버튼 활성화
   } else {
     alert("인증코드가 다릅니다");

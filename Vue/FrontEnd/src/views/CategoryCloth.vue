@@ -2,6 +2,7 @@
     <Header-vue/>
     <Sidebar-vue/>
     <CategoryCloth-Vue/>
+    {{ this.getC }}
     <CardWrapper-Vue/>
     <Footer-Vue/>
 </template>
@@ -28,20 +29,21 @@ export default {
         CategoryClothVue
     },
     mounted() {
-        this.getCloth();
+        this.getCloth2();
     },
     computed: {
-        ...mapState(usersStore, ['getStatus'])
+        ...mapState(usersStore, ['getStatus', 'getCloth'])
     },
     methods: {
         ...mapActions(usersStore, ['addCloth','addStatus']),
-        getCloth() {
+        getCloth2() {
             this.addStatus('의류');
             axiosApi.get('/main/categorySales?salesCategory='+this.getStatus)
-                .then(response => {
-                    this.addCloth(response.data.list);
-                })
-                .catch(error => {
+        
+            .then(response => {
+                this.addCloth(response.data.list);
+            })
+            .catch(error => {
                     console.error(error);
                 });
         }
