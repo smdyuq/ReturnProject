@@ -40,10 +40,8 @@
 		VALUES(ASK_SEQ.NEXTVAL,
 		#{ask_title},
 		#{ask_content},
-		DEFAULT,
-		#{ask_image_name},
-		#{ask_image_path},
-		#{member_no}
+		#{member_no},
+		DEFAULT
 		)
 	</insert>
 

@@ -46,14 +46,10 @@
 				<div class="col text-center">
 					<button type="button" class="btn btn-danger"
 						onclick="history.back()">취소</button>
-					<%-- <c:if test="${sessionScope.memberName eq free.writer}"> --%>
-					<%-- <button type="submit"
-							onclick="location.href='/inquiry/editForm.do?boardIdx=${free.idx}'"
-							class="btn btn-primary">수정</button> --%>
+
 					<button type="submit"
 						onclick="location.href='/inquiry/delete.do?boardIdx=${ask.ask_no}'"
 						class="btn btn-primary">삭제</button>
-					<%-- </c:if> --%>
 				</div>
 
 				<div class="comment_Box" style="border: 1px solid gray;">
@@ -83,37 +79,30 @@
 
 					<div class="comment-count">댓글</div>
 
-					<!-- <span class="c-icon"><i class="fa-solid fa-user"></i>  -->
 					<div class="comment-name">
-						<span class="anonym">작성자 : <input type="text"
+						<span class="anonym">작성자 : 
+						<input type="text"
 							class="form-control" id="com_writer" placeholder="이름" value='관리자'
 							readonly style="width: 100px; border: none;">
 						</span>
 					</div>
 
-					<!-- </span> -->
-					<!--<img src="/익명.jpg" width ="50px" alt="My Image"><!-->
 					<div class="comment-box">
 						<textarea class="comment-input" id="com_content" cols="80"
 							rows="2" name="ask_comment_content"></textarea>
-						<!-- <span class="com-function-btn" type="hidden">
-                            
-                            <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="#"><i class="fa-solid fa-trash-can"></i></a>
-                         </span> -->
 					</div>
 					<div class="regBtn">
 						<button id="Comment_regist">댓글등록</button>
 					</div>
 				</div>
 				<script>
-		var memberType = <%=memberType%>;
+var memberType = <%=memberType%>;
 
-		if (memberType == '0') {
-    		document.getElementById('comment-box').style.display = "block";
-		} else {
-    		document.getElementById('comment-box').style.display = "none";
-		}
+	if (memberType == '0') {
+		document.getElementById('comment-box').style.display = "block";
+	} else {
+		document.getElementById('comment-box').style.display = "none";
+	}
 </script>
 	</main>
 </body>
