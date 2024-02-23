@@ -1,4 +1,5 @@
 <template>
+
     <div class="boardTitle">
       <h2 style="font-weight: bold">문의내역</h2>
     </div>
@@ -182,6 +183,7 @@
   };
   </script>
   
+
 
 <style>
 .boardTitle {

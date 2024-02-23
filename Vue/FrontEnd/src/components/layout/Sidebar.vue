@@ -14,6 +14,7 @@
         <div style="width:100%; height:130px; border:1px solid gray">최근본상품
             <router-link to="/ProductDetail"><img src="https://via.placeholder.com/80.jpg"></router-link>
         </div> -->
+
         <div style="width:100%; height:60px; border:1px solid gray">
             <button class="topBtn" @click="scrollToTop">TOP</button>
         </div>
