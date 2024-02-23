@@ -1,6 +1,5 @@
 package kr.co.three.board.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,13 +10,14 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.three.board.dto.boardDTO;
 import kr.co.three.board.service.boardServiceImpl;
@@ -30,7 +30,11 @@ import kr.co.three.reply.service.ReplyServiceImpl;
 
 @RestController
 @RequestMapping("/inquiry")
+@CrossOrigin(origins = "*")
+
+
 public class boardController {
+	
 
 	@Autowired
 	private boardServiceImpl boardService;
@@ -40,7 +44,7 @@ public class boardController {
 	private MemberServiceImpl memberService;
 
 ////   1:1 문의 게시판 불러오기
-//   @GetMapping("/boardList.do")
+//   @PostMapping("/boardList.do")
 //   public String boardList(boardDTO board, @RequestParam(value = "cpage", defaultValue = "1") int cpage,
 //         ReplyDTO reply, MemberDTO member, Model model, HttpSession session) {
 //      int memberType = (int) session.getAttribute("memberType");
@@ -96,12 +100,13 @@ public class boardController {
 //   }
 
 //   1:1 문의 게시판 불러오기
-	@GetMapping("/boardList")
-	public ResponseEntity<?> boardList(@RequestBody boardDTO board,
-			@RequestParam(value = "cpage", defaultValue = "1") int cpage, @RequestBody ReplyDTO reply,
-			@RequestBody MemberDTO member, HttpSession session) {
-		int memberType = (int) session.getAttribute("memberType");
-		int memberNo = (int) session.getAttribute("memberNo");
+
+		@PostMapping("/boardList")
+		public ResponseEntity<?> boardList(@RequestBody MemberDTO member) {
+		int memberNo = member.getMemberNo();
+		int memberType = member.getMemberType();
+		int cpage=member.getCpage();
+		
 
 		int listCount;
 		List<boardDTO> list;
@@ -110,7 +115,9 @@ public class boardController {
 		int boardLimit = 15;
 
 		if (memberType == 0) {
-			listCount = boardService.selectListCount(board);
+
+			listCount = boardService.selectListCount(new boardDTO());
+
 		} else if (memberType == 1) {
 			listCount = boardService.selectListCountByMemberNo(memberNo);
 		} else {
@@ -121,14 +128,17 @@ public class boardController {
 		PageInfo pi = Pagination.getPageInfo(listCount, cpage, pageLimit, boardLimit);
 
 		if (memberType == 0) {
-			list = boardService.selectListAll(pi, board);
+
+			list = boardService.selectListAll(pi, new boardDTO());
 		} else if (memberType == 1) {
-			list = boardService.selectListByMemberNo(pi, memberType);
+			list = boardService.selectListByMemberNo(pi, memberNo);
+
 		} else {
 			list = new ArrayList<>();
 		}
 
 		Map<String, Object> response = new HashMap<>();
+
 
 		for (boardDTO boardDto : list) {
 			int commentCount = boardService.selectCommentCount(boardDto);
@@ -136,23 +146,27 @@ public class boardController {
 			response.put("commentCount", commentCount);
 		}
 
-		String msg = (String) session.getAttribute("msg");
-		String status = (String) session.getAttribute("status");
+
+//		String msg = (String) session.getAttribute("msg");
+//		String status = (String) session.getAttribute("status");
+
 
 		response.put("row", row);
 		response.put("list", list);
 		response.put("pi", pi);
-		response.put("msg", msg);
-		response.put("status", status);
+
+//		response.put("msg", msg);
+//		response.put("status", status);
 		response.put("listCount", listCount);
 
-		session.setAttribute("action", "/inquiry/boardList.do");
+//		session.setAttribute("action", "/inquiry/boardList.do");
+//
+//		session.removeAttribute("msg");
+//		session.removeAttribute("status");
+	
+			return new ResponseEntity<>(response, HttpStatus.OK);
+		}
 
-		session.removeAttribute("msg");
-		session.removeAttribute("status");
-
-		return new ResponseEntity<>(response, HttpStatus.OK);
-	}
 
 ////   1:1 문의 등록 폼 이동
 //   @GetMapping("enrollForm.do")
@@ -160,33 +174,15 @@ public class boardController {
 //      return "admin/board/boardEnroll";
 //   }
 
-////	1:1 문의 등록
-//	@PostMapping("/enroll.do")
-//	public String boardEnroll(boardDTO board, HttpSession session)
-//			throws IllegalStateException, IOException {
-//
-//		int memberNo = (int) session.getAttribute("memberNo");
-//		board.setMember_no(memberNo);
-//
-//		System.out.println("asd : " + board.getAsk_title());
-//
-//		int result = boardService.enrollBoard(board);
-//
-//		if (result > 0) {
-//			return "success";
-//		} else {
-//			return "error";
-//		}
-//
-//	}
 
-//	1:1 문의 등록
+//   1:1 문의 등록(완)
 	@PostMapping("/enroll")
-	public ResponseEntity<?> boardEnroll(@RequestBody boardDTO board, HttpSession session)
-			throws IllegalStateException, IOException {
+	public ResponseEntity<?> boardEnroll(@RequestBody boardDTO board, HttpSession session) {
+//	   throws IllegalStateException, IOException {
 
-		int memberNo = (int) session.getAttribute("memberNo");
-		board.setMember_no(memberNo);
+//      int memberNo = (int) session.getAttribute("memberNo");
+//      board.setMember_no(memberNo);
+
 
 		int result = boardService.enrollBoard(board);
 

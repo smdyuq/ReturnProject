@@ -11,13 +11,13 @@ import SidebarVue from '../../components/layout/Sidebar.vue'
 import FooterVue from '../../components/layout/Footer.vue'
 import AboutVue from '../../components/layout/About.vue'
 
+
 export default {
     components: {
         HeaderVue,
         SidebarVue,
         AboutVue,
         FooterVue
-
     }
 }
 </script>
