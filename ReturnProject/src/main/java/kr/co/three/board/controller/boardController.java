@@ -32,8 +32,10 @@ import kr.co.three.reply.service.ReplyServiceImpl;
 @RequestMapping("/inquiry")
 @CrossOrigin(origins = "*")
 
+
 public class boardController {
 	
+
 	@Autowired
 	private boardServiceImpl boardService;
 	@Autowired
@@ -98,12 +100,14 @@ public class boardController {
 //   }
 
 //   1:1 문의 게시판 불러오기
+
 		@PostMapping("/boardList")
 		public ResponseEntity<?> boardList(@RequestBody MemberDTO member) {
 		int memberNo = member.getMemberNo();
 		int memberType = member.getMemberType();
 		int cpage=member.getCpage();
 		
+
 		int listCount;
 		List<boardDTO> list;
 
@@ -111,7 +115,9 @@ public class boardController {
 		int boardLimit = 15;
 
 		if (memberType == 0) {
+
 			listCount = boardService.selectListCount(new boardDTO());
+
 		} else if (memberType == 1) {
 			listCount = boardService.selectListCountByMemberNo(memberNo);
 		} else {
@@ -122,26 +128,33 @@ public class boardController {
 		PageInfo pi = Pagination.getPageInfo(listCount, cpage, pageLimit, boardLimit);
 
 		if (memberType == 0) {
+
 			list = boardService.selectListAll(pi, new boardDTO());
 		} else if (memberType == 1) {
 			list = boardService.selectListByMemberNo(pi, memberNo);
+
 		} else {
 			list = new ArrayList<>();
 		}
 
 		Map<String, Object> response = new HashMap<>();
+
+
 		for (boardDTO boardDto : list) {
 			int commentCount = boardService.selectCommentCount(boardDto);
 			boardDto.setCommentCount(commentCount);
 			response.put("commentCount", commentCount);
 		}
 
+
 //		String msg = (String) session.getAttribute("msg");
 //		String status = (String) session.getAttribute("status");
+
 
 		response.put("row", row);
 		response.put("list", list);
 		response.put("pi", pi);
+
 //		response.put("msg", msg);
 //		response.put("status", status);
 		response.put("listCount", listCount);
@@ -154,11 +167,13 @@ public class boardController {
 			return new ResponseEntity<>(response, HttpStatus.OK);
 		}
 
+
 ////   1:1 문의 등록 폼 이동
 //   @GetMapping("enrollForm.do")
 //   public String enrollForm() {
 //      return "admin/board/boardEnroll";
 //   }
+
 
 //   1:1 문의 등록(완)
 	@PostMapping("/enroll")
@@ -167,6 +182,7 @@ public class boardController {
 
 //      int memberNo = (int) session.getAttribute("memberNo");
 //      board.setMember_no(memberNo);
+
 
 		int result = boardService.enrollBoard(board);
 

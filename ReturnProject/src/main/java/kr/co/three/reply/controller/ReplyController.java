@@ -23,8 +23,8 @@ import kr.co.three.reply.service.ReplyServiceImpl;
 @RequestMapping("/reply")
 public class ReplyController {
 
-   @Inject
-   private ReplyServiceImpl replyService;
+	@Inject
+	private ReplyServiceImpl replyService;
 
 //   // 댓글 등록
 //   @PostMapping("/InsertComment.do")
@@ -47,6 +47,7 @@ public class ReplyController {
 //   }
 
 //   댓글 등록
+
    @PostMapping("/insertComment")
    @ResponseBody
    public ResponseEntity<?> InsertComment(@RequestBody Map<String, Object> map) {
@@ -108,5 +109,6 @@ public class ReplyController {
 
 		return response;
 //		return new ResponseEntity<>(response, HttpStatus.OK);
+
 	}
 }

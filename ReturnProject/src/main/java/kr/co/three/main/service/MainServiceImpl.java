@@ -49,7 +49,7 @@ public class MainServiceImpl implements MainService {
 		return mainDAO.mainSalesList(sales, sqlSession);
 	}
 
-//	카테고리 페이지
+//	<카테고리 페이지>
 
 //	가전 카테고리
 	@Override
