@@ -51,10 +51,10 @@
 
       <div>내상품 페이지 입니다.</div>
 
-      <div style="border: 0.5px solid gray"></div>
+      <div style="border: 0.5px solid gray; margin-top: 30px; margin-bottom:30px;"></div>
     </div>
-
-    <div class="cardContainer">
+    
+    <!-- <div class="cardContainer">
       <div class="cardWrapper">
         <div class="cardWrap">
           <div class="imgWrapper">
@@ -72,7 +72,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

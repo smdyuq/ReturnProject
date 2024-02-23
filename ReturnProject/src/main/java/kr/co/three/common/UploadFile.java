@@ -80,9 +80,6 @@ public class UploadFile {
 					sales.setImagePath(UPLOAD_PATH + "303x310\\");
 					sales.setImageName(fileName);
 					sales.setOriginImageName(originName);
-					System.out.println(sales.getImageName());
-					System.out.println(sales.getOriginImageName());
-					System.out.println(sales.getImagePath());
 				} else if (dto instanceof MemberDTO) {
 					MemberDTO member = (MemberDTO) dto;
 					member.setMemberImagePath(UPLOAD_PATH + "303x310\\");

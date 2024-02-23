@@ -63,6 +63,7 @@ export default {
                 this.addStatus("주얼리");
 
             } else if (this.$route.path == '/') {
+
                 this.addStatus("전체","의류","식품","가전","주얼리")
             } else if(this.$route.path == '/StoreProduct') {
                 this.menu = "sales";
