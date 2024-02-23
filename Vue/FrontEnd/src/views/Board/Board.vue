@@ -1,96 +1,187 @@
 <template>
-    <!-- <div id="app" class="container"> -->
     <div class="boardTitle">
-        <h2 style="font-weight:bold;">문의내역</h2>
+      <h2 style="font-weight: bold">문의내역</h2>
     </div>
     <table>
-        <thead>
-            <tr>
-                <th>글번호</th>
-                <th>제목</th>
-                <th>작성자(ID)</th>
-                <th>작성일</th>
-                <th>답변여부</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="(post, index) in posts" :key="index" @click="modalCreate">
-                <td>{{ index + 1 }}</td>
-                <td>{{ post.title }}</td>
-                <td>{{ post.author }}</td>
-                <td>{{ post.date }}</td>
-                <td>{{ post.status }}</td>
-                <!-- <td>{{ post.content }}</td> -->
-            </tr>
-        </tbody>
+      <thead>
+        <tr>
+          <th>글번호</th>
+          <th>제목</th>
+          <th>작성자(ID)</th>
+          <th>작성일</th>
+          <th>답변여부</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(post, index) in posts" :key="index" @click="openModal(post)">
+          <td>{{ index + 1 }}</td>
+          <td>{{ post.ask_title }}</td>
+          <td>{{ post.member_id }}</td>
+          <td>{{ post.ask_date }}</td>
+          <td>{{ post.commentCount > 0 ? "O" : "" }}</td>
+        </tr>
+      </tbody>
     </table>
-
+  
     <div v-if="modalCreated" class="boardModal">
-
-        <div class="inquiriesTitle">문의 상세내용</div>
-
-        <div v-for="(post, index) in posts" :key="index" @click="modalCreate">
-
-            <div class="inquiriesList">제목 : {{ post.title }}</div>
-            <div class="inquiriesList">작성자 ID : {{ post.author }}</div>
-            <div class="inquiriesList">작성일 : {{ post.date }}</div>
-            <div class="inquiriesList" id="inquiriesContent">문의내용 : {{ post.content }}</div>
+      <div class="inquiriesTitle">문의 상세내용</div>
+      <div>
+        <div class="inquiriesList">제목 : {{ selectedPost.ask_title }}</div>
+        <div class="inquiriesList">작성자 ID : {{ selectedPost.member_id }}</div>
+        <div class="inquiriesList">작성일 : {{ selectedPost.ask_date }}</div>
+        <div class="inquiriesList" id="inquiriesContent">
+          문의내용 : {{ selectedPost.ask_content }}
         </div>
-
-        <button class="modalBtn" @click="modalClose">닫기</button>
+      </div>
+      <table id="comment_tb">
+        <tr v-for="comment in comments" :key="comment.id">
+          <td>{{ comment.ask_comment_content }}</td>
+          <td>관리자</td>
+        </tr>
+      </table>
+      <div>
+  
+          <!-- <div class="comment-count">댓글</div>
+          <div class="comment-name">
+            <span class="anonym"
+              >작성자 :
+              <input
+                type="text"
+                class="form-control"
+                id="com_writer"
+                placeholder="이름"
+                value="관리자"
+                readonly
+                style="width: 100px; border: none"
+              />
+            </span> 
+          </div> -->
+          <div v-if=" this.getMemberType === 0">
+            <div class="comment-box">
+            <!-- {{ this.getMemberType }} -->
+  
+            <textarea
+              class="comment-input"
+              id="com_content"
+              cols="80"
+              rows="2"
+              v-model="ask_comment_content"
+            >
+            </textarea>
+  
+          </div>
+          <div class="regBtn">
+            <button class="modalBtn" @click="registerComment">댓글등록</button>
+          </div>
+        </div>
+  
+  
+        <button class="modalBtn" @click="closeModal">닫기</button>
+      </div>
     </div>
-
+  
     <button class="add-post-btn" @click="goToAbout">글쓰기</button>
-    <div v-if="showForm">
-        <!-- 여기에 글 작성 폼을 넣으세요 -->
-        <form>
-            <!-- 폼 내용 -->
-        </form>
-
-
-
-        <!-- </div> -->
-    </div>
-</template>
-
-<script>
-import { ref } from 'vue';
-
-export default {
+  </template>
+  
+  <script>
+  import axiosApi from "../../services/axios";
+  import { mapState } from "pinia";
+  import { userStore } from "../../stores/Member";
+  
+  export default {
+    
     data() {
-        return {
-            users: [],
-            modalCreated: false
-        };
+      return {
+        posts: [],
+        modalCreated: false,
+        selectedPost: null,
+        membertype: 0,
+        ask_comment_content: "",
+        member: {
+          memberType: -1,
+          memberNo: -1,
+          memberId: "",
+          cpage: 1,
+        },
+        askNo: 0,
+        comments:""
+      };
     },
-
-    setup() {
-        const posts = ref([
-            { title: "첫 번째 글입니다.", author: "user123", date: "2024-02-15", status: "답변완료", content: "문의내용입니다" },
-            // { title: "두 번째 글입니다.", author: "admin456", date: "2024-02-16", status: "미진행" }
-            // 추가적인 데이터는 여기에 추가합니다.
-        ]);
-        const showForm = ref(false);
-
-        const showPostForm = () => {
-            showForm.value = true;
-        }
-
-        return { posts, showForm, showPostForm };
+    computed: {
+      ...mapState(userStore, [
+        "getMemberNo",
+        "getMemberType",
+        "getMemberId",
+        "getCpage",
+      ]),
     },
+    mounted() {
+      this.fetchBoardList();
+    },
+  
     methods: {
-        goToAbout() {
-            this.$router.push('/aboutPage')
-        },
-        modalCreate() {
-            this.modalCreated = true;
-        },
-        modalClose() {
-            this.modalCreated = false;
+      async fetchBoardList() {
+        try {
+          this.member.memberNo = this.getMemberNo;
+          this.member.memberType = this.getMemberType;
+          this.member.memberId = this.getMemberId;
+  
+          const response = await axiosApi.post("/inquiry/boardList", this.member);
+  
+          if (response
+          .status === 200) {
+            this.posts = response.data.list;
+          }
+        } catch (error) {
+          console.error("게시물 불러오기 실패:", error);
         }
-    }
-}
-</script>
+      },
+      async registerComment() {
+        // 댓글 등록 코드 추가
+        // 여기에 댓글 등록 코드를 작성해주세요.
+        const commentData = {
+          content: this.ask_comment_content
+        };
+        console.log(commentData)
+        
+        axiosApi
+        .post("/reply/insertComment", { reply: commentData, member: this.member, askNo: this.askNo} )
+        .then((response) => {
+            // 댓글 등록 성공 시 처리할 내용을 작성해주세요.
+            this.fetchCommentList();
+            console.log("댓글이 성공적으로 등록되었습니다.");
+            this.ask_comment_content = '';
+          })
+          .catch((error) => {
+            // 댓글 등록 실패 시 처리할 내용을 작성해주세요.
+            console.error("댓글 등록 실패:", error);
+          });
+      },
+      fetchCommentList() {
+        const com_bno = this.askNo;
+        axiosApi.get(`/reply/CommentList/${com_bno}`)
+          .then(response => {
+            console.log(response)
+            this.comments = response.data.list;
+          });
+      },
+      openModal(post) {
+        console.log(post)
+        this.askNo = post.ask_no;
+        this.selectedPost = post;
+        this.modalCreated = true;
+        this.fetchCommentList(); 
+      },
+      closeModal() {  
+        this.modalCreated = false;
+      },
+      goToAbout() {
+        window.location.href = "aboutPage";
+      },
+    },
+  };
+  </script>
+  
 
 <style>
 .boardTitle {

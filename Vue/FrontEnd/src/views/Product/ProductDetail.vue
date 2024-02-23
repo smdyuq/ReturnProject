@@ -7,7 +7,7 @@
                 <div class="productDetailWrap">
                     <div class="productImage">
                         <div><img :src="'http://192.168.0.16/resources/uploads/' + item.imageName"
-                                style="width: 428px; height: 428;"></div>
+                                style="width: 428px; height: 428px;"></div>
                         <!-- <img src="https://picsum.photos/428/428/?image=0" alt="sample image"> -->
                         <!-- <img :src="'http://192.168.0.4/resources/uploads/' + item.salesImageName" style="width: 194px; height: 194px;"> -->
                     </div>
@@ -95,15 +95,12 @@
 
             <div class="ProductInformation" style="margin-top:50px;">
                 <div>
-                    <div style="font-size:x-large">상품정보</div>
-                    <div class="productDescription">
+                    <div style="font-size:x-large; margin-top:30px; margin-left:30px; font-weight: bold;">상품정보</div>
+                    <div style="margin-left: 30px; margin-top:30px;" class="productDescription">
                         <p>{{ item.salesComment }}</p>
                     </div>
                 </div>
 
-                <div>
-                    상점
-                </div>
             </div>
         </div>
     </div>
@@ -213,10 +210,10 @@ export default {
 
 .ProductInformation {
     width: 1024px;
-    height: 800px;
-    border: 1px solid gray;
-    /* background-color: goldenrod; */
     display: flex;
+    border-top: 1px solid;
+    margin-top: 50px;
+    height: 250px;
 }
 
 .productDetail {

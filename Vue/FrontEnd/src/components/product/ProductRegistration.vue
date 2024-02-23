@@ -185,7 +185,7 @@ export default {
                     // 등록 성공 시 처리할 로직
                     console.log(response.data);
                     alert('상품이 성공적으로 등록되었습니다.');
-                    this.$router.push('/ProductDetail');
+                    this.$router.push('/');
                 })
                 .catch(error => {
 
