@@ -6,10 +6,10 @@ export const userProduct = defineStore('userProduct', {
             userList: []
         }
     },
-    actions:{
+    actions: {
         addUsers(data) {
             this.userList.push(data);
-        }  
+        }
     },
     getters: {
         getUsers(state) {

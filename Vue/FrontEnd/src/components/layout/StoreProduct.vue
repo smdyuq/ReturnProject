@@ -19,6 +19,7 @@
         <div class="storeContents" id="content2">
           <div class="storeContent">
             <div>상점 방문수</div>
+            F
             <span>0</span>
           </div>
           <div class="storeContent">
@@ -38,46 +39,10 @@
       </div>
     </div>
   </div>
-
-  <div>
-    <div class="storeListWrap">
-      <div class="storeList">
-        <routerLink to="/StoreProduct"><div class="storeProduct">상품</div></routerLink>
-        <routerLink to="/StoreLike"><div class="storeLike">찜</div></routerLink>
-        </div>
-      <div>전체</div>
-
-      <div>내상품 페이지 입니다.</div>
-
-      <div style="border: 0.5px solid gray"></div>
-    </div>
-
-    <div class="cardContainer">
-      <div class="cardWrapper">
-        <div class="cardWrap">
-          <div class="imgWrapper">
-            <div>
-              <router-link to="/productDetail"><img src="https://via.placeholder.com/194x194.jpg"
-                  alt="194 * 194 size image" /></router-link>
-            </div>
-          </div>
-          <div>
-            <div><router-link to="/ProductDetail">상품명</router-link></div>
-            <div>
-              <span><router-link to="/ProductDetail">200,000 원</router-link></span>
-              <span><router-link to="/ProductDetail">날짜</router-link></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-export default {
-
-};
+export default {};
 </script>
 
 <style scoped>
@@ -93,7 +58,7 @@ button {
   border: 0.5px solid gray;
 }
 
-#content3>button {
+#content3 > button {
   height: auto;
 }
 
@@ -102,9 +67,9 @@ button {
 }
 
 .storeList {
-  width:1024px;
-  display:flex;
-  margin-bottom:30px;
+  width: 1024px;
+  display: flex;
+  margin-bottom: 30px;
 }
 
 .storeWrapper {
@@ -136,16 +101,15 @@ button {
   border: 0.5px solid gray;
   /* background-color:green; */
   text-align: center;
-  width:200px;
-  height:35px;
-
+  width: 200px;
+  height: 35px;
 }
 
 .storeLike {
   text-align: center;
   border: 0.5px solid gray;
-  width:200px;
-  height:35px;
+  width: 200px;
+  height: 35px;
   /* background-color:yellow; */
 }
 

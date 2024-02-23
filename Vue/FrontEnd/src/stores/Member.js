@@ -6,33 +6,33 @@ export const userStore = defineStore("userKey", {
   },
   state: () => {
     return {
-        memberNo: -1,
-        memberId: '',
-        memberType: 1
+      memberNo: -1,
+      memberId: '',
+      memberType: 1
     };
   },
   actions: {
     //원하는 함수
     setMemberNo(memberNo) {
-        this.memberNo = memberNo;
+      this.memberNo = memberNo;
     },
     setMemberId(memberId) {
-        this.memberId = memberId;
+      this.memberId = memberId;
     },
     setMemberType(memberType) {
-        this.memberType = memberType;
+      this.memberType = memberType;
     }
   },
   getters: {
     //원하는 getter
     getMemberNo() {
-        return this.memberNo;
+      return this.memberNo;
     },
     getMemberId() {
-        return this.memberId;
+      return this.memberId;
     },
     getMemberType() {
-        return this.memberType;
+      return this.memberType;
     }
   },
 });
