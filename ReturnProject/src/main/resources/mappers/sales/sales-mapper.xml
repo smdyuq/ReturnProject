@@ -198,6 +198,25 @@
 
 	<!-- 카테고리 페이지 -->
 
+	<!-- 전체 카테고리 -->
+	<select id="all" resultMap="salesResultSet">
+		SELECT s.*, i.IMAGE_NAME
+		FROM
+		SALES s
+		LEFT JOIN (
+		SELECT IMAGE_NAME, SALES_NO
+		FROM IMAGE
+		WHERE
+		ROWNUM = 1
+		ORDER
+		BY
+		IMAGE_NO ASC
+		) i ON s.SALES_NO =
+		i.SALES_NO
+		ORDER BY
+		s.SALES_DATE DESC
+	</select>
+
 	<!-- 가전 카테고리 -->
 	<select id="homeAppliances" resultMap="salesResultSet">
 		SELECT s.*, i.IMAGE_NAME
@@ -236,7 +255,7 @@
 		ORDER BY s.SALES_DATE DESC
 	</select>
 
-	<!-- 푸드 카테고리 -->
+	<!-- 식품 카테고리 -->
 	<select id="food" resultMap="salesResultSet">
 		SELECT s.*, i.IMAGE_NAME
 		FROM

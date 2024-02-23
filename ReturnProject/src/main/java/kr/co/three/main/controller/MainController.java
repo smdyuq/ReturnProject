@@ -200,10 +200,11 @@ public class MainController {
 //    카테고리 페이지로 이동
 	@GetMapping("/categorySales")
 	public ResponseEntity<?> category(@RequestParam("salesCategory") String salesCategory) {
-
 		List<SalesDTO> salesList = new ArrayList<>();
-
-		if (salesCategory.equals("가전")) {
+		if (salesCategory.equals("전체")) {
+			// 전체 카테고리
+			salesList = mainService.all();
+		} else if (salesCategory.equals("가전")) {
 			// 가전 카테고리
 			salesList = mainService.homeAppliances();
 		} else if (salesCategory.equals("의류")) {

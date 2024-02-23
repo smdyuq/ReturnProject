@@ -1,57 +1,56 @@
 <template>
-  <div>
-    <Header-vue />
-    <Sidebar-vue />
-    <CategoryCloth-Vue />
-    <CardWrapper-Vue />
-    <Footer-Vue />
+
+<div>
+    <Header-vue/>
+    <Sidebar-vue/>
+    <CategoryCloth-Vue/>
+    <!-- {{ this.getC }} -->
+    <CardWrapper-Vue/>
+    <Footer-Vue/>
   </div>
 </template>
 
 <script>
-import HeaderVue from "../components/layout/Header.vue";
-import FooterVue from "../components/layout/Footer.vue";
-import SlideVue from "../components/layout/Slide.vue";
-import CardWrapperVue from "../components/layout/CardWrapper.vue";
-import SidebarVue from "../components/layout/Sidebar.vue";
-import CategoryClothVue from "../components/layout/CategoryCloth.vue";
-import axiosApi from "../services/axios";
-import { mapActions, mapState } from "pinia";
-import { usersStore } from "../stores/Home";
-import { userStore } from "../stores/Member";
+import HeaderVue from '../components/layout/Header.vue';
+import FooterVue from '../components/layout/Footer.vue';
+import SlideVue from '../components/layout/Slide.vue';
+import CardWrapperVue from '../components/layout/CardWrapper.vue';
+import SidebarVue from '../components/layout/Sidebar.vue';
+import CategoryClothVue from '../components/layout/CategoryCloth.vue';
+
+import axiosApi from '../services/axios';
+import { mapActions, mapState } from 'pinia';
+import { usersStore } from '../stores/Home';
 
 export default {
-  components: {
-    HeaderVue,
-    SlideVue,
-    FooterVue,
-    CardWrapperVue,
-    SidebarVue,
-    CategoryClothVue,
-  },
-  data() {
-    return {
-      users: [],
-    };
-  },
-  mounted() {
-    this.getUsers();
-  },
-  computed: {
-    ...mapState(userStore, ["getMemberNo"]),
-  },
-  methods: {
-    ...mapActions(usersStore, ["addUsers"]),
-    getUsers() {
-      axiosApi
-        .get("/main/mainPage")
-        .then((response) => {
-          this.addUsers(response.data.sales);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+    components: {   
+        HeaderVue,
+        SlideVue,
+        FooterVue,
+        CardWrapperVue,
+        SidebarVue,
+        CategoryClothVue
     },
-  },
-};
+    mounted() {
+        this.getCloth1();
+    },
+    computed: {
+        ...mapState(usersStore, ['getStatus', 'getCloth'])
+    },
+    methods: {
+        ...mapActions(usersStore, ['addCloth','addStatus']),
+        getCloth1() {
+            this.addStatus('의류');
+            axiosApi.get('/main/categorySales?salesCategory='+this.getStatus)
+        
+            .then(response => {
+                this.addCloth(response.data.list);
+            })
+            .catch(error => {
+                    console.error(error);
+                });
+        }
+    }
+}
+
 </script>

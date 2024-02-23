@@ -51,6 +51,11 @@ public class MainServiceImpl implements MainService {
 
 //	<카테고리 페이지>
 
+//	전체 카테고리
+	public List<SalesDTO> all() {
+		return mainDAO.all(sqlSession);
+	}
+
 //	가전 카테고리
 	@Override
 	public List<SalesDTO> homeAppliances() {
