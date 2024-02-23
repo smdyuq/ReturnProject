@@ -22,7 +22,7 @@ public class MemberDTO {
 	private boolean isVerficiationCodeSent;
 	private String checkCode;
 	private String authenticationCode;
-	
+
 	private int cpage;
 	private int ask_no;
 	private String ask_comment_content;
