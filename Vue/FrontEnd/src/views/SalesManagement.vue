@@ -1,11 +1,15 @@
 <template>
-    <div style="height:380vh;">
+
+    <div style="height:310vh;">
+
         <HeaderVue></HeaderVue>
         <SidebarVue></SidebarVue>
         <NavVue></NavVue>
         <ProductRegistrationVue></ProductRegistrationVue>
-        <FooterVue id="footer"></FooterVue>
+
     </div>
+    <FooterVue id="footer"></FooterVue>
+
 </template>
 
 <script>

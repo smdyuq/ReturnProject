@@ -4,7 +4,8 @@
 
             <div class="cardWrap" v-for="(item, index) in list" :key="index" @click="goDetail(item.salesNo)">
                 <div class="imgWrapper">
-                    <div><img :src="'http://192.168.0.16/resources/uploads/428x428/' + item.imageName" style="width: 194px; height: 194px;"></div>
+                    <div><img :src="'http://192.168.0.16/resources/uploads/' + item.imageName" style="width: 194px; height: 194px;"></div>
+
                 </div>
 
 
@@ -99,7 +100,9 @@ export default {
                 } else if(this.getStatus == '전체' , '의류' , '식품' , '가전' , '주얼리') {
                     this.addAll(response.data.list);
                 }
-                console.log(response.data)
+
+
+
                 this.list = response.data.list;
             })
             .catch(error => {

@@ -1,46 +1,66 @@
-<template>
+
+<<template>
   <div class="contact-us">
     <h2 style="margin-top:20px; margin-bottom:20px;">1:1 문의하기</h2>
-    <form @submit.prevent="submitForm">
+    <form @submit.prevent="enrollBoard">
       <div class="form-group">
         <label for="title">제목</label>
-        <input type="text" id="title" v-model="formData.title" required>
+        <input type="text" id="title" v-model="board.ask_title" required>
       </div>
       <div class="form-group">
         <label for="message">내용</label>
-        <textarea id="message" v-model="formData.content" required></textarea>
+        <textarea id="message" v-model="board.ask_content" required></textarea>
       </div>
-      <button type="submit" @click="navigateToHome">전송</button>
+      <button type="submit">전송</button>
     </form>
   </div>
 </template>
 
 <script>
+import axiosApi from '../../services/axios'
+import { mapState } from 'pinia';
+import { userStore } from '../../stores/Member'
+
+
 export default {
-  data() {
-    return {
-      formData: { 
-        title: '',
-        content: ''
-      }
-    };
-  },
-  methods: {
-    submitForm() {
-      // 여기에 폼 데이터를 서버로 전송하는 로직을 추가할 수 있습니다.
-      console.log('Form submitted!', this.formData);
-      // 전송 후에 폼을 초기화하거나 다음 단계로 넘어갈 수 있습니다.
-      this.formData = {
-        title: '',
-        content: ''
-      };
+
+    data() {
+        return {
+            board: {
+                ask_title: '',
+                ask_content: '',
+                member_no:-1
+            }
+        };
     },
-    navigateToHome() {
-      this.$router.push('/Board')
+    computed:{
+      ...mapState(userStore,['getMemberNo'])
+    },
+    methods: {
+        async enrollBoard() {
+          console.log('a')  
+          try {
+            console.log('b')  
+                this.board.member_no = this.getMemberNo;
+                const response = await axiosApi.post('/inquiry/enroll', this.board);
+                console.log('c')  
+                if (response.data === 'success') {
+                  console.log('d')    
+                  console.log('게시물 등록 성공');
+                } else {
+                  console.log('e')  
+                    console.error('게시물 등록 실패');
+                }
+            } catch (error) {
+              console.log('f')  
+                console.error('게시물 등록 중 오류 발생:', error);
+            }
+            this.$router.push('/Board')
+        }
     }
-  }
 }
 </script>
+
 
 <style scoped>
 .form-group {
