@@ -21,6 +21,7 @@
             <div>상점 방문수</div>
             <span>0</span>
           </div>
+
           <div class="storeContent">
             <div>상품 판매수</div>
             <span>0</span>
@@ -35,6 +36,7 @@
         <div class="storeContents" id="content4">
           <button>소개글 수정</button>
         </div>
+        
       </div>
     </div>
   </div>
@@ -49,10 +51,10 @@
 
       <div>내상품 페이지 입니다.</div>
 
-      <div style="border: 0.5px solid gray"></div>
+      <div style="border: 0.5px solid gray; margin-top: 30px; margin-bottom:30px;"></div>
     </div>
-
-    <div class="cardContainer">
+    
+    <!-- <div class="cardContainer">
       <div class="cardWrapper">
         <div class="cardWrap">
           <div class="imgWrapper">
@@ -70,7 +72,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

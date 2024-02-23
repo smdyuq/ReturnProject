@@ -14,8 +14,6 @@ import CardWrapperVue from '../components/layout/CardWrapper.vue';
 import SidebarVue from '../components/layout/Sidebar.vue';
 import CategoryAllVue from '../components/layout/CategoryAll.vue';
 
-
-
 export default {
     components: {   
         HeaderVue,
