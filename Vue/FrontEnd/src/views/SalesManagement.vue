@@ -1,14 +1,14 @@
 <template>
 
-    <div style="height:310vh;">
+    <div style="height:330vh;">
 
         <HeaderVue></HeaderVue>
         <SidebarVue></SidebarVue>
         <NavVue></NavVue>
         <ProductRegistrationVue></ProductRegistrationVue>
 
+        <FooterVue id="footer"></FooterVue>
     </div>
-    <FooterVue id="footer"></FooterVue>
 
 </template>
 
