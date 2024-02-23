@@ -3,7 +3,7 @@
     <div class="headerWrapper">
       <div style="display:grid">
         <div class="loginSignup" style="margin-top:0;">
-          <p style="color:gray; margin-bottom:0; margin-right:15px;" v-if="isLoggedIn()">환영합니다, {{ memberId }}님!</p>
+          <p class="userName" v-if="isLoggedIn()">환영합니다, {{ this.getMemberId }}님 😄</p>
           <button v-if="!isLoggedIn()" @click="goLogin()" style="color:gray;">로그인</button>
           <button v-if="!isLoggedIn()" @click="goSignUp()" style="color:gray;">회원가입</button>
           <button v-if="isLoggedIn()" @click="logout()" style="color:gray;">로그아웃</button>
@@ -15,7 +15,7 @@
           <div class="searchWrapper">
             <div class="searchWrap" @click="toggleRecentSearches">
               <input class="search" type="search" placeholder="상품명, 지역명, @상점명 입력">
-              <a><img class="searchImg" src="../../assets/img/검색.png" width="16" height="16"></a>
+              <a><img class="searchImg" src="../../assets/img/돋보기.png" width="23" height="23"></a>
             </div>
             <div class="recentSearches" style="display: none;">
               <div class="recentSearche">최근검색어</div>
@@ -71,7 +71,7 @@ import { userStore } from '../../stores/Member';
 
 export default {
   computed: {
-    ...mapState(userStore, ['getMemberId']),
+    ...mapState(userStore, ['getMemberId','getMemberName']),
     // : computed(() => userStore.getMemberId() !== ''), // 로그인 여부 확인
   },
   methods: {
@@ -164,9 +164,8 @@ header {
   height: 150px;
   width: 1024px;
   z-index: 99998;
-
   background: white;
-
+  
 }
 
 .headerLogo {
@@ -194,6 +193,13 @@ header {
   justify-content: space-between;
 }
 
+.userName {
+  color:black;
+  margin-bottom:0;
+  margin-right:15px;
+  font-size:medium;
+  font-weight:bold;
+}
 .loginSignup {
   float: right;
   display: flex;
@@ -216,6 +222,8 @@ header {
   outline: none;
   height: 39px;
 }
+
+
 
 input:focus {
   outline: none;
@@ -318,6 +326,7 @@ a>img {
   background-color: white;
   top: 35px;
   border: 0.5px solid gray;
+  
 }
 
 .recentSearche {

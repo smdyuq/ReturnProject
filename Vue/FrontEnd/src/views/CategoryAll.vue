@@ -14,10 +14,6 @@ import CardWrapperVue from '../components/layout/CardWrapper.vue';
 import SidebarVue from '../components/layout/Sidebar.vue';
 import CategoryAllVue from '../components/layout/CategoryAll.vue';
 
-import axiosApi from '../services/axios';
-import { mapActions, mapState } from 'pinia';
-import { usersStore } from '../stores/Home';
-
 export default {
     components: {   
         HeaderVue,
@@ -26,28 +22,6 @@ export default {
         CardWrapperVue,
         SidebarVue,
         CategoryAllVue
-    },
-    mounted() {
-        this.getAll();
-    },
-
-    computed: {
-        ...mapState(usersStore, ['getAll','getStaus'])
-    },
-    methods: {
-        ...mapActions(usersStore, ['addAll','addStatus']),
-        getAll() {
-            this.addStatus('전체');
-            axiosApi.get('/main/categorySales?salesCategory='+this.getStatus)
-    
-            .then(response => {
-                this.addAll(response.data.list);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-        }
     }
-
 }
 </script>

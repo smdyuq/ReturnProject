@@ -21,6 +21,7 @@
             <div>상점 방문수</div>
             <span>0</span>
           </div>
+
           <div class="storeContent">
             <div>상품 판매수</div>
             <span>0</span>
@@ -35,6 +36,7 @@
         <div class="storeContents" id="content4">
           <button>소개글 수정</button>
         </div>
+        
       </div>
     </div>
   </div>

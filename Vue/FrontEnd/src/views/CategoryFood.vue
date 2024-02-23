@@ -14,8 +14,6 @@ import CardWrapperVue from '../components/layout/CardWrapper.vue';
 import SidebarVue from '../components/layout/Sidebar.vue';
 import CategoryFoodVue from '../components/layout/CategoryFood.vue';
 
-
-
 export default {
     components: {   
         HeaderVue,
@@ -25,5 +23,6 @@ export default {
         SidebarVue,
         CategoryFoodVue
     }
+
 }
 </script>

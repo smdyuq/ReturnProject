@@ -85,6 +85,7 @@ export default {
       axiosApi.get("/send-one?checkCode="+this.checkCode+"&memberPhone="+this.post.memberPhone)
       .then((result) => {
         if(result.status === 200) {
+          console.log(result.data)
           this.post.authenticationCode = result.data, // 수정: result.data를 저장하도록 수정
           this.isVerificationCodeSent = true; // 수정: isVerificationCodeSent를 true로 설정하여 버튼 활성화
           console.log()
@@ -96,9 +97,10 @@ export default {
     },
     verificationCodeCheck() {
   if(Number(this.post.verificationCode) === this.post.authenticationCode) {
+    alert("인증에 성공하였습니다.")
     this.isVerificationCodeSent = true; // 인증 코드가 맞으면 isVerificationCodeSent를 true로 설정하여 버튼 활성화
   } else {
-    alert("인증코드가 다릅니다");
+    alert("인증코드가 다릅니다.");
   }
 }
 }

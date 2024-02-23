@@ -4,6 +4,7 @@
     <SidebarVue></SidebarVue>
     <SlideVue />
     <p class="todayProduct">오늘의 상품추천</p>
+    
     <CardWrapperVue />
     <FooterVue></FooterVue>
   </div>
@@ -33,6 +34,7 @@ export default {
   },
   methods: {
     ...mapActions(usersStore, ['addUsers']),
+    
     getUsers() {
       axiosApi.get('/main/mainPage')
         .then(response => {
