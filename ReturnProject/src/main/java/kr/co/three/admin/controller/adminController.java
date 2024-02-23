@@ -61,7 +61,7 @@ public class adminController {
 //      }
 //   }
 
-//   관리자 등록
+//  관리자 등록
 	@PostMapping("/adminRegister")
 	public ResponseEntity<?> register(@RequestBody adminDTO admin) {
 

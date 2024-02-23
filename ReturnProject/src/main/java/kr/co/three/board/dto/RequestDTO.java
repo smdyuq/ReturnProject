@@ -14,6 +14,6 @@ import lombok.Setter;
 public class RequestDTO {
 
 	private boardDTO board;
-    private ReplyDTO reply;
-    private MemberDTO member;
+	private ReplyDTO reply;
+	private MemberDTO member;
 }

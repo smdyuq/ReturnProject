@@ -24,6 +24,9 @@ public interface MainService {
 
 //	<카테고리 페이지>
 
+//	전체 카테고리
+	List<SalesDTO> all();
+
 //	가전 카테고리
 	List<SalesDTO> homeAppliances();
 

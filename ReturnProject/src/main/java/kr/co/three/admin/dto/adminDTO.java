@@ -13,7 +13,7 @@ public class adminDTO {
 	private String memberName;
 	private int memberType;
 	private String memberPhone;
-	
+
 	public adminDTO() {
 		super();
 	}

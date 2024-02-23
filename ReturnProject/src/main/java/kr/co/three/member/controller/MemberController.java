@@ -206,7 +206,7 @@ public class MemberController {
 //   내 상점
 	@GetMapping("/storeForm")
 	public ResponseEntity<?> storeForm(@RequestParam(value = "memberNo", defaultValue = "0") int memberNo,
-			HttpSession session) {
+			HttpSession session, @RequestParam(value = "menu") String menu) {
 		// 클라이언트에서 새로고침 이벤트를 감지하여 서버에 요청을 보내지 않도록 함
 		boolean isRefreshRequest = isRefreshRequest(session);
 		if (memberNo == 0) {
@@ -217,22 +217,24 @@ public class MemberController {
 			// 상점 방문 수 증가
 			int storeVisitCount = memberService.storeVisitCount(memberNo);
 		}
-
-		// 멤버 테이블 데이터 조회
-		MemberDTO memberResult = memberService.selectMemberData(memberNo);
-		// 상품 테이블 데이터 조회
-		List<SalesDTO> salesResult = memberService.selectSalesData(memberNo);
-		// 찜 조회
-		List<SalesDTO> likeResult = memberService.selectLikeData(memberNo);
-		// 상품 판매수 데이터 조회
-		int salesCompleteResult = memberService.selectSalesComplete(memberNo);
-
 		Map<String, Object> response = new HashMap<>();
 
-		response.put("member", memberResult);
-		response.put("sales", salesResult);
-		response.put("like", likeResult);
-		response.put("salesComplete", salesCompleteResult);
+		// 멤버 테이블 데이터 조회
+//		MemberDTO memberResult = memberService.selectMemberData(memberNo);
+		if (menu.equals("sales")) {
+			// 상품 테이블 데이터 조회
+			List<SalesDTO> salesResult = memberService.selectSalesData(memberNo);
+			response.put("list", salesResult);
+		} else if (menu.equals("likes")) {
+			// 찜 조회
+			List<SalesDTO> likeResult = memberService.selectLikeData(memberNo);
+			response.put("list", likeResult);
+		}
+		// 상품 판매수 데이터 조회
+//		int salesCompleteResult = memberService.selectSalesComplete(memberNo);
+
+//		response.put("member", memberResult);
+//		response.put("salesComplete", salesCompleteResult);
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
