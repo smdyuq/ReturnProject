@@ -1,22 +1,37 @@
 <template>
   <div class="contact-us">
+<<<<<<< HEAD
     <h2 style="margin-top: 20px; margin-bottom: 20px">1:1 문의하기</h2>
     <form @submit.prevent="submitForm">
+=======
+    <h2 style="margin-top:20px; margin-bottom:20px;">1:1 문의하기</h2>
+    <form @submit.prevent="enrollBoard">
+>>>>>>> branch 'master' of https://github.com/smdyuq/ReturnProject.git
       <div class="form-group">
         <label for="title">제목</label>
+<<<<<<< HEAD
         <input type="text" id="title" v-model="formData.title" required />
+=======
+        <input type="text" id="title" v-model="board.ask_title" required>
+>>>>>>> branch 'master' of https://github.com/smdyuq/ReturnProject.git
       </div>
       <div class="form-group">
         <label for="message">내용</label>
-        <textarea id="message" v-model="formData.content" required></textarea>
+        <textarea id="message" v-model="board.ask_content" required></textarea>
       </div>
-      <button type="submit" @click="navigateToHome">전송</button>
+      <button type="submit">전송</button>
     </form>
   </div>
 </template>
 
 <script>
+import axiosApi from '../../services/axios'
+import { mapState } from 'pinia';
+import { userStore } from '../../stores/Member'
+
+
 export default {
+<<<<<<< HEAD
   data() {
     return {
       formData: {
@@ -34,14 +49,53 @@ export default {
         title: "",
         content: "",
       };
+=======
+
+    data() {
+        return {
+            board: {
+                ask_title: '',
+                ask_content: '',
+                member_no:-1
+            }
+        };
+>>>>>>> branch 'master' of https://github.com/smdyuq/ReturnProject.git
     },
+<<<<<<< HEAD
     navigateToHome() {
       this.$router.push("/Board");
     },
   },
 };
+=======
+    computed:{
+      ...mapState(userStore,['getMemberNo'])
+    },
+    methods: {
+        async enrollBoard() {
+          console.log('a')  
+          try {
+            console.log('b')  
+                this.board.member_no = this.getMemberNo;
+                const response = await axiosApi.post('/inquiry/enroll', this.board);
+                console.log('c')  
+                if (response.data === 'success') {
+                  console.log('d')    
+                  console.log('게시물 등록 성공');
+                } else {
+                  console.log('e')  
+                    console.error('게시물 등록 실패');
+                }
+            } catch (error) {
+              console.log('f')  
+                console.error('게시물 등록 중 오류 발생:', error);
+            }
+            this.$router.push('/Board')
+        }
+    }
+}
+>>>>>>> branch 'master' of https://github.com/smdyuq/ReturnProject.git
 </script>
-
 <style scoped>
 .form-group {
   margin-bottom: 20px;
