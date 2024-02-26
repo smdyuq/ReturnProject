@@ -1,12 +1,10 @@
 # [ReturnProject] 파이널 프로젝트(24.01 ~ 24.02)
 <center><img width="100%" src="https://github.com/smdyuq/ReturnProject/assets/129133645/779dc8dd-4a56-4c01-80a5-4e4fe3f2a949"></center>
-
 <br/>
 
 ## 프로젝트 소개
 중고거래 사이트 '번개장터'를 모티브로 만든 중고거래 웹사이트 '리턴나라'입니다.
-
-<br/><br/>
+<br/>
 
 ## 기술 스택
 - Spring 5.3.24 
@@ -16,14 +14,9 @@
 - lombok 1.18.24
 - Oracle
 - VUE3
-
-<br/><br/>
-
-
-
+<br/>
 
 ## :sunglasses: Member Contact Information
-
 <table border>
   <tbody>
     <tr>
@@ -73,22 +66,8 @@
      </tr>
   </tbody>
 </table>
+<br/>
 
-
-<br/><br/>
-
-
-## :relaxed: 프로젝트 후기(Reflection Report) 
-![image](https://github.com/minsuzzang/final-project/assets/150825231/be11b6ce-8490-409e-8f42-3711a6f327d8)
-
-
-
-<br/><br/>
-
-
-## :pray: 감사의말 (Acknowledgements)
-"막히거나 잘 이해가 안되는 부분들을 자세하게 설명해주시는 등 많은 도움을 주신 김재섭 선생님께 감사드립니다."<br>
-"백엔드분들의 빠른 피드백과 다소 무리한 의견들에 대해서도 흔쾌히 반영해주신 엄윤호 팀원님께 감사합니다."<br>
-"저희 팀원들에게 프로젝트에 대한 노력과 열정, 그리고 헌신에 감사드립니다."<br>
-
-<br/><br/>
+## 프로젝트 후기
+<p> 이승엽 : 파이널 프로젝트라 더 좋은 기능과 좋은 코드를 사용하여 완성하고 싶었지만 아쉬움이 남는 프로젝트였습니다. VUE와 연동하여 작업한 경험은 좋은 경험으로 남았고 앞으로의 개발에 큰 도움이 된 것 같습니다.</p>
+<br/>
