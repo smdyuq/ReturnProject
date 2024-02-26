@@ -8,7 +8,8 @@ export const userStore = defineStore("userKey", {
     return {
         memberNo: -1,
         memberId: '',
-        memberType: 1
+        memberType: 1,
+        memberName: ''
     };
   },
   actions: {
@@ -21,6 +22,9 @@ export const userStore = defineStore("userKey", {
     },
     setMemberType(memberType) {
         this.memberType = memberType;
+    },
+    setMemberName(memberName) {
+      this.memberName = memberName;
     }
   },
   getters: {
@@ -33,6 +37,9 @@ export const userStore = defineStore("userKey", {
     },
     getMemberType() {
         return this.memberType;
+    },
+    getMemberName() {
+      return this.memberName;
     }
   },
 });

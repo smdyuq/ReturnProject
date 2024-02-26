@@ -18,13 +18,14 @@
                 <router-link :to="{ path: '/CategoryHomeAppliances' }" class="category">가전</router-link>
                 <router-link :to="{ path: '/CategoryFood' }" class="category">식품</router-link>
             </div>
-            <div>전체페이지</div>
+        
         </div>
         <div></div>
     </div>
 </template>
 <script>
-import { defineComponent, watch } from 'vue';
+
+import { defineComponent } from 'vue';
 
 export default defineComponent({
     data() {

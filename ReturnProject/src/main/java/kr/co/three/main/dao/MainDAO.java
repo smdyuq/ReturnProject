@@ -38,6 +38,11 @@ public class MainDAO {
 
 //	<카테고리 페이지>
 
+//	전체 카테고리
+	public List<SalesDTO> all(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("salesMapper.all");
+	}
+
 //	가전 카테고리
 	public List<SalesDTO> homeAppliances(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectList("salesMapper.homeAppliances");

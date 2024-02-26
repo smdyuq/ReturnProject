@@ -1,6 +1,6 @@
 <template>
     <div class="SidebarWrapper">
-        <div style="width:100%; height:60px; border:1px solid gray">
+        <!-- <div style="width:100%; height:60px; border:1px solid gray">
             <div>찜한상품</div>
             <a style="display: ;">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart"
@@ -13,8 +13,8 @@
         </div>
         <div style="width:100%; height:130px; border:1px solid gray">최근본상품
             <router-link to="/ProductDetail"><img src="https://via.placeholder.com/80.jpg"></router-link>
-            <!-- <img :src="'http://192.168.0.15/resources/uploads/' + item.salesImageName" style="width: 194px; height: 194px;"> -->
-        </div>
+        </div> -->
+
         <div style="width:100%; height:60px; border:1px solid gray">
             <button class="topBtn" @click="scrollToTop">TOP</button>
         </div>

@@ -29,11 +29,12 @@ export default defineComponent({
   data() {
     return {
       memberId: '',
-      memberPwd: ''
+      memberPwd: '',
+      memberName:''
     };
   },
   methods: {
-    ...mapActions(userStore, ['setMemberNo','setMemberId','setMemberType']),
+    ...mapActions(userStore, ['setMemberNo','setMemberId','setMemberType','setMemberName']),
     login() {
       if (this.memberId.trim() === '' || this.memberPwd.trim() === '') {
         alert('아이디 또는 비밀번호를 입력해주세요.');
@@ -41,7 +42,8 @@ export default defineComponent({
       }
       const userData = {
         memberId: this.memberId,
-        memberPwd: this.memberPwd
+        memberPwd: this.memberPwd,
+        memberName: this.memberName
       };
 
       axios.post('/member/login', userData)
@@ -50,7 +52,8 @@ export default defineComponent({
             this.setMemberNo(response.data.memberNo);
             this.setMemberId(response.data.memberId);
             this.setMemberType(response.data.memberType);
-
+            this.setMemberName(response.data.memberName);
+            console.log("aaaaaaaaa : " + response.data.memberName);
             this.$router.push('/');
             alert('로그인이 완료되었습니다.');
           } else {
