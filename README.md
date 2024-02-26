@@ -53,8 +53,7 @@
         <center>서버와 통신(Vue-axios)</center><br>
         <center>페이지 이동관리(Vue-router)</center><br>
         <center>상태관리(Vue-pinia)</center><br>
-        <center>UI & 이벤트 구현</center><br>
-        <center>PPT 제작</center><br>
+        <center>UI & 이벤트 구현 / PPT 제작</center><br>
       </td>
      </tr>
   </tbody>
