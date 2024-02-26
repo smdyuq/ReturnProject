@@ -12,7 +12,7 @@
 - MyBatis 3.4.1<br/>
 - JAVA 11<br/>
 - JDK 11<br/>
-- lombok 1.18.24<br/>
+- lombok 1.18.30<br/>
 - Oracle<br><br>
 <p>FRONT-END</p>
 - VUE3<br/>
