@@ -27,7 +27,7 @@
 <table border>
   <tbody>
     <tr>
-      <td align="center" width="200px">
+      <td align="center" width="400px">
         <center>팀장</center><br>
         <a href="https://github.com/smdyuq">
           이승엽
@@ -36,7 +36,7 @@
         <center>로그인/회원가입/내상점</center><br>
         <center>판매등록/상품관리/상품상세/찜/최근본상품</center><br>
       </td>
-      <td align="center" width="200px">
+      <td align="center" width="400px">
         <center>팀원</center><br>
         <a href="https://github.com/Jaeyun-Na">
           나재윤
@@ -44,12 +44,17 @@
         <center>관리자 페이지 : 게시판 등록/작성자별 게시글 보이기/댓글 기능 구현</center><br>
         <center>결제 페이지 : 결제 기능 구현(kakao api)/결제 완료 페이지/제품 판매시 판매자에게 문자전송(sms api)</center><br>
       </td>
-      <td align="center" width="200px">
+      <td align="center" width="400px">
         <center>팀원</center><br>
         <a href="https://github.com/">
           이윤호
-        </a>
-        <center></center><br>
+        </a><br>
+        <center>레이아웃 & 디자인</center><br>
+        <center>서버와 통신(Vue-axios)</center><br>
+        <center>페이지 이동관리(Vue-router)</center><br>
+        <center>상태관리(Vue-pinia)</center><br>
+        <center>UI & 이벤트 구현</center><br>
+        <center>PPT 제작</center><br>
       </td>
      </tr>
   </tbody>
@@ -62,5 +67,5 @@
 <p>나재윤</p>
 <p>새미때와 같은 주제로 더 나은 기능 구현과 코드를 작성하고 싶은 욕심이 있었습니다. board에 댓글 기능을 추가한점 과 결제 기능을 구현했다는 점에서는 뿌듯함을 느낄수 있었습니다. 다만 vue와 마이그레이션하는 과정이 쉽지 않아 구현한 모든것을 보여주지 못하는 점에 큰 아쉬움으로 남습니다.</p>
 <p>이윤호</p>
-<p></p>
+<p>이번 프로젝트를 계기로 백엔드의 Spring과 데이터 주고 받는 경험을 쌓았습니다. 마음만은 더 많은 기능을 구현하고 싶었으나, 이번에 Vue를 처음 활용하다 보니 막히는 부분들도 있어, Vue에서 구현이 되지 않아 백엔드 쪽에서 처리하지 못한 기능들이 있어 이부분은 팀원들에게 한편으로 미안한 마음뿐입니다.</p>
 <br/><br/>
