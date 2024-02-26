@@ -23,6 +23,7 @@ import kr.co.three.main.dto.MainDTO;
 import kr.co.three.main.service.MainServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
 
+// JSP 코드
 //@Controller
 //public class MainController {
 //
