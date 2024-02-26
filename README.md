@@ -14,7 +14,7 @@
 - JDK 11<br/>
 - lombok 1.18.24<br/>
 - Oracle<br>
-<p>FRONT-END</p>
+<p>FRONT-END</p><br>
 - VUE3<br/>
 - HTML<br/>
 - CSS<br/>
