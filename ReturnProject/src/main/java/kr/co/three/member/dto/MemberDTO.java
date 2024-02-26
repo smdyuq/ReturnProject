@@ -11,5 +11,19 @@ public class MemberDTO {
 	private String memberPwd;
 	private String memberName;
 	private String memberPhone;
-	private String memberType;
+	private int memberType;
+	private String memberImageName;
+	private String memberImagePath;
+	private int memberVisit;
+	private String memberContent;
+	private String memberOriginImageName;
+	private String confirmPassword;
+	private String verficationCode;
+	private boolean isVerficiationCodeSent;
+	private String checkCode;
+	private String authenticationCode;
+
+	private int cpage;
+	private int ask_no;
+	private String ask_comment_content;
 }
