@@ -32,9 +32,9 @@
         <a href="https://github.com/smdyuq">
           이승엽
         </a><br>
-        <center>메인페이지/검색페이지/카테고리페이지</center><br>
-        <center>로그인/회원가입/내상점</center><br>
-        <center>판매등록/상품관리/상품상세/찜/최근본상품</center><br>
+        <center>데이터 보여주기 : 메인페이지/검색페이지/카테고리페이지</center><br>
+        <center>회원 : 로그인/회원가입/내상점</center><br>
+        <center>상품 : 판매등록/상품관리/상품상세/찜/최근본상품</center><br>
       </td>
       <td align="center" width="400px">
         <center>팀원</center><br>
@@ -46,7 +46,7 @@
       </td>
       <td align="center" width="400px">
         <center>팀원</center><br>
-        <a href="https://github.com/">
+        <a href="https://github.com/YounHooooo">
           이윤호
         </a><br>
         <center>레이아웃 & 디자인</center><br>
