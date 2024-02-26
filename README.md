@@ -1,25 +1,21 @@
-# [ReturnProject]
+# [ReturnProject] 파이널 프로젝트(24.01 ~ 24.02)
 <center><img width="100%" src="https://github.com/smdyuq/ReturnProject/assets/129133645/779dc8dd-4a56-4c01-80a5-4e4fe3f2a949"></center>
 
-<br/><br/>
-<hr/>
-<hr/>
+<br/>
 
 ## 프로젝트 소개
+중고거래 사이트 '번개장터'를 모티브로 만든 중고거래 웹사이트 '리턴나라'입니다.
 
 <br/><br/>
 
 ## 기술 스택
-
-<br/><br/>
-
 - Spring 5.3.24 
-- Spring Security 5.3.13
 - MyBatis 3.4.1
 - JAVA 11
 - JDK 11
 - lombok 1.18.24
 - Oracle
+- VUE3
 
 <br/><br/>
 
