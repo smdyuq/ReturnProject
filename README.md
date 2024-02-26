@@ -7,22 +7,20 @@
 <br/><br/>
 
 ## 기술 스택
-<BACK-END>
-- Spring 5.3.24 
-- MyBatis 3.4.1
-- JAVA 11
-- JDK 11
-- lombok 1.18.24
-- Oracle
-<br/>
-<FRONT-END>
-- VUE3
-- HTML
-- CSS
-- JavaScript
-- Ajax
-- Bootstrap
-<br/><br/>
+BACK-END<br/>
+- Spring 5.3.24<br/>
+- MyBatis 3.4.1<br/>
+- JAVA 11<br/>
+- JDK 11<br/>
+- lombok 1.18.24<br/>
+- Oracle<br/>
+FRONT-END<br/>
+- VUE3<br/>
+- HTML<br/>
+- CSS<br/>
+- JavaScript<br/>
+- Ajax<br/>
+- Bootstrap<br/><br/>
 
 ## 팀원 소개
 <table border>
