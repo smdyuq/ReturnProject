@@ -13,7 +13,7 @@ BACK-END<br/>
 - JAVA 11<br/>
 - JDK 11<br/>
 - lombok 1.18.24<br/>
-- Oracle
+- Oracle<br>
 FRONT-END<br/>
 - VUE3<br/>
 - HTML<br/>
@@ -31,7 +31,7 @@ FRONT-END<br/>
         <center>팀장</center><br>
         <a href="https://github.com/smdyuq">
           이승엽
-        </a>
+        </a><br>
         <center>메인페이지/검색페이지/카테고리페이지</center><br>
         <center>로그인/회원가입/내상점</center><br>
         <center>판매등록/상품관리/상품상세/찜/최근본상품</center><br>
@@ -40,7 +40,7 @@ FRONT-END<br/>
         <center>팀원</center><br>
         <a href="https://github.com/Jaeyun-Na">
           나재윤
-        </a>
+        </a><br>
         <center>관리자 페이지 : 게시판 등록/작성자별 게시글 보이기/댓글 기능 구현</center><br>
         <center>결제 페이지 : 결제 기능 구현(kakao api)/결제 완료 페이지/제품 판매시 판매자에게 문자전송(sms api)</center><br>
       </td>
