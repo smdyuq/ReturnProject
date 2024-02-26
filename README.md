@@ -1,32 +1,14 @@
+# [ReturnProject]
 <center><img width="100%" src="https://github.com/smdyuq/ReturnProject/assets/129133645/779dc8dd-4a56-4c01-80a5-4e4fe3f2a949"></center>
-<center><img width="100%" src="https://github.com/minsuzzang/final-project/assets/150643135/dea6651c-637a-4bd1-b414-c40dedbb7c31"></center>
-
-
-# 👨‍💼💼👩‍ [JESS 4-CARD]  (24.01 ~ 24.02)
-
-![image](https://github.com/minsuzzang/final-project/assets/150825231/15bd0854-b2f5-40db-ab0e-2aebc8d8b11f)
-
-
 
 <br/><br/>
 
-
-## 👨‍💼💼👩코드리뷰 규칙<br>
-![image](https://github.com/minsuzzang/final-project/assets/150825231/2ce71424-0451-4adf-a7f8-c589d3947f3e)></center><br>
-
+## 프로젝트 소개
 
 <br/><br/>
 
-
-## :construction: :mortar_board: 프로젝트 목표 (Project Goals)
-1. 팀원들이 이해하기 쉬운 코드 작성과 컨벤션을 지키자!
-2. ERD 정규화를 실현해보자!
-3. 원활한 소통과 기록을 남기자!
-4. 팀원 모두 전체 프로젝트에 대한 이해를 갖자!
-5. UXUI, 프론트엔드 개발자분과의 협업을 경험해보자!
-6. 익숙하지 않은 기능들을 중심으로 역할 분담하여 공부하자!
-7. 즐기자!!! :satisfied:  
-
+## 기술 스택
+![image](https://github.com/smdyuq/ReturnProject/assets/129133645/a15a9b7f-cc99-4ffc-b992-f0f2079f8793)
 
 <br/><br/>
 
