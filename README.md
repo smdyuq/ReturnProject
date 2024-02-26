@@ -2,26 +2,16 @@
 <center><img width="100%" src="https://github.com/smdyuq/ReturnProject/assets/129133645/779dc8dd-4a56-4c01-80a5-4e4fe3f2a949"></center>
 
 <br/><br/>
+<hr/>
+<hr/>
 
 ## 프로젝트 소개
 
 <br/><br/>
 
 ## 기술 스택
-![image](https://github.com/smdyuq/ReturnProject/assets/129133645/a15a9b7f-cc99-4ffc-b992-f0f2079f8793)
 
 <br/><br/>
-
-
-## :construction: :hammer: 기술 스택 (Technologies Used)
-![Java](https://img.shields.io/badge/Java-007396?style=flat-round&logo=Java&logoColor=white)
-![Spring](https://img.shields.io/badge/Spring-6DB33F?style=flat-round&logo=Spring&logoColor=white)
-![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?style=flat-round&logo=Spring&logoColor=white)
-![Oracle](https://img.shields.io/badge/Oracle-F80000?style=flat-round&logo=Oracle&logoColor=white)
-
-![Lombok](https://img.shields.io/badge/Lombok-BC2055?style=flat-round&logo=Lombok&logoColor=white)
-![Maven](https://img.shields.io/badge/Maven-C71A36?style=flat-round&logo=apachemaven&logoColor=white)
-![jquery](https://img.shields.io/badge/jquery-0769AD?style=flat-round&logo=jquery&logoColor=white)
 
 - Spring 5.3.24 
 - Spring Security 5.3.13
@@ -31,37 +21,8 @@
 - lombok 1.18.24
 - Oracle
 
-
 <br/><br/>
 
-
-## :earth_asia: 요구 사항
-- 사용자
-1. 사용자는 이메일, 비밀번호, 이름 ,전화번호를 입력하고 회원가입을 합니다.​
-2. 사용자는 비밀번호 분실 시 본인의 이메일로 임시 비밀번호를 받을 수 있습니다.​
-3. 사용자는 My Account에서 내정보, 내카드, 이용내역을 확인 할 수 있습니다.​ <br/>
-
-
-- 관리자
-1. 관리자 계정으로 공지사항 작성, 고객문의 답변을 할 수 있습니다.​
-2. 관리자 페이지에서 카드신청 승인/거절을 할 수 있습니다.​ <br/>
-
-
-- 카드발급
-1. 사용자는 원하는색상,디자인의 카드를 신청하고 난 후 관리자의 승인을 받을 수 있습니다.​
-2. 관리자가 승인한 카드에 세부정보를 입력한 후 최종 발급을 받을 수 있습니다.​
-3. 사용자는 하나의 계정에 최대 3개의 카드만 가질 수 있습니다.​
-4. 카드 분실 신고를 하면 DB에서 해당 카드정보가 삭제됩니다.​ <br/>
-
-
-- 제품구매
-1. 사용자는 제품구매를 할 수 있습니다. 제품구매는 일반구매와 할인구매로 나뉘어 있습니다.​
-2. 일반구매는 kakao api 결제로, 할인이나 적립이 적용되지 않습니다.​
-3. 할인구매는 발급된 현대카드로 결제합니다. 발급된 카드색상, 디자인을 선택하고 카드정보를 입력 한 후 다음으로 넘어갑니다.​
-4. 현대카드로 상품 구매시 마일리지가 적립되고, 적립된 마일리지를 사용 할 수 있습니다.
-
-
-<br/><br/>
 
 
 
