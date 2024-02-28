@@ -22,14 +22,14 @@ import kr.co.three.member.dto.MemberDTO;
 import kr.co.three.sales.dto.SalesDTO;
 
 public class UploadFile {
-	private static final String UPLOAD_PATH = "C:\\Users\\tmddu\\git\\ReturnProject\\ReturnProject\\src\\main\\webapp\\resources\\uploads\\";
+	private static final String UPLOAD_PATH = "C:\\Users\\jaeyun\\git\\ReturnProject\\ReturnProject\\src\\main\\webapp\\resources\\uploads\\";
 
 	public static boolean deleteFile(String fileName) {
 		File file1 = new File(UPLOAD_PATH + "110x150\\" + fileName);
 		File file2 = new File(UPLOAD_PATH + "121x96\\" + fileName);
 		File file3 = new File(UPLOAD_PATH + "194x194\\" + fileName);
 		File file4 = new File(UPLOAD_PATH + "428x428\\" + fileName);
-		File file5 = new File(UPLOAD_PATH + "66x66\\" + fileName);
+		File file5 = new File(UPLOAD_PATH + "66x66\\" + fileName);	
 		File file6 = new File(UPLOAD_PATH + "303x310\\" + fileName);
 		File file7 = new File(UPLOAD_PATH + fileName);
 

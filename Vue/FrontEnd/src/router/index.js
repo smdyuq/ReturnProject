@@ -20,7 +20,8 @@ import ProductDetail from '../views/Product/ProductDetail.vue'
 import Event1 from '../views/Event/Event1.vue'
 import Event2 from '../views/Event/Event2.vue'
 import Event3 from '../views/Event/Event3.vue'
-import Payment from '../views/Payment/Payment.vue'
+import PaymentDirect from '../views/Payment/PaymentDirect.vue'
+import PaymentDelivery from '../views/Payment/PaymentDelivery.vue'
 import PaymentCompleted from '../views/Payment/PaymentCompleted.vue'
 import Board from '../views/Board/Board.vue'
 import searchPage from '../views/searchPage.vue'
@@ -48,7 +49,8 @@ const routes = [
     { path: '/Event1', name:'Event1', component:Event1},
     { path: '/Event2', name:'Event2', component:Event2},
     { path: '/Event3', name:'Event3', component:Event3},
-    { path: '/Payment', name:'Payment', component:Payment},
+    { path: '/PaymentDirect', name:'PaymentDirect', component:PaymentDirect},
+    { path: '/PaymentDelivery', name:'PaymentDelivery', component:PaymentDelivery},
     { path: '/PaymentCompleted', name:'PaymentCompleted', component:PaymentCompleted},
     { path: '/Board', name:'Board', component:Board},
     { path: '/searchPage', name:'searchPage', component:searchPage},

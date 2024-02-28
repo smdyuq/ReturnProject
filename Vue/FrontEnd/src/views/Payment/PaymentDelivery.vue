@@ -18,7 +18,7 @@
                     <div class="paymentContent">
                         <div class="paymentsDetail">{{ salesCheck.salesPrice }}</div>
                         <div class="paymentsDetail">{{ salesCheck.salesName }}</div>
-                        <div class="paymentsDetail">{{ type }}</div>
+                        <div class="paymentsDetail">택배 거래</div>
                     </div>
                 </div>
             </div>

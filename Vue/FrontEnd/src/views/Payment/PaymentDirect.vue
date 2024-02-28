@@ -18,7 +18,7 @@
                     <div class="paymentContent">
                         <div class="paymentsDetail">{{ salesCheck.salesPrice }}</div>
                         <div class="paymentsDetail">{{ salesCheck.salesName }}</div>
-                        <div class="paymentsDetail">{{ type }}</div>
+                        <div class="paymentsDetail">직거래</div>
                     </div>
                 </div>
             </div>
@@ -41,14 +41,31 @@
 
 <script>
   import axiosApi from "../../services/axios";
+  import { mapActions, mapState } from 'pinia';
 
 export default {
     data() {
         return {
-
+            salesCheck: null,
         }
     },
+    created() {
+        // 페이지가 로드될 때, API를 호출하여 데이터를 불러옵니다.
+        this.fetchData();
+    },
     methods: {
+        fetchData() {
+            // salesNo 값을 정의해주세요.
+            const salesNo = 'sales_no';
+            
+            axiosApi.get(`/pay/payDirectPage?salesNo=${salesNo}`)
+                .then(response => {
+                    this.salesCheck = response.data.salesCheck;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        },
         goPaymentCompleted() {
             this.$router.push('/paymentCompleted');
         }

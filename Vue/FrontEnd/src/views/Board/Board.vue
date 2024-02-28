@@ -1,5 +1,5 @@
 <template>
-
+  <div>
     <div class="boardTitle">
       <h2 style="font-weight: bold">문의내역</h2>
     </div>
@@ -82,6 +82,7 @@
     </div>
   
     <button class="add-post-btn" @click="goToAbout">글쓰기</button>
+  </div>
   </template>
   
   <script>

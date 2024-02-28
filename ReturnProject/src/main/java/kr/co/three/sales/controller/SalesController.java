@@ -408,9 +408,8 @@ public class SalesController {
 			@RequestParam("jsonSales") String jsonSales, HttpSession session) {
 
 		Gson gson = new Gson();
-
 		SalesDTO sales = gson.fromJson(jsonSales, SalesDTO.class);
-
+		
 //		int memberNo = (int) session.getAttribute("memberNo");
 //		sales.setMemberNo(memberNo);
 
