@@ -16,9 +16,9 @@
                         <div class="paymentsTitle">수령방법</div>
                     </div>
                     <div class="paymentContent">
-                        <div class="paymentsDetail">300,000 원</div>
-                        <div class="paymentsDetail">스투시 패딩</div>
-                        <div class="paymentsDetail">직거래</div>
+                        <div class="paymentsDetail">{{ salesCheck.salesPrice }}</div>
+                        <div class="paymentsDetail">{{ salesCheck.salesName }}</div>
+                        <div class="paymentsDetail">{{ type }}</div>
                     </div>
                 </div>
             </div>
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+  import axiosApi from "../../services/axios";
+
 export default {
     data() {
         return {

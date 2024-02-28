@@ -1,4 +1,5 @@
 <template>
+    <div>
     <HeaderVue />
     <SidebarVue />
     <div v-for="(item, index) in this.getUsers" :key="index" varStatus="status">
@@ -61,7 +62,7 @@
                             <div v-if="isModalOpen" class="modal">
                                 <div class="modal-content">
                                     <!-- <router-Link to="/"><div><img class="leftArrow" src="../../assets/img/뒤로가기.png" style="width:22px;"></div></router-Link> -->
-                                    <div class="deliveryTransaction" @click="goPayment">
+                                    <div class="deliveryTransaction" @click="goPayment('delivery')">
                                         <div class="TransactionWrap">
                                             <div class="Transaction">택배거래</div>
                                             <div>안전하게 상품을 받을 때까지,</div>
@@ -75,7 +76,7 @@
 
                                     <div style="border:0.5px solid gray"></div>
 
-                                    <div class="directTransaction" @click="goPayment">
+                                    <div class="directTransaction" @click="goPayment('direct')">
                                         <div class="TransactionWrap">
                                             <div class="Transaction">직거래</div>
                                             <div style="justify-content:center; display: flex; flex-direction: column;">
@@ -110,14 +111,15 @@
         </div>
     </div>
 
-    <FooterVue />
+    <FooterVue/>
+</div>
 </template>
 
 <script>
 import HeaderVue from '../../components/layout/Header.vue'
 import SidebarVue from '../../components/layout/Sidebar.vue'
 import FooterVue from '../../components/layout/Footer.vue'
-import axiosApi from 'axios';
+import axiosApi from "../../services/axios";
 
 import { mapActions, mapState } from 'pinia';
 import { usersStore } from '../../stores/Home';
@@ -160,8 +162,14 @@ export default {
         hideModal() {
             this.isModalOpen = false;
         },
-        goPayment() {
-            this.$router.push("/Payment")
+        goPayment(type) {
+            if (type === 'direct') {
+                this.$router.push("/PaymentDirect");
+            } else if (type === 'delivery') {
+                this.$router.push("/PaymentDelivery");
+            } else {
+                console.error('Invalid type:', type);
+            }
         }
     }
 }

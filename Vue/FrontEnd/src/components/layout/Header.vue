@@ -10,12 +10,13 @@
         </div>
         <div class="headerWrap">
           <router-link to="/">
-            <div class="headerLogo">리턴나라</div>
+            <span><img src="../../assets/img/리턴프로젝트 로고.png" width="45" height="45"></span>
+            <span class="headerLogo">리턴나라</span>
           </router-link>
           <div class="searchWrapper">
             <div class="searchWrap" @click="toggleRecentSearches">
               <input class="search" type="search" placeholder="상품명, 지역명, @상점명 입력">
-              <a><img class="searchImg" src="../../assets/img/돋보기.png" width="23" height="23"></a>
+              <a><img class="searchImg" src="../../assets/img/돋보기.png" width="20" height="20"></a>
             </div>
             <div class="recentSearches" style="display: none;">
               <div class="recentSearche">최근검색어</div>
@@ -154,6 +155,7 @@ header {
 
 .headerMenuWrapper {
   width: 1024px;
+  margin-top:20px;
 }
 
 .hedaerWrapper {
@@ -169,7 +171,7 @@ header {
 }
 
 .headerLogo {
-  font-size: 32px;
+  font-size: 20px;
   font-weight: bold;
   text-align: center;
   background: linear-gradient(125deg, #81ecec, #6c5ce7, #81ecec);
