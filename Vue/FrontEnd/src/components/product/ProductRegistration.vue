@@ -135,7 +135,7 @@
 import axiosApi from '../../services/axios';
 import { mapActions, mapState } from 'pinia';
 import { userProduct } from '../../stores/Product/Product';
-import {userStore} from '../../stores/Member';
+import {userStore} from '../../stores/Member/Member';
 
 export default {
     data() {

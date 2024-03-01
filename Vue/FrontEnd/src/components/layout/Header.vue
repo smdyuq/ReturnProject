@@ -26,16 +26,16 @@
             <ul class="headerList" style="color:black;">
 
               <li @click="goSales()" class="MyList">
-                <img src="../../assets/img/판매.png" width="30" height="30"
-                    style="margin-right:5px 0px;">판매</li>
+                <img src="../../assets/img/판매.png" width="30" height="30" style="margin-right:5px 0px;">판매
+              </li>
 
               <li @click="goStore()" class="MyList">
-                <img src="../../assets/img/내상점.png" width="30" height="30"
-                    style="margin-right:5px 0px">내상점</li>
+                <img src="../../assets/img/내상점.png" width="30" height="30" style="margin-right:5px 0px">내상점
+              </li>
 
               <li @click="goBoard()" class="MyList">
-                <img src="../../assets/img/문의하기.png" width="30" height="30"
-                    style="margin-right:5px 0px">문의</li>
+                <img src="../../assets/img/문의하기.png" width="30" height="30" style="margin-right:5px 0px">문의
+              </li>
             </ul>
           </div>
         </div>
@@ -67,41 +67,41 @@
 
 <script>
 import { mapState, mapActions } from 'pinia';
-import { userStore } from '../../stores/Member';
+import { userStore } from '../../stores/Member/Member';
 
 export default {
   computed: {
-    ...mapState(userStore, ['getMemberId','getMemberName']),
+    ...mapState(userStore, ['getMemberId', 'getMemberName']),
     // : computed(() => userStore.getMemberId() !== ''), // 로그인 여부 확인
   },
   methods: {
-    ...mapActions(userStore,['setMemberId']),
+    ...mapActions(userStore, ['setMemberId']),
     isLoggedIn() {
       return this.getMemberId !== '';
     },
     goSales() {
-      if(this.getMemberId !== '') {
+      if (this.getMemberId !== '') {
         this.$router.push('/SalesManagement');
       } else {
         alert("로그인이 필요합니다.");
       }
     },
     goStore() {
-      if(this.getMemberId !== '') {
+      if (this.getMemberId !== '') {
         this.$router.push('/StoreProduct');
       } else {
         alert("로그인이 필요합니다.");
       }
     },
     goBoard() {
-      if(this.getMemberId !=='') {
+      if (this.getMemberId !== '') {
         this.$router.push('/Board');
       } else {
         alert("로그인이 필요합니다.");
       }
     },
 
-    
+
 
 
     goLogin() {
@@ -165,7 +165,7 @@ header {
   width: 1024px;
   z-index: 99998;
   background: white;
-  
+
 }
 
 .headerLogo {
@@ -194,12 +194,13 @@ header {
 }
 
 .userName {
-  color:black;
-  margin-bottom:0;
-  margin-right:15px;
-  font-size:medium;
-  font-weight:bold;
+  color: black;
+  margin-bottom: 0;
+  margin-right: 15px;
+  font-size: medium;
+  font-weight: bold;
 }
+
 .loginSignup {
   float: right;
   display: flex;
@@ -290,10 +291,11 @@ button {
   margin: 10px 0px;
   width: 100%;
 }
+
 .MyList {
-  font-size:medium;
-  font-weight:bold;
-  color:steelblue;
+  font-size: medium;
+  font-weight: bold;
+  color: steelblue;
 }
 
 .menubars>li {
@@ -326,7 +328,7 @@ a>img {
   background-color: white;
   top: 35px;
   border: 0.5px solid gray;
-  
+
 }
 
 .recentSearche {

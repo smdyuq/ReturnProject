@@ -4,7 +4,7 @@
 
             <div class="cardWrap" v-for="(item, index) in list" :key="index" @click="goDetail(item.salesNo)">
                 <div class="imgWrapper">
-                    <div><img :src="'http://192.168.0.16/resources/uploads/' + item.imageName" style="width: 194px; height: 194px;"></div>
+                    <div><img :src="'http://localhost:8080/resources/uploads/' + item.imageName" style="width: 194px; height: 194px;"></div>
 
                 </div>
 
@@ -27,7 +27,7 @@
 import axiosApi from '../../services/axios';
 import { mapActions, mapState } from 'pinia';
 import { usersStore } from '../../stores/Home'
-import { userStore } from '../../stores/Member'
+import { userStore } from '../../stores/Member/Member'
 
 export default {
     data() {
@@ -123,6 +123,7 @@ export default {
     width: 1024px;
     justify-content: space-between;
     flex-wrap: wrap;
+    cursor: pointer;
 }
 
 .cardWrap {

@@ -1,6 +1,9 @@
 <template>
 
     <div class="boardTitle">
+      <router-Link to="/">
+            <div><img class="leftArrow" src="../../assets/img/뒤로가기.png" style="width:22px;"></div>
+        </router-Link>
       <h2 style="font-weight: bold">문의내역</h2>
     </div>
     <table>
@@ -87,7 +90,7 @@
   <script>
   import axiosApi from "../../services/axios";
   import { mapState } from "pinia";
-  import { userStore } from "../../stores/Member";
+  import { userStore } from "../../stores/Member/Member";
   
   export default {
     

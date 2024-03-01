@@ -6,7 +6,7 @@
             <div class="ProductDetailWrapper">
                 <div class="productDetailWrap">
                     <div class="productImage">
-                        <div><img :src="'http://192.168.0.16/resources/uploads/' + item.imageName"
+                        <div><img :src="'http://localhost:8080/resources/uploads/' + item.imageName"
 
                                 style="width: 428px; height: 428px;"></div>
 

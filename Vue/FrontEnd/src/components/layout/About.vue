@@ -19,7 +19,7 @@
 <script>
 import axiosApi from '../../services/axios'
 import { mapState } from 'pinia';
-import { userStore } from '../../stores/Member'
+import { userStore } from '../../stores/Member/Member'
 
 
 export default {

@@ -7,11 +7,11 @@
 </template>
 
 <script>
-import HeaderVue from '../components/layout/Header.vue'
-import SidebarVue from '../components/layout/Sidebar.vue'
-import FooterVue from '../components/layout/Footer.vue'
-import CardWrapper from '../components/layout/CardWrapper.vue'
-import StoreProduct from '../components/layout/StoreProduct.vue'
+import HeaderVue from '../../components/layout/Header.vue'
+import SidebarVue from '../../components/layout/Sidebar.vue'
+import FooterVue from '../../components/layout/Footer.vue'
+import CardWrapper from '../../components/layout/CardWrapper.vue'
+import StoreProduct from '../../components/Store/StoreProduct.vue'
 
 export default {
     components: {

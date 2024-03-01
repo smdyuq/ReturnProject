@@ -16,7 +16,3 @@ createApp(App)
 .use(router)
 .use(pinia)
 .mount('#app')
-
-
-// Vue.use(VueSession);
-// VueSession.use(VueSession, sessionOptions)

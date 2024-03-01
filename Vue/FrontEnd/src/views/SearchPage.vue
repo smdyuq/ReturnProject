@@ -12,7 +12,7 @@ import FooterVue from '../components/layout/Footer.vue';
 import SlideVue from '../components/layout/Slide.vue';
 import CardWrapperVue from '../components/layout/CardWrapper.vue';
 import SidebarVue from '../components/layout/Sidebar.vue';
-import CategoryAllVue from '../components/layout/CategoryAll.vue';
+import CategoryAllVue from '../components/Category/CategoryAll.vue';
 
 
 

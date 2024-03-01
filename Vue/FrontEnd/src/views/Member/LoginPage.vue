@@ -23,7 +23,7 @@
 import { defineComponent } from 'vue';
 import axios from '../../services/axios';
 import { mapActions } from 'pinia';
-import { userStore } from '../../stores/Member'
+import { userStore } from '../../stores/Member/Member'
 
 export default defineComponent({
   data() {
