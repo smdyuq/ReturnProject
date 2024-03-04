@@ -42,7 +42,7 @@
           나재윤
         </a><br>
         <center>관리자 페이지 : 게시판 등록/작성자별 게시글 보이기/댓글 기능 구현</center><br>
-        <center>결제 페이지 : 결제 기능 구현(kakao api)/결제 완료 페이지/제품 판매시 판매자에게 문자전송(sms api)</center><br>
+        <center>결제 페이지 : 결제 기능 구현(kakao api)/결제 완료 페이지/주소 API/제품 판매시 판매자에게 문자전송(sms api)</center><br>
       </td>
       <td align="center" width="400px">
         <center>팀원</center><br>
