@@ -402,42 +402,11 @@ public class SalesController {
 //		}
 //	}
 
-////	판매 등록
-//	@GetMapping("/enrollSales")
-//	public ResponseEntity<?> enrollSales(List<MultipartFile> uploads, @RequestBody SalesDTO sales,
-//			HttpSession session) {
-//		int memberNo = (int) session.getAttribute("memberNo");
-//		sales.setMemberNo(memberNo);
-//
-//		int result = salesService.enrollSales(sales);
-//
-//		int salesNoSelect = salesService.salesNoSelect();
-//		sales.setSalesNo(salesNoSelect);
-//
-//		// 업로드된 파일이 존재하는지 확인
-//		for (MultipartFile m : uploads) {
-//			if (m != null && !m.isEmpty()) {
-//				UploadFile.uploadMethod(m, sales, session);
-//				int imageInsert = salesService.imageInsert(sales);
-//			}
-//		}
-//		if (result == 1) {
-//			// 판매 번호 조회
-//			int selectSalesNo = salesService.selectSalesNo(memberNo);
-//			sales.setSalesNo(selectSalesNo);
-//			// 판매 상태 : 판매 중
-//			int statusResult = salesService.salesStatus(sales.getSalesNo());
-//			return new ResponseEntity<>("success", HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>("error", HttpStatus.OK);
-//		}
-//	}
-
 //	판매 등록
 	@PostMapping(value = "/enrollSales", consumes = "multipart/form-data")
 	public ResponseEntity<?> enrollSales(@RequestParam("upload") MultipartFile uploads,
 			@RequestParam("jsonSales") String jsonSales, HttpSession session) {
-
+		
 		Gson gson = new Gson();
 
 		SalesDTO sales = gson.fromJson(jsonSales, SalesDTO.class);

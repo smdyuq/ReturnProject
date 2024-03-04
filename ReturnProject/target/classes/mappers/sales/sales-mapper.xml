@@ -130,9 +130,9 @@
 		NULL,
 		NULL,
 		DEFAULT,
-		#{memberNo},
 		#{salesChatLink},
-		DEFAULT)
+		DEFAULT,
+		#{memberNo})
 	</insert>
 
 	<!-- 판매등록 작성자 조회 -->
@@ -320,6 +320,7 @@
 		IMAGE_NO ASC
 		) i ON s.SALES_NO =
 		i.SALES_NO
+		WHERE s.SALES_NO = #{salesNo}
 	</select>
 
 	<!-- 판매 정보 조회 -->
@@ -449,6 +450,12 @@
 		JOIN PAY
 		ON SALES.SALES_NO = PAY.SALES_NO
 		WHERE SALES.SALES_NO = #{salesNo};
+	</select>
+	
+	<!-- 상품명 조회 -->
+	<select id="salesSelectList" resultMap="salesResultSet">
+		SELECT * FROM "상품 테이블"
+		WHERE 상품이름 LIKE '%검색어%';
 	</select>
 
 </mapper>

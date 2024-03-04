@@ -10,7 +10,8 @@ export const usersStore = defineStore('usersStore', {
             homeAppliancesList:[],
             storeList: [],
             jewelryList:[],
-            status: ''
+            status: '',
+            deilvery: []
         }
     },
     actions:{
@@ -37,6 +38,9 @@ export const usersStore = defineStore('usersStore', {
         },
         addStore(data) {
             this.status = data;
+        },
+        addDeilvery(data) {
+            this.deilvery = data;
         }
     },
     getters: {
@@ -63,6 +67,9 @@ export const usersStore = defineStore('usersStore', {
         },
         getStore(state) {
             return state.storeList[0];
+        },
+        getDeilvery(state) {
+            return state.deilvery[0];
         }
             
     }

@@ -40,10 +40,8 @@
 		VALUES(ASK_SEQ.NEXTVAL,
 		#{ask_title},
 		#{ask_content},
-
-		#{member_no},
-		DEFAULT
-
+		DEFAULT,
+		#{member_no}
 		)
 	</insert>
 

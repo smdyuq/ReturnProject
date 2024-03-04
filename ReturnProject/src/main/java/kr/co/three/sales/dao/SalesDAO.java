@@ -27,6 +27,16 @@ public class SalesDAO {
 		RowBounds rb = new RowBounds(offset, pi.getBoardLimit());
 		return sqlSession.selectList("salesMapper.salesSelectListAll", sales, rb);
 	}
+	
+//  검색 상품 목록 불러오기
+	public List<SalesDTO> salesSelectList(PageInfo pi, SalesDTO sales, SqlSessionTemplate sqlSession) {
+		// 현재 페이지의 게시글을 불러오기 위한 변수
+		int offset = (pi.getCpage() - 1) * pi.getBoardLimit();
+
+		// 작은 규모일 경우에만 사용하는것을 권장
+		RowBounds rb = new RowBounds(offset, pi.getBoardLimit());
+		return sqlSession.selectList("salesMapper.salesSelectList", sales, rb);
+	}
 
 //   상품 수정 폼 이동
 	public SalesDTO updateSalesForm(int salesNo, SqlSessionTemplate sqlSession) {

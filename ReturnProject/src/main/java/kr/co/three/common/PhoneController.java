@@ -31,16 +31,16 @@ public class PhoneController {
 	public ResponseEntity<?> sendOne(@RequestParam("memberPhone") String memberPhone) {
 		Message message = new Message();
 		// 발신번호 및 수신번호는 반드시 01012345678 형태로 입력되어야 합니다.
-		message.setFrom("01024749245");
-		message.setTo(memberPhone);
+//		message.setFrom("01024749245");
+//		message.setTo(memberPhone);
 
 		// 랜덤 인증번호 생성
 		Random random = new Random();
 		int randomCode = random.nextInt(9000) + 1000; // 4자리 랜덤 숫자 생성
 		String verificationCode = String.valueOf(randomCode);
-		message.setText("인증번호는 " + verificationCode + "입니다.");
+//		message.setText("인증번호는 " + verificationCode + "입니다.");
 
-		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
+//		SingleMessageSentResponse response = this.messageService.sendOne(new SingleMessageSendingRequest(message));
 //		System.out.println(response);
 
 		return new ResponseEntity<>(verificationCode, HttpStatus.OK);

@@ -22,7 +22,7 @@ import kr.co.three.member.dto.MemberDTO;
 import kr.co.three.sales.dto.SalesDTO;
 
 public class UploadFile {
-	private static final String UPLOAD_PATH = "C:\\Users\\tmddu\\git\\ReturnProject\\ReturnProject\\src\\main\\webapp\\resources\\uploads\\";
+	private static final String UPLOAD_PATH = "C:\\dev\\ReturnProject\\ReturnProject\\ReturnProject\\src\\main\\webapp\\resources\\uploads\\";
 
 	public static boolean deleteFile(String fileName) {
 		File file1 = new File(UPLOAD_PATH + "110x150\\" + fileName);
@@ -73,7 +73,6 @@ public class UploadFile {
 				String resizedPathName = UPLOAD_PATH + "303x310\\" + fileName;
 				Path resizedFilePath = Paths.get(resizedPathName);
 				ImageIO.write(resizedImage, extension.substring(1), resizedFilePath.toFile());
-
 				// Update DTO according to its type
 				if (dto instanceof SalesDTO) {
 					SalesDTO sales = (SalesDTO) dto;

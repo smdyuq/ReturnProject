@@ -61,7 +61,7 @@
                             <div v-if="isModalOpen" class="modal">
                                 <div class="modal-content">
                                     <!-- <router-Link to="/"><div><img class="leftArrow" src="../../assets/img/뒤로가기.png" style="width:22px;"></div></router-Link> -->
-                                    <div class="deliveryTransaction" @click="goPayment">
+                                    <div class="deliveryTransaction" @click="goPaymentDelivery">
                                         <div class="TransactionWrap">
                                             <div class="Transaction">택배거래</div>
                                             <div>안전하게 상품을 받을 때까지,</div>
@@ -75,7 +75,7 @@
 
                                     <div style="border:0.5px solid gray"></div>
 
-                                    <div class="directTransaction" @click="goPayment">
+                                    <div class="directTransaction" @click="goPaymentDirect">
                                         <div class="TransactionWrap">
                                             <div class="Transaction">직거래</div>
                                             <div style="justify-content:center; display: flex; flex-direction: column;">
@@ -118,7 +118,6 @@ import HeaderVue from '../../components/layout/Header.vue'
 import SidebarVue from '../../components/layout/Sidebar.vue'
 import FooterVue from '../../components/layout/Footer.vue'
 import axiosApi from 'axios';
-
 import { mapActions, mapState } from 'pinia';
 import { usersStore } from '../../stores/Home';
 
@@ -147,7 +146,7 @@ export default {
 
                 .then(response => {
                     this.addUsers(response.data.list);
-
+                    console.log(response.data.list)
                 })
                 .catch(error => {
                     console.error(error);
@@ -160,8 +159,11 @@ export default {
         hideModal() {
             this.isModalOpen = false;
         },
-        goPayment() {
-            this.$router.push("/Payment")
+        goPaymentDelivery() {
+            this.$router.push('/PaymentDelivery?salesNo=' + this.$route.query.salesNo);
+        },
+        goPaymentDirect() {
+            this.$router.push("/PaymentDirect")
         }
     }
 }

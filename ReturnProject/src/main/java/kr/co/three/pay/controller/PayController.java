@@ -135,14 +135,16 @@ public class PayController {
 
 	// 모달에서 택배거래 클릭했을때
 	@GetMapping("/payDeliveryPage")
-	public ResponseEntity<?> DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, @RequestBody PayDTO pay,
-			@RequestBody SalesDTO sales, HttpSession session) {
-
+//	public ResponseEntity<?> DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo, @RequestBody PayDTO pay,
+//			@RequestBody SalesDTO sales, HttpSession session) {
+	public ResponseEntity<?> DeliveryPayPage(@RequestParam(value = "salesNo") int salesNo) {
+		System.out.println("asasasbs");
 		SalesDTO salesCheck = salesService.payCheck(salesNo);
 
 		Map<String, Object> response = new HashMap<>();
-
+		System.out.println("aaa : " + salesNo);
 		response.put("salesCheck", salesCheck);
+		System.out.println(response.get("salesCheck"));
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 

@@ -23,7 +23,6 @@ import kr.co.three.main.dto.MainDTO;
 import kr.co.three.main.service.MainServiceImpl;
 import kr.co.three.sales.dto.SalesDTO;
 
-// JSP 코드
 //@Controller
 //public class MainController {
 //
@@ -105,13 +104,16 @@ public class MainController {
 
 //   검색 페이지로 이동
 	@PostMapping("/search")
-	public ResponseEntity<?> search(@RequestBody SalesDTO sales, @RequestBody MainDTO main, HttpSession session) {
+//	public ResponseEntity<?> search(@RequestBody SalesDTO sales, @RequestBody MainDTO main, HttpSession session) {
+	public ResponseEntity<?> search(@RequestBody MainDTO main) {
 
+		System.out.println("asdasd : " + main.getSearchWord());
 		Map<String, Object> response = new HashMap<>();
 
 		try {
-			int memberNo = (int) session.getAttribute("memberNo");
-			main.setMemberNo(memberNo);
+//			int memberNo = (int) session.getAttribute("memberNo");
+//			main.setMemberNo(memberNo);
+			main.setMemberNo(1);
 
 			// 중복 등록 체크
 			int isDuplicate = mainService.SearchWordDuplicate(main);
@@ -124,9 +126,9 @@ public class MainController {
 			List<MainDTO> searchList = mainService.searchList(main);
 
 			// 상품 리스트
-			List<SalesDTO> salesList = mainService.mainSalesList(sales);
+//			List<SalesDTO> salesList = mainService.mainSalesList(sales);
 
-			response.put("sales", salesList);
+//			response.put("sales", salesList);
 			response.put("search", searchList);
 
 			return new ResponseEntity<>(response, HttpStatus.OK);
@@ -137,9 +139,9 @@ public class MainController {
 			List<MainDTO> searchList = mainService.searchList(main);
 
 			// 상품 리스트
-			List<SalesDTO> salesList = mainService.mainSalesList(sales);
+//			List<SalesDTO> salesList = mainService.mainSalesList(sales);
 
-			response.put("sales", salesList);
+//			response.put("sales", salesList);
 			response.put("search", searchList);
 
 			return new ResponseEntity<>(response, HttpStatus.OK);

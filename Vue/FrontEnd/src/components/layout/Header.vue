@@ -13,13 +13,15 @@
             <div class="headerLogo">리턴나라</div>
           </router-link>
           <div class="searchWrapper">
-            <div class="searchWrap" @click="toggleRecentSearches">
-              <input class="search" type="search" placeholder="상품명, 지역명, @상점명 입력">
-              <a><img class="searchImg" src="../../assets/img/돋보기.png" width="23" height="23"></a>
+            <div class="searchWrap">
+              <input class="search" type="search" placeholder="상품명, 지역명, @상점명 입력" v-model="inputVal" @click="toggleRecentSearches">
+              <a><img class="searchImg" src="../../assets/img/돋보기.png" width="23" height="23" @click="test"></a>
             </div>
             <div class="recentSearches" style="display: none;">
               <div class="recentSearche">최근검색어</div>
-              <div></div>
+              <ul>
+                <li v-for="keyword in recentSearches" :key="keyword">{{ keyword }}</li>
+              </ul>
             </div>
           </div>
           <div style="width:300px;">
@@ -68,13 +70,45 @@
 <script>
 import { mapState, mapActions } from 'pinia';
 import { userStore } from '../../stores/Member/Member';
+import { recentSearchesStore } from '../../stores/Search/Search';
+import axiosApi from '../../services/axios';
 
 export default {
+
+  // Composition API vs Options API
+  data() {
+    return {
+      recentSearches: [],
+      inputVal: this.queryData,
+    }
+  },
+  props: {
+    queryData: {
+      type: Object,
+      required: true,
+    }
+  },
+  // first page
+  mounted() {
+    this.getRecentSearches();
+  },
+
   computed: {
     ...mapState(userStore, ['getMemberId', 'getMemberName']),
-    // : computed(() => userStore.getMemberId() !== ''), // 로그인 여부 확인
+    ...mapState(recentSearchesStore, ['searches'])
+  
   },
   methods: {
+    getRecentSearches() {
+      axiosApi.get('main/mainPage')
+      .then(response => {
+        this.recentSearches = response.data;
+      
+      })
+      .catch(error=> {
+        console.error(error);
+      })
+    },
     ...mapActions(userStore, ['setMemberId']),
     isLoggedIn() {
       return this.getMemberId !== '';
@@ -122,10 +156,21 @@ export default {
       const menu = document.querySelector('.menubars');
       menu.style.display = 'none';
     },
+    // TODO: 딴데 눌러도 창 꺼지게
     toggleRecentSearches() {
       const recentSearches = document.querySelector('.recentSearches');
       recentSearches.style.display = recentSearches.style.display === 'block' ? 'none' : 'block';
-    }
+    },
+    test () {
+      // serachPage routing & parameter
+      
+      if(this.$route.name === 'searchPage') {
+        // console.log('gg...');
+      }else {
+        this.$router.push({name: 'searchPage', query: {keyword: this.inputVal}});
+      }
+      
+    },
   }
 }
 </script>
