@@ -14,13 +14,13 @@
           </router-link>
           <div class="searchWrapper">
             <div class="searchWrap">
-              <input class="search" type="search" placeholder="상품명, 지역명, @상점명 입력" v-model="inputVal" @click="toggleRecentSearches">
-              <a><img class="searchImg" src="../../assets/img/돋보기.png" width="23" height="23" @click="test"></a>
+              <input class="search" type="search" placeholder="상품명, 지역명, @상점명 입력" v-model="inputVal" @click="toggleRecentSearches" @keyup.enter="test">
+              <a><img class="searchImg" src="../../assets/img/돋보기.png" width="23" height="23" @click="test" ></a>
             </div>
             <div class="recentSearches" style="display: none;">
               <div class="recentSearche">최근검색어</div>
-              <ul>
-                <li v-for="keyword in recentSearches" :key="keyword">{{ keyword }}</li>
+              <ul v-for="keywords in recentSearches" :key="keywords">
+                <li v-for="keyword in keywords" :key="keyword">{{ keyword.searchWord }}</li>
               </ul>
             </div>
           </div>
@@ -80,6 +80,9 @@ export default {
     return {
       recentSearches: [],
       inputVal: this.queryData,
+      main: {
+        searchWord: ''
+      }
     }
   },
   props: {
@@ -100,14 +103,14 @@ export default {
   },
   methods: {
     getRecentSearches() {
-      axiosApi.get('main/mainPage')
-      .then(response => {
-        this.recentSearches = response.data;
-      
-      })
-      .catch(error=> {
-        console.error(error);
-      })
+      axiosApi.post('/main/search', this.main)
+            .then(response => {
+              this.recentSearches = response.data;
+            })
+
+            .catch(error => {   
+                console.log(error);
+            })
     },
     ...mapActions(userStore, ['setMemberId']),
     isLoggedIn() {
@@ -163,13 +166,7 @@ export default {
     },
     test () {
       // serachPage routing & parameter
-      
-      if(this.$route.name === 'searchPage') {
-        // console.log('gg...');
-      }else {
         this.$router.push({name: 'searchPage', query: {keyword: this.inputVal}});
-      }
-      
     },
   }
 }

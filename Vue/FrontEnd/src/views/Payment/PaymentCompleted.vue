@@ -62,19 +62,10 @@ export default {
 
 }
 
-.paymentWrap {
-    display: flex;
-}
-
 .paymentContents {
     font-size: x-large;
-    margin-left: 20px;
+    /* margin-left: 20px; */
 
-}
-
-.paymentContent {
-    font-size: large;
-    margin-left: 20px;
 }
 
 .paymentsWrap {
@@ -82,13 +73,12 @@ export default {
 }
 
 .paymentsDetail {
-    width: 100%;
-    height: 33%;
+    margin-left:18px;
 }
 
 .paymentsTitle {
     width: 100%;
-    height: 33%;
+
 }
 
 .paymentList {

@@ -5,6 +5,7 @@ export const recentSearchesStore = defineStore('search', {
     state() {
         return {
             recentSearches: [],
+            keyword: ''
         };
     },
     actions: {
@@ -16,5 +17,16 @@ export const recentSearchesStore = defineStore('search', {
                 console.error(error);
             }
         },
+        addKeyword(data) {
+            this.keyword = data;
+        }
+
     },
+
+    getters: {
+        getKeyword(state) {
+            return state.keyword;
+        }
+    }
+
 });

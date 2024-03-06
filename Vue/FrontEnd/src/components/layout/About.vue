@@ -38,21 +38,15 @@ export default {
     },
     methods: {
         async enrollBoard() {
-          console.log('a')  
           try {
-            console.log('b')  
                 this.board.member_no = this.getMemberNo;
                 const response = await axiosApi.post('/inquiry/enroll', this.board);
-                console.log('c')  
                 if (response.data === 'success') {
-                  console.log('d')    
                   console.log('게시물 등록 성공');
                 } else {
-                  console.log('e')  
                     console.error('게시물 등록 실패');
                 }
             } catch (error) {
-              console.log('f')  
                 console.error('게시물 등록 중 오류 발생:', error);
             }
             this.$router.push('/Board')

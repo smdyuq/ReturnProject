@@ -28,6 +28,7 @@ import axiosApi from '../../services/axios';
 import { mapActions, mapState } from 'pinia';
 import { usersStore } from '../../stores/Home'
 import { userStore } from '../../stores/Member/Member'
+import { recentSearchesStore } from '@/stores/Search/Search';
 
 export default {
     data() {
@@ -38,17 +39,24 @@ export default {
     },
     computed: {
         ...mapState(usersStore, ['getUsers', 'getStatus','getAll','getCloth', 'getFood','getCategoryHomeAppliances','getJewelry']),
-        ...mapState(userStore, ['getMemberNo'])
+        ...mapState(userStore, ['getMemberNo']),
+        ...mapState(recentSearchesStore , ['getKeyword'])
     },
     mounted() {
         this.printList();
     },
     methods: {
         ...mapActions(usersStore, ['addStatus','addAll','addCloth','addFood','addHomeAppliances','addJewelry']),
+        ...mapActions(recentSearchesStore, ['addKeyword']),
         
         printList() {
+            if(this.$route.query.keyword === undefined) {
+                this.addKeyword("");
+            } else {
+                this.addKeyword(this.$route.query.keyword);
+            }
 
-            if (this.$route.path == '/CategoryAll' ) {
+            if (this.$route.path == '/CategoryAll' || this.$route.path == '/searchPage') {
                 this.addStatus('전체');
 
             } else if (this.$route.path == '/CategoryCloth') {
@@ -79,9 +87,8 @@ export default {
                 })
             }
 
-            axiosApi.get('/main/categorySales?salesCategory='+this.getStatus)
+            axiosApi.get('/main/categorySales?salesCategory='+this.getStatus + '&searchWord='+this.getKeyword)
             .then(response => {
-
                 if(this.getStatus == '전체') {
                     this.addAll(response.data.list);
 

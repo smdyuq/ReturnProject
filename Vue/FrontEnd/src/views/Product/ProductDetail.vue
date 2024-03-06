@@ -8,7 +8,7 @@
                     <div class="productImage">
                         <div><img :src="'http://localhost:8080/resources/uploads/' + item.imageName"
 
-                                style="width: 428px; height: 428px;"></div>
+                                style="width: 428px; height: 428px; border: 0.5px solid #CCCCCC;"></div>
 
                         <!-- <img src="https://picsum.photos/428/428/?image=0" alt="sample image"> -->
                         <!-- <img :src="'http://192.168.0.4/resources/uploads/' + item.salesImageName" style="width: 194px; height: 194px;"> -->

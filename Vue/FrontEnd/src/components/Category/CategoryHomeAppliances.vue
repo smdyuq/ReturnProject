@@ -12,11 +12,12 @@
       </div>
       <div>
         <div class="categoryBar">
-          <router-link :to="{ path: '/CategoryAll' }" class="category">전체</router-link>
-          <router-link :to="{ path: '/CategoryCloth' }" class="category">의류</router-link>
-          <router-link :to="{ path: '/CategoryJewelry' }" class="category">주얼리</router-link>
-          <router-link :to="{ path: '/CategoryHomeAppliances' }" class="category">가전</router-link>
-          <router-link :to="{ path: '/CategoryFood' }" class="category">식품</router-link>
+          <div @click="goAll" class="category">전체</div>
+          <div @click="goCloth" class="category">의류</div>
+          <div @click="goJewelry" class="category">주얼리</div>
+          <div @click="goHomeAppliances" class="category">가전</div>
+          <div @click="goFood" class="category">식품</div>
+
         </div>
       </div>
       <div></div>
@@ -36,21 +37,37 @@
       handleCategoryChange() {
         switch (this.selectedCategory) {
           case '의류':
-            this.$router.push('/CategoryCloth');
+            this.$router.push({name: 'CategoryCloth', query: {keyword: this.$route.query.keyword}});
             break;
           case '주얼리':
-            this.$router.push('/CategoryJewelry');
+            this.$router.push({name: 'CategoryJewelry', query: {keyword: this.$route.query.keyword}});
             break;
           case '가전':
-            this.$router.push('/CategoryHomeAppliances');
+            this.$router.push({name: 'CategoryHomeAppliances', query: {keyword: this.$route.query.keyword}});
             break;
           case '식품':
-            this.$router.push('/CategoryFood');
+            this.$router.push({name: 'CategoryFood', query: {keyword: this.$route.query.keyword}});
             break;
           default:
-            this.$router.push('/CategoryAll');
+            this.$router.push({name: 'CategoryAll', query: {keyword: this.$route.query.keyword}});
             break;
         }
+      },
+
+      goAll() {
+          this.$router.push({name: 'CategoryAll', query: {keyword: this.$route.query.keyword}});
+      },
+      goHomeAppliances() {
+          this.$router.push({name: 'CategoryHomeAppliances', query: {keyword: this.$route.query.keyword}});
+      },
+      goFood() {
+          this.$router.push({name: 'CategoryFood', query: {keyword: this.$route.query.keyword}});
+      },
+      goJewelry() {
+          this.$router.push({name: 'CategoryJewelry', query: {keyword: this.$route.query.keyword}});
+      },
+      goCloth() {
+          this.$router.push({name: 'CategoryCloth', query: {keyword: this.$route.query.keyword}});
       }
     },
     mounted() {
@@ -84,6 +101,7 @@
     height: 60px;
     margin-top: 4%;
     margin-bottom: 4%;
+    cursor: pointer;
   }
   
   .category {

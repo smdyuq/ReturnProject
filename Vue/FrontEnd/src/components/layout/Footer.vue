@@ -34,6 +34,11 @@ Footer {
     height: 12rem;
     width: 100%;
 
+    position: relative;
+    border-top:1px solid #c4c4c4;
+    color:#808080;
+    font-size:15px;
+
 
 }
 
