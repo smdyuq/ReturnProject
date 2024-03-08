@@ -45,39 +45,39 @@ public class MainServiceImpl implements MainService {
 
 //	상품 리스트
 	@Override
-	public List<SalesDTO> mainSalesList(SalesDTO sales) {
-		return mainDAO.mainSalesList(sales, sqlSession);
+	public List<SalesDTO> mainSalesList(MainDTO main) {
+		return mainDAO.mainSalesList(main, sqlSession);
 	}
 
 //	<카테고리 페이지>
 
 //	전체 카테고리
-	public List<SalesDTO> all() {
-		return mainDAO.all(sqlSession);
+	public List<SalesDTO> all(String searchWord) {
+		return mainDAO.all(sqlSession, searchWord);
 	}
 
 //	가전 카테고리
 	@Override
-	public List<SalesDTO> homeAppliances() {
-		return mainDAO.homeAppliances(sqlSession);
+	public List<SalesDTO> homeAppliances(String searchWord) {
+		return mainDAO.homeAppliances(sqlSession, searchWord);
 	}
 
 //	의류 카테고리
 	@Override
-	public List<SalesDTO> clothes() {
-		return mainDAO.clothes(sqlSession);
+	public List<SalesDTO> clothes(String searchWord) {
+		return mainDAO.clothes(sqlSession, searchWord);
 	}
 
 //	식품 카테고리
 	@Override
-	public List<SalesDTO> food() {
-		return mainDAO.food(sqlSession);
+	public List<SalesDTO> food(String searchWord) {
+		return mainDAO.food(sqlSession, searchWord);
 	}
 
 //	주얼리 카테고리
 	@Override
-	public List<SalesDTO> jewelry() {
-		return mainDAO.jewelry(sqlSession);
+	public List<SalesDTO> jewelry(String searchWord) {
+		return mainDAO.jewelry(sqlSession, searchWord);
 	}
 
 }

@@ -32,35 +32,35 @@ public class MainDAO {
 	}
 
 //	상품 리스트
-	public List<SalesDTO> mainSalesList(SalesDTO sales, SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("salesMapper.mainSalesList", sales);
+	public List<SalesDTO> mainSalesList(MainDTO main, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectList("salesMapper.mainSalesList", main);
 	}
 
 //	<카테고리 페이지>
 
 //	전체 카테고리
-	public List<SalesDTO> all(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("salesMapper.all");
+	public List<SalesDTO> all(SqlSessionTemplate sqlSession, String searchWord) {
+		return sqlSession.selectList("salesMapper.all", searchWord);
 	}
 
 //	가전 카테고리
-	public List<SalesDTO> homeAppliances(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("salesMapper.homeAppliances");
+	public List<SalesDTO> homeAppliances(SqlSessionTemplate sqlSession, String searchWord) {
+		return sqlSession.selectList("salesMapper.homeAppliances", searchWord);
 	}
 
 //	의류 카테고리
-	public List<SalesDTO> clothes(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("salesMapper.clothes");
+	public List<SalesDTO> clothes(SqlSessionTemplate sqlSession, String searchWord) {
+		return sqlSession.selectList("salesMapper.clothes", searchWord);
 	}
 
 //	식품 카테고리
-	public List<SalesDTO> food(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("salesMapper.food");
+	public List<SalesDTO> food(SqlSessionTemplate sqlSession, String searchWord) {
+		return sqlSession.selectList("salesMapper.food", searchWord);
 	}
 
 //	주얼리 카테고리
-	public List<SalesDTO> jewelry(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectList("salesMapper.jewelry");
+	public List<SalesDTO> jewelry(SqlSessionTemplate sqlSession, String searchWord) {
+		return sqlSession.selectList("salesMapper.jewelry", searchWord);
 	}
 
 }

@@ -20,23 +20,23 @@ public interface MainService {
 	int deleteSearch(int searchNo);
 
 //	상품 리스트
-	List<SalesDTO> mainSalesList(SalesDTO sales);
+	List<SalesDTO> mainSalesList(MainDTO main);
 
 //	<카테고리 페이지>
 
 //	전체 카테고리
-	List<SalesDTO> all();
+	List<SalesDTO> all(String searchWord);
 
 //	가전 카테고리
-	List<SalesDTO> homeAppliances();
+	List<SalesDTO> homeAppliances(String searchWord);
 
 //	의류 카테고리
-	List<SalesDTO> clothes();
+	List<SalesDTO> clothes(String searchWord);
 
 //	식품 카테고리
-	List<SalesDTO> food();
+	List<SalesDTO> food(String searchWord);
 
 //	주얼리 카테고리
-	List<SalesDTO> jewelry();
+	List<SalesDTO> jewelry(String searchWord);
 
 }

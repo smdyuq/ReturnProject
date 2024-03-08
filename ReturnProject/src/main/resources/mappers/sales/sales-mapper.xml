@@ -191,8 +191,10 @@
 		IMAGE_NO ASC
 		) i ON s.SALES_NO =
 		i.SALES_NO
+		WHERE s.SALES_NAME LIKE '%' || #{searchWord} || '%'
 		ORDER BY
 		s.SALES_DATE DESC
+		
 	</select>
 
 	<!-- 카테고리 페이지 -->
@@ -211,6 +213,7 @@
 		) i
 		ON s.SALES_NO =
 		i.SALES_NO
+		WHERE s.SALES_NAME LIKE '%' || #{searchWord} || '%'
 		ORDER BY
 		s.SALES_DATE DESC
 	</select>
@@ -229,6 +232,7 @@
 		WHERE
 		s.SALES_CATEGORY =
 		'가전'
+		AND s.SALES_NAME LIKE '%' || #{searchWord} || '%'
 		ORDER BY s.SALES_DATE DESC
 	</select>
 
@@ -246,6 +250,7 @@
 		WHERE
 		s.SALES_CATEGORY =
 		'의류'
+		AND s.SALES_NAME LIKE '%' || #{searchWord} || '%'
 		ORDER BY s.SALES_DATE DESC
 	</select>
 
@@ -265,6 +270,7 @@
 		WHERE
 		s.SALES_CATEGORY =
 		'식품'
+		AND s.SALES_NAME LIKE '%' || #{searchWord} || '%'
 		ORDER BY
 		s.SALES_DATE DESC
 	</select>
@@ -283,6 +289,7 @@
 		WHERE
 		s.SALES_CATEGORY =
 		'주얼리'
+		AND s.SALES_NAME LIKE '%' || #{searchWord} || '%'
 		ORDER BY s.SALES_DATE DESC
 	</select>
 

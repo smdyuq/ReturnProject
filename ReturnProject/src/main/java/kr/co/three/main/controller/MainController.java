@@ -106,8 +106,6 @@ public class MainController {
 	@PostMapping("/search")
 //	public ResponseEntity<?> search(@RequestBody SalesDTO sales, @RequestBody MainDTO main, HttpSession session) {
 	public ResponseEntity<?> search(@RequestBody MainDTO main) {
-
-		System.out.println("asdasd : " + main.getSearchWord());
 		Map<String, Object> response = new HashMap<>();
 
 		try {
@@ -117,7 +115,7 @@ public class MainController {
 
 			// 중복 등록 체크
 			int isDuplicate = mainService.SearchWordDuplicate(main);
-			if (isDuplicate != 1) {
+			if (isDuplicate != 1 && !main.getSearchWord().equals("")) {
 				// 검색 페이지 검색 데이터 등록
 				int result = mainService.insertSearch(main);
 			}
@@ -126,9 +124,9 @@ public class MainController {
 			List<MainDTO> searchList = mainService.searchList(main);
 
 			// 상품 리스트
-//			List<SalesDTO> salesList = mainService.mainSalesList(sales);
+			List<SalesDTO> salesList = mainService.mainSalesList(main);
 
-//			response.put("sales", salesList);
+			response.put("sales", salesList);
 			response.put("search", searchList);
 
 			return new ResponseEntity<>(response, HttpStatus.OK);
@@ -139,9 +137,9 @@ public class MainController {
 			List<MainDTO> searchList = mainService.searchList(main);
 
 			// 상품 리스트
-//			List<SalesDTO> salesList = mainService.mainSalesList(sales);
+			List<SalesDTO> salesList = mainService.mainSalesList(main);
 
-//			response.put("sales", salesList);
+			response.put("sales", salesList);
 			response.put("search", searchList);
 
 			return new ResponseEntity<>(response, HttpStatus.OK);
@@ -202,23 +200,32 @@ public class MainController {
 
 //    카테고리 페이지로 이동
 	@GetMapping("/categorySales")
-	public ResponseEntity<?> category(@RequestParam("salesCategory") String salesCategory) {
+	public ResponseEntity<?> category(@RequestParam("salesCategory") String salesCategory,@RequestParam("searchWord") String searchWord) {
+		MainDTO main = new MainDTO();
+		main.setSearchWord(searchWord);
+		main.setMemberNo(1);
+		
+		int isDuplicate = mainService.SearchWordDuplicate(main);
+		if (isDuplicate != 1 && !main.getSearchWord().equals("")) {
+			// 검색 페이지 검색 데이터 등록
+			int result = mainService.insertSearch(main);
+		}
 		List<SalesDTO> salesList = new ArrayList<>();
 		if (salesCategory.equals("전체")) {
 			// 전체 카테고리
-			salesList = mainService.all();
+			salesList = mainService.all(searchWord);
 		} else if (salesCategory.equals("가전")) {
 			// 가전 카테고리
-			salesList = mainService.homeAppliances();
+			salesList = mainService.homeAppliances(searchWord);
 		} else if (salesCategory.equals("의류")) {
 			// 의류 카테고리
-			salesList = mainService.clothes();
+			salesList = mainService.clothes(searchWord);
 		} else if (salesCategory.equals("식품")) {
 			// 식품 카테고리
-			salesList = mainService.food();
+			salesList = mainService.food(searchWord);
 		} else if (salesCategory.equals("주얼리")) {
 			// 주얼리 카테고리
-			salesList = mainService.jewelry();
+			salesList = mainService.jewelry(searchWord);
 		}
 
 		Map<String, Object> response = new HashMap<>();
