@@ -20,7 +20,7 @@
             <div class="recentSearches" style="display: none;">
               <div class="recentSearche">최근검색어</div>
               <ul v-for="keywords in recentSearches" :key="keywords">
-                <li v-for="keyword in keywords" :key="keyword">{{ keyword.searchWord }}</li>
+                <li class="keyword" v-for="keyword in keywords" :key="keyword">{{ keyword.searchWord }}<img @click="deleteSearch" src="../../assets/img/xImg.png" width="22" height="22"></li>
               </ul>
             </div>
           </div>
@@ -105,13 +105,27 @@ export default {
     getRecentSearches() {
       axiosApi.post('/main/search', this.main)
             .then(response => {
-              this.recentSearches = response.data;
+              console.log(response.data)
+              this.recentSearches.push(response.data.search);
+              // this.recentSearches = response.data;
             })
 
             .catch(error => {   
                 console.log(error);
             })
     },
+
+    deleteSearch(keywords, searchWord) {
+      axiosApi.post('/main/deleteSearch' + this.searchNo)
+      .then(response => {
+      this.keywords = response.data
+    
+      })
+
+    },
+
+
+
     ...mapActions(userStore, ['setMemberId']),
     isLoggedIn() {
       return this.getMemberId !== '';
@@ -179,6 +193,9 @@ export default {
   display: flex;
 }
 
+a {
+  color:black;
+}
 header {
   width: 100%;
   position: relative;
@@ -280,6 +297,16 @@ input:focus {
 
 }
 
+.keyword {
+  display: flex;
+    height: 37px;
+    padding-left: 12px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
 li {
   list-style: none;
 }
@@ -362,7 +389,7 @@ a>img {
   text-align: left;
   position: absolute;
   width: 560px;
-  height: 300px;
+  height: 410px;
   box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.3);
   padding: 8px;
   z-index: 999999;

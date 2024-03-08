@@ -8,13 +8,25 @@
 
                 </div>
 
-
-                <div>
-                    <div><router-link to="/productDetail">{{ item.salesName }}</router-link></div>
-                    <div>
-                        <span><router-link to="/productDetail">{{ item.salesPrice }}원</router-link></span>
-                        <span><router-link to="/productDetail">{{ item.salesDate }}</router-link></span>
+<div class="cardContentWrapper">
+                <div class="cardContentWrap">
+                    <div class="salesName">
+                        <router-link to="/productDetail">{{ item.salesName }}</router-link>
                     </div>
+
+
+                    <div class="cardContent">
+
+                        <span>
+                            <router-link to="/productDetail"  class="salesPrice">{{ item.salesPrice }}원</router-link>
+                        </span>
+
+                        <span class="salesDate">
+                            <router-link to="/productDetail">{{ item.salesDate }}</router-link>
+                        </span>
+                        
+                    </div>
+                </div>
                 </div>
             </div>
 
@@ -128,14 +140,64 @@ export default {
 .cardWrapper {
     display: flex;
     width: 1024px;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     flex-wrap: wrap;
+    /* background-color:yellow; */
     cursor: pointer;
+    
+    
 }
 
 .cardWrap {
     display: block;
     margin-bottom: 25px;
+    margin-right: 11px;
+    border: 1px solid #E6E6E6;
+    width: 196px;
 
+}
+
+.cardWrap:nth-child(5n) {
+    margin-right:0px;
+}
+
+
+.cardContentWrapper {
+    height:70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.salesPrice {
+    font-weight:600;
+    font-size:16px;
+}
+
+.cardContent {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 20px;
+    margin:0 8px;
+    
+}
+
+.imgWrapper {
+    border-bottom:1px solid #E6E6E6;
+}
+
+.salesName {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom:10px;
+    margin-left:8px;
+}
+
+a {
+    color:black;
 }
 </style>

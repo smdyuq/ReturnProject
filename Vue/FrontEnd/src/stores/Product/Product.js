@@ -8,6 +8,7 @@ export const userProduct = defineStore('userProduct', {
     },
     actions:{
         addUsers(data) {
+            this.userList = [];
             this.userList.push(data);
         }  
     },

@@ -61,9 +61,17 @@
                 <span class="basicInfo">거래지역<span class="sectionSign">*</span>
                 </span>
 
-                <div class="infoContent">
+                <!-- <div class="infoContent">
                     <input type="text" placeholder="지역을 입력해주세요." v-model="userProduct.salesAddress" />
-                </div>
+                </div> -->
+            <div>
+                <!-- <input type="text" v-model="postcode" placeholder="우편번호"> -->
+                <input type="button" @click="execDaumPostcode()" value="우편번호 찾기"><br>
+                <input type="text" id="address" v-model="userProduct.salesAddress" placeholder="주소"><br>
+                <!-- <input type="text" id="detailAddress" placeholder="상세주소"> -->
+                <!-- <input type="text" id="extraAddress" v-model="extraAddress" placeholder="참고항목"> -->
+            </div>
+
             </div>
 
             <div class="infoTitle">
@@ -150,14 +158,15 @@ export default {
                 salesComment: '',
                 salesCount: '',
                 salesChatLink: '',
-                memberNo: ''
+                memberNo: '',
+                salesAddress: ""                
             },
             radioList: [
                 {
                     key:'',
                     value:''
                 }
-            ]
+            ],
         }
     },
     computed: {
@@ -192,7 +201,20 @@ export default {
                     console.error(error);
                     alert('상품 등록에 실패했습니다. 다시 시도해주세요.');
                 });
-        }
+        },
+        execDaumPostcode() {
+            new window.daum.Postcode({
+                oncomplete: (data) => {
+                    if (data.userSelectedType === "R") {
+                        // 사용자가 도로명 주소를 선택했을 경우
+                        this.userProduct.salesAddress = data.roadAddress;
+                    } else {
+                        // 사용자가 지번 주소를 선택했을 경우(J)
+                        this.userProduct.salesAddress = data.jibunAddress;
+                    }
+                },
+            }).open();
+            },
     }
 }
 </script>

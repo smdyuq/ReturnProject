@@ -1,23 +1,16 @@
 <template>
-    <div class="paymentWrapper" v-for="(item, index) in salesList" :key="index">
-        <div>
+    <div class="paymentWrapper" v-for="(item, index) in getUsers" :key="index">
+        <div v-if="item.salesNo == this.$route.query.salesNo">
             <div class="leftArrow" @click="goPayment">
                 <img class="leftArrow" src="../../assets/img/뒤로가기.png" style="width: 22px" />
             </div>
             <div>
-                <div style="font-size: x-large; font-weight: bold" @click="goKakaoPayment">
-                    결제하기
-                </div>
+                <div style="font-size: x-large; font-weight: bold" @click="goKakaoPayment">결제하기</div>
                 <div class="paymentWrap">
                     <div style="display: flex">
                         <img :src="'http://localhost:8080/resources/uploads/' + item.imageName"
                             style="width: 121px; height: 94px" />
-                        <div style="
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                margin-left:25px;
-              ">
+                        <div style=" display: flex; flex-direction: column; justify-content: center; margin-left: 25px;">
                             <div class="paymentsDetail" style="font-weight: bold; font-size: large">
                                 {{ item.salesPrice }}원
                             </div>
@@ -27,14 +20,10 @@
 
                     <div class="line"></div>
 
-
                     <div class="paymentsWrap">
                         <div class="paymentContents">
                             <div class="paymentsTitle">거래방법</div>
 
-
-                            <!-- <div class="paymentsTitle">상품명</div>
-                            <div class="paymentsTitle">수령방법</div> -->
                         </div>
                         <div class="paymentContent">
                             <div>
@@ -51,13 +40,10 @@
                     <div class="addressTitle">배송지</div>
                     <div class="address">{{ item.salesAddress }}</div>
                 </div>
-                <div class="salesPriceWrap">
-
-                    <div class="salesPrice">결제금액</div>
+                <div class="paymentPriceWrap">
+                    <div class="paymentPrice">결제금액</div>
                     <div class="price">{{ item.salesPrice }}원</div>
-
                 </div>
-                <!-- <div>결제수단 : 택배거래</div> -->
             </div>
 
             <div>
@@ -82,12 +68,6 @@ export default {
 
     computed: {
         ...mapState(usersStore, ["getUsers"]),
-        salesList() {
-            // userList는 getUsers를 통해 가져온 데이터입니다.
-            // 여기서는 getUsers가 객체 하나를 반환하기 때문에 배열로 변환합니다.
-            // 만약 getUsers가 배열을 반환한다면 따로 변환할 필요가 없습니다.
-            return [this.getUsers];
-        },
     },
 
     methods: {
@@ -96,13 +76,16 @@ export default {
         goPayment() {
             this.$router.push("/ProductDetail?salesNo=" + this.$route.query.salesNo);
         },
-        goKakaoPayment() { },
+        goKakaoPayment() {
+
+
+        },
 
         goPaymentCompleted() {
             this.$router.push("/paymentCompleted");
         },
     },
-    beforeMount() {
+    mounted() {
         axiosApi
             .get("/pay/payDeliveryPage?salesNo=" + this.$route.query.salesNo)
             .then((response) => {
@@ -118,7 +101,6 @@ export default {
 <style>
 .paymentWrapper {
     width: 700px;
-    /* background-color: yellow; */
     flex-direction: center;
     position: absolute;
     left: 50%;
@@ -127,12 +109,7 @@ export default {
 
 .paymentContents {
     font-size: x-large;
-    /* margin-left: 20px; */
 }
-
-/* .paymentsWrap {
-    display: flex;
-} */
 
 .paymentsTitle {
     width: 100%;
@@ -158,12 +135,12 @@ export default {
 }
 
 .line {
-    border: 0.5px solid #CCCCCC;
+    border: 0.5px solid #cccccc;
     margin: 25px 0;
 }
 
 .weightLine {
-    border: 2px solid #CCCCCC;
+    border: 2px solid #cccccc;
     margin: 25px 0;
 }
 
@@ -182,18 +159,17 @@ export default {
 }
 
 .addressWrap {
-    border: 1px solid #CCCCCC;
+    border: 1px solid #cccccc;
     border-radius: 10px;
     height: 150px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
 }
 
-.salesPriceWrap {
+.paymentPriceWrap {
     margin: 30px 0;
-    border: 1px solid #CCCCCC;
+    border: 1px solid #cccccc;
     border-radius: 10px;
     height: 150px;
     display: flex;
@@ -201,11 +177,10 @@ export default {
     justify-content: center;
 }
 
-.salesPrice {
+.paymentPrice {
     font-weight: bold;
     margin-bottom: 15px;
     margin-left: 20px;
-
 }
 
 .price {
