@@ -1,4 +1,4 @@
-# [ReturnProject] 파이널 프로젝트(24년 1월 ~ 24년 2월)
+# [Return Project] 파이널 프로젝트(24년 1월 ~ 24년 2월)
 <center><img width="100%" src="https://github.com/smdyuq/ReturnProject/assets/129133645/779dc8dd-4a56-4c01-80a5-4e4fe3f2a949"></center>
 <br/><br/>
 
